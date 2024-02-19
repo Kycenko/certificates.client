@@ -1,0 +1,30 @@
+
+.container {
+  @apply w-full p-6
+}
+.tableContainer {
+  @apply h-full max-h-[800px] overflow-y-scroll bg-white
+}
+.table {
+  @apply w-full min-w-max table-auto rounded-md bg-[#FFF] shadow-md
+}
+
+.headerContainer {
+  @apply flex justify-between px-4
+}
+.header {
+ @apply flex gap-3
+}
+.createBtn {
+  @apply border bg-[#5bc0de] hover:bg-[#46b8da] p-2 rounded text-white
+}
+
+.heads {
+  @apply text-sm uppercase leading-normal text-gray-800
+}
+
+
+.head {
+  @apply px-6 py-3 text-left
+}
+

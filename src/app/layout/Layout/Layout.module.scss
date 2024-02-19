@@ -1,0 +1,11 @@
+.sideBar {
+  @apply flex h-full ml-[320px];
+}
+
+.header {
+  @apply w-full flex-1;
+}
+
+.main {
+  @apply flex-1 ;
+}
