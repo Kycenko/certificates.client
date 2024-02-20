@@ -15,7 +15,7 @@ export class DepartmentService {
 	async getAll() {
 		const departments = await this.prisma.department.findMany({
 			include: {
-				Course: {
+				courses: {
 					include: {
 						groups: true
 					}
@@ -31,7 +31,7 @@ export class DepartmentService {
 		const department = await this.prisma.department.findUnique({
 			where: { id: +id },
 			include: {
-				Course: {
+				courses: {
 					where: {
 						departmentId: +id
 					},

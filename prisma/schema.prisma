@@ -14,7 +14,7 @@ model User {
   isAdmin   Boolean  @default(false) @map("is_admin")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  Group     Group[]
+  groups    Group[]
 
   @@map("users")
 }
@@ -26,8 +26,8 @@ model Student {
   secondName          String?              @map("second_name")
   birthDate           DateTime             @map("birth_date")
   groupId             Int?                 @map("group_id")
-  group               Group?               @relation(fields: [groupId], references: [id])
   medicalCertificates MedicalCertificate[]
+  group               Group?               @relation(fields: [groupId], references: [id])
 
   @@map("students")
 }
@@ -53,11 +53,11 @@ model MedicalCertificate {
   startDate           DateTime          @map("start_date")
   finishDate          DateTime          @map("finish_date")
   studentId           Int               @map("student_id")
-  student             Student           @relation(fields: [studentId], references: [id])
   healthGroupId       Int               @map("health_group_id")
-  healthGroup         HealthGroup       @relation(fields: [healthGroupId], references: [id])
   physicalEducationId Int               @map("physical_education_id")
+  healthGroup         HealthGroup       @relation(fields: [healthGroupId], references: [id])
   physicalEducation   PhysicalEducation @relation(fields: [physicalEducationId], references: [id])
+  student             Student           @relation(fields: [studentId], references: [id])
 
   @@map("medical_certificates")
 }
@@ -66,8 +66,8 @@ model Group {
   id       Int       @id @default(autoincrement())
   name     String
   courseId Int       @map("course_id")
-  course   Course    @relation(fields: [courseId], references: [id])
   userId   Int?      @map("user_id")
+  course   Course    @relation(fields: [courseId], references: [id])
   user     User?     @relation(fields: [userId], references: [id])
   students Student[]
 
@@ -75,9 +75,9 @@ model Group {
 }
 
 model Department {
-  id     Int      @id @default(autoincrement())
-  name   String
-  Course Course[]
+  id      Int      @id @default(autoincrement())
+  name    String
+  courses Course[]
 
   @@map("departments")
 }

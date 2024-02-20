@@ -10,7 +10,7 @@ export class UserService {
 	async getAll() {
 		const users = await this.prisma.user.findMany({
 			include: {
-				Group: true
+				groups: true
 			}
 		})
 		if (!users || users.length === 0)
