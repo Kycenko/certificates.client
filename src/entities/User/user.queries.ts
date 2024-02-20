@@ -1,8 +1,9 @@
+import { UserService } from '.'
 import { QUERY_KEYS } from '@shared/config/enums.ts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
-import { UserService } from '.'
+
 import { IUser, TypeUserForm } from './user.types'
 
 export const useGetUsers = () => {
@@ -24,7 +25,8 @@ export const useGetUser = (id: string | undefined) => {
 	const {
 		data: user,
 		isLoading,
-		isSuccess
+		isSuccess,
+		refetch
 	} = useQuery({
 		queryKey: [QUERY_KEYS.USERS, id],
 		queryFn: async () => {
@@ -32,7 +34,7 @@ export const useGetUser = (id: string | undefined) => {
 			return response.data
 		}
 	})
-	return { user, isLoading, isSuccess }
+	return { user, isLoading, isSuccess, refetch }
 }
 
 // export const useFetchProfile = (id: number | string) => {

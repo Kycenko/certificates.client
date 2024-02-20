@@ -25,17 +25,17 @@ const DepartmentDetailsPage = () => {
 
 			<table className='min-w-full  border-gray-300'>
 				<thead>
-					<tr className='border'>
+					<tr className='border justify-center text-center items-center'>
 						<th className=' p-2'>Номер курса</th>
 						<th className=' p-2'>Количество групп</th>
 						<th className=' p-2'>Отделение</th>
 					</tr>
 				</thead>
 				<tbody>
-					{department?.Course?.map(({ id, number, groups }) => (
+					{department?.courses?.map(({ id, number, groups }) => (
 						<tr
 							onClick={() => navigate(`/courses/${id}`)}
-							className='border hover:bg-gray-200 cursor-pointer'
+							className='border hover:bg-gray-200 cursor-pointer  justify-center text-center items-center'
 							key={id}
 						>
 							<td className=' p-2'>{`${number} Курс`}</td>

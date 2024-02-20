@@ -1,30 +1,45 @@
-
 .container {
-  @apply w-full p-6
+	@apply w-full p-6;
 }
 .tableContainer {
-  @apply h-full max-h-[800px] overflow-y-scroll bg-white
+	@apply h-full max-h-[800px] overflow-y-scroll bg-white;
 }
 .table {
-  @apply w-full min-w-max table-auto rounded-md bg-[#FFF] shadow-md
+	@apply w-full min-w-max table-auto rounded-md bg-[#FFF] shadow-md;
+}
+.tHeads {
+	@apply border-b-2 border-t-2;
 }
 
 .headerContainer {
-  @apply flex justify-between px-4
+	@apply flex justify-between py-4;
 }
 .header {
- @apply flex gap-3
+	@apply flex gap-3;
 }
 .createBtn {
-  @apply border bg-[#5bc0de] hover:bg-[#46b8da] p-2 rounded text-white
+	@apply border bg-[#5bc0de] hover:bg-[#46b8da] p-2 rounded text-white;
 }
 
 .heads {
-  @apply text-sm uppercase leading-normal text-gray-800
+	@apply text-sm uppercase leading-normal text-gray-800;
 }
-
 
 .head {
-  @apply px-6 py-3 text-left
+	@apply px-6 py-3 text-left;
 }
 
+.noData {
+	@apply px-6 py-4 text-center justify-center items-center;
+}
+
+.contentCell {
+	@apply border-b items-center justify-center;
+}
+
+.editCellContainer {
+	@apply flex justify-end px-6 py-4;
+}
+.editCell {
+	@apply flex items-center space-x-2;
+}

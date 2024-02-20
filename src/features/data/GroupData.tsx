@@ -1,32 +1,37 @@
-import { IDepartment, TypeDepartmentForm } from '@entities/Department/department.types'
+import { useGetCourses } from '@entities/Course/course.queries'
+import { IGroup, TypeGroupForm } from '@entities/Group/group.types'
 import { selectSearchTerm } from '@features/Search/search.slice'
 import { selectSortOrder } from '@features/SortOrder/sort.slice'
 import { useAppSelector, useModal } from '@shared/hooks'
-import { CustomButton, CustomInput, CustomModalForm, ErrorMessage } from '@shared/ui'
+import {
+	CustomButton,
+	CustomInput,
+	CustomModalForm,
+	CustomSelect,
+	ErrorMessage
+} from '@shared/ui'
 import { updateHistory } from '@shared/utils'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-interface DepartmentDataProps {
-	data: IDepartment[] | undefined
-	onEdit: (id: number | string, data: TypeDepartmentForm) => void
+import styles from '@shared/styles/Tables.module.scss'
+
+interface GroupDataProps {
+	data: IGroup[] | undefined
+	onEdit: (id: number | string, data: TypeGroupForm) => void
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
 }
-const DepartmentData: FC<DepartmentDataProps> = ({
-	data,
-	onDelete,
-	onEdit,
-	onInfo
-}) => {
+const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
+	const { courses } = useGetCourses()
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeDepartmentForm>()
+	} = useForm<TypeGroupForm>()
 
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
@@ -43,7 +48,10 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 	if (!sortedData || sortedData.length === 0) {
 		return (
 			<tr>
-				<td colSpan={2} className='px-6 py-4 text-center'>
+				<td
+					colSpan={2}
+					className={styles.noData}
+				>
 					Данные не найдены
 				</td>
 			</tr>
@@ -53,15 +61,18 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 
 	return (
 		<>
-			{filteredData?.map(({ id, name }) => (
-				<tr key={id}>
+			{filteredData?.map(({ id, name, courseId }) => (
+				<tr
+					className={styles.contentCell}
+					key={id}
+				>
 					<td>
 						<div>
 							<span>{name}</span>
 						</div>
 					</td>
-					<td className='flex justify-end px-6 py-4'>
-						<div className='flex items-center space-x-2'>
+					<td className={styles.editCellContainer}>
+						<div className={styles.editCell}>
 							<CustomButton
 								onClick={() => {
 									setEditId(id)
@@ -78,7 +89,8 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 					</td>
 					<CustomModalForm
 						onSubmit={handleSubmit(data => {
-							onEdit(id, data)
+							const newData = { ...data, courseId: Number(data.courseId) }
+							onEdit(id, newData)
 							setEditId(null)
 							reset()
 						})}
@@ -90,11 +102,26 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 						<CustomInput
 							id='name'
 							label='Название'
-							placeholder={'Введите название'}
 							defaultValue={name}
+							placeholder={'Введите название'}
 							{...register('name', { required: 'Обязательное поле' })}
 						/>
 						<ErrorMessage error={errors.name} />
+						<CustomSelect
+							id='courseId'
+							label='Выберите курс'
+							defaultValue={courseId}
+							{...register('courseId')}
+						>
+							{courses?.map(({ id, number }) => (
+								<option
+									key={id}
+									value={id}
+								>
+									{number}-й курс
+								</option>
+							))}
+						</CustomSelect>
 					</CustomModalForm>
 					<CustomModalForm
 						onSubmit={() => {
@@ -114,4 +141,4 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 	)
 }
 
-export default DepartmentData
+export default GroupData

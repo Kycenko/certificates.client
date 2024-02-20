@@ -1,12 +1,16 @@
 import { Layout } from '@app/layout'
 import { useDeleteUser, useGetUsers } from '@entities/User/user.queries.ts'
-
+import UserData from '@features/data/UserData'
 import { useRegister } from '@shared/auth/auth.queries.ts'
 import { IRegister } from '@shared/auth/auth.types.ts'
-import { CustomInput, CustomModalForm, CustomSelect, ErrorMessage, Heading } from '@shared/ui'
-
-import { UserData } from '@features/User'
 import { useModal } from '@shared/hooks'
+import {
+	CustomInput,
+	CustomModalForm,
+	CustomSelect,
+	ErrorMessage,
+	Heading
+} from '@shared/ui'
 import CreateButton from '@shared/ui/buttons/CreateButton.tsx'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { useForm } from 'react-hook-form'
@@ -22,24 +26,24 @@ const UserComponent = () => {
 		reset
 	} = useForm<IRegister>()
 	const { users, refetch, isLoading } = useGetUsers()
-	
+
 	const registerQuery = useRegister()
 	const deleteQuery = useDeleteUser()
-	
+
 	const handleRegister = async (data: IRegister) => {
 		await registerQuery.mutateAsync({ ...data })
 		closeModal()
 		reset()
 		await refetch()
 	}
-	
+
 	const handleDelete = async (id: string | number) => {
 		await deleteQuery.mutateAsync(id)
 		closeModal()
-		
+
 		await refetch()
 	}
-	
+
 	const handleEdit = (id: number | string) => {
 		navigate(`/users/${id}`)
 	}
@@ -49,17 +53,21 @@ const UserComponent = () => {
 				<Loader />
 			</Layout>
 		)
-	
+
 	return (
 		<Layout>
-			<Heading title="Список пользователей" />
-			
+			<Heading title='Список пользователей' />
+
 			<CreateButton onClick={openModal}>Создать пользователя</CreateButton>
-			
-			<UserData data={users} onDelete={handleDelete} onEdit={handleEdit} />
+
+			<UserData
+				data={users}
+				onDelete={handleDelete}
+				onEdit={handleEdit}
+			/>
 			<CustomModalForm
-				buttonTitle="Создать"
-				formTitle="Создание"
+				buttonTitle='Создать'
+				formTitle='Создание'
 				isOpen={isOpen}
 				onClose={closeModal}
 				onSubmit={handleSubmit(handleRegister)}
@@ -71,7 +79,7 @@ const UserComponent = () => {
 					{...register('login', { required: 'Обязательное поле' })}
 				/>
 				<ErrorMessage error={errors.login} />
-				
+
 				<CustomInput
 					id={'password'}
 					label={'Пароль'}
@@ -79,16 +87,16 @@ const UserComponent = () => {
 					{...register('password', { required: 'Обязательное поле' })}
 				/>
 				<ErrorMessage error={errors.password} />
-				
+
 				<CustomSelect
 					id={'isAdmin'}
-					label="Администратор?"
+					label='Администратор?'
 					{...register('isAdmin', {
 						setValueAs: value => value === 'true'
 					})}
 				>
-					<option value="false">Нет</option>
-					<option value="true">Да</option>
+					<option value='false'>Нет</option>
+					<option value='true'>Да</option>
 				</CustomSelect>
 			</CustomModalForm>
 		</Layout>

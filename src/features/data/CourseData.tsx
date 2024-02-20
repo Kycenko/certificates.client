@@ -11,6 +11,8 @@ import {
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
+import styles from '@shared/styles/Tables.module.scss'
+
 interface CourseDataProps {
 	data: ICourse[] | undefined
 	onEdit: (id: number | string, data: TypeCourseForm) => void
@@ -41,7 +43,10 @@ const CourseData: FC<CourseDataProps> = ({
 	if (!sortedData || sortedData.length === 0) {
 		return (
 			<tr>
-				<td colSpan={2} className='px-6 py-4 text-center'>
+				<td
+					colSpan={2}
+					className={styles.noData}
+				>
 					Данные не найдены
 				</td>
 			</tr>
@@ -57,8 +62,8 @@ const CourseData: FC<CourseDataProps> = ({
 							<span>{number}-й курс</span>
 						</div>
 					</td>
-					<td className='flex justify-end px-6 py-4'>
-						<div className='flex items-center space-x-2'>
+					<td className={styles.editCellContainer}>
+						<div className={styles.editCell}>
 							<CustomButton
 								onClick={() => {
 									setEditId(id)
@@ -94,16 +99,28 @@ const CourseData: FC<CourseDataProps> = ({
 							defaultValue={number}
 							{...register('number', { required: 'Обязательное поле' })}
 						>
-							<option key={1} value={1}>
+							<option
+								key={1}
+								value={1}
+							>
 								1 курс
 							</option>
-							<option key={2} value={2}>
+							<option
+								key={2}
+								value={2}
+							>
 								2 курс
 							</option>
-							<option key={3} value={3}>
+							<option
+								key={3}
+								value={3}
+							>
 								3 курс
 							</option>
-							<option key={4} value={4}>
+							<option
+								key={4}
+								value={4}
+							>
 								4 курс
 							</option>
 						</CustomSelect>
@@ -116,7 +133,10 @@ const CourseData: FC<CourseDataProps> = ({
 							{...register('departmentId')}
 						>
 							{departments?.map(({ id, name }) => (
-								<option key={id} value={id}>
+								<option
+									key={id}
+									value={id}
+								>
 									{name}
 								</option>
 							))}

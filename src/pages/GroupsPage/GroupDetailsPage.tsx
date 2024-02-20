@@ -3,6 +3,7 @@ import { useGetGroup } from '@entities/Group/group.queries'
 import { Heading } from '@shared/ui'
 import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
+
 const GroupDetailsPage = () => {
 	const { id } = useParams()
 
@@ -36,10 +37,15 @@ const GroupDetailsPage = () => {
 							birthDate,
 							medicalCertificates
 						}) => (
-							<tr className='border hover:bg-gray-200 cursor-pointer' key={id}>
+							<tr
+								className='border hover:bg-gray-200 cursor-pointer  text-center'
+								key={id}
+							>
 								<td className=' p-2'>{surname}</td>
 								<td className=' p-2'>{name}</td>
-								<td className='p-2'>{secondName}</td>
+								<td className='p-2'>
+									{secondName ? secondName : 'Не указано'}
+								</td>
 								<td className='p-2'>
 									{format(new Date(birthDate), 'dd.MM.yyyy')}
 								</td>
@@ -49,6 +55,7 @@ const GroupDetailsPage = () => {
 									{medicalCertificates.map(item => {
 										const finishDate = new Date(item.finishDate)
 										const currentDate = new Date()
+
 										return finishDate > currentDate ? 'Да' : 'Нет'
 									})}
 								</td>

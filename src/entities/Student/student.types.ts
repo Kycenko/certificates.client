@@ -6,7 +6,7 @@ export interface IStudent {
 	surname: string
 	birthDate: Date
 	secondName: string
-	groupId: number
+	groupId: number | null
 	medicalCertificates: IMedicalCertificate[]
 }
 

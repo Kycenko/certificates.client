@@ -2,10 +2,11 @@ import { Layout } from '@app/layout'
 import { useGetCourse } from '@entities/Course/course.queries'
 import { Heading } from '@shared/ui'
 import Loader from '@shared/ui/loader/CustomLoader'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const CourseDetailsPage = () => {
 	const { id } = useParams()
+	const navigate = useNavigate()
 
 	const { course, isLoading } = useGetCourse(id)
 
@@ -32,7 +33,11 @@ const CourseDetailsPage = () => {
 				</thead>
 				<tbody>
 					{course?.groups?.map(({ id, name, students }) => (
-						<tr className='border hover:bg-gray-200 cursor-pointer' key={id}>
+						<tr
+							onClick={() => navigate(`/groups/${id}`)}
+							className='border hover:bg-gray-200 cursor-pointer  justify-center text-center items-center'
+							key={id}
+						>
 							<td className=' p-2'>{name}</td>
 							<td>{students ? students.length : 0}</td>
 							<td>{course.number}-й Курс</td>

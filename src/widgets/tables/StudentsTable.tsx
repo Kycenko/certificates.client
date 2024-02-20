@@ -1,3 +1,4 @@
+import { useGetGroups } from '@entities/Group/group.queries'
 import {
 	useCreateStudent,
 	useDeleteStudent,
@@ -7,13 +8,14 @@ import {
 import { TypeStudentForm } from '@entities/Student/student.types.ts'
 import Search from '@features/Search/Search.tsx'
 import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import StudentData from '@features/Student/StudentData.tsx'
 import TableHeads, { StudentHeads } from '@features/TableHeads.tsx'
+import StudentData from '@features/data/StudentData'
 import { useModal } from '@shared/hooks'
 import {
 	CustomButton,
 	CustomInput,
 	CustomModalForm,
+	CustomSelect,
 	ErrorMessage
 } from '@shared/ui'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
@@ -26,7 +28,7 @@ import styles from '@shared/styles/Tables.module.scss'
 const StudentsTable = () => {
 	const navigate = useNavigate()
 	const { students, isLoading, refetch } = useGetStudents()
-
+	const { groups } = useGetGroups()
 	const { isOpen, openModal, closeModal } = useModal()
 
 	const {
@@ -43,7 +45,8 @@ const StudentsTable = () => {
 	const { remove } = useDeleteStudent()
 
 	const handleCreate: SubmitHandler<TypeStudentForm> = async data => {
-		await create(data)
+		const newData = { ...data, groupId: Number(data.groupId) || null }
+		await create(newData)
 		closeModal()
 		await refetch()
 		reset()
@@ -83,7 +86,7 @@ const StudentsTable = () => {
 						</CustomButton>
 					</div>
 					<table className={styles.table}>
-						<thead>
+						<thead className={styles.tHeads}>
 							<TableHeads data={StudentHeads} />
 						</thead>
 						<tbody>
@@ -135,6 +138,21 @@ const StudentsTable = () => {
 					label={'Дата рождения'}
 				/>
 				<ErrorMessage error={errors.birthDate} />
+
+				<CustomSelect
+					id='groupId'
+					label='Группа'
+					{...register('groupId')}
+				>
+					{groups?.map(({ id, name }) => (
+						<option
+							key={id}
+							value={id}
+						>
+							{name}
+						</option>
+					))}
+				</CustomSelect>
 			</CustomModalForm>
 		</>
 	)

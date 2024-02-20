@@ -1,4 +1,4 @@
-import UserComponent from '@widgets/tables/UserComponent.tsx'
+import UserComponent from '@widgets/components/UserComponent'
 
 const UsersPage = () => {
 	return <UserComponent />

@@ -6,12 +6,12 @@ import {
 	useUpdateHealthGroup
 } from '@entities/HealthGroup/health-group.query.ts'
 import { TypeHealthGroupForm } from '@entities/HealthGroup/health-group.types.ts'
-import { HealthGroupData } from '@features/HealthGroup'
+import HealthGroupData from '@features/data/HealthGroupData'
 import { useModal } from '@shared/hooks'
 import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
 import CreateButton from '@shared/ui/buttons/CreateButton.tsx'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 const HealthGroupComponent = () => {
 	const { data, refetch, isLoading } = useGetHealthGroups()
@@ -31,23 +31,27 @@ const HealthGroupComponent = () => {
 		await refetch()
 		reset()
 	}
-	
+
 	const handleEdit = async (id: string | number, data: TypeHealthGroupForm) => {
 		await update({ id, data })
 		closeModal()
 		await refetch()
 	}
-	
+
 	const handleDelete = async (id: string | number) => {
 		await remove(id)
 		closeModal()
 		await refetch()
 	}
 	if (isLoading)
-		return <Layout><Loader /></Layout>
+		return (
+			<Layout>
+				<Loader />
+			</Layout>
+		)
 	return (
 		<Layout>
-			<Heading title="Список групп здоровья" />
+			<Heading title='Список групп здоровья' />
 			<CreateButton onClick={openModal}>Создать группу здоровья</CreateButton>
 			<HealthGroupData
 				data={data}

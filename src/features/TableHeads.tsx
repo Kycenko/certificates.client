@@ -9,7 +9,10 @@ const TableHeads = ({ data }: { data: string[] }) => {
 	return (
 		<tr className={styles.heads}>
 			{data?.map(head => (
-				<th key={head} className={styles.head}>
+				<th
+					key={head}
+					className={styles.head}
+				>
 					{head}
 				</th>
 			))}

@@ -6,36 +6,36 @@ import {
 	useUpdatePhysicalEducation
 } from '@entities/PhysicalEducation/physical-education.queries.ts'
 import { TypePhysicalEducationForm } from '@entities/PhysicalEducation/physical-education.types.ts'
-import { PhysicalEducationData } from '@features/PhysicalEducation'
+import PhysicalEducationData from '@features/data/PhysicalEducationData'
 import { useModal } from '@shared/hooks'
 import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
 import CreateButton from '@shared/ui/buttons/CreateButton.tsx'
-import { SubmitHandler, useForm } from 'react-hook-form'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import { SubmitHandler, useForm } from 'react-hook-form'
 
 const PhysicalEducationComponent = () => {
 	const { data, refetch, isLoading } = useGetPhysicalEducations()
-	
+
 	const { closeModal, isOpen, openModal } = useModal()
-	
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		reset
 	} = useForm<TypePhysicalEducationForm>()
-	
+
 	const { create } = useCreatePhysicalEducation()
 	const { update } = useUpdatePhysicalEducation()
 	const { remove } = useDeletePhysicalEducation()
-	
+
 	const handleCreate: SubmitHandler<TypePhysicalEducationForm> = async data => {
 		await create(data)
 		closeModal()
 		await refetch()
 		reset()
 	}
-	
+
 	const handleEdit = async (
 		id: number | string,
 		data: TypePhysicalEducationForm
@@ -44,19 +44,23 @@ const PhysicalEducationComponent = () => {
 		closeModal()
 		await refetch()
 	}
-	
+
 	const handleDelete = async (id: number | string) => {
 		await remove(id)
 		closeModal()
 		await refetch()
 	}
-	
+
 	if (isLoading)
-		return <Layout><Loader /></Layout>
-	
+		return (
+			<Layout>
+				<Loader />
+			</Layout>
+		)
+
 	return (
 		<Layout>
-			<Heading title="Список групп по физкультуре" />
+			<Heading title='Список групп по физкультуре' />
 			<CreateButton onClick={openModal}>
 				Создать группу по физкультуре
 			</CreateButton>
