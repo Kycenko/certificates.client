@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import styles from '@shared/styles/Fields.module.scss'
 
 interface DateSelectProps {
-	selected: Date | undefined
+	selected: Date | undefined | null
 	id: string
 	onChange: (value: Date | null) => void
 	label: string

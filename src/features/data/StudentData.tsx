@@ -32,6 +32,7 @@ const StudentData: FC<StudentDataProps> = ({
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { groups } = useGetGroups()
+
 	const {
 		register,
 		handleSubmit,

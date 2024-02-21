@@ -14,12 +14,14 @@ import {
 import CreateButton from '@shared/ui/buttons/CreateButton'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import DateSelect from '@shared/ui/selects/DateSelect'
+import daysUntilTheEnd from '@shared/utils/daysUntilTheEnd'
+import getDaysUntilExpiry from '@shared/utils/getDaysUntilExpiry'
+import getValidityPeriod from '@shared/utils/getValidityPeriod'
 import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const StudentDetailsPage = () => {
-	const navigate = useNavigate()
 	const { id } = useParams()
 	const { user } = useAuth()
 	const { student, isLoading, refetch } = useGetStudent(id)
@@ -52,33 +54,6 @@ const StudentDetailsPage = () => {
 		await refetch()
 		reset()
 	}
-	const getValidityPeriod = (finishDate: Date, startDate: Date) => {
-		const start = new Date(startDate)
-		const finish = new Date(finishDate)
-
-		let months
-		months = (finish.getFullYear() - start.getFullYear()) * 12
-		months -= start.getMonth()
-		months += finish.getMonth()
-		return `${months === 0 ? 'Текущий месяц' : `${months} месяц(а/ев)`}`
-	}
-
-	const getDaysUntilExpiry = (finishDate: any, startDay: any) => {
-		const start = new Date(startDay) as any
-		const end = new Date(finishDate) as any
-
-		const diffTime = Math.abs(end - start)
-		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-		return diffDays
-	}
-
-	const daysUntilTheEnd = (date: Date) => {
-		const finishDate = new Date(date)
-		const currentDate = new Date()
-
-		return finishDate > currentDate ? 'Да' : 'Нет'
-	}
 
 	if (isLoading)
 		return (
@@ -95,9 +70,7 @@ const StudentDetailsPage = () => {
 			</Heading>
 			{user?.isAdmin ? (
 				<CreateButton onClick={openModal}>Добавить справку</CreateButton>
-			) : (
-				''
-			)}
+			) : null}
 			<table className='min-w-full border-gray-300'>
 				<thead>
 					<tr className='border'>
@@ -115,8 +88,7 @@ const StudentDetailsPage = () => {
 					{student?.medicalCertificates?.map(
 						({ id, startDate, finishDate }) => (
 							<tr
-								onClick={() => navigate(`/courses/${id}`)}
-								className='border hover:bg-gray-200 text-center cursor-pointer'
+								className='border text-center '
 								key={id}
 							>
 								<td>{student?.name}</td>
@@ -129,11 +101,14 @@ const StudentDetailsPage = () => {
 								<td>{getValidityPeriod(finishDate, startDate)} </td>
 								<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
 								<td>
-									{student?.medicalCertificates.map(item => item.healthGroupId)}
+									{student?.medicalCertificates.map(
+										() => healthGroups?.map(item => item.name) || 'Не указано'
+									)}
 								</td>
 								<td>
 									{student?.medicalCertificates.map(
-										item => item.physicalEducationId
+										() =>
+											physicalEducations?.map(item => item.name) || 'Не указано'
 									)}
 								</td>
 								<td>{daysUntilTheEnd(finishDate)}</td>
