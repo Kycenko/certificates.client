@@ -4,8 +4,8 @@ import {
 	Delete,
 	Get,
 	Param,
+	Patch,
 	Post,
-	Put,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
@@ -39,7 +39,7 @@ export class MedicalCertificateController {
 		return this.medicalCertificateService.getById(id)
 	}
 
-	@Put(':id')
+	@Patch(':id')
 	@Auth('admin')
 	@UsePipes(new ValidationPipe())
 	async update(@Param('id') id: number, @Body() dto: MedicalCertificateDto) {
