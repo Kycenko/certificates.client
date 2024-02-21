@@ -2,7 +2,7 @@ import { Layout } from '@app/layout'
 import { useGetGroup } from '@entities/Group/group.queries'
 import { useCreateStudent } from '@entities/Student/student.queries'
 import { TypeStudentForm } from '@entities/Student/student.types'
-import { useModal } from '@shared/hooks'
+import { useAuth, useModal } from '@shared/hooks'
 import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
 import CreateButton from '@shared/ui/buttons/CreateButton'
 import DateSelect from '@shared/ui/selects/DateSelect'
@@ -13,7 +13,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 const GroupDetailsPage = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
-
+	const { user } = useAuth()
 	const { group, refetch } = useGetGroup(id)
 	const { isOpen, openModal, closeModal } = useModal()
 
@@ -40,7 +40,11 @@ const GroupDetailsPage = () => {
 			<Heading title={'Описание группы'}>
 				<span className='text-base text-gray-500'>{group?.name}</span>
 			</Heading>
-			<CreateButton onClick={openModal}>Добавить ученика</CreateButton>
+			{user?.isAdmin ? (
+				<CreateButton onClick={openModal}>Добавить ученика</CreateButton>
+			) : (
+				''
+			)}
 			<table className='min-w-full  border-gray-300'>
 				<thead>
 					<tr className='border'>
@@ -50,7 +54,6 @@ const GroupDetailsPage = () => {
 						<th className=' p-2'>Дата рождения</th>
 						<th className=' p-2'>Группа</th>
 						<th className=' p-2'>Количество справок</th>
-						<th className=' p-2'>Действительна ли справка?</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -78,14 +81,6 @@ const GroupDetailsPage = () => {
 								</td>
 								<td className='p-2'>{group.name}</td>
 								<td>{medicalCertificates?.length}</td>
-								<td>
-									{medicalCertificates.map(item => {
-										const finishDate = new Date(item.finishDate)
-										const currentDate = new Date()
-
-										return finishDate > currentDate ? 'Да' : 'Нет'
-									})}
-								</td>
 							</tr>
 						)
 					)}

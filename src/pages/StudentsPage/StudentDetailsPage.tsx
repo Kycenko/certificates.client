@@ -4,7 +4,7 @@ import { useCreateMedicalCertificate } from '@entities/MedicalCertificate/medica
 import { TypeMedicalCertificateForm } from '@entities/MedicalCertificate/medical-certificate.types'
 import { useGetPhysicalEducations } from '@entities/PhysicalEducation/physical-education.queries'
 import { useGetStudent } from '@entities/Student/student.queries.ts'
-import { useModal } from '@shared/hooks'
+import { useAuth, useModal } from '@shared/hooks'
 import {
 	CustomModalForm,
 	CustomSelect,
@@ -21,7 +21,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 const StudentDetailsPage = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
-
+	const { user } = useAuth()
 	const { student, isLoading, refetch } = useGetStudent(id)
 	const { physicalEducations } = useGetPhysicalEducations()
 	const { healthGroups } = useGetHealthGroups()
@@ -52,11 +52,32 @@ const StudentDetailsPage = () => {
 		await refetch()
 		reset()
 	}
+	const getValidityPeriod = (finishDate: Date, startDate: Date) => {
+		const start = new Date(startDate)
+		const finish = new Date(finishDate)
 
-	const getValidityPeriod = (finishDate: any, startDate: any) => {
-		const diffTime = Math.abs(finishDate - startDate)
-		//const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-		return diffTime
+		let months
+		months = (finish.getFullYear() - start.getFullYear()) * 12
+		months -= start.getMonth()
+		months += finish.getMonth()
+		return `${months === 0 ? 'Текущий месяц' : `${months} месяц(а/ев)`}`
+	}
+
+	const getDaysUntilExpiry = (finishDate: any, startDay: any) => {
+		const start = new Date(startDay) as any
+		const end = new Date(finishDate) as any
+
+		const diffTime = Math.abs(end - start)
+		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+		return diffDays
+	}
+
+	const daysUntilTheEnd = (date: Date) => {
+		const finishDate = new Date(date)
+		const currentDate = new Date()
+
+		return finishDate > currentDate ? 'Да' : 'Нет'
 	}
 
 	if (isLoading)
@@ -72,7 +93,11 @@ const StudentDetailsPage = () => {
 					{student?.surname} {student?.name} {student?.secondName}
 				</span>
 			</Heading>
-			<CreateButton onClick={openModal}>Добавить справку</CreateButton>
+			{user?.isAdmin ? (
+				<CreateButton onClick={openModal}>Добавить справку</CreateButton>
+			) : (
+				''
+			)}
 			<table className='min-w-full border-gray-300'>
 				<thead>
 					<tr className='border'>
@@ -91,7 +116,7 @@ const StudentDetailsPage = () => {
 						({ id, startDate, finishDate }) => (
 							<tr
 								onClick={() => navigate(`/courses/${id}`)}
-								className='border hover:bg-gray-200 cursor-pointer'
+								className='border hover:bg-gray-200 text-center cursor-pointer'
 								key={id}
 							>
 								<td>{student?.name}</td>
@@ -101,11 +126,17 @@ const StudentDetailsPage = () => {
 								<td className=' p-2'>
 									{format(new Date(finishDate), 'dd.MM.yyyy')}
 								</td>
-								<td>{getValidityPeriod(finishDate, startDate)}</td>
-								<td></td>
+								<td>{getValidityPeriod(finishDate, startDate)} </td>
+								<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
 								<td>
 									{student?.medicalCertificates.map(item => item.healthGroupId)}
 								</td>
+								<td>
+									{student?.medicalCertificates.map(
+										item => item.physicalEducationId
+									)}
+								</td>
+								<td>{daysUntilTheEnd(finishDate)}</td>
 							</tr>
 						)
 					)}

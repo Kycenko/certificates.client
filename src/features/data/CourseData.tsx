@@ -56,7 +56,10 @@ const CourseData: FC<CourseDataProps> = ({
 	return (
 		<>
 			{sortedData?.map(({ id, number, departmentId }) => (
-				<tr key={id}>
+				<tr
+					className={styles.contentCell}
+					key={id}
+				>
 					<td>
 						<div>
 							<span>{number}-й курс</span>

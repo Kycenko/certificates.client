@@ -1,16 +1,18 @@
 import { removeFromStorage } from '@shared/auth/auth.helper'
+import { useAuth } from '@shared/hooks'
 import { Link, useNavigate } from 'react-router-dom'
 
 import styles from './SideBar.module.scss'
 
 const Sidebar = () => {
 	const navigate = useNavigate()
+	const { user } = useAuth()
 	const handleLogout = () => {
 		removeFromStorage()
 		navigate('/login', { replace: true })
 	}
 
-	return (
+	return user?.isAdmin ? (
 		<div className={styles.main}>
 			<div className={styles.linksContainer}>
 				<Link
@@ -68,6 +70,31 @@ const Sidebar = () => {
 					className={styles.link}
 				>
 					Медицинские справки
+				</Link>
+			</div>
+			<div>
+				<Link
+					to={'/users/profile'}
+					className={styles.link}
+				>
+					Профиль
+				</Link>
+				<button
+					onClick={handleLogout}
+					className={styles.link}
+				>
+					Выйти
+				</button>
+			</div>
+		</div>
+	) : (
+		<div className={styles.main}>
+			<div className={styles.linksContainer}>
+				<Link
+					to={'/groups'}
+					className={styles.link}
+				>
+					Группы
 				</Link>
 			</div>
 			<div>

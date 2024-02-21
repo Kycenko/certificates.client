@@ -80,7 +80,7 @@ const StudentData: FC<StudentDataProps> = ({
 						<span>{name}</span>
 					</td>
 					<td>
-						<span>{secondName}</span>
+						<span>{secondName ? secondName : 'Не указано'}</span>
 					</td>
 					<td>
 						<span>{format(new Date(birthDate), 'dd.MM.yyyy')}</span>

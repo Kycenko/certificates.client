@@ -34,7 +34,7 @@ const UserDetailsPage = () => {
 			<Heading title={'Описание пользователя'}>
 				<span className='text-base text-gray-500'>{user?.login}</span>
 			</Heading>
-			<div className='flex px-6'>
+			<div className='flex px-6 justify-center'>
 				<form
 					className=' w-2/4'
 					onSubmit={handleSubmit(handleEdit)}
@@ -78,7 +78,7 @@ const UserDetailsPage = () => {
 							))}
 						</CustomSelect>
 					</div>
-					<div>
+					<div className='flex justify-center mt-6'>
 						<CustomButton
 							type={'submit'}
 							disabled={isPending}

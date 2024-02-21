@@ -67,7 +67,10 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 	return (
 		<>
 			{filteredData?.map(({ id, name }) => (
-				<tr key={id}>
+				<tr
+					className={styles.contentCell}
+					key={id}
+				>
 					<td>
 						<div>
 							<span>{name}</span>

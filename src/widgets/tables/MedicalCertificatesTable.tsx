@@ -51,7 +51,7 @@ const MedicalCertificatesTable = () => {
 					</div>
 				</div>
 				<table className={styles.table}>
-					<thead>
+					<thead className={styles.tHeads}>
 						<TableHeads data={CertificatesHeads} />
 					</thead>
 					<tbody>

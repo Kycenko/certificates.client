@@ -22,8 +22,7 @@ interface MedicalCertificateDataProps {
 const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	data,
 	onDelete,
-	onEdit,
-	onInfo
+	onEdit
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 
@@ -51,6 +50,33 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	}
 	updateHistory(searchTerm, sortOrder)
 
+	const getValidityPeriod = (finishDate: Date, startDate: Date) => {
+		const start = new Date(startDate)
+		const finish = new Date(finishDate)
+
+		let months
+		months = (finish.getFullYear() - start.getFullYear()) * 12
+		months -= start.getMonth()
+		months += finish.getMonth()
+		return `${months === 0 ? 'Текущий месяц' : `${months} месяц(а/ев)`}`
+	}
+
+	const getDaysUntilExpiry = (finishDate: any, startDay: any) => {
+		const start = new Date(startDay) as any
+		const end = new Date(finishDate) as any
+
+		const diffTime = Math.abs(end - start)
+		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+
+		return diffDays
+	}
+
+	const daysUntilTheEnd = (date: Date) => {
+		const finishDate = new Date(date)
+		const currentDate = new Date()
+
+		return finishDate > currentDate ? 'Да' : 'Нет'
+	}
 	return (
 		<>
 			{data?.map(({ id, startDate, finishDate }) => (
@@ -64,6 +90,9 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 					<td>
 						<span>{format(new Date(finishDate), 'dd.MM.yyyy')}</span>
 					</td>
+					<td>{getValidityPeriod(finishDate, startDate)}</td>
+					<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
+					<td>{daysUntilTheEnd(finishDate)}</td>
 
 					<td className={styles.editCellContainer}>
 						<div className={styles.editCell}>
@@ -75,7 +104,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 							>
 								Изменить
 							</CustomButton>
-							<CustomButton onClick={() => onInfo(id)}>Подробнее</CustomButton>
+
 							<CustomButton onClick={() => setDeleteId(id)}>
 								Удалить
 							</CustomButton>

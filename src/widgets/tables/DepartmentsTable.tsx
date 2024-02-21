@@ -80,7 +80,7 @@ const DepartmentsTable = () => {
 						</CustomButton>
 					</div>
 					<table className={styles.table}>
-						<thead>
+						<thead className={styles.tHeads}>
 							<TableHeads data={DepartmentHeads} />
 						</thead>
 						<tbody>
