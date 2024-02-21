@@ -28,8 +28,8 @@ export class UserService {
 	}
 
 	// async getProfile(id: number) {
-	//   const profile = await this.getById(id)
-	//   return profile
+	// 	const profile = await this.getById(id)
+	// 	return profile
 	// }
 
 	async update(id: number, dto: UserDto) {
