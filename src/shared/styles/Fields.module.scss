@@ -11,30 +11,28 @@
 }
 
 .heading {
-	@apply mt-5 text-center text-2xl font-bold flex flex-col
-
-
+	@apply mt-5 text-center text-2xl font-bold flex flex-col;
 }
 .underLine {
-	@apply my-3 h-0.5 bg-gray-300 bg-opacity-50 w-full
+	@apply my-3 h-0.5 bg-gray-300 bg-opacity-50 w-full;
 }
 
 .loaderContainer {
-	@apply flex justify-end items-center
+	@apply flex justify-end items-center;
 }
 
 .loader {
-	@apply animate-spin h-8 w-8 text-black
+	@apply animate-spin h-8 w-8 text-black;
 }
 
 .customBtn {
-	@apply rounded border px-2 py-2 text-black hover:bg-gray-300
+	@apply rounded border px-2 py-2 text-black hover:bg-gray-300;
 }
 
 .btnContainer {
-	@apply flex justify-center
+	@apply flex justify-center;
 }
 
 .createBtn {
-	@apply m-4 rounded border bg-[#5bc0de] px-2 py-2 text-white hover:bg-[#46b8da]
+	@apply mb-4 rounded border bg-[#5bc0de] px-2 py-2 text-white hover:bg-[#46b8da];
 }

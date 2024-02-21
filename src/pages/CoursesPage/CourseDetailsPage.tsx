@@ -1,14 +1,35 @@
 import { Layout } from '@app/layout'
 import { useGetCourse } from '@entities/Course/course.queries'
-import { Heading } from '@shared/ui'
+import { useCreateGroup } from '@entities/Group/group.queries'
+import { TypeGroupForm } from '@entities/Group/group.types'
+import { useModal } from '@shared/hooks'
+import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
+import CreateButton from '@shared/ui/buttons/CreateButton'
 import Loader from '@shared/ui/loader/CustomLoader'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const CourseDetailsPage = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
 
-	const { course, isLoading } = useGetCourse(id)
+	const { course, isLoading, refetch } = useGetCourse(id)
+	const { isOpen, closeModal, openModal } = useModal()
+	const { create } = useCreateGroup()
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors }
+	} = useForm<TypeGroupForm>()
+
+	const handleCreate: SubmitHandler<TypeGroupForm> = async data => {
+		const newData = { ...data, courseId: course?.id }
+		await create(newData)
+		closeModal()
+		await refetch()
+		reset()
+	}
 
 	if (isLoading)
 		return (
@@ -22,6 +43,7 @@ const CourseDetailsPage = () => {
 			<Heading title='Описание курса'>
 				<span className='text-base text-gray-500'>{course?.number}-й Курс</span>
 			</Heading>
+			<CreateButton onClick={openModal}>Создать группу</CreateButton>
 
 			<table className='min-w-full  border-gray-300'>
 				<thead>
@@ -45,6 +67,22 @@ const CourseDetailsPage = () => {
 					))}
 				</tbody>
 			</table>
+			<CustomModalForm
+				onSubmit={handleSubmit(handleCreate)}
+				buttonTitle={'Создать'}
+				isOpen={isOpen}
+				onClose={closeModal}
+				formTitle={'Создание'}
+			>
+				<CustomInput
+					label={'Название'}
+					id={'name'}
+					placeholder={'Введите название'}
+					{...register('name', { required: 'Обязательное поле' })}
+				/>
+
+				<ErrorMessage error={errors.name} />
+			</CustomModalForm>
 		</Layout>
 	)
 }

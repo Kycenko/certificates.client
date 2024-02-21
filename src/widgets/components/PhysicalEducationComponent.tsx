@@ -14,7 +14,7 @@ import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const PhysicalEducationComponent = () => {
-	const { data, refetch, isLoading } = useGetPhysicalEducations()
+	const { physicalEducations, refetch, isLoading } = useGetPhysicalEducations()
 
 	const { closeModal, isOpen, openModal } = useModal()
 
@@ -65,7 +65,7 @@ const PhysicalEducationComponent = () => {
 				Создать группу по физкультуре
 			</CreateButton>
 			<PhysicalEducationData
-				data={data}
+				data={physicalEducations}
 				onDelete={handleDelete}
 				onEdit={handleEdit}
 			/>

@@ -37,15 +37,20 @@ export const useGetUser = (id: string | undefined) => {
 	return { user, isLoading, isSuccess, refetch }
 }
 
-// export const useFetchProfile = (id: number | string) => {
-// 	return useQuery<IUser, Error>({
-// 		queryKey: [QUERY_KEYS.USERS, id],
-// 		queryFn: async () => {
-// 			const response: AxiosResponse<IUser> = await UserService.getProfile(id)
-// 			return response.data
-// 		}
-// 	})
-// }
+export const useGetProfile = () => {
+	const {
+		data: profile,
+		isLoading,
+		isSuccess
+	} = useQuery({
+		queryKey: [QUERY_KEYS.USERS],
+		queryFn: async () => {
+			const response: AxiosResponse<IUser> = await UserService.getProfile()
+			return response.data
+		}
+	})
+	return { profile, isLoading, isSuccess }
+}
 
 export const useUpdateUser = () => {
 	const queryClient = new QueryClient()

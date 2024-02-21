@@ -1,15 +1,63 @@
 import { Layout } from '@app/layout'
+import { useGetHealthGroups } from '@entities/HealthGroup/health-group.query'
+import { useCreateMedicalCertificate } from '@entities/MedicalCertificate/medical-certificate.queries'
+import { TypeMedicalCertificateForm } from '@entities/MedicalCertificate/medical-certificate.types'
+import { useGetPhysicalEducations } from '@entities/PhysicalEducation/physical-education.queries'
 import { useGetStudent } from '@entities/Student/student.queries.ts'
-import { Heading } from '@shared/ui'
+import { useModal } from '@shared/hooks'
+import {
+	CustomModalForm,
+	CustomSelect,
+	ErrorMessage,
+	Heading
+} from '@shared/ui'
+import CreateButton from '@shared/ui/buttons/CreateButton'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import DateSelect from '@shared/ui/selects/DateSelect'
 import { format } from 'date-fns'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 const StudentDetailsPage = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()
 
-	const { student, isLoading } = useGetStudent(id)
+	const { student, isLoading, refetch } = useGetStudent(id)
+	const { physicalEducations } = useGetPhysicalEducations()
+	const { healthGroups } = useGetHealthGroups()
+	const { isOpen, openModal, closeModal } = useModal()
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+		watch,
+		setValue
+	} = useForm<TypeMedicalCertificateForm>()
+
+	const { create } = useCreateMedicalCertificate()
+
+	const handleCreate: SubmitHandler<
+		TypeMedicalCertificateForm
+	> = async data => {
+		const newDate = {
+			...data,
+			healthGroupId: Number(data.healthGroupId),
+			physicalEducationId: Number(data.physicalEducationId),
+			studentId: student?.id
+		}
+		await create(newDate)
+		closeModal()
+		await refetch()
+		reset()
+	}
+
+	const getValidityPeriod = (finishDate: any, startDate: any) => {
+		const diffTime = Math.abs(finishDate - startDate)
+		//const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+		return diffTime
+	}
 
 	if (isLoading)
 		return (
@@ -24,6 +72,7 @@ const StudentDetailsPage = () => {
 					{student?.surname} {student?.name} {student?.secondName}
 				</span>
 			</Heading>
+			<CreateButton onClick={openModal}>Добавить справку</CreateButton>
 			<table className='min-w-full border-gray-300'>
 				<thead>
 					<tr className='border'>
@@ -52,8 +101,8 @@ const StudentDetailsPage = () => {
 								<td className=' p-2'>
 									{format(new Date(finishDate), 'dd.MM.yyyy')}
 								</td>
-								<td>1</td>
-								<td>2</td>
+								<td>{getValidityPeriod(finishDate, startDate)}</td>
+								<td></td>
 								<td>
 									{student?.medicalCertificates.map(item => item.healthGroupId)}
 								</td>
@@ -62,6 +111,60 @@ const StudentDetailsPage = () => {
 					)}
 				</tbody>
 			</table>
+			<CustomModalForm
+				onSubmit={handleSubmit(handleCreate)}
+				buttonTitle={'Создать'}
+				isOpen={isOpen}
+				onClose={closeModal}
+				formTitle={'Создание'}
+			>
+				<DateSelect
+					{...register('startDate', { required: 'Обязательное поле' })}
+					dateFormat='dd.MM.yyyy'
+					selected={watch('startDate')}
+					onChange={(date: any) => setValue('startDate', date)}
+					id={'startDate'}
+					label={'Дата начала'}
+				/>
+				<ErrorMessage error={errors.startDate} />
+				<DateSelect
+					{...register('finishDate', { required: 'Обязательное поле' })}
+					dateFormat='dd.MM.yyyy'
+					selected={watch('finishDate')}
+					onChange={(date: any) => setValue('finishDate', date)}
+					id={'finishDate'}
+					label={'Дата окончания'}
+				/>
+				<ErrorMessage error={errors.finishDate} />
+				<CustomSelect
+					id='healthGroupId'
+					label='Выберите группу здоровья'
+					{...register('healthGroupId')}
+				>
+					{healthGroups?.map(({ id, name }) => (
+						<option
+							value={id}
+							key={id}
+						>
+							{name}
+						</option>
+					))}
+				</CustomSelect>
+				<CustomSelect
+					id='physicalEducationId'
+					label='Выберите группу по физкультуре'
+					{...register('physicalEducationId')}
+				>
+					{physicalEducations?.map(({ id, name }) => (
+						<option
+							value={id}
+							key={id}
+						>
+							{name}
+						</option>
+					))}
+				</CustomSelect>
+			</CustomModalForm>
 		</Layout>
 	)
 }

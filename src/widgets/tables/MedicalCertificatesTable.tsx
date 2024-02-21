@@ -1,29 +1,32 @@
 import {
-	useDeleteCourse,
-	useGetCourses,
-	useUpdateCourse
-} from '@entities/Course/course.queries.ts'
-import { TypeCourseForm } from '@entities/Course/course.types.ts'
+	useDeleteMedicalCertificate,
+	useGetMedicalCertificates,
+	useUpdateMedicalCertificate
+} from '@entities/MedicalCertificate/medical-certificate.queries'
+import { TypeMedicalCertificateForm } from '@entities/MedicalCertificate/medical-certificate.types'
 import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads, { CourseHeads } from '@features/TableHeads.tsx'
-import CourseData from '@features/data/CourseData'
+import TableHeads, { CertificatesHeads } from '@features/TableHeads.tsx'
+import MedicalCertificateData from '@features/data/MedicalCertificateData'
 import { useModal } from '@shared/hooks'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { useNavigate } from 'react-router-dom'
 
 import styles from '@shared/styles/Tables.module.scss'
 
-const CoursesTable = () => {
+const MedicalCertificatesTable = () => {
 	const navigate = useNavigate()
-	const { courses, isLoading, refetch } = useGetCourses()
+	const { certificates, isLoading, refetch } = useGetMedicalCertificates()
 
 	const { closeModal } = useModal()
 
-	const { update } = useUpdateCourse()
-	const { remove } = useDeleteCourse()
+	const { update } = useUpdateMedicalCertificate()
+	const { remove } = useDeleteMedicalCertificate()
 
-	const handleEdit = async (id: number | string, data: TypeCourseForm) => {
-		await update({ id, data: { ...data, number: +data.number } })
+	const handleEdit = async (
+		id: number | string,
+		data: TypeMedicalCertificateForm
+	) => {
+		await update({ id, data })
 		closeModal()
 		await refetch()
 	}
@@ -35,7 +38,7 @@ const CoursesTable = () => {
 	}
 
 	const handleInfo = (id: number | string) => {
-		navigate(`/courses/${id}`)
+		navigate(`/medical-certificates/${id}`)
 	}
 
 	if (isLoading) return <Loader />
@@ -49,11 +52,11 @@ const CoursesTable = () => {
 				</div>
 				<table className={styles.table}>
 					<thead>
-						<TableHeads data={CourseHeads} />
+						<TableHeads data={CertificatesHeads} />
 					</thead>
 					<tbody>
-						<CourseData
-							data={courses}
+						<MedicalCertificateData
+							data={certificates}
 							onDelete={handleDelete}
 							onEdit={handleEdit}
 							onInfo={handleInfo}
@@ -65,4 +68,4 @@ const CoursesTable = () => {
 	)
 }
 
-export default CoursesTable
+export default MedicalCertificatesTable

@@ -2,6 +2,7 @@ import { QUERY_KEYS } from '@shared/config/enums.ts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
+
 import { GroupService } from './group.service'
 import { IGroup, TypeGroupForm } from './group.types'
 
@@ -36,14 +37,18 @@ export const useGetGroups = () => {
 }
 
 export const useGetGroup = (id: string | undefined) => {
-	const { data: group, isLoading } = useQuery({
+	const {
+		data: group,
+		isLoading,
+		refetch
+	} = useQuery({
 		queryKey: [QUERY_KEYS.GROUPS, id],
 		queryFn: async () => {
 			const response: AxiosResponse<IGroup> = await GroupService.getById(id)
 			return response.data
 		}
 	})
-	return { group, isLoading }
+	return { group, isLoading, refetch }
 }
 
 export const useUpdateGroup = () => {

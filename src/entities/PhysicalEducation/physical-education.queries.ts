@@ -2,6 +2,7 @@ import { QUERY_KEYS } from '@shared/config/enums.ts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
+
 import { PhysicalEducationService } from './physical-education.service'
 import {
 	IPhysicalEducation,
@@ -26,7 +27,11 @@ export const useCreatePhysicalEducation = () => {
 }
 
 export const useGetPhysicalEducations = () => {
-	const { data, isLoading, refetch } = useQuery({
+	const {
+		data: physicalEducations,
+		isLoading,
+		refetch
+	} = useQuery({
 		queryKey: [QUERY_KEYS.PHYSICAL_EDUCATIONS],
 		queryFn: async () => {
 			const response: AxiosResponse<IPhysicalEducation[]> =
@@ -34,11 +39,11 @@ export const useGetPhysicalEducations = () => {
 			return response.data
 		}
 	})
-	return { data, isLoading, refetch }
+	return { physicalEducations, isLoading, refetch }
 }
 
 export const useGetPhysicalEducation = (id: number | string) => {
-	const { data, isLoading } = useQuery({
+	const { data: physicalEducation, isLoading } = useQuery({
 		queryKey: [QUERY_KEYS.PHYSICAL_EDUCATIONS, id],
 		queryFn: async () => {
 			const response: AxiosResponse<IPhysicalEducation> =
@@ -46,7 +51,7 @@ export const useGetPhysicalEducation = (id: number | string) => {
 			return response.data
 		}
 	})
-	return { data, isLoading }
+	return { physicalEducation, isLoading }
 }
 
 export const useUpdatePhysicalEducation = () => {

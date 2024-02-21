@@ -2,6 +2,7 @@ import { QUERY_KEYS } from '@shared/config/enums.ts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
+
 import { DepartmentService } from './department.service'
 import { IDepartment, TypeDepartmentForm } from './department.types'
 
@@ -37,7 +38,11 @@ export const useGetDepartments = () => {
 }
 
 export const useGetDepartment = (id: string | undefined) => {
-	const { data: department, isLoading } = useQuery({
+	const {
+		data: department,
+		isLoading,
+		refetch
+	} = useQuery({
 		queryKey: [QUERY_KEYS.DEPARTMENTS, id],
 		queryFn: async () => {
 			const response: AxiosResponse<IDepartment> =
@@ -45,7 +50,7 @@ export const useGetDepartment = (id: string | undefined) => {
 			return response.data
 		}
 	})
-	return { department, isLoading }
+	return { department, isLoading, refetch }
 }
 
 export const useUpdateDepartment = () => {

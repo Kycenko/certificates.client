@@ -2,6 +2,7 @@ import { QUERY_KEYS } from '@shared/config/enums.ts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
+
 import { StudentService } from './student.service'
 import { IStudent, TypeStudentForm } from './student.types'
 
@@ -36,14 +37,18 @@ export const useGetStudents = () => {
 }
 
 export const useGetStudent = (id: string | undefined) => {
-	const { data: student, isLoading } = useQuery({
+	const {
+		data: student,
+		isLoading,
+		refetch
+	} = useQuery({
 		queryKey: [QUERY_KEYS.STUDENTS, id],
 		queryFn: async () => {
 			const response: AxiosResponse<IStudent> = await StudentService.getById(id)
 			return response.data
 		}
 	})
-	return { student, isLoading }
+	return { student, isLoading, refetch }
 }
 
 export const useUpdateStudent = () => {

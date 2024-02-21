@@ -25,7 +25,12 @@ export function useCreateHealthGroup() {
 }
 
 export const useGetHealthGroups = () => {
-	const { data, isSuccess, isLoading, refetch } = useQuery({
+	const {
+		data: healthGroups,
+		isSuccess,
+		isLoading,
+		refetch
+	} = useQuery({
 		queryKey: [QUERY_KEYS.HEALTH_GROUPS],
 		queryFn: async () => {
 			const response: AxiosResponse<IHealthGroup[]> =
@@ -33,11 +38,15 @@ export const useGetHealthGroups = () => {
 			return response.data
 		}
 	})
-	return { data, isSuccess, isLoading, refetch }
+	return { healthGroups, isSuccess, isLoading, refetch }
 }
 
 export const useGetHealthGroup = (id: string | number) => {
-	const { data, isSuccess, isLoading } = useQuery({
+	const {
+		data: healthGroup,
+		isSuccess,
+		isLoading
+	} = useQuery({
 		queryKey: [QUERY_KEYS.HEALTH_GROUPS, id],
 		queryFn: async () => {
 			const response: AxiosResponse<IHealthGroup> =
@@ -45,7 +54,7 @@ export const useGetHealthGroup = (id: string | number) => {
 			return response.data
 		}
 	})
-	return { data, isSuccess, isLoading }
+	return { healthGroup, isSuccess, isLoading }
 }
 
 export const useUpdateHealthGroup = () => {

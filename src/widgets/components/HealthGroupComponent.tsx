@@ -14,7 +14,7 @@ import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const HealthGroupComponent = () => {
-	const { data, refetch, isLoading } = useGetHealthGroups()
+	const { healthGroups, refetch, isLoading } = useGetHealthGroups()
 	const { closeModal, isOpen, openModal } = useModal()
 	const {
 		register,
@@ -54,7 +54,7 @@ const HealthGroupComponent = () => {
 			<Heading title='Список групп здоровья' />
 			<CreateButton onClick={openModal}>Создать группу здоровья</CreateButton>
 			<HealthGroupData
-				data={data}
+				data={healthGroups}
 				onDelete={handleDelete}
 				onEdit={handleEdit}
 			/>

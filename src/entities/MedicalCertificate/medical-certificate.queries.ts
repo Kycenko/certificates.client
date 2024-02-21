@@ -1,10 +1,13 @@
 import { QUERY_KEYS } from '@shared/config/enums.ts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import { MedicalCertificateService } from './medical-certificate.service'
-import { IMedicalCertificate, TypeMedicalCertificateForm } from './medical-certificate.types'
 import toast from 'react-hot-toast'
 
+import { MedicalCertificateService } from './medical-certificate.service'
+import {
+	IMedicalCertificate,
+	TypeMedicalCertificateForm
+} from './medical-certificate.types'
 
 export const useCreateMedicalCertificate = () => {
 	const queryClient = new QueryClient()
@@ -24,7 +27,11 @@ export const useCreateMedicalCertificate = () => {
 }
 
 export const useGetMedicalCertificates = () => {
-	const { data: certificates, isLoading } = useQuery({
+	const {
+		data: certificates,
+		isLoading,
+		refetch
+	} = useQuery({
 		queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES],
 		queryFn: async () => {
 			const response: AxiosResponse<IMedicalCertificate[]> =
@@ -33,13 +40,17 @@ export const useGetMedicalCertificates = () => {
 		}
 	})
 	return {
-		certificates, isLoading
+		certificates,
+		isLoading,
+		refetch
 	}
 }
 
 export const useGetMedicalCertificate = (id: string | undefined) => {
 	const {
-		data: certificate, isLoading
+		data: certificate,
+		isLoading,
+		refetch
 	} = useQuery({
 		queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES, id],
 		queryFn: async () => {
@@ -48,7 +59,7 @@ export const useGetMedicalCertificate = (id: string | undefined) => {
 			return response.data
 		}
 	})
-	return { certificate, isLoading }
+	return { certificate, isLoading, refetch }
 }
 
 export const useUpdateMedicalCertificate = () => {

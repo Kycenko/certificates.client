@@ -2,6 +2,7 @@ import { QUERY_KEYS } from '@shared/config/enums.ts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 import toast from 'react-hot-toast'
+
 import { CourseService } from './course.service'
 import { ICourse, TypeCourseForm } from './course.types'
 
@@ -36,14 +37,18 @@ export const useGetCourses = () => {
 }
 
 export const useGetCourse = (id: string | undefined) => {
-	const { data: course, isLoading } = useQuery({
+	const {
+		data: course,
+		isLoading,
+		refetch
+	} = useQuery({
 		queryKey: [QUERY_KEYS.COURSES, id],
 		queryFn: async () => {
 			const response: AxiosResponse<ICourse> = await CourseService.getById(id)
 			return response.data
 		}
 	})
-	return { course, isLoading }
+	return { course, isLoading, refetch }
 }
 
 export const useUpdateCourse = () => {

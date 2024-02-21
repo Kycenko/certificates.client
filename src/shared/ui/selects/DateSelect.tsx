@@ -11,7 +11,7 @@ interface DateSelectProps {
 	onChange: (value: Date | null) => void
 	label: string
 	className?: string
-	maxDate: Date | null
+	maxDate?: Date | null
 	dateFormat: string
 	showTimeSelect?: boolean
 }
