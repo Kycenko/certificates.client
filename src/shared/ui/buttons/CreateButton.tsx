@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
+
 import styles from '@shared/styles/Fields.module.scss'
 
 type TypeButton = ButtonHTMLAttributes<HTMLButtonElement>
@@ -11,11 +12,7 @@ const CreateButton = ({
 	return (
 		<div className={styles.btnContainer}>
 			<button
-				className={
-					className
-						? className
-						: styles.createBtn
-				}
+				className={className ? className : styles.createBtn}
 				{...rest}
 			>
 				{children}

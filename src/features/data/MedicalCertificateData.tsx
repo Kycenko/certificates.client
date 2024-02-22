@@ -1,15 +1,24 @@
-import {useGetHealthGroups} from '@entities/HealthGroup/health-group.query'
-import {IMedicalCertificate, TypeMedicalCertificateForm} from '@entities/MedicalCertificate/medical-certificate.types'
-import {useGetPhysicalEducations} from '@entities/PhysicalEducation/physical-education.queries'
-import {useModal} from '@shared/hooks'
-import {CustomButton, CustomModalForm, CustomSelect, ErrorMessage} from '@shared/ui'
-import DateSelect from '@shared/ui/selects/DateSelect'
+import { useGetHealthGroups } from '@entities/HealthGroup/health-group.query'
+import {
+	IMedicalCertificate,
+	TypeMedicalCertificateForm
+} from '@entities/MedicalCertificate/medical-certificate.types'
+import { useGetPhysicalEducations } from '@entities/PhysicalEducation/physical-education.queries'
+import { useGetStudents } from '@entities/Student/student.queries'
+import { useModal } from '@shared/hooks'
+import {
+	CustomButton,
+	CustomInput,
+	CustomModalForm,
+	CustomSelect,
+	ErrorMessage
+} from '@shared/ui'
 import daysUntilTheEnd from '@shared/utils/daysUntilTheEnd'
 import getDaysUntilExpiry from '@shared/utils/getDaysUntilExpiry'
 import getValidityPeriod from '@shared/utils/getValidityPeriod'
-import {format} from 'date-fns'
-import {FC} from 'react'
-import {useForm} from 'react-hook-form'
+import { format } from 'date-fns'
+import { FC } from 'react'
+import { useForm } from 'react-hook-form'
 
 import styles from '@shared/styles/Tables.module.scss'
 
@@ -21,22 +30,25 @@ interface MedicalCertificateDataProps {
 }
 
 const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
-	                                                                 data,
-	                                                                 onDelete,
-	                                                                 onEdit
-                                                                 }) => {
-	const {setDeleteId, deleteId, editId, setEditId} = useModal()
-	const {healthGroups} = useGetHealthGroups()
-	const {physicalEducations} = useGetPhysicalEducations()
+	data,
+	onDelete,
+	onEdit
+}) => {
+	const { setDeleteId, deleteId, editId, setEditId } = useModal()
+	const { healthGroups } = useGetHealthGroups()
+	const { physicalEducations } = useGetPhysicalEducations()
+	const { students } = useGetStudents()
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
-		reset,
-		setValue
+		formState: { errors },
+		reset
 	} = useForm<TypeMedicalCertificateForm>()
-	
-	const handleEdit = (id: number | string, data: any) => {
+
+	const handleEdit = (
+		id: number | string,
+		data: TypeMedicalCertificateForm
+	) => {
 		const newData = {
 			...data,
 			healthGroupId: Number(data.healthGroupId),
@@ -46,7 +58,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		setEditId(null)
 		reset()
 	}
-	
+
 	return (
 		<>
 			{!data || data.length === 0 ? (
@@ -59,11 +71,19 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 					</td>
 				</tr>
 			) : (
-				data?.map(({id, startDate, finishDate}) => (
+				data?.map(({ id, startDate, finishDate, studentId }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}
 					>
+						<td>
+							{students
+								?.filter(({ id }) => id === studentId)
+								.map(
+									({ name, surname, secondName }) =>
+										`${surname} ${name} ${secondName}`
+								)}
+						</td>
 						<td>
 							<span>{format(new Date(startDate), 'dd.MM.yyyy')}</span>
 						</td>
@@ -73,7 +93,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 						<td>{getValidityPeriod(finishDate, startDate)}</td>
 						<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
 						<td>{daysUntilTheEnd(finishDate)}</td>
-						
+
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
 								<CustomButton
@@ -84,37 +104,35 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 								>
 									Изменить
 								</CustomButton>
-								
+
 								<CustomButton onClick={() => setDeleteId(id)}>
 									Удалить
 								</CustomButton>
 							</div>
 						</td>
 						<CustomModalForm
-							onSubmit={handleSubmit(() => handleEdit(id, data))}
+							onSubmit={handleSubmit(data => handleEdit(id, data))}
 							isOpen={editId === id}
 							onClose={() => setEditId(null)}
 							formTitle='Изменение'
 							buttonTitle='Изменить'
 						>
-							<DateSelect
+							<CustomInput
 								id='startDate'
-								dateFormat='dd.MM.yyyy'
 								label='Выберите дату начала'
-								selected={startDate}
-								{...register('startDate', {required: 'Обязательное поле'})}
-								onChange={(date: any) => setValue('startDate', date)}
+								type='date'
+								defaultValue={format(new Date(startDate), 'yyyy-MM-dd')}
+								{...register('startDate', { required: 'Обязательное поле' })}
 							/>
-							<ErrorMessage error={errors.startDate}/>
-							<DateSelect
+							<ErrorMessage error={errors.startDate} />
+							<CustomInput
 								id='finishDate'
-								dateFormat='dd.MM.yyyy'
 								label='Выберите дату окончания'
-								selected={finishDate}
-								{...register('finishDate', {required: 'Обязательное поле'})}
-								onChange={(date: any) => setValue('finishDate', date)}
+								type='date'
+								defaultValue={format(new Date(finishDate), 'yyyy-MM-dd')}
+								{...register('finishDate', { required: 'Обязательное поле' })}
 							/>
-							<ErrorMessage error={errors.finishDate}/>
+							<ErrorMessage error={errors.finishDate} />
 							<CustomSelect
 								id='healthGroupId'
 								label='Выберите группу здоровья'
@@ -122,7 +140,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 									required: 'Обязательное поле'
 								})}
 							>
-								{physicalEducations?.map(({id, name}) => (
+								{physicalEducations?.map(({ id, name }) => (
 									<option
 										value={id}
 										key={id}
@@ -131,7 +149,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 									</option>
 								))}
 							</CustomSelect>
-							
+
 							<CustomSelect
 								id='physicalEducationId'
 								label='Выберите группу по физкультуре'
@@ -139,7 +157,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 									required: 'Обязательное поле'
 								})}
 							>
-								{healthGroups?.map(({id, name}) => (
+								{healthGroups?.map(({ id, name }) => (
 									<option
 										value={id}
 										key={id}

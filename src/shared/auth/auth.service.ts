@@ -1,6 +1,7 @@
 import instance from '@shared/api/api.instance'
 import { BASE_URL, SERVICE_URL, TOKENS } from '@shared/config/enums.ts'
 import Cookies from 'js-cookie'
+
 import { saveToStorage } from './auth.helper'
 import { IAuthResponse, ILogin, IRegister } from './auth.types'
 

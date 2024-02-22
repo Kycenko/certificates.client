@@ -1,5 +1,6 @@
 import instance from '@shared/api/api.instance'
 import { SERVICE_URL } from '@shared/config/enums.ts'
+
 import { ICourse, TypeCourseForm } from './course.types'
 
 export const CourseService = {

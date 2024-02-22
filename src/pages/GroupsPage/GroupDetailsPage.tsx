@@ -2,13 +2,17 @@ import { Layout } from '@app/layout'
 import { useGetGroup } from '@entities/Group/group.queries'
 import { useCreateStudent } from '@entities/Student/student.queries'
 import { TypeStudentForm } from '@entities/Student/student.types'
+import DetailsTableHeads from '@features/DetailsTableHeads'
+import { PAGES_URL } from '@shared/config/enums'
+import { DetailsGroupHeads } from '@shared/config/heads'
 import { useAuth, useModal } from '@shared/hooks'
 import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
 import CreateButton from '@shared/ui/buttons/CreateButton'
-import DateSelect from '@shared/ui/selects/DateSelect'
 import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+
+import styles from '@shared/styles/DetailsTables.module.scss'
 
 const GroupDetailsPage = () => {
 	const navigate = useNavigate()
@@ -21,9 +25,7 @@ const GroupDetailsPage = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset,
-		watch,
-		setValue
+		reset
 	} = useForm<TypeStudentForm>()
 
 	const { create } = useCreateStudent()
@@ -38,23 +40,14 @@ const GroupDetailsPage = () => {
 	return (
 		<Layout>
 			<Heading title={'Описание группы'}>
-				<span className='text-base text-gray-500'>{group?.name}</span>
+				<span className={styles.title}>{group?.name}</span>
 			</Heading>
 			{user?.isAdmin ? (
 				<CreateButton onClick={openModal}>Добавить ученика</CreateButton>
-			) : (
-				''
-			)}
-			<table className='min-w-full  border-gray-300'>
+			) : null}
+			<table className={styles.table}>
 				<thead>
-					<tr className='border'>
-						<th className=' p-2'>Фамилия</th>
-						<th className=' p-2'>Имя</th>
-						<th className=' p-2'>Отчество</th>
-						<th className=' p-2'>Дата рождения</th>
-						<th className=' p-2'>Группа</th>
-						<th className=' p-2'>Количество справок</th>
-					</tr>
+					<DetailsTableHeads data={DetailsGroupHeads} />
 				</thead>
 				<tbody>
 					{group?.students?.map(
@@ -67,8 +60,8 @@ const GroupDetailsPage = () => {
 							medicalCertificates
 						}) => (
 							<tr
-								onClick={() => navigate(`/students/${id}`)}
-								className='border hover:bg-gray-200 cursor-pointer  text-center'
+								onClick={() => navigate(`${PAGES_URL.STUDENTS}/${id}`)}
+								className={styles.cell}
 								key={id}
 							>
 								<td className=' p-2'>{surname}</td>
@@ -114,14 +107,12 @@ const GroupDetailsPage = () => {
 					{...register('secondName')}
 				/>
 				<ErrorMessage error={errors.secondName} />
-				<DateSelect
+				<CustomInput
+					id='birthDate'
+					label='Выберите дату рождения'
+					type='date'
+					max={format(new Date(), 'yyyy-MM-dd')}
 					{...register('birthDate', { required: 'Обязательное поле' })}
-					dateFormat='dd.MM.yyyy'
-					selected={watch('birthDate')}
-					onChange={(date: any) => setValue('birthDate', date)}
-					maxDate={new Date()}
-					id={'birthDate'}
-					label={'Дата рождения'}
 				/>
 				<ErrorMessage error={errors.birthDate} />
 			</CustomModalForm>

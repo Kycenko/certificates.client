@@ -1,6 +1,7 @@
 import { X } from 'lucide-react'
 import { FC, ReactNode, useEffect, useRef } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+
 import styles from './CustomModalForm.module.scss'
 
 interface CustomModalFormProps {
@@ -53,20 +54,28 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = ({
 		isOpen && (
 			<div className={isOpen ? styles.modalOpen : styles.modalClose}>
 				<div className={styles.container}>
-					<div className={styles.main} ref={modalRef}>
+					<div
+						className={styles.main}
+						ref={modalRef}
+					>
 						<div className={styles.form}>
 							<div className={styles.header}>
 								<h3 className={styles.title}>{formTitle}</h3>
-								<X className={styles.cross} onClick={onClose} />
+								<X
+									className={styles.cross}
+									onClick={onClose}
+								/>
 							</div>
 							<FormProvider {...methods}>
 								<form onSubmit={handleSubmit(onSubmit)}>
 									<div className={styles.content}>{children}</div>
 								</form>
 							</FormProvider>
-
 							<div className={styles.footer}>
-								<button className={styles.submitBtn} onClick={onClose}>
+								<button
+									className={styles.submitBtn}
+									onClick={onClose}
+								>
 									Закрыть
 								</button>
 								<button

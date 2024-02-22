@@ -1,5 +1,6 @@
 import instance from '@shared/api/api.instance'
 import { SERVICE_URL } from '@shared/config/enums.ts'
+
 import { IDepartment, TypeDepartmentForm } from './department.types'
 
 export const DepartmentService = {

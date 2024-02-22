@@ -1,12 +1,17 @@
-import {ICourse, TypeCourseForm} from '@entities/Course/course.types'
-import {useGetDepartments} from '@entities/Department/department.queries'
-import {selectSortOrder} from '@features/SortOrder/sort.slice'
-import {useAppSelector, useModal} from '@shared/hooks'
+import { ICourse, TypeCourseForm } from '@entities/Course/course.types'
+import { useGetDepartments } from '@entities/Department/department.queries'
+import { selectSortOrder } from '@features/SortOrder/sort.slice'
+import { useAppSelector, useModal } from '@shared/hooks'
 import useSortData from '@shared/hooks/useSortData'
-import {CustomButton, CustomModalForm, CustomSelect, ErrorMessage} from '@shared/ui'
-import {updateHistory} from '@shared/utils'
-import {FC} from 'react'
-import {useForm} from 'react-hook-form'
+import {
+	CustomButton,
+	CustomModalForm,
+	CustomSelect,
+	ErrorMessage
+} from '@shared/ui'
+import { updateHistory } from '@shared/utils'
+import { FC } from 'react'
+import { useForm } from 'react-hook-form'
 
 import styles from '@shared/styles/Tables.module.scss'
 
@@ -18,28 +23,38 @@ interface CourseDataProps {
 }
 
 const CourseData: FC<CourseDataProps> = ({
-	                                         data,
-	                                         onDelete,
-	                                         onEdit,
-	                                         onInfo
-                                         }) => {
-	const {setDeleteId, deleteId, editId, setEditId} = useModal()
-	const {departments} = useGetDepartments()
+	data,
+	onDelete,
+	onEdit,
+	onInfo
+}) => {
+	const { setDeleteId, deleteId, editId, setEditId } = useModal()
+	const { departments } = useGetDepartments()
 	const {
 		register,
 		handleSubmit,
-		formState: {errors},
+		formState: { errors },
 		reset
 	} = useForm<TypeCourseForm>()
-	
+
 	const handleEdit = (id: number | string) => {
 		setEditId(id)
 		reset()
 	}
+
+	const onSubmit = (id: number | string, data: TypeCourseForm) => {
+		const newData = {
+			...data,
+			departmentId: Number(data.departmentId)
+		}
+		onEdit(id, newData)
+		setEditId(null)
+		reset()
+	}
 	const sortOrder = useAppSelector(selectSortOrder)
-	
-	const {sortedData} = useSortData(data as ICourse[], sortOrder)
-	
+
+	const { sortedData } = useSortData(data as ICourse[], sortOrder)
+
 	updateHistory(null, sortOrder)
 	return (
 		<>
@@ -53,7 +68,7 @@ const CourseData: FC<CourseDataProps> = ({
 					</td>
 				</tr>
 			) : (
-				sortedData.map(({id, number, departmentId}) => (
+				sortedData.map(({ id, number, departmentId }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}
@@ -61,7 +76,13 @@ const CourseData: FC<CourseDataProps> = ({
 						<td>
 							<span>{number}-й курс</span>
 						</td>
-						<td><span>{departments?.filter(({id}) => id === departmentId)?.map(({name}) => name)}</span></td>
+						<td>
+							<span>
+								{departments
+									?.filter(({ id }) => id === departmentId)
+									?.map(({ name }) => name)}
+							</span>
+						</td>
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
 								<CustomButton onClick={() => handleEdit(id)}>
@@ -76,15 +97,7 @@ const CourseData: FC<CourseDataProps> = ({
 							</div>
 						</td>
 						<CustomModalForm
-							onSubmit={handleSubmit(data => {
-								const newData = {
-									...data,
-									departmentId: Number(data.departmentId)
-								}
-								onEdit(id, newData)
-								setEditId(null)
-								reset()
-							})}
+							onSubmit={handleSubmit(data => onSubmit(id, data))}
 							isOpen={editId === id}
 							onClose={() => setEditId(null)}
 							formTitle='Изменение'
@@ -94,7 +107,7 @@ const CourseData: FC<CourseDataProps> = ({
 								id='number'
 								label='Выберите номер курса'
 								defaultValue={number}
-								{...register('number', {required: 'Обязательное поле'})}
+								{...register('number', { required: 'Обязательное поле' })}
 							>
 								<option
 									key={1}
@@ -121,15 +134,15 @@ const CourseData: FC<CourseDataProps> = ({
 									4 курс
 								</option>
 							</CustomSelect>
-							
-							<ErrorMessage error={errors.number}/>
+
+							<ErrorMessage error={errors.number} />
 							<CustomSelect
 								id='departmentId'
 								label='Выберите отделение'
 								defaultValue={departmentId}
 								{...register('departmentId')}
 							>
-								{departments?.map(({id, name}) => (
+								{departments?.map(({ id, name }) => (
 									<option
 										key={id}
 										value={id}

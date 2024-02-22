@@ -1,5 +1,6 @@
 import { instance } from '@shared/api'
 import { SERVICE_URL } from '@shared/config/enums'
+
 import {
 	IPhysicalEducation,
 	TypePhysicalEducationForm

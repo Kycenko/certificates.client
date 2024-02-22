@@ -1,5 +1,7 @@
+import { InputHTMLAttributes, forwardRef } from 'react'
+
 import styles from '@shared/styles/Fields.module.scss'
-import { forwardRef, InputHTMLAttributes } from 'react'
+
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	label: string
 	id: string

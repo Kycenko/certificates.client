@@ -2,6 +2,7 @@ import { useLogin } from '@shared/auth/auth.queries'
 import { ILogin } from '@shared/auth/auth.types'
 import { CustomInput, ErrorMessage } from '@shared/ui'
 import { useForm } from 'react-hook-form'
+
 import styles from './LoginForm.module.scss'
 
 const LoginForm = () => {
@@ -26,7 +27,10 @@ const LoginForm = () => {
 		<div className={styles.container}>
 			<div className={styles.form}>
 				<h1 className={styles.title}>Авторизация</h1>
-				<form className='mt-6' onSubmit={handleSubmit(handleLogin)}>
+				<form
+					className='mt-6'
+					onSubmit={handleSubmit(handleLogin)}
+				>
 					<div className='mb-2'>
 						<CustomInput
 							id={'name'}

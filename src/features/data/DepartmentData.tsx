@@ -39,6 +39,16 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 		reset
 	} = useForm<TypeDepartmentForm>()
 
+	const handleEdit = (id: number | string) => {
+		setEditId(id)
+		reset()
+	}
+	const onSubmit = (id: number | string, data: TypeDepartmentForm) => {
+		onEdit(id, data)
+		setEditId(null)
+		reset()
+	}
+
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
 	const { sortedData } = useSortAndFilterData(
@@ -73,12 +83,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 						</td>
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
-								<CustomButton
-									onClick={() => {
-										setEditId(id)
-										reset()
-									}}
-								>
+								<CustomButton onClick={() => handleEdit(id)}>
 									Изменить
 								</CustomButton>
 								<CustomButton onClick={() => onInfo(id)}>
@@ -90,11 +95,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 							</div>
 						</td>
 						<CustomModalForm
-							onSubmit={handleSubmit(data => {
-								onEdit(id, data)
-								setEditId(null)
-								reset()
-							})}
+							onSubmit={handleSubmit(data => onSubmit(id, data))}
 							isOpen={editId === id}
 							onClose={() => setEditId(null)}
 							formTitle='Изменение'

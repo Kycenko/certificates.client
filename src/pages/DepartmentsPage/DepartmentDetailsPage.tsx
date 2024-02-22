@@ -2,12 +2,17 @@ import { Layout } from '@app/layout'
 import { useCreateCourse } from '@entities/Course/course.queries'
 import { TypeCourseForm } from '@entities/Course/course.types'
 import { useGetDepartment } from '@entities/Department/department.queries'
+import DetailsTableHeads from '@features/DetailsTableHeads'
+import { PAGES_URL } from '@shared/config/enums'
+import { DetailsDepartmentHeads } from '@shared/config/heads'
 import { useModal } from '@shared/hooks'
 import { CustomModalForm, CustomSelect, Heading } from '@shared/ui'
 import CreateButton from '@shared/ui/buttons/CreateButton'
 import Loader from '@shared/ui/loader/CustomLoader'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+
+import styles from '@shared/styles/DetailsTables.module.scss'
 
 const DepartmentDetailsPage = () => {
 	const navigate = useNavigate()
@@ -45,23 +50,19 @@ const DepartmentDetailsPage = () => {
 	return (
 		<Layout>
 			<Heading title={'Описание отделения'}>
-				<span className='text-base text-gray-500'>{department?.name}</span>
+				<span className={styles.title}>{department?.name}</span>
 			</Heading>
 			<CreateButton onClick={openModal}>Создать курс</CreateButton>
 
-			<table className='min-w-full  border-gray-300'>
+			<table className={styles.table}>
 				<thead>
-					<tr className='border justify-center text-center items-center'>
-						<th className=' p-2'>Номер курса</th>
-						<th className=' p-2'>Количество групп</th>
-						<th className=' p-2'>Отделение</th>
-					</tr>
+					<DetailsTableHeads data={DetailsDepartmentHeads} />
 				</thead>
 				<tbody>
 					{department?.courses?.map(({ id, number, groups }) => (
 						<tr
-							onClick={() => navigate(`/courses/${id}`)}
-							className='border hover:bg-gray-200 cursor-pointer  justify-center text-center items-center'
+							onClick={() => navigate(`${PAGES_URL.COURSES}/${id}`)}
+							className={styles.cell}
 							key={id}
 						>
 							<td className=' p-2'>{`${number} Курс`}</td>

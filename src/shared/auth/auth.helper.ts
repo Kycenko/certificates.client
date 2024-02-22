@@ -1,5 +1,6 @@
 import { LOCAL_STORAGE_KEY, TOKENS } from '@shared/config/enums.ts'
 import Cookies from 'js-cookie'
+
 import { IAuthResponse, ITokens } from './auth.types'
 
 export const getAccessToken = async () => {

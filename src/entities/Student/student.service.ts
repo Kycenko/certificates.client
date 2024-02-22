@@ -1,6 +1,7 @@
 import { TypeStudentForm } from '@entities/Student/student.types'
 import instance from '@shared/api/api.instance'
 import { SERVICE_URL } from '@shared/config/enums.ts'
+
 import { IStudent } from './student.types'
 
 export const StudentService = {

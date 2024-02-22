@@ -1,5 +1,7 @@
+import { ReactNode, SelectHTMLAttributes, forwardRef } from 'react'
+
 import styles from '@shared/styles/Fields.module.scss'
-import { forwardRef, ReactNode, SelectHTMLAttributes } from 'react'
+
 interface CustomSelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 	children: ReactNode
 	id: string

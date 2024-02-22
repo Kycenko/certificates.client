@@ -2,6 +2,7 @@ import { useGetCourses } from '@entities/Course/course.queries'
 import { IGroup, TypeGroupForm } from '@entities/Group/group.types'
 import { selectSearchTerm } from '@features/Search/search.slice'
 import { selectSortOrder } from '@features/SortOrder/sort.slice'
+import { PAGES_URL } from '@shared/config/enums'
 import { useAppSelector, useAuth, useModal } from '@shared/hooks'
 import useSortAndFilterData from '@shared/hooks/useSortAndFilterData'
 import {
@@ -68,9 +69,12 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 						{user?.isAdmin ? (
 							<>
 								<td>
-									<div>
-										<span>{name}</span>
-									</div>
+									<span>{name}</span>
+								</td>
+								<td>
+									{courses
+										?.filter(({ id }) => id === courseId)
+										?.map(({ number }) => `${number}-й курс`)}
 								</td>
 								<td className={styles.editCellContainer}>
 									<div className={styles.adminEditCell}>
@@ -93,7 +97,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 							</>
 						) : (
 							<td
-								onClick={() => navigate(`/groups/${id}`)}
+								onClick={() => navigate(`${PAGES_URL.GROUPS}/${id}`)}
 								className={styles.userEditCell}
 							>
 								<span>{name}</span>
