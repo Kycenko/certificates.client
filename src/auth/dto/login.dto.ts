@@ -6,7 +6,7 @@ export class LoginDto {
 	@MinLength(4)
 	@MaxLength(15)
 	login: string
-	
+
 	@IsString()
 	@IsNotEmpty({ message: 'Обязательное поле!' })
 	@MinLength(6, { message: 'Минимум 6 символов!' })

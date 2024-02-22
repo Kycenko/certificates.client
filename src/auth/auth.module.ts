@@ -19,5 +19,4 @@ import { getJwtConfig } from '@config/jwt.config'
 		})
 	]
 })
-export class AuthModule {
-}
+export class AuthModule {}

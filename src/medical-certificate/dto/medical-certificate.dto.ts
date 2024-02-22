@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
 export class MedicalCertificateDto {
 	@IsString()
@@ -8,7 +8,7 @@ export class MedicalCertificateDto {
 	@IsNotEmpty({ message: 'Обязательное поле!' })
 	finishDate: Date
 	@IsNumber()
-	@IsOptional()
+	@IsNotEmpty()
 	studentId: number
 	@IsNumber()
 	@IsNotEmpty({ message: 'Обязательное поле!' })

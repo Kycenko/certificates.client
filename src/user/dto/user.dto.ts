@@ -13,13 +13,13 @@ export class UserDto {
 
 	@IsString()
 	@IsOptional()
-	password: string
+	password?: string
 
 	@IsBoolean()
 	@IsOptional()
-	isAdmin: boolean
+	isAdmin?: boolean
 
 	@IsNumber()
 	@IsOptional()
-	groupId: number
+	groupId?: number
 }

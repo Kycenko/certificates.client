@@ -10,7 +10,7 @@ export class UserService {
 	async getAll() {
 		const users = await this.prisma.user.findMany({
 			include: {
-				groups: true
+				group: true
 			}
 		})
 		if (!users || users.length === 0)
@@ -41,7 +41,8 @@ export class UserService {
 			data: {
 				login: dto.login,
 				password: dto.password ? await hash(dto.password) : user.password,
-				isAdmin: dto.isAdmin
+				isAdmin: dto.isAdmin,
+				groupId: dto.groupId
 			}
 		})
 	}

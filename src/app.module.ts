@@ -29,5 +29,4 @@ import { StatisticsModule } from '@statistics/statistics.module'
 	controllers: [],
 	providers: [PrismaService]
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional, Max, Min } from 'class-validator'
+import { IsNotEmpty, IsNumber, Max, Min } from 'class-validator'
 
 export class CourseDto {
 	@IsNumber()
@@ -8,6 +8,6 @@ export class CourseDto {
 	number: number
 
 	@IsNumber()
-	@IsOptional()
+	@IsNotEmpty()
 	departmentId: number
 }

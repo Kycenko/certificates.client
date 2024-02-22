@@ -8,13 +8,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  login     String   @unique
-  password  String
-  isAdmin   Boolean  @default(false) @map("is_admin")
+  id       Int     @id @default(autoincrement())
+  login    String  @unique
+  password String
+  isAdmin  Boolean @default(false) @map("is_admin")
+
+  groupId   Int?     @map("group_id")
+  group     Group?   @relation(fields: [groupId], references: [id])
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  groups    Group[]
 
   @@map("users")
 }
@@ -28,22 +30,28 @@ model Student {
   groupId             Int?                 @map("group_id")
   medicalCertificates MedicalCertificate[]
   group               Group?               @relation(fields: [groupId], references: [id])
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
 
   @@map("students")
 }
 
 model HealthGroup {
   id                  Int                  @id @default(autoincrement())
-  name                String
+  name                String               @unique
   medicalCertificates MedicalCertificate[]
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
 
   @@map("health_groups")
 }
 
 model PhysicalEducation {
   id                  Int                  @id @default(autoincrement())
-  name                String
+  name                String               @unique
   medicalCertificates MedicalCertificate[]
+  createdAt           DateTime             @default(now()) @map("created_at")
+  updatedAt           DateTime             @updatedAt @map("updated_at")
 
   @@map("physical_educations")
 }
@@ -58,26 +66,32 @@ model MedicalCertificate {
   healthGroup         HealthGroup       @relation(fields: [healthGroupId], references: [id])
   physicalEducation   PhysicalEducation @relation(fields: [physicalEducationId], references: [id])
   student             Student           @relation(fields: [studentId], references: [id])
+  createdAt           DateTime          @default(now()) @map("created_at")
+  updatedAt           DateTime          @updatedAt @map("updated_at")
 
   @@map("medical_certificates")
 }
 
 model Group {
-  id       Int       @id @default(autoincrement())
-  name     String
-  courseId Int       @map("course_id")
-  userId   Int?      @map("user_id")
-  course   Course    @relation(fields: [courseId], references: [id])
-  user     User?     @relation(fields: [userId], references: [id])
-  students Student[]
+  id        Int       @id @default(autoincrement())
+  name      String
+  courseId  Int       @map("course_id")
+  course    Course    @relation(fields: [courseId], references: [id])
+  students  Student[]
+  User      User[]
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
 
+  @@unique([name, courseId])
   @@map("groups")
 }
 
 model Department {
-  id      Int      @id @default(autoincrement())
-  name    String
-  courses Course[]
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  courses   Course[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("departments")
 }
@@ -88,6 +102,9 @@ model Course {
   departmentId Int        @map("department_id")
   department   Department @relation(fields: [departmentId], references: [id])
   groups       Group[]
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
 
+  @@unique([number, departmentId])
   @@map("courses")
 }

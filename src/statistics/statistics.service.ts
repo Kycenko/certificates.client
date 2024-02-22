@@ -5,16 +5,15 @@ import { PrismaService } from '@config/prisma.service'
 
 @Injectable()
 export class StatisticsService {
-	constructor(private prisma: PrismaService) {
-	}
-	
+	constructor(private prisma: PrismaService) {}
+
 	async getStudentsWithMedicalCertificatesInRange(
 		startDate: Date,
 		endDate: Date
 	) {
 		const startOfDayDate = startOfDay(startDate)
 		const endOfDayDate = endOfDay(endDate)
-		
+
 		return this.prisma.student.findMany({
 			include: {
 				medicalCertificates: {
@@ -59,12 +58,11 @@ export class StatisticsService {
 					}
 				}
 			}
-		});
-		
-		return studentsInAllGroups;
+		})
+
+		return studentsInAllGroups
 	}
-	
-	
+
 	async getStatisticsByGroup(groupId: number) {
 		const studentsInGroup = this.prisma.student.findMany({
 			where: {
@@ -93,8 +91,6 @@ export class StatisticsService {
 		})
 		return studentsInGroup
 	}
-	
-	async getCourseReport(reportType: string, sortBy: string) {
-	
-	}
+
+	async getCourseReport(reportType: string, sortBy: string) {}
 }

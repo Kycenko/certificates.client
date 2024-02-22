@@ -1,7 +1,6 @@
 import {
 	IsNotEmpty,
 	IsNumber,
-	IsOptional,
 	IsString,
 	MaxLength,
 	MinLength
@@ -16,7 +15,4 @@ export class GroupDto {
 	@IsNumber()
 	@IsNotEmpty({ message: 'Обязательное поле!' })
 	courseId: number
-	@IsOptional()
-	@IsNumber()
-	userId: number
 }
