@@ -1,6 +1,7 @@
 import { useLogin } from '@shared/auth/auth.queries'
 import { ILogin } from '@shared/auth/auth.types'
 import { CustomInput, ErrorMessage } from '@shared/ui'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import styles from './LoginForm.module.scss'
@@ -14,11 +15,14 @@ const LoginForm = () => {
 	} = useForm<ILogin>()
 
 	const { mutate } = useLogin()
+	const [loginError, setLoginError] = useState<string | null>(null)
 
 	const handleLogin = (data: ILogin) => {
 		try {
 			mutate(data)
+			setLoginError(null)
 		} catch (error) {
+			setLoginError('Неверный логин или пароль')
 			reset()
 		}
 	}
@@ -48,7 +52,7 @@ const LoginForm = () => {
 						/>
 						<ErrorMessage error={errors.password} />
 					</div>
-					{/*{loginError && <p className='text-red-500'>{loginError}</p>}*/}
+					{loginError && <p className='text-red-500'>{loginError}</p>}
 					<div className={styles.btnContainer}>
 						<button
 							className={styles.loginBtn}

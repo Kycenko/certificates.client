@@ -26,7 +26,8 @@ export const enum SERVICE_URL {
 	GROUPS = 'groups',
 	DEPARTMENTS = 'departments',
 	COURSES = 'courses',
-	MEDICAL_CERTIFICATES = 'medical-certificates'
+	MEDICAL_CERTIFICATES = 'medical-certificates',
+	GROUP_REPORT = 'group-report'
 }
 
 export const enum SERVICE_METHOD {

@@ -9,6 +9,7 @@ import HomePage from '@pages/HomePage/HomePage.tsx'
 import LoginPage from '@pages/Login/LoginPage'
 import MedicalCertificatesPage from '@pages/MedicalCertificatesPage/MedicalCertificatesPage'
 import PhysicalEducationPage from '@pages/PhysicalEducationsPage/PhysicalEducationsPage'
+import StatisticsPage from '@pages/StatisticsPage/StatisticsPage'
 import StudentDetailsPage from '@pages/StudentsPage/StudentDetailsPage.tsx'
 import StudentsPage from '@pages/StudentsPage/StudentsPage'
 import ProfilePage from '@pages/UsersPage/ProfilePage/ProfilePage'
@@ -32,7 +33,8 @@ export const enum AppRoutes {
 	STUDENTS = 'students',
 	STUDENT_DETAILS = 'student-details',
 	MEDICAL_CERTIFICATES = 'medical-certificates',
-	PROFILE = 'profile'
+	PROFILE = 'profile',
+	STATISTICS = 'statistics'
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -51,7 +53,8 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.STUDENTS]: '/students',
 	[AppRoutes.STUDENT_DETAILS]: '/students/:id',
 	[AppRoutes.MEDICAL_CERTIFICATES]: '/medical-certificates',
-	[AppRoutes.PROFILE]: '/users/profile/:id'
+	[AppRoutes.PROFILE]: '/users/profile/:id',
+	[AppRoutes.STATISTICS]: '/statistics/group-report/:id'
 }
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -118,5 +121,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.PROFILE]: {
 		path: RoutePath.profile,
 		element: <ProfilePage />
+	},
+	[AppRoutes.STATISTICS]: {
+		path: RoutePath.statistics,
+		element: <StatisticsPage />
 	}
 }

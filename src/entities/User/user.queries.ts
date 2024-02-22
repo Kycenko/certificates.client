@@ -37,15 +37,15 @@ export const useGetUser = (id: string | undefined) => {
 	return { user, isLoading, isSuccess, refetch }
 }
 
-export const useGetProfile = () => {
+export const useGetProfile = (id: string | undefined) => {
 	const {
 		data: profile,
 		isLoading,
 		isSuccess
 	} = useQuery({
-		queryKey: [QUERY_KEYS.USERS],
+		queryKey: [QUERY_KEYS.USERS, id],
 		queryFn: async () => {
-			const response: AxiosResponse<IUser> = await UserService.getProfile()
+			const response: AxiosResponse<IUser> = await UserService.getProfile(id)
 			return response.data
 		}
 	})

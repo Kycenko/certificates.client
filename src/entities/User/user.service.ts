@@ -12,8 +12,8 @@ export const UserService = {
 		return instance.get<IUser>(`${SERVICE_URL.USERS}/${id}`)
 	},
 
-	async getProfile() {
-		return instance.get<IUser>(`${SERVICE_URL.USERS}/profile`)
+	async getProfile(id: string | undefined) {
+		return instance.get<IUser>(`${SERVICE_URL.USERS}/profile/${id}`)
 	},
 
 	async update(id: string | undefined, data: TypeUserForm) {
