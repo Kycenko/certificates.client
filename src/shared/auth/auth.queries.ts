@@ -1,9 +1,10 @@
+import { AuthService } from '.'
 import { SERVICE_URL } from '@shared/config/enums'
+import { authToast, createToast } from '@shared/config/toasts'
 import { useAuth } from '@shared/hooks'
 import { useMutation } from '@tanstack/react-query'
-import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { AuthService } from '.'
+
 import { ILogin, IRegister } from './auth.types'
 
 export const useLogin = () => {
@@ -16,7 +17,7 @@ export const useLogin = () => {
 			if (data) {
 				setUser(data.user)
 				navigate(`${SERVICE_URL.HOME}`, { replace: true })
-				toast.success('Авторизация прошла успешно')
+				authToast()
 			}
 		}
 	})
@@ -28,7 +29,7 @@ export const useRegister = () => {
 		mutationKey: ['register'],
 		mutationFn: (data: IRegister) => AuthService.register(data),
 		onSuccess() {
-			toast.success('Пользователь успешно создан')
+			createToast()
 		}
 	})
 }

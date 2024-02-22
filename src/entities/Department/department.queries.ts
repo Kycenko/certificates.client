@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { createToast, deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 import { DepartmentService } from './department.service'
 import { IDepartment, TypeDepartmentForm } from './department.types'
@@ -15,7 +15,7 @@ export const useCreateDepartment = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DEPARTMENTS] })
-			toast.success('Отделение успешно создано')
+			createToast()
 		}
 	})
 	return { create, isPending }
@@ -66,7 +66,7 @@ export const useUpdateDepartment = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DEPARTMENTS] })
-			toast.success('Отделение успешно изменено')
+			editToast()
 		}
 	})
 	return { update, isPending }
@@ -80,7 +80,7 @@ export const useDeleteDepartment = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DEPARTMENTS] })
-			toast.success('Отделение успешно удалено')
+			deleteToast()
 		}
 	})
 	return { remove }

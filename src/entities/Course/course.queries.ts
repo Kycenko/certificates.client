@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { createToast, deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 import { CourseService } from './course.service'
 import { ICourse, TypeCourseForm } from './course.types'
@@ -15,7 +15,7 @@ export const useCreateCourse = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COURSES] })
-			toast.success('Курс успешно создан')
+			createToast()
 		}
 	})
 	return { create, isPending }
@@ -64,7 +64,7 @@ export const useUpdateCourse = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COURSES] })
-			toast.success('Курс успешно изменен')
+			editToast()
 		}
 	})
 	return { update, isPending }
@@ -78,7 +78,7 @@ export const useDeleteCourse = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COURSES] })
-			toast.success('Курс успешно удален')
+			deleteToast()
 		}
 	})
 	return { remove, isPending }

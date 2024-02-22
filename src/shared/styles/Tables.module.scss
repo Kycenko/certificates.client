@@ -38,8 +38,12 @@
 }
 
 .editCellContainer {
-	@apply flex justify-end px-6 py-4;
+	@apply flex justify-end px-6 py-2;
 }
-.editCell {
+.adminEditCell {
 	@apply flex items-center space-x-2;
+}
+
+.userEditCell {
+	@apply py-4 px-2 hover:bg-gray-200 cursor-pointer;
 }

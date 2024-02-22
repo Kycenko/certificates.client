@@ -6,8 +6,10 @@ import {
 import { TypeStudentForm } from '@entities/Student/student.types.ts'
 import Search from '@features/Search/Search.tsx'
 import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads, { StudentHeads } from '@features/TableHeads.tsx'
+import TableHeads from '@features/TableHeads'
 import StudentData from '@features/data/StudentData'
+import { PAGES_URL } from '@shared/config/enums'
+import { StudentHeads } from '@shared/config/heads'
 import { useModal } from '@shared/hooks'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { useNavigate } from 'react-router-dom'
@@ -36,7 +38,7 @@ const StudentsTable = () => {
 	}
 
 	const handleInfo = (id: number | string) => {
-		navigate(`/students/${id}`)
+		navigate(`${PAGES_URL.STUDENTS}/${id}`)
 	}
 
 	if (isLoading) return <Loader />

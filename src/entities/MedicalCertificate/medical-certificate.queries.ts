@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { createToast, deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 import { MedicalCertificateService } from './medical-certificate.service'
 import {
@@ -20,7 +20,7 @@ export const useCreateMedicalCertificate = () => {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES]
 			})
-			toast.success('Справка успешно создана')
+			createToast()
 		}
 	})
 	return { create, isPending }
@@ -77,7 +77,7 @@ export const useUpdateMedicalCertificate = () => {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES]
 			})
-			toast.success('Справка успешно обновлена')
+			editToast()
 		}
 	})
 	return { update, isPending }
@@ -93,7 +93,7 @@ export const useDeleteMedicalCertificate = () => {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES]
 			})
-			toast.success('Справка успешно удалена')
+			deleteToast()
 		}
 	})
 	return { remove, isPending }

@@ -1,8 +1,8 @@
 import { UserService } from '.'
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 import { IUser, TypeUserForm } from './user.types'
 
@@ -65,7 +65,7 @@ export const useUpdateUser = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USERS] })
-			toast.success('Пользователь успешно обновлен')
+			editToast()
 		}
 	})
 	return { mutateAsync, isPending }
@@ -79,7 +79,7 @@ export const useDeleteUser = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.USERS] })
-			toast.success('Пользователь успешно удален')
+			deleteToast()
 		}
 	})
 }

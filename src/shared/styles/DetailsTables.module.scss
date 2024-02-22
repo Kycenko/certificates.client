@@ -1,0 +1,11 @@
+.title {
+  @apply text-base text-gray-500
+}
+
+.table {
+  @apply min-w-full border-gray-300
+}
+
+.cell {
+  @apply border hover:bg-gray-200 cursor-pointer  justify-center text-center items-center
+}

@@ -1,0 +1,10 @@
+.container {
+	@apply mb-4 rounded bg-white p-4 shadow;
+}
+.title {
+	@apply mb-2 text-xl font-bold;
+}
+
+.buttons {
+	@apply flex space-x-2;
+}

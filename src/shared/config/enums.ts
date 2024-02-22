@@ -2,6 +2,19 @@ export const enum BASE_URL {
 	BASE_URL = 'http://localhost:7777/'
 }
 
+export const enum PAGES_URL {
+	HOME = '/',
+	AUTH_LOGIN = '/auth/login',
+	USERS = '/users',
+	HEALTHS_GROUPS = '/health-groups',
+	PHYSICAL_EDUCATIONS = '/physical-educations',
+	DEPARTMENTS = '/departments',
+	COURSES = '/courses',
+	GROUPS = '/groups',
+	STUDENTS = '/students',
+	MEDICAL_CERTIFICATES = '/medical-certificates'
+}
+
 export const enum SERVICE_URL {
 	HOME = '/',
 	AUTH = 'auth',

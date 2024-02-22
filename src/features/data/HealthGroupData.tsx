@@ -1,9 +1,13 @@
-import { IHealthGroup, TypeHealthGroupForm } from '@entities/HealthGroup/health-group.types.ts'
-import { FC } from 'react'
-
+import {
+	IHealthGroup,
+	TypeHealthGroupForm
+} from '@entities/HealthGroup/health-group.types.ts'
 import { useModal } from '@shared/hooks'
 import { CustomButton, CustomInput, CustomModalForm } from '@shared/ui'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
+import styles from '@shared/styles/Cards.module.scss'
 
 interface HealthGroupProps {
 	data: IHealthGroup[] | undefined
@@ -19,9 +23,12 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 	return (
 		<div>
 			{data?.map(({ id, name }) => (
-				<div key={id} className='mb-4 rounded bg-white p-4 shadow'>
-					<h2 className='mb-2 text-xl font-bold'>{name}</h2>
-					<div className='flex space-x-2'>
+				<div
+					key={id}
+					className={styles.container}
+				>
+					<h2 className={styles.title}>{name}</h2>
+					<div className={styles.buttons}>
 						<CustomButton onClick={() => setEditId(id)}>Изменить</CustomButton>
 						<CustomButton onClick={() => setDeleteId(id)}>Удалить</CustomButton>
 					</div>

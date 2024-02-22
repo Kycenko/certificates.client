@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { createToast, deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 import { GroupService } from './group.service'
 import { IGroup, TypeGroupForm } from './group.types'
@@ -15,7 +15,7 @@ export const useCreateGroup = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GROUPS] })
-			toast.success('Группа успешно создана')
+			createToast()
 		}
 	})
 	return { create, isPending }
@@ -64,7 +64,7 @@ export const useUpdateGroup = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GROUPS] })
-			toast.success('Группа успешно удалена')
+			editToast()
 		}
 	})
 	return { update, isPending }
@@ -78,7 +78,7 @@ export const useDeleteGroup = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GROUPS] })
-			toast.success('Группа успешно удалена')
+			deleteToast()
 		}
 	})
 	return { remove, isPending }

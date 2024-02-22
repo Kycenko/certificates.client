@@ -6,8 +6,10 @@ import {
 import { TypeGroupForm } from '@entities/Group/group.types.ts'
 import Search from '@features/Search/Search.tsx'
 import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads, { GroupHeads } from '@features/TableHeads.tsx'
+import TableHeads from '@features/TableHeads'
 import GroupData from '@features/data/GroupData'
+import { PAGES_URL } from '@shared/config/enums'
+import { GroupHeads } from '@shared/config/heads'
 import { useModal } from '@shared/hooks'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { useNavigate } from 'react-router-dom'
@@ -36,7 +38,7 @@ const GroupsTable = () => {
 	}
 
 	const handleInfo = (id: number | string) => {
-		navigate(`/groups/${id}`)
+		navigate(`${PAGES_URL.GROUPS}/${id}`)
 	}
 
 	if (isLoading) return <Loader />

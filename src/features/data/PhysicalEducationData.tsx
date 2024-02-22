@@ -1,8 +1,13 @@
-import { IPhysicalEducation, TypePhysicalEducationForm } from '@entities/PhysicalEducation/physical-education.types'
+import {
+	IPhysicalEducation,
+	TypePhysicalEducationForm
+} from '@entities/PhysicalEducation/physical-education.types'
 import { useModal } from '@shared/hooks'
 import { CustomButton, CustomInput, CustomModalForm } from '@shared/ui'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+
+import styles from '@shared/styles/Cards.module.scss'
 
 interface PhysicalEducationDataProps {
 	data: IPhysicalEducation[] | undefined
@@ -21,9 +26,12 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 	return (
 		<div>
 			{data?.map(({ id, name }) => (
-				<div key={id} className='mb-4 rounded bg-white p-4 shadow'>
-					<h2 className='mb-2 text-xl font-bold'>{name}</h2>
-					<div className='flex space-x-2'>
+				<div
+					key={id}
+					className={styles.container}
+				>
+					<h2 className={styles.title}>{name}</h2>
+					<div className={styles.buttons}>
 						<CustomButton onClick={() => setEditId(id)}>Изменить</CustomButton>
 						<CustomButton onClick={() => setDeleteId(id)}>Удалить</CustomButton>
 					</div>

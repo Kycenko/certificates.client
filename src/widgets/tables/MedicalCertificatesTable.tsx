@@ -5,8 +5,10 @@ import {
 } from '@entities/MedicalCertificate/medical-certificate.queries'
 import { TypeMedicalCertificateForm } from '@entities/MedicalCertificate/medical-certificate.types'
 import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads, { CertificatesHeads } from '@features/TableHeads.tsx'
+import TableHeads from '@features/TableHeads'
 import MedicalCertificateData from '@features/data/MedicalCertificateData'
+import { PAGES_URL } from '@shared/config/enums'
+import { CertificatesHeads } from '@shared/config/heads'
 import { useModal } from '@shared/hooks'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { useNavigate } from 'react-router-dom'
@@ -38,7 +40,7 @@ const MedicalCertificatesTable = () => {
 	}
 
 	const handleInfo = (id: number | string) => {
-		navigate(`/medical-certificates/${id}`)
+		navigate(`${PAGES_URL.MEDICAL_CERTIFICATES}/${id}`)
 	}
 
 	if (isLoading) return <Loader />

@@ -5,8 +5,10 @@ import {
 } from '@entities/Course/course.queries.ts'
 import { TypeCourseForm } from '@entities/Course/course.types.ts'
 import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads, { CourseHeads } from '@features/TableHeads.tsx'
+import TableHeads from '@features/TableHeads'
 import CourseData from '@features/data/CourseData'
+import { PAGES_URL } from '@shared/config/enums'
+import { CourseHeads } from '@shared/config/heads'
 import { useModal } from '@shared/hooks'
 import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { useNavigate } from 'react-router-dom'
@@ -35,7 +37,7 @@ const CoursesTable = () => {
 	}
 
 	const handleInfo = (id: number | string) => {
-		navigate(`/courses/${id}`)
+		navigate(`${PAGES_URL.COURSES}/${id}`)
 	}
 
 	if (isLoading) return <Loader />

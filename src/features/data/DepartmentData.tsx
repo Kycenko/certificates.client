@@ -5,6 +5,7 @@ import {
 import { selectSearchTerm } from '@features/Search/search.slice'
 import { selectSortOrder } from '@features/SortOrder/sort.slice'
 import { useAppSelector, useModal } from '@shared/hooks'
+import useSortAndFilterData from '@shared/hooks/useSortAndFilterData'
 import {
 	CustomButton,
 	CustomInput,
@@ -40,92 +41,89 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
-
-	const filteredData = data?.filter(item =>
-		item.name.toLowerCase().includes(searchTerm.toLowerCase())
+	const { sortedData } = useSortAndFilterData(
+		data as IDepartment[],
+		searchTerm,
+		sortOrder
 	)
-	const sortedData = filteredData?.sort((a, b) => {
-		return sortOrder === 'asc'
-			? a.name.localeCompare(b.name)
-			: b.name.localeCompare(a.name)
-	})
 
-	if (!sortedData || sortedData.length === 0) {
-		return (
-			<tr>
-				<td
-					colSpan={2}
-					className={styles.noData}
-				>
-					Данные не найдены
-				</td>
-			</tr>
-		)
-	}
 	updateHistory(searchTerm, sortOrder)
 
 	return (
 		<>
-			{filteredData?.map(({ id, name }) => (
-				<tr
-					className={styles.contentCell}
-					key={id}
-				>
-					<td>
-						<div>
-							<span>{name}</span>
-						</div>
-					</td>
-					<td className={styles.editCellContainer}>
-						<div className={styles.editCell}>
-							<CustomButton
-								onClick={() => {
-									setEditId(id)
-									reset()
-								}}
-							>
-								Изменить
-							</CustomButton>
-							<CustomButton onClick={() => onInfo(id)}>Подробнее</CustomButton>
-							<CustomButton onClick={() => setDeleteId(id)}>
-								Удалить
-							</CustomButton>
-						</div>
-					</td>
-					<CustomModalForm
-						onSubmit={handleSubmit(data => {
-							onEdit(id, data)
-							setEditId(null)
-							reset()
-						})}
-						isOpen={editId === id}
-						onClose={() => setEditId(null)}
-						formTitle='Изменение'
-						buttonTitle='Изменить'
+			{!sortedData || sortedData.length === 0 ? (
+				<tr>
+					<td
+						colSpan={2}
+						className={styles.noData}
 					>
-						<CustomInput
-							id='name'
-							label='Название'
-							placeholder={'Введите название'}
-							defaultValue={name}
-							{...register('name', { required: 'Обязательное поле' })}
-						/>
-						<ErrorMessage error={errors.name} />
-					</CustomModalForm>
-					<CustomModalForm
-						onSubmit={() => {
-							onDelete(id)
-							setDeleteId(null)
-						}}
-						buttonTitle={'Удалить'}
-						isOpen={deleteId === id}
-						onClose={() => setDeleteId(null)}
-						formTitle={'Удаление'}
-					>
-						{name}
-					</CustomModalForm>
+						Данные не найдены
+					</td>
 				</tr>
-			))}
+			) : (
+				sortedData?.map(({ id, name }) => (
+					<tr
+						className={styles.contentCell}
+						key={id}
+					>
+						<td>
+							<div>
+								<span>{name}</span>
+							</div>
+						</td>
+						<td className={styles.editCellContainer}>
+							<div className={styles.adminEditCell}>
+								<CustomButton
+									onClick={() => {
+										setEditId(id)
+										reset()
+									}}
+								>
+									Изменить
+								</CustomButton>
+								<CustomButton onClick={() => onInfo(id)}>
+									Подробнее
+								</CustomButton>
+								<CustomButton onClick={() => setDeleteId(id)}>
+									Удалить
+								</CustomButton>
+							</div>
+						</td>
+						<CustomModalForm
+							onSubmit={handleSubmit(data => {
+								onEdit(id, data)
+								setEditId(null)
+								reset()
+							})}
+							isOpen={editId === id}
+							onClose={() => setEditId(null)}
+							formTitle='Изменение'
+							buttonTitle='Изменить'
+						>
+							<CustomInput
+								id='name'
+								label='Название'
+								placeholder={'Введите название'}
+								defaultValue={name}
+								{...register('name', { required: 'Обязательное поле' })}
+							/>
+							<ErrorMessage error={errors.name} />
+						</CustomModalForm>
+						<CustomModalForm
+							onSubmit={() => {
+								onDelete(id)
+								setDeleteId(null)
+							}}
+							buttonTitle={'Удалить'}
+							isOpen={deleteId === id}
+							onClose={() => setDeleteId(null)}
+							formTitle={'Удаление'}
+						>
+							{name}
+						</CustomModalForm>
+					</tr>
+				))
+			)}
 		</>
 	)
 }

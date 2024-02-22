@@ -4,9 +4,9 @@ import {
 	TypeHealthGroupForm
 } from '@entities/HealthGroup/health-group.types.ts'
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { createToast, deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 export function useCreateHealthGroup() {
 	const queryClient = new QueryClient()
@@ -17,7 +17,7 @@ export function useCreateHealthGroup() {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.HEALTH_GROUPS]
 			})
-			toast.success('Группа здоровья успешно создана')
+			createToast()
 		}
 	})
 
@@ -70,7 +70,7 @@ export const useUpdateHealthGroup = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.HEALTH_GROUPS] })
-			toast.success('Группа здоровья успешно изменена')
+			editToast()
 		}
 	})
 	return { update, isPending }
@@ -84,7 +84,7 @@ export const useDeleteHealthGroup = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.HEALTH_GROUPS] })
-			toast.success('Группа здоровья успешно удалена')
+			deleteToast()
 		}
 	})
 	return { remove }

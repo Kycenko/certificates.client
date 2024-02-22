@@ -1,5 +1,7 @@
 import { ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import styles from './SortOrder.module.scss'
 import { selectSortOrder, setSortOrder } from './sort.slice'
 
 const SortOrder = () => {
@@ -12,12 +14,12 @@ const SortOrder = () => {
 	}
 
 	return (
-		<div className='flex items-center space-x-2'>
-			<label className='text-gray-700'>Сортировка:</label>
+		<div className={styles.container}>
+			<label className={styles.label}>Сортировка:</label>
 			<select
 				value={sortOrder}
 				onChange={handleSortChange}
-				className='rounded border border-gray-300 px-2 py-1 focus:border-blue-500 focus:outline-none'
+				className={styles.select}
 			>
 				<option value='asc'>По возрастанию</option>
 				<option value='desc'>По убыванию</option>

@@ -7,8 +7,10 @@ import {
 import { TypeDepartmentForm } from '@entities/Department/department.types.ts'
 import Search from '@features/Search/Search.tsx'
 import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads, { DepartmentHeads } from '@features/TableHeads.tsx'
+import TableHeads from '@features/TableHeads'
 import DepartmentData from '@features/data/DepartmentData'
+import { PAGES_URL } from '@shared/config/enums'
+import { DepartmentHeads } from '@shared/config/heads'
 import { useModal } from '@shared/hooks'
 import {
 	CustomButton,
@@ -59,7 +61,7 @@ const DepartmentsTable = () => {
 	}
 
 	const handleInfo = (id: number | string) => {
-		navigate(`/departments/${id}`)
+		navigate(`${PAGES_URL.DEPARTMENTS}/${id}`)
 	}
 
 	if (isLoading) return <Loader />

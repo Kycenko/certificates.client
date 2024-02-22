@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { createToast, deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 import { StudentService } from './student.service'
 import { IStudent, TypeStudentForm } from './student.types'
@@ -15,7 +15,7 @@ export const useCreateStudent = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
-			toast.success('Студент успешно создан')
+			createToast()
 		}
 	})
 	return { create, isPending }
@@ -64,7 +64,7 @@ export const useUpdateStudent = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
-			toast.success('Студент успешно изменен')
+			editToast()
 		}
 	})
 	return { update, isPending }
@@ -78,7 +78,7 @@ export const useDeleteStudent = () => {
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
-			toast.success('Студент успешно удален')
+			deleteToast()
 		}
 	})
 	return { remove, isPending }

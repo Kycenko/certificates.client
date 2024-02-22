@@ -1,5 +1,5 @@
 export const updateHistory = (
-	searchTerm: string,
+	searchTerm: string | null,
 	sortDirection: 'asc' | 'desc'
 ) => {
 	{

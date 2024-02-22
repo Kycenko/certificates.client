@@ -2,7 +2,8 @@ import { useGetCourses } from '@entities/Course/course.queries'
 import { IGroup, TypeGroupForm } from '@entities/Group/group.types'
 import { selectSearchTerm } from '@features/Search/search.slice'
 import { selectSortOrder } from '@features/SortOrder/sort.slice'
-import { useAppSelector, useModal } from '@shared/hooks'
+import { useAppSelector, useAuth, useModal } from '@shared/hooks'
+import useSortAndFilterData from '@shared/hooks/useSortAndFilterData'
 import {
 	CustomButton,
 	CustomInput,
@@ -13,6 +14,7 @@ import {
 import { updateHistory } from '@shared/utils'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import styles from '@shared/styles/Tables.module.scss'
 
@@ -23,8 +25,10 @@ interface GroupDataProps {
 	onInfo: (id: number | string) => void
 }
 const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
+	const navigate = useNavigate()
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { courses } = useGetCourses()
+	const { user } = useAuth()
 
 	const {
 		register,
@@ -36,107 +40,117 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
 
-	const filteredData = data?.filter(item =>
-		item.name.toLowerCase().includes(searchTerm.toLowerCase())
+	const { sortedData } = useSortAndFilterData(
+		data as IGroup[],
+		searchTerm,
+		sortOrder
 	)
-	const sortedData = filteredData?.sort((a, b) => {
-		return sortOrder === 'asc'
-			? a.name.localeCompare(b.name)
-			: b.name.localeCompare(a.name)
-	})
 
-	if (!sortedData || sortedData.length === 0) {
-		return (
-			<tr>
-				<td
-					colSpan={2}
-					className={styles.noData}
-				>
-					Данные не найдены
-				</td>
-			</tr>
-		)
-	}
 	updateHistory(searchTerm, sortOrder)
 
 	return (
 		<>
-			{filteredData?.map(({ id, name, courseId }) => (
-				<tr
-					className={styles.contentCell}
-					key={id}
-				>
-					<td>
-						<div>
-							<span>{name}</span>
-						</div>
-					</td>
-					<td className={styles.editCellContainer}>
-						<div className={styles.editCell}>
-							<CustomButton
-								onClick={() => {
-									setEditId(id)
-									reset()
-								}}
-							>
-								Изменить
-							</CustomButton>
-							<CustomButton onClick={() => onInfo(id)}>Подробнее</CustomButton>
-							<CustomButton onClick={() => setDeleteId(id)}>
-								Удалить
-							</CustomButton>
-						</div>
-					</td>
-					<CustomModalForm
-						onSubmit={handleSubmit(data => {
-							const newData = { ...data, courseId: Number(data.courseId) }
-							onEdit(id, newData)
-							setEditId(null)
-							reset()
-						})}
-						isOpen={editId === id}
-						onClose={() => setEditId(null)}
-						formTitle='Изменение'
-						buttonTitle='Изменить'
+			{!sortedData || sortedData.length === 0 ? (
+				<tr>
+					<td
+						colSpan={2}
+						className={styles.noData}
 					>
-						<CustomInput
-							id='name'
-							label='Название'
-							defaultValue={name}
-							placeholder={'Введите название'}
-							{...register('name', { required: 'Обязательное поле' })}
-						/>
-						<ErrorMessage error={errors.name} />
-						<CustomSelect
-							id='courseId'
-							label='Выберите курс'
-							defaultValue={courseId}
-							{...register('courseId')}
-						>
-							{courses?.map(({ id, number }) => (
-								<option
-									key={id}
-									value={id}
-								>
-									{number}-й курс
-								</option>
-							))}
-						</CustomSelect>
-					</CustomModalForm>
-					<CustomModalForm
-						onSubmit={() => {
-							onDelete(id)
-							setDeleteId(null)
-						}}
-						buttonTitle={'Удалить'}
-						isOpen={deleteId === id}
-						onClose={() => setDeleteId(null)}
-						formTitle={'Удаление'}
-					>
-						{name}
-					</CustomModalForm>
+						Данные не найдены
+					</td>
 				</tr>
-			))}
+			) : (
+				sortedData?.map(({ id, name, courseId }) => (
+					<tr
+						className={styles.contentCell}
+						key={id}
+					>
+						{user?.isAdmin ? (
+							<>
+								<td>
+									<div>
+										<span>{name}</span>
+									</div>
+								</td>
+								<td className={styles.editCellContainer}>
+									<div className={styles.adminEditCell}>
+										<CustomButton
+											onClick={() => {
+												setEditId(id)
+												reset()
+											}}
+										>
+											Изменить
+										</CustomButton>
+										<CustomButton onClick={() => onInfo(id)}>
+											Подробнее
+										</CustomButton>
+										<CustomButton onClick={() => setDeleteId(id)}>
+											Удалить
+										</CustomButton>
+									</div>
+								</td>
+							</>
+						) : (
+							<td
+								onClick={() => navigate(`/groups/${id}`)}
+								className={styles.userEditCell}
+							>
+								<span>{name}</span>
+							</td>
+						)}
+
+						<CustomModalForm
+							onSubmit={handleSubmit(data => {
+								const newData = { ...data, courseId: Number(data.courseId) }
+								onEdit(id, newData)
+								setEditId(null)
+								reset()
+							})}
+							isOpen={editId === id}
+							onClose={() => setEditId(null)}
+							formTitle='Изменение'
+							buttonTitle='Изменить'
+						>
+							<CustomInput
+								id='name'
+								label='Название'
+								defaultValue={name}
+								placeholder={'Введите название'}
+								{...register('name', { required: 'Обязательное поле' })}
+							/>
+							<ErrorMessage error={errors.name} />
+							<CustomSelect
+								id='courseId'
+								label='Выберите курс'
+								defaultValue={courseId}
+								{...register('courseId')}
+							>
+								{courses?.map(({ id, number }) => (
+									<option
+										key={id}
+										value={id}
+									>
+										{number}-й курс
+									</option>
+								))}
+							</CustomSelect>
+						</CustomModalForm>
+						<CustomModalForm
+							onSubmit={() => {
+								onDelete(id)
+								setDeleteId(null)
+							}}
+							buttonTitle={'Удалить'}
+							isOpen={deleteId === id}
+							onClose={() => setDeleteId(null)}
+							formTitle={'Удаление'}
+						>
+							{name}
+						</CustomModalForm>
+					</tr>
+				))
+			)}
 		</>
 	)
 }

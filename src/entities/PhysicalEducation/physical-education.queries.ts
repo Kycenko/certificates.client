@@ -1,7 +1,7 @@
 import { QUERY_KEYS } from '@shared/config/enums.ts'
+import { createToast, deleteToast, editToast } from '@shared/config/toasts'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-import toast from 'react-hot-toast'
 
 import { PhysicalEducationService } from './physical-education.service'
 import {
@@ -20,7 +20,7 @@ export const useCreatePhysicalEducation = () => {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.PHYSICAL_EDUCATIONS]
 			})
-			toast.success('Группа по физкультуре успешно создана')
+			createToast()
 		}
 	})
 	return { create, isPending }
@@ -69,7 +69,7 @@ export const useUpdatePhysicalEducation = () => {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.PHYSICAL_EDUCATIONS]
 			})
-			toast.success('Группа по физкультуре успешно изменена')
+			editToast()
 		}
 	})
 	return { update, isPending }
@@ -85,7 +85,7 @@ export const useDeletePhysicalEducation = () => {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.PHYSICAL_EDUCATIONS]
 			})
-			toast.success('Группа по физкультуре успешно удалена')
+			deleteToast()
 		}
 	})
 	return { remove }

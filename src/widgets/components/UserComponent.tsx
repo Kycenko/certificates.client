@@ -3,6 +3,7 @@ import { useDeleteUser, useGetUsers } from '@entities/User/user.queries.ts'
 import UserData from '@features/data/UserData'
 import { useRegister } from '@shared/auth/auth.queries.ts'
 import { IRegister } from '@shared/auth/auth.types.ts'
+import { PAGES_URL } from '@shared/config/enums'
 import { useModal } from '@shared/hooks'
 import {
 	CustomInput,
@@ -45,7 +46,7 @@ const UserComponent = () => {
 	}
 
 	const handleEdit = (id: number | string) => {
-		navigate(`/users/${id}`)
+		navigate(`${PAGES_URL.USERS}/${id}`)
 	}
 	if (isLoading)
 		return (
