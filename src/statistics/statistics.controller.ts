@@ -3,9 +3,8 @@ import { StatisticsService } from './statistics.service'
 
 @Controller('statistics')
 export class StatisticsController {
-	constructor(private readonly statisticsService: StatisticsService) {
-	}
-	
+	constructor(private readonly statisticsService: StatisticsService) {}
+
 	@Get()
 	async getStudentsWithMedicalCertificatesInRange(
 		@Query('startDate') startDate: Date,
@@ -16,19 +15,14 @@ export class StatisticsController {
 			endDate
 		)
 	}
-	
-	@Get('group/:id')
-	async getStatisticsByGroup(
-		@Param('id') groupId: number
-	) {
+
+	@Get('group-report/:id')
+	async getStatisticsByGroup(@Param('id') groupId: number) {
 		return this.statisticsService.getStatisticsByGroup(groupId)
 	}
-	
+
 	@Get('groups/:id')
-	async getStatisticsForAllGroups(
-		@Param('id') departmentId: number
-	) {
+	async getStatisticsForAllGroups(@Param('id') departmentId: number) {
 		return this.statisticsService.getStatisticsForAllGroups(departmentId)
 	}
-	
 }
