@@ -1,4 +1,6 @@
-export interface IMedicalCertificate {
+import { IBase } from '@shared/config/base.interface'
+
+export interface IMedicalCertificate extends IBase {
 	id: number
 	startDate: Date
 	finishDate: Date

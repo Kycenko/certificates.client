@@ -1,9 +1,9 @@
-export interface IUser {
+import { IBase } from '@shared/config/base.interface'
+
+export interface IUser extends IBase {
 	id: string
 	login: string
 	isAdmin: boolean
-	createdAt: Date
-	updatedAt: Date
 	groupId?: number | null
 }
 
