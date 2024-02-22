@@ -1,3 +1,4 @@
-#!/usr/bin/env sh
-. "${0%/*}/h"
-pnpm run prettier
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx prettier --write "**/*.{ts,tsx,json,scss}"
