@@ -25,13 +25,13 @@ export class HealthGroupController {
 	}
 
 	@Get()
-	@Auth('admin')
+	@Auth()
 	async getAll() {
 		return this.healthGroupService.getAll()
 	}
 
 	@Get(':id')
-	@Auth('admin')
+	@Auth()
 	async getById(@Param('id') id: number) {
 		return this.healthGroupService.getById(id)
 	}

@@ -5,24 +5,42 @@ import { StatisticsService } from './statistics.service'
 export class StatisticsController {
 	constructor(private readonly statisticsService: StatisticsService) {}
 
+	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия
+
+	@Get('certificates-info/:id')
+	async getStudentCertificatesInfo(@Param('id') groupId: number) {
+		return this.statisticsService.getStudentCertificatesInfo(groupId)
+	}
+
+	//лист здоровья по для всех групп с указанием даты выдачи справки
+	@Get('health-report')
+	async getHealthReportForAllGroups() {
+		return this.statisticsService.getHealthReportForAllGroups()
+	}
+
+	//отчеты за период времени/конкретную дату в разрезе различных показателей медицинских справок
+
 	@Get()
-	async getStudentsWithMedicalCertificatesInRange(
+	async getReportsForPeriod(
 		@Query('startDate') startDate: Date,
 		@Query('endDate') endDate: Date
 	) {
-		return this.statisticsService.getStudentsWithMedicalCertificatesInRange(
-			startDate,
-			endDate
-		)
+		return this.statisticsService.getReportsForPeriod(startDate, endDate)
 	}
 
-	@Get('group-report/:id')
-	async getStatisticsByGroup(@Param('id') groupId: number) {
-		return this.statisticsService.getStatisticsByGroup(groupId)
+	//приказ о группах по физической культуре для обучающихся
+	@Get('physical-education-report')
+	async getPhysicalEducationGroupsReport() {
+		return this.statisticsService.getPhysicalEducationGroupsReport()
 	}
 
-	@Get('groups/:id')
-	async getStatisticsForAllGroups(@Param('id') departmentId: number) {
-		return this.statisticsService.getStatisticsForAllGroups(departmentId)
+	//список учащихся, срок действия медицинских справок которых истек (истекает через определенный промежуток времени)
+	@Get('certificates-expiry-list/:daysUntilExpiry')
+	async getCertificatesExpiryList(
+		@Param('daysUntilExpiry') daysUntilExpiry: number
+	) {
+		return this.statisticsService.getCertificatesExpiryList(daysUntilExpiry)
 	}
+
+	// список наличия медицинских справок по группам и отделениям, статистический отчет по медицинским показателям в разрезе отделения или группы
 }

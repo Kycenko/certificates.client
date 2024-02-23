@@ -26,13 +26,13 @@ export class CourseController {
 	}
 
 	@Get()
-	@Auth('admin')
+	@Auth()
 	async getAll() {
 		return this.courseService.getAll()
 	}
 
 	@Get(':id')
-	@Auth('admin')
+	@Auth()
 	async getById(@Param('id') id: number) {
 		return this.courseService.getById(id)
 	}

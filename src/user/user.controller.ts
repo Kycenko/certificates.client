@@ -10,7 +10,6 @@ import {
 } from '@nestjs/common'
 
 import { Auth } from '@auth/decorators/auth.decorator'
-import { CurrentUser } from '@auth/decorators/user.decorator'
 import { UserDto } from './dto/user.dto'
 import { UserService } from './user.service'
 
@@ -30,11 +29,11 @@ export class UserController {
 		return this.userService.getById(id)
 	}
 
-	@Get('profile/:id')
-	@Auth()
-	async getProfile(@CurrentUser('id') id: number) {
-		return this.userService.getProfile(id)
-	}
+	// @Get('profile/:id')
+	// @Auth()
+	// async getProfile(@CurrentUser('id') id: number) {
+	// 	return this.userService.getProfile(id)
+	// }
 
 	@Patch(':id')
 	@UsePipes(new ValidationPipe())

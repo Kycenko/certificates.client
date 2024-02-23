@@ -27,10 +27,10 @@ export class UserService {
 		return user
 	}
 
-	async getProfile(id: number) {
-		const profile = await this.getById(id)
-		return profile
-	}
+	// async getProfile(id: number) {
+	// 	const profile = await this.getById(id)
+	// 	return profile
+	// }
 
 	async update(id: number, dto: UserDto) {
 		const user = await this.getById(id)

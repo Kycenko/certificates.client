@@ -1,3 +1,4 @@
+import { Auth } from '@auth/decorators/auth.decorator'
 import {
 	Body,
 	Controller,
@@ -9,7 +10,6 @@ import {
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
-import { Auth } from '@auth/decorators/auth.decorator'
 import { PhysicalEducationDto } from './dto/physical-education.dto'
 import { PhysicalEducationService } from './physical-education.service'
 
@@ -27,13 +27,13 @@ export class PhysicalEducationController {
 	}
 
 	@Get()
-	@Auth('admin')
+	@Auth()
 	async getAll() {
 		return this.physicalEducationService.getAll()
 	}
 
 	@Get(':id')
-	@Auth('admin')
+	@Auth()
 	async getById(@Param('id') id: number) {
 		return this.physicalEducationService.getById(id)
 	}
