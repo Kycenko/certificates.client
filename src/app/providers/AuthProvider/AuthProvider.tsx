@@ -1,7 +1,7 @@
-import { IUser } from '@entities/User/user.types'
-import { getAccessToken, removeFromStorage } from '@shared/auth/auth.helper.ts'
-import { LOCAL_STORAGE_KEY } from '@shared/config/enums.ts'
-import { getLocalStorage } from '@shared/utils/getLocalStorage.ts'
+import { IUser } from '@entities/User'
+import { getAccessToken, removeFromStorage } from '@shared/auth'
+import { LOCAL_STORAGE_KEY } from '@shared/config'
+import { getLocalStorage } from '@shared/utils'
 import {
 	Dispatch,
 	FC,
@@ -21,7 +21,7 @@ interface IAuthContext {
 
 export const AuthContext = createContext<IAuthContext | null>(null)
 
-export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
+const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 	const navigate = useNavigate()
 	//const dispatch = useAppDispatch()
 	//const user = useSelector((state: RootState) => state.user.user)
@@ -52,3 +52,4 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 		</AuthContext.Provider>
 	)
 }
+export default AuthProvider

@@ -1,7 +1,6 @@
-import instance from '@shared/api/api.instance'
-import { SERVICE_URL } from '@shared/config/enums.ts'
-
-import { ICourse, TypeCourseForm } from './course.types'
+import { ICourse, TypeCourseForm } from '.'
+import { instance } from '@shared/api'
+import { SERVICE_URL } from '@shared/config'
 
 export const CourseService = {
 	async create(data: TypeCourseForm) {

@@ -1,14 +1,17 @@
 import { Layout } from '@app/layout'
-import { useGetCourse } from '@entities/Course/course.queries'
-import { useCreateGroup } from '@entities/Group/group.queries'
-import { TypeGroupForm } from '@entities/Group/group.types'
-import DetailsTableHeads from '@features/DetailsTableHeads'
-import { PAGES_URL } from '@shared/config/enums'
-import { DetailsCourseHeads } from '@shared/config/heads'
+import { useGetCourse } from '@entities/Course'
+import { TypeGroupForm, useCreateGroup } from '@entities/Group'
+import { DetailsTableHeads } from '@features/heads'
+import { DetailsCourseHeads, PAGES_URL } from '@shared/config'
 import { useModal } from '@shared/hooks'
-import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
-import CreateButton from '@shared/ui/buttons/CreateButton'
-import Loader from '@shared/ui/loader/CustomLoader'
+import {
+	CreateButton,
+	CustomInput,
+	CustomLoader,
+	CustomModalForm,
+	ErrorMessage,
+	Heading
+} from '@shared/ui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -38,7 +41,7 @@ const CourseDetailsPage = () => {
 	if (isLoading)
 		return (
 			<Layout>
-				<Loader />
+				<CustomLoader />
 			</Layout>
 		)
 

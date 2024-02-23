@@ -1,11 +1,7 @@
-import {
-	IDepartment,
-	TypeDepartmentForm
-} from '@entities/Department/department.types'
-import { selectSearchTerm } from '@features/Search/search.slice'
-import { selectSortOrder } from '@features/SortOrder/sort.slice'
-import { useAppSelector, useModal } from '@shared/hooks'
-import useSortAndFilterData from '@shared/hooks/useSortAndFilterData'
+import { IDepartment, TypeDepartmentForm } from '@entities/Department'
+import { selectSearchTerm } from '@features/Search'
+import { selectSortOrder } from '@features/SortOrder'
+import { useAppSelector, useModal, useSortAndFilterData } from '@shared/hooks'
 import {
 	CustomButton,
 	CustomInput,

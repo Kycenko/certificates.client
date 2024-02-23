@@ -1,5 +1,5 @@
-import { IGroup } from '@entities/Group/group.types'
-import { IBase } from '@shared/config/base.interface'
+import { IGroup } from '@entities/Group'
+import { IBase } from '@shared/config'
 
 export interface ICourse extends IBase {
 	id: number

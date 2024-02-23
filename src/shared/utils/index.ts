@@ -1,4 +1,14 @@
-import { getLocalStorage } from './getLocalStorage'
-import { updateHistory } from './updateHistory'
+import daysUntilTheEnd from '@shared/utils/daysUntilTheEnd'
 
-export { getLocalStorage, updateHistory }
+import getDaysUntilExpiry from './getDaysUntilExpiry'
+import getLocalStorage from './getLocalStorage'
+import getValidityPeriod from './getValidityPeriod'
+import updateHistory from './updateHistory'
+
+export {
+	daysUntilTheEnd,
+	getDaysUntilExpiry,
+	getLocalStorage,
+	getValidityPeriod,
+	updateHistory
+}

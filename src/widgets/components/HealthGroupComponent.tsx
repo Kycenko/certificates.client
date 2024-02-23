@@ -1,16 +1,21 @@
 import { Layout } from '@app/layout'
 import {
+	TypeHealthGroupForm,
 	useCreateHealthGroup,
 	useDeleteHealthGroup,
 	useGetHealthGroups,
 	useUpdateHealthGroup
-} from '@entities/HealthGroup/health-group.query.ts'
-import { TypeHealthGroupForm } from '@entities/HealthGroup/health-group.types.ts'
-import HealthGroupData from '@features/data/HealthGroupData'
+} from '@entities/HealthGroup'
+import { HealthGroupData } from '@features/data'
 import { useModal } from '@shared/hooks'
-import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
-import CreateButton from '@shared/ui/buttons/CreateButton.tsx'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import {
+	CreateButton,
+	CustomInput,
+	CustomLoader,
+	CustomModalForm,
+	ErrorMessage,
+	Heading
+} from '@shared/ui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const HealthGroupComponent = () => {
@@ -46,7 +51,7 @@ const HealthGroupComponent = () => {
 	if (isLoading)
 		return (
 			<Layout>
-				<Loader />
+				<CustomLoader />
 			</Layout>
 		)
 	return (

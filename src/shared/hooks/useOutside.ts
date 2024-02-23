@@ -6,7 +6,7 @@ type TypeOut = {
 	setIsShow: Dispatch<SetStateAction<boolean>>
 }
 
-export const useOutside = (initialIsVisible: boolean): TypeOut => {
+const useOutside = (initialIsVisible: boolean): TypeOut => {
 	const [isShow, setIsShow] = useState(initialIsVisible)
 	const ref = useRef<HTMLElement>(null)
 
@@ -25,3 +25,4 @@ export const useOutside = (initialIsVisible: boolean): TypeOut => {
 
 	return { ref, isShow, setIsShow }
 }
+export default useOutside

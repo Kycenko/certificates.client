@@ -1,7 +1,5 @@
+import { Header, Sidebar } from '..'
 import { FC, PropsWithChildren } from 'react'
-
-import Header from '../Header'
-import Sidebar from '../SideBar/SideBar'
 
 import styles from './Layout.module.scss'
 

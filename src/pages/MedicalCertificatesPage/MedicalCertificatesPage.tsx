@@ -1,6 +1,6 @@
 import { Layout } from '@app/layout'
 import { Heading } from '@shared/ui'
-import MedicalCertificatesTable from '@widgets/tables/MedicalCertificatesTable'
+import { MedicalCertificatesTable } from '@widgets/tables'
 
 const MedicalCertificatesPage = () => {
 	return (

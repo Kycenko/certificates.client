@@ -1,3 +1,4 @@
+import CreateButton from './buttons/CreateButton'
 import CustomButton from './buttons/CustomButton'
 import ErrorMessage from './fields/ErrorMessage'
 import Heading from './fields/Heading'
@@ -7,6 +8,7 @@ import CustomLoader from './loader/CustomLoader'
 import CustomSelect from './selects/CustomSelect'
 
 export {
+	CreateButton,
 	CustomButton,
 	CustomInput,
 	CustomLoader,

@@ -1,4 +1,4 @@
-import HealthGroupComponent from '@widgets/components/HealthGroupComponent.tsx'
+import { HealthGroupComponent } from '@widgets/components'
 
 const HealthGroupsPage = () => {
 	return <HealthGroupComponent />

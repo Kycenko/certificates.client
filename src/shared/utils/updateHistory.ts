@@ -1,4 +1,4 @@
-export const updateHistory = (
+const updateHistory = (
 	searchTerm: string | null,
 	sortDirection: 'asc' | 'desc'
 ) => {
@@ -10,3 +10,4 @@ export const updateHistory = (
 		)
 	}
 }
+export default updateHistory

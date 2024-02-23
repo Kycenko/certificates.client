@@ -1,7 +1,6 @@
+import { IUser, TypeUserForm } from '.'
 import { instance } from '@shared/api'
-import { SERVICE_URL } from '@shared/config/enums'
-
-import { IUser, TypeUserForm } from './user.types'
+import { SERVICE_URL } from '@shared/config'
 
 export const UserService = {
 	async getAll() {

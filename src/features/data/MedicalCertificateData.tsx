@@ -1,10 +1,10 @@
-import { useGetHealthGroups } from '@entities/HealthGroup/health-group.query'
+import { useGetHealthGroups } from '@entities/HealthGroup'
 import {
 	IMedicalCertificate,
 	TypeMedicalCertificateForm
-} from '@entities/MedicalCertificate/medical-certificate.types'
-import { useGetPhysicalEducations } from '@entities/PhysicalEducation/physical-education.queries'
-import { useGetStudents } from '@entities/Student/student.queries'
+} from '@entities/MedicalCertificate'
+import { useGetPhysicalEducations } from '@entities/PhysicalEducation'
+import { useGetStudents } from '@entities/Student'
 import { useModal } from '@shared/hooks'
 import {
 	CustomButton,
@@ -13,9 +13,11 @@ import {
 	CustomSelect,
 	ErrorMessage
 } from '@shared/ui'
-import daysUntilTheEnd from '@shared/utils/daysUntilTheEnd'
-import getDaysUntilExpiry from '@shared/utils/getDaysUntilExpiry'
-import getValidityPeriod from '@shared/utils/getValidityPeriod'
+import {
+	daysUntilTheEnd,
+	getDaysUntilExpiry,
+	getValidityPeriod
+} from '@shared/utils'
 import { format } from 'date-fns'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'

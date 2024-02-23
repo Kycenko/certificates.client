@@ -1,9 +1,6 @@
-import {
-	IHealthGroup,
-	TypeHealthGroupForm
-} from '@entities/HealthGroup/health-group.types.ts'
-import instance from '@shared/api/api.instance'
-import { SERVICE_URL } from '@shared/config/enums.ts'
+import { IHealthGroup, TypeHealthGroupForm } from '.'
+import { instance } from '@shared/api'
+import { SERVICE_URL } from '@shared/config'
 
 export const HealthGroupService = {
 	async create(data: TypeHealthGroupForm) {

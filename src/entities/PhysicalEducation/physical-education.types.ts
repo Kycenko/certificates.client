@@ -1,4 +1,4 @@
-import { IBase } from '@shared/config/base.interface'
+import { IBase } from '@shared/config'
 
 export interface IPhysicalEducation extends IBase {
 	id: number

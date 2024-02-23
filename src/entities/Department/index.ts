@@ -1,5 +1,20 @@
-import * as departmentQueries from './department.queries'
-import * as departmentService from './department.service'
-import * as departmentTypes from './department.types'
+import {
+	useCreateDepartment,
+	useDeleteDepartment,
+	useGetDepartment,
+	useGetDepartments,
+	useUpdateDepartment
+} from './department.queries'
+import { DepartmentService } from './department.service'
+import { IDepartment, TypeDepartmentForm } from './department.types'
 
-export { departmentQueries, departmentService, departmentTypes }
+export {
+	DepartmentService,
+	useCreateDepartment,
+	useDeleteDepartment,
+	useGetDepartment,
+	useGetDepartments,
+	useUpdateDepartment
+}
+
+export type { IDepartment, TypeDepartmentForm }

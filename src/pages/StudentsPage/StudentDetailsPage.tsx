@@ -1,24 +1,28 @@
 import { Layout } from '@app/layout'
-import { useGetHealthGroups } from '@entities/HealthGroup/health-group.query'
-import { useCreateMedicalCertificate } from '@entities/MedicalCertificate/medical-certificate.queries'
-import { TypeMedicalCertificateForm } from '@entities/MedicalCertificate/medical-certificate.types'
-import { useGetPhysicalEducations } from '@entities/PhysicalEducation/physical-education.queries'
-import { useGetStudent } from '@entities/Student/student.queries.ts'
-import DetailsTableHeads from '@features/DetailsTableHeads'
-import { DetailsStudentHeads } from '@shared/config/heads'
+import { useGetHealthGroups } from '@entities/HealthGroup'
+import {
+	TypeMedicalCertificateForm,
+	useCreateMedicalCertificate
+} from '@entities/MedicalCertificate'
+import { useGetPhysicalEducations } from '@entities/PhysicalEducation'
+import { useGetStudent } from '@entities/Student'
+import { DetailsTableHeads } from '@features/heads'
+import { DetailsStudentHeads } from '@shared/config'
 import { useAuth, useModal } from '@shared/hooks'
 import {
+	CreateButton,
 	CustomInput,
+	CustomLoader,
 	CustomModalForm,
 	CustomSelect,
 	ErrorMessage,
 	Heading
 } from '@shared/ui'
-import CreateButton from '@shared/ui/buttons/CreateButton'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
-import daysUntilTheEnd from '@shared/utils/daysUntilTheEnd'
-import getDaysUntilExpiry from '@shared/utils/getDaysUntilExpiry'
-import getValidityPeriod from '@shared/utils/getValidityPeriod'
+import {
+	daysUntilTheEnd,
+	getDaysUntilExpiry,
+	getValidityPeriod
+} from '@shared/utils'
 import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
@@ -60,7 +64,7 @@ const StudentDetailsPage = () => {
 	if (isLoading)
 		return (
 			<Layout>
-				<Loader />
+				<CustomLoader />
 			</Layout>
 		)
 	return (

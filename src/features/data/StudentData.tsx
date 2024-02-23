@@ -1,9 +1,8 @@
-import { useGetGroups } from '@entities/Group/group.queries'
-import { IStudent, TypeStudentForm } from '@entities/Student/student.types'
-import { selectSearchTerm } from '@features/Search/search.slice'
-import { selectSortOrder } from '@features/SortOrder/sort.slice'
-import { useAppSelector, useModal } from '@shared/hooks'
-import useSortAndFilterData from '@shared/hooks/useSortAndFilterData'
+import { useGetGroups } from '@entities/Group'
+import { IStudent, TypeStudentForm } from '@entities/Student'
+import { selectSearchTerm } from '@features/Search'
+import { selectSortOrder } from '@features/SortOrder'
+import { useAppSelector, useModal, useSortAndFilterData } from '@shared/hooks'
 import {
 	CustomButton,
 	CustomInput,

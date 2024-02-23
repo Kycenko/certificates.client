@@ -1,5 +1,4 @@
-import { useGetUser } from '@entities/User/user.queries.ts'
-import { TypeUserForm } from '@entities/User/user.types.ts'
+import { TypeUserForm, useGetUser } from '@entities/User'
 import { useEffect } from 'react'
 import { UseFormReset } from 'react-hook-form'
 

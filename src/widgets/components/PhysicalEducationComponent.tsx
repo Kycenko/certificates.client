@@ -1,16 +1,21 @@
 import { Layout } from '@app/layout'
 import {
+	TypePhysicalEducationForm,
 	useCreatePhysicalEducation,
 	useDeletePhysicalEducation,
 	useGetPhysicalEducations,
 	useUpdatePhysicalEducation
-} from '@entities/PhysicalEducation/physical-education.queries.ts'
-import { TypePhysicalEducationForm } from '@entities/PhysicalEducation/physical-education.types.ts'
-import PhysicalEducationData from '@features/data/PhysicalEducationData'
+} from '@entities/PhysicalEducation'
+import { PhysicalEducationData } from '@features/data'
 import { useModal } from '@shared/hooks'
-import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
-import CreateButton from '@shared/ui/buttons/CreateButton.tsx'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import {
+	CreateButton,
+	CustomInput,
+	CustomLoader,
+	CustomModalForm,
+	ErrorMessage,
+	Heading
+} from '@shared/ui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 const PhysicalEducationComponent = () => {
@@ -54,7 +59,7 @@ const PhysicalEducationComponent = () => {
 	if (isLoading)
 		return (
 			<Layout>
-				<Loader />
+				<CustomLoader />
 			</Layout>
 		)
 

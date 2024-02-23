@@ -1,5 +1,22 @@
-import * as groupQueries from './group.queries'
-import * as groupService from './group.service'
-import * as groupTypes from './group.types'
+import { IGroup } from '@entities/Group/group.types'
+import { TypeGroupForm } from '@entities/Group/group.types.ts'
 
-export { groupQueries, groupService, groupTypes }
+import {
+	useCreateGroup,
+	useDeleteGroup,
+	useGetGroup,
+	useGetGroups,
+	useUpdateGroup
+} from './group.queries'
+import { GroupService } from './group.service'
+
+export {
+	GroupService,
+	useCreateGroup,
+	useDeleteGroup,
+	useGetGroup,
+	useGetGroups,
+	useUpdateGroup
+}
+
+export type { IGroup, TypeGroupForm }

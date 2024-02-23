@@ -1,4 +1,4 @@
-import { IBase } from '@shared/config/base.interface'
+import { IBase } from '@shared/config'
 
 export interface IUser extends IBase {
 	id: string

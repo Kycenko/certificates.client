@@ -1,7 +1,6 @@
-import { LOCAL_STORAGE_KEY, TOKENS } from '@shared/config/enums.ts'
+import { IAuthResponse, ITokens } from '.'
+import { LOCAL_STORAGE_KEY, TOKENS } from '@shared/config'
 import Cookies from 'js-cookie'
-
-import { IAuthResponse, ITokens } from './auth.types'
 
 export const getAccessToken = async () => {
 	const accessToken = Cookies.get(TOKENS.ACCESS_TOKEN)
@@ -14,12 +13,10 @@ export const getUserFromStorage = async () => {
 
 export const saveTokensToStorage = (data: ITokens) => {
 	Cookies.set(TOKENS.ACCESS_TOKEN, data.accessToken)
-	Cookies.set(TOKENS.REFRESH_TOKEN, data.refreshToken)
 }
 
 export const removeFromStorage = () => {
 	Cookies.remove(TOKENS.ACCESS_TOKEN)
-	Cookies.remove(TOKENS.REFRESH_TOKEN)
 	localStorage.removeItem(LOCAL_STORAGE_KEY.USER)
 }
 export const saveToStorage = (data: IAuthResponse) => {

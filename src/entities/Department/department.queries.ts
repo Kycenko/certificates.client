@@ -1,10 +1,7 @@
-import { QUERY_KEYS } from '@shared/config/enums.ts'
-import { createToast, deleteToast, editToast } from '@shared/config/toasts'
+import { DepartmentService, IDepartment, TypeDepartmentForm } from '.'
+import { QUERY_KEYS, createToast, deleteToast, editToast } from '@shared/config'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-
-import { DepartmentService } from './department.service'
-import { IDepartment, TypeDepartmentForm } from './department.types'
 
 export const useCreateDepartment = () => {
 	const queryClient = new QueryClient()

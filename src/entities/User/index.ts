@@ -1,5 +1,13 @@
-import * as userQueries from './user.queries'
-import { UserService } from './user.service'
-import * as userTypes from './user.types'
+import { IUser, TypeUserForm } from '@entities/User/user.types.ts'
 
-export { UserService, userQueries, userTypes }
+import {
+	useDeleteUser,
+	useGetUser,
+	useGetUsers,
+	useUpdateUser
+} from './user.queries'
+import { UserService } from './user.service'
+
+export { UserService, useDeleteUser, useGetUser, useGetUsers, useUpdateUser }
+
+export type { IUser, TypeUserForm }

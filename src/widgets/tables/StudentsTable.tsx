@@ -1,17 +1,16 @@
 import {
+	TypeStudentForm,
 	useDeleteStudent,
 	useGetStudents,
 	useUpdateStudent
-} from '@entities/Student/student.queries.ts'
-import { TypeStudentForm } from '@entities/Student/student.types.ts'
-import Search from '@features/Search/Search.tsx'
-import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads from '@features/TableHeads'
-import StudentData from '@features/data/StudentData'
-import { PAGES_URL } from '@shared/config/enums'
-import { StudentHeads } from '@shared/config/heads'
+} from '@entities/Student'
+import { Search } from '@features/Search'
+import { SortOrder } from '@features/SortOrder'
+import { StudentData } from '@features/data'
+import { TableHeads } from '@features/heads'
+import { PAGES_URL, StudentHeads } from '@shared/config'
 import { useModal } from '@shared/hooks'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import { CustomLoader } from '@shared/ui'
 import { useNavigate } from 'react-router-dom'
 
 import styles from '@shared/styles/Tables.module.scss'
@@ -41,7 +40,7 @@ const StudentsTable = () => {
 		navigate(`${PAGES_URL.STUDENTS}/${id}`)
 	}
 
-	if (isLoading) return <Loader />
+	if (isLoading) return <CustomLoader />
 	return (
 		<>
 			<div className={styles.container}>

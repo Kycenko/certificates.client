@@ -1,10 +1,7 @@
-import { QUERY_KEYS } from '@shared/config/enums.ts'
-import { createToast, deleteToast, editToast } from '@shared/config/toasts'
+import { IStudent, StudentService, TypeStudentForm } from '.'
+import { QUERY_KEYS, createToast, deleteToast, editToast } from '@shared/config'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
-
-import { StudentService } from './student.service'
-import { IStudent, TypeStudentForm } from './student.types'
 
 export const useCreateStudent = () => {
 	const queryClient = new QueryClient()

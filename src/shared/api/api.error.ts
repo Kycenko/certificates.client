@@ -1,4 +1,4 @@
-export const errorCatch = (error: any): string => {
+const errorCatch = (error: any): string => {
 	const message = error?.response?.data?.message
 
 	return message
@@ -7,3 +7,4 @@ export const errorCatch = (error: any): string => {
 			: message
 		: error.message
 }
+export default errorCatch

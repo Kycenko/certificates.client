@@ -1,7 +1,4 @@
-import {
-	selectSearchTerm,
-	setSearchTerm
-} from '@features/Search/search.slice.ts'
+import { selectSearchTerm, setSearchTerm } from '.'
 import { useAppDispatch, useAppSelector, useDebounce } from '@shared/hooks'
 import { SearchIcon } from 'lucide-react'
 import { ChangeEvent, FC, useEffect } from 'react'

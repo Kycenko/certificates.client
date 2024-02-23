@@ -1,24 +1,23 @@
 import {
+	TypeDepartmentForm,
 	useCreateDepartment,
 	useDeleteDepartment,
 	useGetDepartments,
 	useUpdateDepartment
-} from '@entities/Department/department.queries.ts'
-import { TypeDepartmentForm } from '@entities/Department/department.types.ts'
-import Search from '@features/Search/Search.tsx'
-import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads from '@features/TableHeads'
-import DepartmentData from '@features/data/DepartmentData'
-import { PAGES_URL } from '@shared/config/enums'
-import { DepartmentHeads } from '@shared/config/heads'
+} from '@entities/Department'
+import { Search } from '@features/Search'
+import { SortOrder } from '@features/SortOrder'
+import { DepartmentData } from '@features/data'
+import { TableHeads } from '@features/heads'
+import { DepartmentHeads, PAGES_URL } from '@shared/config'
 import { useModal } from '@shared/hooks'
 import {
 	CustomButton,
 	CustomInput,
+	CustomLoader,
 	CustomModalForm,
 	ErrorMessage
 } from '@shared/ui'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -64,7 +63,7 @@ const DepartmentsTable = () => {
 		navigate(`${PAGES_URL.DEPARTMENTS}/${id}`)
 	}
 
-	if (isLoading) return <Loader />
+	if (isLoading) return <CustomLoader />
 	return (
 		<>
 			<div className={styles.container}>

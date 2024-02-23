@@ -1,7 +1,6 @@
-import instance from '@shared/api/api.instance'
-import { SERVICE_URL } from '@shared/config/enums.ts'
-
-import { IDepartment, TypeDepartmentForm } from './department.types'
+import { IDepartment, TypeDepartmentForm } from '.'
+import { instance } from '@shared/api'
+import { SERVICE_URL } from '@shared/config'
 
 export const DepartmentService = {
 	async create(data: TypeDepartmentForm) {

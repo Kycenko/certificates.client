@@ -1,6 +1,6 @@
 import { Layout } from '@app/layout'
 import { Heading } from '@shared/ui'
-import StudentsTable from '@widgets/tables/StudentsTable.tsx'
+import { StudentsTable } from '@widgets/tables'
 
 const StudentsPage = () => {
 	return (

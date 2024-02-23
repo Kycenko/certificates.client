@@ -1,10 +1,5 @@
-import { HealthGroupService } from '@entities/HealthGroup/health-group.service.ts'
-import {
-	IHealthGroup,
-	TypeHealthGroupForm
-} from '@entities/HealthGroup/health-group.types.ts'
-import { QUERY_KEYS } from '@shared/config/enums.ts'
-import { createToast, deleteToast, editToast } from '@shared/config/toasts'
+import { HealthGroupService, IHealthGroup, TypeHealthGroupForm } from '.'
+import { QUERY_KEYS, createToast, deleteToast, editToast } from '@shared/config'
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 

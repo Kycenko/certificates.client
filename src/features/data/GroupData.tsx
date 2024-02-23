@@ -1,10 +1,14 @@
-import { useGetCourses } from '@entities/Course/course.queries'
-import { IGroup, TypeGroupForm } from '@entities/Group/group.types'
-import { selectSearchTerm } from '@features/Search/search.slice'
-import { selectSortOrder } from '@features/SortOrder/sort.slice'
-import { PAGES_URL } from '@shared/config/enums'
-import { useAppSelector, useAuth, useModal } from '@shared/hooks'
-import useSortAndFilterData from '@shared/hooks/useSortAndFilterData'
+import { useGetCourses } from '@entities/Course'
+import { IGroup, TypeGroupForm } from '@entities/Group'
+import { selectSearchTerm } from '@features/Search'
+import { selectSortOrder } from '@features/SortOrder'
+import { PAGES_URL } from '@shared/config'
+import {
+	useAppSelector,
+	useAuth,
+	useModal,
+	useSortAndFilterData
+} from '@shared/hooks'
 import {
 	CustomButton,
 	CustomInput,

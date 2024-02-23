@@ -1,19 +1,18 @@
 import { Layout } from '@app/layout'
-import { useDeleteUser, useGetUsers } from '@entities/User/user.queries.ts'
-import UserData from '@features/data/UserData'
-import { useRegister } from '@shared/auth/auth.queries.ts'
-import { IRegister } from '@shared/auth/auth.types.ts'
-import { PAGES_URL } from '@shared/config/enums'
+import { useDeleteUser, useGetUsers } from '@entities/User'
+import { UserData } from '@features/data'
+import { IRegister, useRegister } from '@shared/auth'
+import { PAGES_URL } from '@shared/config'
 import { useModal } from '@shared/hooks'
 import {
+	CreateButton,
 	CustomInput,
+	CustomLoader,
 	CustomModalForm,
 	CustomSelect,
 	ErrorMessage,
 	Heading
 } from '@shared/ui'
-import CreateButton from '@shared/ui/buttons/CreateButton.tsx'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -51,7 +50,7 @@ const UserComponent = () => {
 	if (isLoading)
 		return (
 			<Layout>
-				<Loader />
+				<CustomLoader />
 			</Layout>
 		)
 

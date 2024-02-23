@@ -1,7 +1,7 @@
 import {
 	IPhysicalEducation,
 	TypePhysicalEducationForm
-} from '@entities/PhysicalEducation/physical-education.types'
+} from '@entities/PhysicalEducation'
 import { useModal } from '@shared/hooks'
 import { CustomButton, CustomInput, CustomModalForm } from '@shared/ui'
 import { FC } from 'react'

@@ -1,5 +1,5 @@
-import searchSlice from '@features/Search/search.slice'
-import sortSlice from '@features/SortOrder/sort.slice'
+import { searchSlice } from '@features/Search'
+import { sortSlice } from '@features/SortOrder'
 import { configureStore } from '@reduxjs/toolkit'
 
 import { StateSchema } from './StateSchema'

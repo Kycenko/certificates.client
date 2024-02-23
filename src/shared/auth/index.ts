@@ -1,6 +1,22 @@
-import * as authHelper from './auth.helper'
-import * as authQueries from './auth.queries'
+import {
+	getAccessToken,
+	getUserFromStorage,
+	removeFromStorage,
+	saveToStorage,
+	saveTokensToStorage
+} from './auth.helper'
+import { useLogin, useRegister } from './auth.queries'
 import { AuthService } from './auth.service'
-import * as authTypes from './auth.types'
+import { IAuthResponse, ILogin, IRegister, ITokens } from './auth.types'
 
-export { AuthService, authHelper, authQueries, authTypes }
+export {
+	AuthService,
+	getAccessToken,
+	getUserFromStorage,
+	removeFromStorage,
+	saveToStorage,
+	saveTokensToStorage,
+	useLogin,
+	useRegister
+}
+export type { IAuthResponse, ILogin, IRegister, ITokens }

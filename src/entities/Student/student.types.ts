@@ -1,5 +1,5 @@
-import { IMedicalCertificate } from '@entities/MedicalCertificate/medical-certificate.types'
-import { IBase } from '@shared/config/base.interface'
+import { IMedicalCertificate } from '@entities/MedicalCertificate'
+import { IBase } from '@shared/config'
 
 export interface IStudent extends IBase {
 	id: number

@@ -1,13 +1,16 @@
 import { Layout } from '@app/layout'
-import { useGetGroup } from '@entities/Group/group.queries'
-import { useCreateStudent } from '@entities/Student/student.queries'
-import { TypeStudentForm } from '@entities/Student/student.types'
-import DetailsTableHeads from '@features/DetailsTableHeads'
-import { PAGES_URL } from '@shared/config/enums'
-import { DetailsGroupHeads } from '@shared/config/heads'
+import { useGetGroup } from '@entities/Group'
+import { TypeStudentForm, useCreateStudent } from '@entities/Student'
+import { DetailsTableHeads } from '@features/heads'
+import { DetailsGroupHeads, PAGES_URL } from '@shared/config'
 import { useAuth, useModal } from '@shared/hooks'
-import { CustomInput, CustomModalForm, ErrorMessage, Heading } from '@shared/ui'
-import CreateButton from '@shared/ui/buttons/CreateButton'
+import {
+	CreateButton,
+	CustomInput,
+	CustomModalForm,
+	ErrorMessage,
+	Heading
+} from '@shared/ui'
 import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'

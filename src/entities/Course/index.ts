@@ -1,5 +1,20 @@
-import * as courseQueries from './course.queries'
-import * as courseService from './course.service'
-import * as courseTypes from './course.types'
+import {
+	useCreateCourse,
+	useDeleteCourse,
+	useGetCourse,
+	useGetCourses,
+	useUpdateCourse
+} from './course.queries'
+import { CourseService } from './course.service'
+import { ICourse, TypeCourseForm } from './course.types'
 
-export { courseQueries, courseService, courseTypes }
+export {
+	CourseService,
+	useCreateCourse,
+	useDeleteCourse,
+	useGetCourse,
+	useGetCourses,
+	useUpdateCourse
+}
+
+export type { ICourse, TypeCourseForm }

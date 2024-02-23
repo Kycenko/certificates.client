@@ -1,16 +1,14 @@
 import {
+	TypeMedicalCertificateForm,
 	useDeleteMedicalCertificate,
 	useGetMedicalCertificates,
 	useUpdateMedicalCertificate
-} from '@entities/MedicalCertificate/medical-certificate.queries'
-import { TypeMedicalCertificateForm } from '@entities/MedicalCertificate/medical-certificate.types'
-import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads from '@features/TableHeads'
-import MedicalCertificateData from '@features/data/MedicalCertificateData'
-import { PAGES_URL } from '@shared/config/enums'
-import { CertificatesHeads } from '@shared/config/heads'
+} from '@entities/MedicalCertificate'
+import { MedicalCertificateData } from '@features/data'
+import { TableHeads } from '@features/heads'
+import { CertificatesHeads, PAGES_URL } from '@shared/config'
 import { useModal } from '@shared/hooks'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import { CustomLoader } from '@shared/ui'
 import { useNavigate } from 'react-router-dom'
 
 import styles from '@shared/styles/Tables.module.scss'
@@ -43,14 +41,12 @@ const MedicalCertificatesTable = () => {
 		navigate(`${PAGES_URL.MEDICAL_CERTIFICATES}/${id}`)
 	}
 
-	if (isLoading) return <Loader />
+	if (isLoading) return <CustomLoader />
 	return (
 		<div className={styles.container}>
 			<div className={styles.tableContainer}>
 				<div className={styles.headerContainer}>
-					<div className={styles.header}>
-						<SortOrder />
-					</div>
+					<div className={styles.header}></div>
 				</div>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>

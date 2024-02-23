@@ -1,9 +1,7 @@
-import instance from '@shared/api/api.instance'
-import { BASE_URL, SERVICE_URL, TOKENS } from '@shared/config/enums.ts'
+import { IAuthResponse, ILogin, IRegister, saveToStorage } from '.'
+import { instance } from '@shared/api'
+import { BASE_URL, SERVICE_URL, TOKENS } from '@shared/config'
 import Cookies from 'js-cookie'
-
-import { saveToStorage } from './auth.helper'
-import { IAuthResponse, ILogin, IRegister } from './auth.types'
 
 export const AuthService = {
 	async login(data: ILogin) {
@@ -27,7 +25,7 @@ export const AuthService = {
 	async getNewTokens() {
 		const refreshToken = Cookies.get(TOKENS.REFRESH_TOKEN)
 		const response = await instance.post<IAuthResponse>(
-			`${BASE_URL.BASE_URL} ${SERVICE_URL.AUTH_ACCESS_TOKEN}`,
+			BASE_URL.BASE_URL + SERVICE_URL.AUTH_ACCESS_TOKEN,
 			{ refreshToken }
 		)
 		if (response.data.accessToken) saveToStorage(response.data)

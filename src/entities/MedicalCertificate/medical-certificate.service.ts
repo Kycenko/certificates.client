@@ -1,10 +1,6 @@
-import instance from '@shared/api/api.instance'
-import { SERVICE_URL } from '@shared/config/enums.ts'
-
-import {
-	IMedicalCertificate,
-	TypeMedicalCertificateForm
-} from './medical-certificate.types'
+import { IMedicalCertificate, TypeMedicalCertificateForm } from '.'
+import { instance } from '@shared/api'
+import { SERVICE_URL } from '@shared/config'
 
 export const MedicalCertificateService = {
 	async create(data: TypeMedicalCertificateForm) {

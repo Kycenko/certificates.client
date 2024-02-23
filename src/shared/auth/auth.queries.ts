@@ -1,16 +1,13 @@
-import { AuthService } from '.'
-import { SERVICE_URL } from '@shared/config/enums'
-import { authToast, createToast } from '@shared/config/toasts'
+import { AuthService, ILogin, IRegister } from '.'
+import { SERVICE_URL, authToast, createToast } from '@shared/config'
 import { useAuth } from '@shared/hooks'
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
-import { ILogin, IRegister } from './auth.types'
-
 export const useLogin = () => {
 	const navigate = useNavigate()
 	const { setUser } = useAuth()
-	const { mutate } = useMutation({
+	const { mutateAsync } = useMutation({
 		mutationKey: ['login'],
 		mutationFn: (data: ILogin) => AuthService.login(data),
 		onSuccess: data => {
@@ -21,7 +18,7 @@ export const useLogin = () => {
 			}
 		}
 	})
-	return { mutate }
+	return { mutateAsync }
 }
 
 export const useRegister = () => {

@@ -1,6 +1,6 @@
-import { useLogin } from '@shared/auth/auth.queries'
-import { ILogin } from '@shared/auth/auth.types'
+import { ILogin, useLogin } from '@shared/auth'
 import { CustomInput, ErrorMessage } from '@shared/ui'
+import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -14,12 +14,13 @@ const LoginForm = () => {
 		reset
 	} = useForm<ILogin>()
 
-	const { mutate } = useLogin()
+	const { mutateAsync } = useLogin()
 	const [loginError, setLoginError] = useState<string | null>(null)
+	const [showPassword, setShowPassword] = useState(false)
 
-	const handleLogin = (data: ILogin) => {
+	const handleLogin = async (data: ILogin) => {
 		try {
-			mutate(data)
+			await mutateAsync(data)
 			setLoginError(null)
 		} catch (error) {
 			setLoginError('Неверный логин или пароль')
@@ -41,22 +42,29 @@ const LoginForm = () => {
 							label={'Логин:'}
 							{...register('login', { required: 'Обязательное поле' })}
 						/>
-						<ErrorMessage error={errors.login} />
 					</div>
-					<div className='mb-2'>
+					<ErrorMessage error={errors.login} />
+					<div className='mb-2 relative'>
 						<CustomInput
 							id={'password'}
 							label={'Пароль:'}
-							type={'password'}
+							type={showPassword ? 'text' : 'password'}
 							{...register('password', { required: 'Обязательное поле' })}
 						/>
-						<ErrorMessage error={errors.password} />
+						<button
+							type='button'
+							className={styles.togglePassword}
+							onClick={() => setShowPassword(prev => !prev)}
+						>
+							{showPassword ? <Eye size={25} /> : <EyeOff size={25} />}
+						</button>
 					</div>
+					<ErrorMessage error={errors.password} />
 					{loginError && <p className='text-red-500'>{loginError}</p>}
 					<div className={styles.btnContainer}>
 						<button
 							className={styles.loginBtn}
-							onSubmit={handleSubmit(handleLogin)}
+							type='submit'
 						>
 							Войти
 						</button>

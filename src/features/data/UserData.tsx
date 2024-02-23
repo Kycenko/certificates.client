@@ -1,4 +1,4 @@
-import { IUser } from '@entities/User/user.types'
+import { IUser } from '@entities/User'
 import { useAuth, useModal } from '@shared/hooks'
 import { CustomButton, CustomModalForm } from '@shared/ui'
 import { FC } from 'react'

@@ -1,4 +1,4 @@
 import RouteProvider from './RouteProvider'
-import * as routeConfig from './route.config'
+import { AppRoutes, RoutePath, routeConfig } from './route.config'
 
-export { RouteProvider, routeConfig }
+export { AppRoutes, RoutePath, RouteProvider, routeConfig }

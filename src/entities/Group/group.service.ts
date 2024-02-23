@@ -1,7 +1,6 @@
-import instance from '@shared/api/api.instance'
-import { SERVICE_URL } from '@shared/config/enums.ts'
-
-import { IGroup, TypeGroupForm } from './group.types'
+import { IGroup, TypeGroupForm } from '.'
+import { instance } from '@shared/api'
+import { SERVICE_URL } from '@shared/config'
 
 export const GroupService = {
 	async create(data: TypeGroupForm) {

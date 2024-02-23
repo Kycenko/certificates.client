@@ -1,16 +1,15 @@
 import {
+	TypeCourseForm,
 	useDeleteCourse,
 	useGetCourses,
 	useUpdateCourse
-} from '@entities/Course/course.queries.ts'
-import { TypeCourseForm } from '@entities/Course/course.types.ts'
-import SortOrder from '@features/SortOrder/SortOrder.tsx'
-import TableHeads from '@features/TableHeads'
-import CourseData from '@features/data/CourseData'
-import { PAGES_URL } from '@shared/config/enums'
-import { CourseHeads } from '@shared/config/heads'
+} from '@entities/Course'
+import { SortOrder } from '@features/SortOrder'
+import { CourseData } from '@features/data'
+import { TableHeads } from '@features/heads'
+import { CourseHeads, PAGES_URL } from '@shared/config'
 import { useModal } from '@shared/hooks'
-import Loader from '@shared/ui/loader/CustomLoader.tsx'
+import { Loader } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
 import styles from '@shared/styles/Tables.module.scss'

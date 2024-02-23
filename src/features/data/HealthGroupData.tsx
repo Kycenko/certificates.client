@@ -1,7 +1,4 @@
-import {
-	IHealthGroup,
-	TypeHealthGroupForm
-} from '@entities/HealthGroup/health-group.types.ts'
+import { IHealthGroup, TypeHealthGroupForm } from '@entities/HealthGroup'
 import { useModal } from '@shared/hooks'
 import { CustomButton, CustomInput, CustomModalForm } from '@shared/ui'
 import { FC } from 'react'

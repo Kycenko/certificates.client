@@ -1,8 +1,7 @@
-import { ICourse, TypeCourseForm } from '@entities/Course/course.types'
-import { useGetDepartments } from '@entities/Department/department.queries'
-import { selectSortOrder } from '@features/SortOrder/sort.slice'
-import { useAppSelector, useModal } from '@shared/hooks'
-import useSortData from '@shared/hooks/useSortData'
+import { ICourse, TypeCourseForm } from '@entities/Course'
+import { useGetDepartments } from '@entities/Department'
+import { selectSortOrder } from '@features/SortOrder'
+import { useAppSelector, useModal, useSortData } from '@shared/hooks'
 import {
 	CustomButton,
 	CustomModalForm,

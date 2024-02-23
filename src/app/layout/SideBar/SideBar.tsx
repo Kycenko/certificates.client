@@ -1,4 +1,4 @@
-import { removeFromStorage } from '@shared/auth/auth.helper'
+import { removeFromStorage } from '@shared/auth'
 import { useAuth } from '@shared/hooks'
 import { Link, useNavigate } from 'react-router-dom'
 

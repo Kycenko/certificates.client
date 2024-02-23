@@ -1,10 +1,6 @@
+import { IPhysicalEducation, TypePhysicalEducationForm } from '.'
 import { instance } from '@shared/api'
-import { SERVICE_URL } from '@shared/config/enums'
-
-import {
-	IPhysicalEducation,
-	TypePhysicalEducationForm
-} from './physical-education.types'
+import { SERVICE_URL } from '@shared/config'
 
 export const PhysicalEducationService = {
 	async create(data: TypePhysicalEducationForm) {
