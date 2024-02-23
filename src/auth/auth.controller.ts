@@ -33,7 +33,7 @@ export class AuthController {
 	@HttpCode(200)
 	@UsePipes(new ValidationPipe())
 	@Auth()
-	@Post('/login/access-token')
+	@Post('login/access-token')
 	async getNewTokens(@Body() dto: RefreshTokenDto) {
 		return this.authService.getNewTokens(dto.refreshToken)
 	}
