@@ -13,7 +13,8 @@ const useUserInitialData = (
 		if (isSuccess && user) {
 			reset({
 				login: user.login,
-				isAdmin: user.isAdmin
+				isAdmin: user.isAdmin,
+				groupId: user.groupId
 			})
 		}
 	}, [isSuccess])

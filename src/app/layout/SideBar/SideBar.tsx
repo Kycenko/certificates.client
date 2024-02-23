@@ -74,7 +74,7 @@ const Sidebar = () => {
 			</div>
 			<div>
 				<Link
-					to={`/users/profile/${user?.id}`}
+					to={`/users/${user?.id}`}
 					className={styles.link}
 				>
 					Профиль
@@ -99,7 +99,7 @@ const Sidebar = () => {
 			</div>
 			<div>
 				<Link
-					to={'/users/profile'}
+					to={`/users/${user?.id}`}
 					className={styles.link}
 				>
 					Профиль

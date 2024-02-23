@@ -2,20 +2,27 @@ import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
 import { StatisticService } from './statistics.service'
-import { IStatistics } from './statistics.types'
 
-export const useGetGroupStatistics = (id: string | undefined) => {
-	const {
-		data: groupStatistics,
-		isLoading,
-		refetch
-	} = useQuery({
+export const useGetHealthReport = () => {
+	const { data, isLoading } = useQuery({
 		queryKey: ['statistics'],
 		queryFn: async () => {
-			const response: AxiosResponse<IStatistics> =
-				await StatisticService.getStatisticsByGroup(id)
+			const response: AxiosResponse =
+				await StatisticService.getStatisticsByGroup()
 			return response.data
 		}
 	})
-	return { groupStatistics, isLoading, refetch }
+	return { data, isLoading }
+}
+
+export const useGetStudentCertificates = (id: string | undefined) => {
+	const { data, isLoading } = useQuery({
+		queryKey: ['statistics', id],
+		queryFn: async () => {
+			const response: AxiosResponse =
+				await StatisticService.getStatisticsByStudentCertificates(id)
+			return response.data
+		}
+	})
+	return { data, isLoading }
 }

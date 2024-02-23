@@ -20,22 +20,14 @@ export const enum SERVICE_URL {
 	AUTH = 'auth',
 	AUTH_ACCESS_TOKEN = 'auth/login/access-token',
 	USERS = 'users',
+	PROFILE = 'users/profile',
 	STUDENTS = 'students',
 	PHYSICAL_EDUCATIONS = 'physical-educations',
 	HEALTH_GROUPS = 'health-groups',
 	GROUPS = 'groups',
 	DEPARTMENTS = 'departments',
 	COURSES = 'courses',
-	MEDICAL_CERTIFICATES = 'medical-certificates',
-	GROUP_REPORT = 'group-report'
-}
-
-export const enum SERVICE_METHOD {
-	POST = 'POST',
-	GET = 'GET',
-	PUT = 'PUT',
-	PATCH = 'PATCH',
-	DELETE = 'DELETE'
+	MEDICAL_CERTIFICATES = 'medical-certificates'
 }
 
 export const enum TOKENS {

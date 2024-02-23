@@ -1,6 +1,7 @@
-import { IStudent } from '@entities/Student/student.types'
+import { IHealthGroup } from '@entities/HealthGroup/health-group.types'
+import { IMedicalCertificate } from '@entities/MedicalCertificate/medical-certificate.types'
 
-export interface IStatistics {
-	students: IStudent[]
-	groupId: number
+export interface IHealthReportResponse {
+	healthGroup: IHealthGroup[]
+	medicalCertificates: IMedicalCertificate[]
 }

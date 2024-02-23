@@ -12,9 +12,9 @@ export const UserService = {
 		return instance.get<IUser>(`${SERVICE_URL.USERS}/${id}`)
 	},
 
-	async getProfile(id: string | undefined) {
-		return instance.get<IUser>(`${SERVICE_URL.USERS}/profile/${id}`)
-	},
+	// async getProfile(id: string | undefined) {
+	// 	return instance.get<IUser>(`${SERVICE_URL.PROFILE}/${id}`)
+	// },
 
 	async update(id: string | undefined, data: TypeUserForm) {
 		return instance.patch<IUser>(`${SERVICE_URL.USERS}/${id}`, data)
