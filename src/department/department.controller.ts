@@ -10,9 +10,9 @@ import {
 	ValidationPipe
 } from '@nestjs/common'
 
+import { Auth } from '@auth/decorators/auth.decorator'
 import { DepartmentService } from './department.service'
 import { DepartmentDto } from './dto/department.dto'
-import { Auth } from '@auth/decorators/auth.decorator'
 
 @Controller('departments')
 export class DepartmentController {
