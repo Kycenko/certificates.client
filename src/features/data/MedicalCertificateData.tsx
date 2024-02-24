@@ -47,6 +47,11 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		reset
 	} = useForm<TypeMedicalCertificateForm>()
 
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
+	}
+
 	const handleEdit = (
 		id: number | string,
 		data: TypeMedicalCertificateForm
@@ -170,10 +175,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 							</CustomSelect>
 						</CustomModalForm>
 						<CustomModalForm
-							onSubmit={() => {
-								onDelete(id)
-								setDeleteId(null)
-							}}
+							onSubmit={() => handleDelete(id)}
 							buttonTitle={'Удалить'}
 							isOpen={deleteId === id}
 							onClose={() => setDeleteId(null)}

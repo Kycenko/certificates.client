@@ -36,7 +36,9 @@
 .contentCell {
 	@apply border-b items-center justify-center;
 }
-
+.cellPadding {
+	@apply p-2;
+}
 .editCellContainer {
 	@apply flex justify-end px-6 py-2;
 }

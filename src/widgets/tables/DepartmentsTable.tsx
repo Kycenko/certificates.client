@@ -106,9 +106,13 @@ const DepartmentsTable = () => {
 					label={'Название'}
 					id={'name'}
 					placeholder={'Введите название'}
-					{...register('name', { required: 'Обязательное поле' })}
+					{...register('name', {
+						required: 'Обязательное поле',
+						minLength: { value: 4, message: 'Минимум 4 символа' },
+						maxLength: { value: 60, message: 'Максимум 60 символов' }
+					})}
 				/>
-				<ErrorMessage error={errors.name} />
+				<ErrorMessage error={errors.name}></ErrorMessage>
 			</CustomModalForm>
 		</>
 	)

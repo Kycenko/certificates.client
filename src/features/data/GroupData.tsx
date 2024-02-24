@@ -40,7 +40,22 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeGroupForm>()
+	} = useForm<TypeGroupForm>({ mode: 'onChange' })
+	const handleEdit = (id: number | string) => {
+		setEditId(id)
+		reset()
+	}
+
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
+	}
+
+	const onSubmit = (id: number | string, data: TypeGroupForm) => {
+		onEdit(id, data)
+		setEditId(null)
+		reset()
+	}
 
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
@@ -66,12 +81,12 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 				</tr>
 			) : (
 				sortedData?.map(({ id, name, courseId }) => (
-					<tr
-						className={styles.contentCell}
-						key={id}
-					>
+					<>
 						{user?.isAdmin ? (
-							<>
+							<tr
+								className={styles.contentCell}
+								key={id}
+							>
 								<td>
 									<span>{name}</span>
 								</td>
@@ -82,12 +97,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 								</td>
 								<td className={styles.editCellContainer}>
 									<div className={styles.adminEditCell}>
-										<CustomButton
-											onClick={() => {
-												setEditId(id)
-												reset()
-											}}
-										>
+										<CustomButton onClick={() => handleEdit(id)}>
 											Изменить
 										</CustomButton>
 										<CustomButton onClick={() => onInfo(id)}>
@@ -98,23 +108,25 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 										</CustomButton>
 									</div>
 								</td>
-							</>
+							</tr>
 						) : (
-							<td
+							<tr
+								key={id}
 								onClick={() => navigate(`${PAGES_URL.GROUPS}/${id}`)}
 								className={styles.userEditCell}
 							>
-								<span>{name}</span>
-							</td>
+								<td className={styles.cellPadding}>
+									<span>{name}</span>
+								</td>
+								<td className={styles.cellPadding}>
+									{courses
+										?.filter(({ id }) => id === courseId)
+										?.map(({ number }) => `${number}-й курс`)}
+								</td>
+							</tr>
 						)}
-
 						<CustomModalForm
-							onSubmit={handleSubmit(data => {
-								const newData = { ...data, courseId: Number(data.courseId) }
-								onEdit(id, newData)
-								setEditId(null)
-								reset()
-							})}
+							onSubmit={handleSubmit(data => onSubmit(id, data))}
 							isOpen={editId === id}
 							onClose={() => setEditId(null)}
 							formTitle='Изменение'
@@ -125,7 +137,11 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 								label='Название'
 								defaultValue={name}
 								placeholder={'Введите название'}
-								{...register('name', { required: 'Обязательное поле' })}
+								{...register('name', {
+									required: 'Обязательное поле',
+									minLength: { value: 5, message: 'Минимум 5 символов' },
+									maxLength: { value: 5, message: 'Максимум 5 символов' }
+								})}
 							/>
 							<ErrorMessage error={errors.name} />
 							<CustomSelect
@@ -145,10 +161,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 							</CustomSelect>
 						</CustomModalForm>
 						<CustomModalForm
-							onSubmit={() => {
-								onDelete(id)
-								setDeleteId(null)
-							}}
+							onSubmit={() => handleDelete(id)}
 							buttonTitle={'Удалить'}
 							isOpen={deleteId === id}
 							onClose={() => setDeleteId(null)}
@@ -156,7 +169,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 						>
 							{name}
 						</CustomModalForm>
-					</tr>
+					</>
 				))
 			)}
 		</>

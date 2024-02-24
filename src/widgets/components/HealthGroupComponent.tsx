@@ -26,7 +26,7 @@ const HealthGroupComponent = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeHealthGroupForm>()
+	} = useForm<TypeHealthGroupForm>({ mode: 'onChange' })
 	const { create } = useCreateHealthGroup()
 	const { update } = useUpdateHealthGroup()
 	const { remove } = useDeleteHealthGroup()
@@ -74,7 +74,11 @@ const HealthGroupComponent = () => {
 					label={'Название'}
 					id={'name'}
 					placeholder={'Введите название'}
-					{...register('name', { required: 'Обязательное поле' })}
+					{...register('name', {
+						required: 'Обязательное поле',
+						minLength: { value: 5, message: 'Минимум 5 символов' },
+						maxLength: { value: 15, message: 'Максимум 15 символов' }
+					})}
 				/>
 				<ErrorMessage error={errors.name} />
 			</CustomModalForm>

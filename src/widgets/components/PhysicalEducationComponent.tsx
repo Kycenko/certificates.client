@@ -28,7 +28,7 @@ const PhysicalEducationComponent = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypePhysicalEducationForm>()
+	} = useForm<TypePhysicalEducationForm>({ mode: 'onChange' })
 
 	const { create } = useCreatePhysicalEducation()
 	const { update } = useUpdatePhysicalEducation()
@@ -85,7 +85,11 @@ const PhysicalEducationComponent = () => {
 					label={'Название'}
 					id={'name'}
 					placeholder={'Введите название'}
-					{...register('name', { required: 'Обязательное поле' })}
+					{...register('name', {
+						required: 'Обязательное поле',
+						minLength: { value: 5, message: 'Минимум 5 символов' },
+						maxLength: { value: 15, message: 'Максимум 15 символов' }
+					})}
 				/>
 				<ErrorMessage error={errors.name} />
 			</CustomModalForm>

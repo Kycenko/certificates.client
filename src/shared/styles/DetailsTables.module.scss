@@ -9,3 +9,17 @@
 .cell {
 	@apply border hover:bg-gray-200 cursor-pointer  justify-center text-center items-center;
 }
+.cellPadding {
+	@apply p-2;
+}
+
+.yesDaysCell {
+	@apply bg-green-200;
+}
+.noDaysCell {
+	@apply bg-red-200;
+}
+
+.daysCell {
+	@apply border text-center;
+}

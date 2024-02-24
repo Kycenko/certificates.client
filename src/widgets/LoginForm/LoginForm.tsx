@@ -12,7 +12,7 @@ const LoginForm = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<ILogin>()
+	} = useForm<ILogin>({ mode: 'onChange' })
 
 	const { mutateAsync } = useLogin()
 	const [loginError, setLoginError] = useState<string | null>(null)
@@ -32,24 +32,29 @@ const LoginForm = () => {
 		<div className={styles.container}>
 			<div className={styles.form}>
 				<h1 className={styles.title}>Авторизация</h1>
-				<form
-					className='mt-6'
-					onSubmit={handleSubmit(handleLogin)}
-				>
-					<div className='mb-2'>
+				<form onSubmit={handleSubmit(handleLogin)}>
+					<div>
 						<CustomInput
 							id={'name'}
 							label={'Логин:'}
-							{...register('login', { required: 'Обязательное поле' })}
+							{...register('login', {
+								required: 'Обязательное поле',
+								minLength: { value: 5, message: 'Минимум 5 символов' },
+								maxLength: { value: 30, message: 'Максимум 30 символов' }
+							})}
 						/>
 					</div>
 					<ErrorMessage error={errors.login} />
-					<div className='mb-2 relative'>
+					<div className={styles.checkPassContainer}>
 						<CustomInput
 							id={'password'}
 							label={'Пароль:'}
 							type={showPassword ? 'text' : 'password'}
-							{...register('password', { required: 'Обязательное поле' })}
+							{...register('password', {
+								required: 'Обязательное поле',
+								minLength: { value: 6, message: 'Минимум 6 символов' },
+								maxLength: { value: 40, message: 'Максимум 40 символов' }
+							})}
 						/>
 						<button
 							type='button'

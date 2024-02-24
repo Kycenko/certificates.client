@@ -3,7 +3,12 @@ import {
 	TypePhysicalEducationForm
 } from '@entities/PhysicalEducation'
 import { useModal } from '@shared/hooks'
-import { CustomButton, CustomInput, CustomModalForm } from '@shared/ui'
+import {
+	CustomButton,
+	CustomInput,
+	CustomModalForm,
+	ErrorMessage
+} from '@shared/ui'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -21,8 +26,18 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 	onEdit
 }) => {
 	const { editId, setDeleteId, deleteId, setEditId } = useModal()
-	const { register, handleSubmit } = useForm<TypePhysicalEducationForm>()
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors }
+	} = useForm<TypePhysicalEducationForm>({ mode: 'onChange' })
 
+	const onSubmit = (id: number | string, data: TypePhysicalEducationForm) => {
+		onEdit(id, data)
+		setEditId(null)
+		reset()
+	}
 	return (
 		<div>
 			{data?.map(({ id, name }) => (
@@ -45,10 +60,7 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 						{name}
 					</CustomModalForm>
 					<CustomModalForm
-						onSubmit={handleSubmit(data => {
-							onEdit(id, data)
-							setEditId(null)
-						})}
+						onSubmit={handleSubmit(data => onSubmit(id, data))}
 						buttonTitle={'Изменить'}
 						isOpen={editId === id}
 						onClose={() => setEditId(null)}
@@ -59,8 +71,13 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 							defaultValue={name}
 							placeholder={'Введите название'}
 							id={'name'}
-							{...register('name', { required: 'Обязательное поле' })}
+							{...register('name', {
+								required: 'Обязательное поле',
+								minLength: { value: 5, message: 'Минимум 5 символов' },
+								maxLength: { value: 15, message: 'Максимум 15 символов' }
+							})}
 						/>
+						<ErrorMessage error={errors.name} />
 					</CustomModalForm>
 				</div>
 			))}

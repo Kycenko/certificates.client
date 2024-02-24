@@ -24,7 +24,7 @@ const UserComponent = () => {
 		formState: { errors },
 		handleSubmit,
 		reset
-	} = useForm<IRegister>()
+	} = useForm<IRegister>({ mode: 'onChange' })
 	const { users, refetch, isLoading } = useGetUsers()
 
 	const registerQuery = useRegister()
@@ -76,7 +76,11 @@ const UserComponent = () => {
 					id={'login'}
 					label={'Логин'}
 					placeholder={'Введите логин'}
-					{...register('login', { required: 'Обязательное поле' })}
+					{...register('login', {
+						required: 'Обязательное поле',
+						minLength: { value: 5, message: 'Минимум 5 символов' },
+						maxLength: { value: 30, message: 'Максимум 30 символов' }
+					})}
 				/>
 				<ErrorMessage error={errors.login} />
 
@@ -84,7 +88,11 @@ const UserComponent = () => {
 					id={'password'}
 					label={'Пароль'}
 					placeholder={'Введите пароль'}
-					{...register('password', { required: 'Обязательное поле' })}
+					{...register('password', {
+						required: 'Обязательное поле',
+						minLength: { value: 6, message: 'Минимум 6 символов' },
+						maxLength: { value: 40, message: 'Максимум 40 символов' }
+					})}
 				/>
 				<ErrorMessage error={errors.password} />
 

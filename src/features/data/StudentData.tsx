@@ -37,7 +37,14 @@ const StudentData: FC<StudentDataProps> = ({
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeStudentForm>()
+	} = useForm<TypeStudentForm>({ mode: 'onChange' })
+
+	const onSubmit = (id: number | string, data: TypeStudentForm) => {
+		const newData = { ...data, groupId: Number(data.groupId) }
+		onEdit(id, newData)
+		setEditId(null)
+		reset()
+	}
 
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
@@ -55,7 +62,7 @@ const StudentData: FC<StudentDataProps> = ({
 			{!sortedData || sortedData.length === 0 ? (
 				<tr>
 					<td
-						colSpan={2}
+						colSpan={5}
 						className={styles.noData}
 					>
 						Данные не найдены
@@ -104,12 +111,7 @@ const StudentData: FC<StudentDataProps> = ({
 								</div>
 							</td>
 							<CustomModalForm
-								onSubmit={handleSubmit(data => {
-									const newData = { ...data, groupId: Number(data.groupId) }
-									onEdit(id, newData)
-									setEditId(null)
-									reset()
-								})}
+								onSubmit={handleSubmit(data => onSubmit(id, data))}
 								isOpen={editId === id}
 								onClose={() => setEditId(null)}
 								formTitle='Изменение'
@@ -120,7 +122,11 @@ const StudentData: FC<StudentDataProps> = ({
 									id={'surname'}
 									defaultValue={surname}
 									placeholder={'Введите фамилию'}
-									{...register('surname', { required: 'Обязательное поле' })}
+									{...register('surname', {
+										required: 'Обязательное поле',
+										minLength: { value: 5, message: 'Минимум 5 символов' },
+										maxLength: { value: 30, message: 'Максимум 30 символов' }
+									})}
 								/>
 								<ErrorMessage error={errors.surname} />
 								<CustomInput
@@ -128,7 +134,11 @@ const StudentData: FC<StudentDataProps> = ({
 									id={'name'}
 									defaultValue={name}
 									placeholder={'Введите имя'}
-									{...register('name', { required: 'Обязательное поле' })}
+									{...register('surname', {
+										required: 'Обязательное поле',
+										minLength: { value: 3, message: 'Минимум 3 символа' },
+										maxLength: { value: 30, message: 'Максимум 30 символов' }
+									})}
 								/>
 								<ErrorMessage error={errors.name} />
 								<CustomInput

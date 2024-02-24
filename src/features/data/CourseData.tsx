@@ -36,9 +36,9 @@ const CourseData: FC<CourseDataProps> = ({
 		reset
 	} = useForm<TypeCourseForm>()
 
-	const handleEdit = (id: number | string) => {
-		setEditId(id)
-		reset()
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
 	}
 
 	const onSubmit = (id: number | string, data: TypeCourseForm) => {
@@ -84,7 +84,7 @@ const CourseData: FC<CourseDataProps> = ({
 						</td>
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
-								<CustomButton onClick={() => handleEdit(id)}>
+								<CustomButton onClick={() => setEditId(id)}>
 									Изменить
 								</CustomButton>
 								<CustomButton onClick={() => onInfo(id)}>
@@ -152,10 +152,7 @@ const CourseData: FC<CourseDataProps> = ({
 							</CustomSelect>
 						</CustomModalForm>
 						<CustomModalForm
-							onSubmit={() => {
-								onDelete(id)
-								setDeleteId(null)
-							}}
+							onSubmit={() => handleDelete(id)}
 							buttonTitle={'Удалить'}
 							isOpen={deleteId === id}
 							onClose={() => setDeleteId(null)}

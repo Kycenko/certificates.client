@@ -1,6 +1,11 @@
 import { IHealthGroup, TypeHealthGroupForm } from '@entities/HealthGroup'
 import { useModal } from '@shared/hooks'
-import { CustomButton, CustomInput, CustomModalForm } from '@shared/ui'
+import {
+	CustomButton,
+	CustomInput,
+	CustomModalForm,
+	ErrorMessage
+} from '@shared/ui'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -15,7 +20,23 @@ interface HealthGroupProps {
 const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 	const { editId, setEditId, deleteId, setDeleteId } = useModal()
 
-	const { register, handleSubmit } = useForm<TypeHealthGroupForm>()
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors }
+	} = useForm<TypeHealthGroupForm>({ mode: 'onChange' })
+
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
+	}
+
+	const onSubmit = (id: number | string, data: TypeHealthGroupForm) => {
+		onEdit(id, data)
+		setEditId(null)
+		reset()
+	}
 
 	return (
 		<div>
@@ -30,7 +51,7 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 						<CustomButton onClick={() => setDeleteId(id)}>Удалить</CustomButton>
 					</div>
 					<CustomModalForm
-						onSubmit={() => onDelete(id)}
+						onSubmit={() => handleDelete(id)}
 						buttonTitle={'Удалить'}
 						isOpen={deleteId === id}
 						onClose={() => setDeleteId(null)}
@@ -39,10 +60,7 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 						{name}
 					</CustomModalForm>
 					<CustomModalForm
-						onSubmit={handleSubmit(data => {
-							onEdit(id, data)
-							setEditId(null)
-						})}
+						onSubmit={handleSubmit(data => onSubmit(id, data))}
 						buttonTitle={'Изменить'}
 						isOpen={editId === id}
 						onClose={() => setEditId(null)}
@@ -53,8 +71,13 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 							defaultValue={name}
 							placeholder={'Введите название'}
 							id={'name'}
-							{...register('name', { required: 'Обязательное поле' })}
+							{...register('name', {
+								required: 'Обязательное поле',
+								minLength: { value: 5, message: 'Минимум 5 символов' },
+								maxLength: { value: 15, message: 'Максимум 15 символов' }
+							})}
 						/>
+						<ErrorMessage error={errors.name} />
 					</CustomModalForm>
 				</div>
 			))}

@@ -33,11 +33,11 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeDepartmentForm>()
+	} = useForm<TypeDepartmentForm>({ mode: 'onChange' })
 
-	const handleEdit = (id: number | string) => {
-		setEditId(id)
-		reset()
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
 	}
 	const onSubmit = (id: number | string, data: TypeDepartmentForm) => {
 		onEdit(id, data)
@@ -79,7 +79,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 						</td>
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
-								<CustomButton onClick={() => handleEdit(id)}>
+								<CustomButton onClick={() => setEditId(id)}>
 									Изменить
 								</CustomButton>
 								<CustomButton onClick={() => onInfo(id)}>
@@ -102,15 +102,16 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 								label='Название'
 								placeholder={'Введите название'}
 								defaultValue={name}
-								{...register('name', { required: 'Обязательное поле' })}
+								{...register('name', {
+									required: 'Обязательное поле',
+									minLength: { value: 4, message: 'Минимум 4 символа' },
+									maxLength: { value: 15, message: 'Максимум 60 символов' }
+								})}
 							/>
 							<ErrorMessage error={errors.name} />
 						</CustomModalForm>
 						<CustomModalForm
-							onSubmit={() => {
-								onDelete(id)
-								setDeleteId(null)
-							}}
+							onSubmit={() => handleDelete(id)}
 							buttonTitle={'Удалить'}
 							isOpen={deleteId === id}
 							onClose={() => setDeleteId(null)}
