@@ -14,7 +14,7 @@ model User {
   isAdmin  Boolean @default(false) @map("is_admin")
 
   groupId   Int?     @map("group_id")
-  group     Group?   @relation(fields: [groupId], references: [id])
+  group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -29,7 +29,7 @@ model Student {
   birthDate           DateTime             @map("birth_date")
   groupId             Int?                 @map("group_id")
   medicalCertificates MedicalCertificate[]
-  group               Group?               @relation(fields: [groupId], references: [id])
+  group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
   createdAt           DateTime             @default(now()) @map("created_at")
   updatedAt           DateTime             @updatedAt @map("updated_at")
 
@@ -63,9 +63,9 @@ model MedicalCertificate {
   studentId           Int               @map("student_id")
   healthGroupId       Int               @map("health_group_id")
   physicalEducationId Int               @map("physical_education_id")
-  healthGroup         HealthGroup       @relation(fields: [healthGroupId], references: [id])
-  physicalEducation   PhysicalEducation @relation(fields: [physicalEducationId], references: [id])
-  student             Student           @relation(fields: [studentId], references: [id])
+  healthGroup         HealthGroup       @relation(fields: [healthGroupId], references: [id], onDelete: Cascade)
+  physicalEducation   PhysicalEducation @relation(fields: [physicalEducationId], references: [id], onDelete: Cascade)
+  student             Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
   createdAt           DateTime          @default(now()) @map("created_at")
   updatedAt           DateTime          @updatedAt @map("updated_at")
 
@@ -76,7 +76,7 @@ model Group {
   id        Int       @id @default(autoincrement())
   name      String
   courseId  Int       @map("course_id")
-  course    Course    @relation(fields: [courseId], references: [id])
+  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
   students  Student[]
   User      User[]
   createdAt DateTime  @default(now()) @map("created_at")
@@ -100,7 +100,7 @@ model Course {
   id           Int        @id @default(autoincrement())
   number       Int
   departmentId Int        @map("department_id")
-  department   Department @relation(fields: [departmentId], references: [id])
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
   groups       Group[]
   createdAt    DateTime   @default(now()) @map("created_at")
   updatedAt    DateTime   @updatedAt @map("updated_at")

@@ -23,6 +23,9 @@ export class StatisticsService {
 						id: true,
 						startDate: true,
 						finishDate: true
+					},
+					orderBy: {
+						finishDate: 'desc'
 					}
 				}
 			}
