@@ -1,8 +1,10 @@
+import { useAuth } from '@shared/hooks'
 import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
 	const navigate = useNavigate()
-	return (
+	const { user } = useAuth()
+	return user?.isAdmin ? (
 		<div className={'border-b-2 flex justify-start py-4'}>
 			<div className={'justify-start text-blue-gray-900'}>
 				<ul className={'flex flex-row gap-2 cursor-pointer'}>
@@ -18,7 +20,7 @@ const Header = () => {
 				</ul>
 			</div>
 		</div>
-	)
+	) : null
 }
 
 export default Header

@@ -1,8 +1,14 @@
 import { useGetGroups } from '@entities/Group'
 import { IStudent, TypeStudentForm } from '@entities/Student'
+import { setStudentHistory } from '@features/ChangeHistory'
 import { selectSearchTerm } from '@features/Search'
 import { selectSortOrder } from '@features/SortOrder'
-import { useAppSelector, useModal, useSortAndFilterData } from '@shared/hooks'
+import {
+	useAppDispatch,
+	useAppSelector,
+	useModal,
+	useSortAndFilterData
+} from '@shared/hooks'
 import {
 	CustomButton,
 	CustomInput,
@@ -29,6 +35,7 @@ const StudentData: FC<StudentDataProps> = ({
 	onEdit,
 	onInfo
 }) => {
+	const dispatch = useAppDispatch()
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { groups } = useGetGroups()
 
@@ -40,12 +47,19 @@ const StudentData: FC<StudentDataProps> = ({
 	} = useForm<TypeStudentForm>({ mode: 'onChange' })
 
 	const onSubmit = (id: number | string, data: TypeStudentForm) => {
+		const oldData = data
+		console.log(oldData, 'old')
+
 		const newData = { ...data, groupId: Number(data.groupId) }
 		onEdit(id, newData)
+		console.log(newData, 'new')
+		if (oldData) dispatch(setStudentHistory({ id, oldData, newData }))
+
 		setEditId(null)
 		reset()
 	}
-
+	const history = useAppSelector(state => state.studentHistory.history)
+	console.log(history)
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
 
@@ -134,7 +148,7 @@ const StudentData: FC<StudentDataProps> = ({
 									id={'name'}
 									defaultValue={name}
 									placeholder={'Введите имя'}
-									{...register('surname', {
+									{...register('name', {
 										required: 'Обязательное поле',
 										minLength: { value: 3, message: 'Минимум 3 символа' },
 										maxLength: { value: 30, message: 'Максимум 30 символов' }

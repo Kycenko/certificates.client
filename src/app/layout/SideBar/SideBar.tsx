@@ -98,12 +98,6 @@ const Sidebar = () => {
 				</Link>
 			</div>
 			<div>
-				<Link
-					to={`/users/${user?.id}`}
-					className={styles.link}
-				>
-					Профиль
-				</Link>
 				<button
 					onClick={handleLogout}
 					className={styles.link}

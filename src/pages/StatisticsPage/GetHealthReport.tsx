@@ -7,11 +7,7 @@ const GetHealthReport = () => {
 	console.log(data)
 	return (
 		<div>
-			{data?.map(item => (
-				<div key={item.id}>
-					{item.name} {item.surname} {item.secondName} {item.birthDate}
-				</div>
-			))}
+		
 		</div>
 	)
 }
