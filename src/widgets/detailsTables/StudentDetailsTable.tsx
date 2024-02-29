@@ -23,7 +23,7 @@ import {
 	getDaysUntilExpiry,
 	getValidityPeriod
 } from '@shared/utils'
-import { addMonths, format } from 'date-fns'
+import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -53,15 +53,15 @@ const StudentDetailsTable = () => {
 			...data,
 			healthGroupId: Number(data.healthGroupId),
 			physicalEducationId: Number(data.physicalEducationId),
-			studentId: student?.id,
-			finishDate: data.finishDate
+			studentId: student?.id
+			// finishDate: data.finishDate
 		}
 
-		if (!isNaN(parseInt(data.finishDate))) {
-			const monthsToAdd = parseInt(data.finishDate)
-			const startDate = new Date(data.startDate)
-			newDate.finishDate = addMonths(startDate, monthsToAdd)
-		}
+		// if (!isNaN(parseInt(data.finishDate))) {
+		// 	const monthsToAdd = parseInt(data.finishDate)
+		// 	const startDate = new Date(data.startDate)
+		// 	newDate.finishDate = addMonths(startDate, monthsToAdd)
+		// }
 		await create(newDate)
 		closeModal()
 		await refetch()
@@ -150,16 +150,6 @@ const StudentDetailsTable = () => {
 					{...register('finishDate', { required: 'Обязательное поле' })}
 				/>
 				<ErrorMessage error={errors.finishDate} />
-				<p className='flex justify-center'>Или</p>
-				<CustomSelect
-					id='finishDate'
-					label='Выберите срок действия'
-					{...register('finishDate')}
-				>
-					<option value='3'>3 месяца</option>
-					<option value='6'>6 месяцев</option>
-					<option value='12'>12 месяцев</option>
-				</CustomSelect>
 				<CustomSelect
 					id='healthGroupId'
 					label='Выберите группу здоровья'

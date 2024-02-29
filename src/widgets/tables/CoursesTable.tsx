@@ -9,7 +9,7 @@ import { CourseData } from '@features/data'
 import { TableHeads } from '@features/heads'
 import { CourseHeads, PAGES_URL } from '@shared/config'
 import { useModal } from '@shared/hooks'
-import { Loader } from 'lucide-react'
+import { CustomLoader } from '@shared/ui'
 import { useNavigate } from 'react-router-dom'
 
 import styles from '@shared/styles/Tables.module.scss'
@@ -39,7 +39,7 @@ const CoursesTable = () => {
 		navigate(`${PAGES_URL.COURSES}/${id}`)
 	}
 
-	if (isLoading) return <Loader />
+	if (isLoading) return <CustomLoader />
 	return (
 		<div className={styles.container}>
 			<div className={styles.tableContainer}>

@@ -30,7 +30,7 @@ const GroupDetailsTable = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeStudentForm>()
+	} = useForm<TypeStudentForm>({ mode: 'onChange' })
 
 	const { create } = useCreateStudent()
 
@@ -113,7 +113,7 @@ const GroupDetailsTable = () => {
 					label={'Имя'}
 					id={'name'}
 					placeholder={'Введите имя'}
-					{...register('surname', {
+					{...register('name', {
 						required: 'Обязательное поле',
 						minLength: { value: 3, message: 'Минимум 3 символа' },
 						maxLength: { value: 30, message: 'Максимум 30 символов' }

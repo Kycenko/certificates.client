@@ -2,12 +2,7 @@ import { useGetGroups } from '@entities/Group'
 import { IStudent, TypeStudentForm } from '@entities/Student'
 import { selectSearchTerm } from '@features/Search'
 import { selectSortOrder } from '@features/SortOrder'
-import {
-	useAppDispatch,
-	useAppSelector,
-	useModal,
-	useSortAndFilterData
-} from '@shared/hooks'
+import { useAppSelector, useModal, useSortAndFilterData } from '@shared/hooks'
 import {
 	CustomButton,
 	CustomInput,
@@ -34,7 +29,6 @@ const StudentData: FC<StudentDataProps> = ({
 	onEdit,
 	onInfo
 }) => {
-	const dispatch = useAppDispatch()
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { groups } = useGetGroups()
 
@@ -168,6 +162,7 @@ const StudentData: FC<StudentDataProps> = ({
 								<CustomSelect
 									id='groupId'
 									label='Выберите группу'
+									defaultValue={groupId}
 									{...register('groupId')}
 								>
 									{groups?.map(({ id, name }) => (

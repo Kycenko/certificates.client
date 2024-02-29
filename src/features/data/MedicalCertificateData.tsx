@@ -19,7 +19,7 @@ import {
 	getValidityPeriod
 } from '@shared/utils'
 import { format } from 'date-fns'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import styles from '@shared/styles/Tables.module.scss'
@@ -34,12 +34,14 @@ interface MedicalCertificateDataProps {
 const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	data,
 	onDelete,
-	onEdit
+	onEdit,
+	onInfo
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
 	const { students } = useGetStudents()
+
 	const {
 		register,
 		handleSubmit,
@@ -51,6 +53,8 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		onDelete(id)
 		setDeleteId(null)
 	}
+
+	useEffect(() => {})
 
 	const handleEdit = (
 		id: number | string,
@@ -111,7 +115,9 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 								>
 									Изменить
 								</CustomButton>
-
+								<CustomButton onClick={() => onInfo(id)}>
+									Подробнее
+								</CustomButton>
 								<CustomButton onClick={() => setDeleteId(id)}>
 									Удалить
 								</CustomButton>

@@ -31,7 +31,8 @@ const GetStudentsCertificatesWithDepartment = () => {
 																new Date(certificate.finishDate),
 																'dd.MM.yyyy'
 															)}
-															{certificate.healthGroups?.map(item => item.name)}
+															{certificate.healthGroup?.name}
+															{certificate.physicalEducation?.name}
 														</li>
 													))}
 												</ul>
