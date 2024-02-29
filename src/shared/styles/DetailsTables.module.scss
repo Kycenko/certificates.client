@@ -13,11 +13,14 @@
 	@apply p-2;
 }
 
-.yesDaysCell {
+.greenBg {
 	@apply bg-green-200;
 }
-.noDaysCell {
+.redBg {
 	@apply bg-red-200;
+}
+.yellowBg {
+	@apply bg-yellow-300;
 }
 
 .daysCell {

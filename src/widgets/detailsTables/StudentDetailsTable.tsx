@@ -23,7 +23,7 @@ import {
 	getDaysUntilExpiry,
 	getValidityPeriod
 } from '@shared/utils'
-import { format } from 'date-fns'
+import { addMonths, format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -53,7 +53,14 @@ const StudentDetailsTable = () => {
 			...data,
 			healthGroupId: Number(data.healthGroupId),
 			physicalEducationId: Number(data.physicalEducationId),
-			studentId: student?.id
+			studentId: student?.id,
+			finishDate: data.finishDate
+		}
+
+		if (!isNaN(parseInt(data.finishDate))) {
+			const monthsToAdd = parseInt(data.finishDate)
+			const startDate = new Date(data.startDate)
+			newDate.finishDate = addMonths(startDate, monthsToAdd)
 		}
 		await create(newDate)
 		closeModal()
@@ -91,11 +98,11 @@ const StudentDetailsTable = () => {
 							physicalEducationId
 						}) => (
 							<tr
-								className={`${
-									daysUntilTheEnd(finishDate) === 'Да'
-										? `${styles.yesDaysCell}`
-										: `${styles.noDaysCell}`
-								} ${styles.daysCell}`}
+								className={`
+								${styles.daysCell}
+								${daysUntilTheEnd(finishDate) === 'Да' ? styles.greenBg : styles.redBg}
+								${getDaysUntilExpiry(finishDate, startDate) < 30 ? styles.yellowBg : null}
+							`}
 								key={id}
 							>
 								<td className={styles.cellPadding}>
@@ -143,6 +150,16 @@ const StudentDetailsTable = () => {
 					{...register('finishDate', { required: 'Обязательное поле' })}
 				/>
 				<ErrorMessage error={errors.finishDate} />
+				<p className='flex justify-center'>Или</p>
+				<CustomSelect
+					id='finishDate'
+					label='Выберите срок действия'
+					{...register('finishDate')}
+				>
+					<option value='3'>3 месяца</option>
+					<option value='6'>6 месяцев</option>
+					<option value='12'>12 месяцев</option>
+				</CustomSelect>
 				<CustomSelect
 					id='healthGroupId'
 					label='Выберите группу здоровья'

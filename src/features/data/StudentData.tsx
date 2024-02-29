@@ -1,6 +1,5 @@
 import { useGetGroups } from '@entities/Group'
 import { IStudent, TypeStudentForm } from '@entities/Student'
-import { setStudentHistory } from '@features/ChangeHistory'
 import { selectSearchTerm } from '@features/Search'
 import { selectSortOrder } from '@features/SortOrder'
 import {
@@ -47,19 +46,13 @@ const StudentData: FC<StudentDataProps> = ({
 	} = useForm<TypeStudentForm>({ mode: 'onChange' })
 
 	const onSubmit = (id: number | string, data: TypeStudentForm) => {
-		const oldData = data
-		console.log(oldData, 'old')
-
 		const newData = { ...data, groupId: Number(data.groupId) }
 		onEdit(id, newData)
-		console.log(newData, 'new')
-		if (oldData) dispatch(setStudentHistory({ id, oldData, newData }))
 
 		setEditId(null)
 		reset()
 	}
-	const history = useAppSelector(state => state.studentHistory.history)
-	console.log(history)
+
 	const searchTerm = useAppSelector(selectSearchTerm)
 	const sortOrder = useAppSelector(selectSortOrder)
 

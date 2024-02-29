@@ -6,7 +6,8 @@ import { HomePage } from '@pages/HomePage'
 import { LoginPage } from '@pages/Login'
 import { MedicalCertificatesPage } from '@pages/MedicalCertificatesPage'
 import { PhysicalEducationPage } from '@pages/PhysicalEducationsPage'
-import GetHealthReport from '@pages/StatisticsPage/GetHealthReport'
+import GetStudentsCertificates from '@pages/StatisticsPage/GetStudentsCertificates'
+import GetStudentsCertificatesWithDepartment from '@pages/StatisticsPage/GetStudentsCertificatesWithDepartment'
 import { StudentsPage } from '@pages/StudentsPage'
 import StudentDetailsPage from '@pages/StudentsPage/StudentDetailsPage'
 import { UserDetailsPage, UsersPage } from '@pages/UsersPage'
@@ -28,8 +29,8 @@ export const enum AppRoutes {
 	STUDENTS = 'students',
 	STUDENT_DETAILS = 'student-details',
 	MEDICAL_CERTIFICATES = 'medical-certificates',
-
-	STATISTICS = 'statistics'
+	GET_STUDENTS_CERTIFICATES = 'statistics-certificates-info',
+	GET_STUDENTS_CERTIFICATES_WITH_DEPARTMENT = 'statistics-certificates-with-department-info'
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -48,7 +49,9 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.STUDENTS]: '/students',
 	[AppRoutes.STUDENT_DETAILS]: '/students/:id',
 	[AppRoutes.MEDICAL_CERTIFICATES]: '/medical-certificates',
-	[AppRoutes.STATISTICS]: '/statistics/certificates-info/:id'
+	[AppRoutes.GET_STUDENTS_CERTIFICATES]: '/statistics/certificates-info/:id',
+	[AppRoutes.GET_STUDENTS_CERTIFICATES_WITH_DEPARTMENT]:
+		'/statistics/certificates-with-department-info/:id'
 }
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -112,9 +115,12 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 		path: RoutePath['medical-certificates'],
 		element: <MedicalCertificatesPage />
 	},
-
-	[AppRoutes.STATISTICS]: {
-		path: RoutePath.statistics,
-		element: <GetHealthReport />
+	[AppRoutes.GET_STUDENTS_CERTIFICATES]: {
+		path: RoutePath['statistics-certificates-info'],
+		element: <GetStudentsCertificates />
+	},
+	[AppRoutes.GET_STUDENTS_CERTIFICATES_WITH_DEPARTMENT]: {
+		path: RoutePath['statistics-certificates-with-department-info'],
+		element: <GetStudentsCertificatesWithDepartment />
 	}
 }

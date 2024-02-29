@@ -1,46 +1,7 @@
-1.Перенести всю логику из DetailsPages в отдельные компоненты []
-2.GroupData - переделать отображение таблицы для пользователя []
+у справок сделать сортировку по фио
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface HistoryItem {
-id: string | number;
-oldName: string;
-newName: string;
-}
-
-interface HistoryState {
-history: HistoryItem[];
-}
-
-const initialState: HistoryState = {
-history: [],
-};
-
-const historySlice = createSlice({
-name: 'history',
-initialState,
-reducers: {
-addHistoryItem: (state, action: PayloadAction<HistoryItem>) => {
-state.history.push(action.payload);
-},
-},
-});
-
-export const { addHistoryItem } = historySlice.actions;
-
-export default historySlice.reducer;
-
-import { useDispatch } from 'react-redux';
-import { addHistoryItem } from './historySlice';
-
-// ...
-
-const handleEdit = (id: string | number, data: TypeHealthGroupForm) => {
-const oldName = data.find(item => item.id === id)?.name;
-if (oldName && oldName !== data.name) {
-dispatch(addHistoryItem({ id, oldName, newName: data.name }));
-}
-onEdit(id, data);
-setEditId(null);
-};
+1. ФИО, Дата выдачи, дата окончания конкретного отделения - доделать
+2. ФИО, Дата выдачи, дата окончания, группа здоровья и группа по физкультуре конкретного отделения или группы - доделать
+3. по отделения по группе здоровья или физкултуры
+4.
+5. по группе и отделению, с какой группой здоровья и физькультуре людей

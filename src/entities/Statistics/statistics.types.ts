@@ -5,3 +5,5 @@ export interface IHealthReportResponse {
 	healthGroup: IHealthGroup[]
 	medicalCertificates: IMedicalCertificate[]
 }
+
+export interface IGetStatisticsByStudentsCertificates {}
