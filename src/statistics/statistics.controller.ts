@@ -8,16 +8,23 @@ export class StatisticsController {
 	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия
 
 	@Get('certificates-info/:id')
-	async getStudentCertificatesInfo(@Param('id') groupId: number) {
-		return this.statisticsService.getStudentCertificatesInfo(groupId)
+	async getStudentsCertificatesInfo(@Param('id') departmentId: number) {
+		return this.statisticsService.getStudentsCertificatesInfo(departmentId)
 	}
 
 	//лист здоровья по для всех групп с указанием даты выдачи справки
-	@Get('health-report')
-	async getHealthReportForAllGroups() {
-		return this.statisticsService.getHealthReportForAllGroups()
+	@Get('certificates-with-department-info/:id')
+	async getStudentsCertificatesInfoWithDepartment(
+		@Param('id') departmentId: number
+	) {
+		return this.statisticsService.getStudentsCertificatesInfoWithDepartment(
+			departmentId
+		)
 	}
-
+	@Get('certificates-with-group-info/:id')
+	async getStudentsCertificatesInfoWithGroup(@Param('id') groupId: number) {
+		return this.statisticsService.getStudentsCertificatesInfoWithGroup(groupId)
+	}
 	//отчеты за период времени/конкретную дату в разрезе различных показателей медицинских справок
 
 	@Get()

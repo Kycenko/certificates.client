@@ -7,25 +7,35 @@ import { endOfDay, startOfDay } from 'date-fns'
 export class StatisticsService {
 	constructor(private prisma: PrismaService) {}
 
-	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия
+	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия определенного отделения
 
-	async getStudentCertificatesInfo(groupId: number) {
-		const studentsWithCertificates = await this.prisma.student.findMany({
+	async getStudentsCertificatesInfo(departmentId: number) {
+		const studentsWithCertificates = await this.prisma.department.findMany({
 			where: {
-				groupId: +groupId
+				id: +departmentId
 			},
 			select: {
+				id: true,
 				name: true,
-				surname: true,
-				birthDate: true,
-				medicalCertificates: {
+				courses: {
 					select: {
-						id: true,
-						startDate: true,
-						finishDate: true
-					},
-					orderBy: {
-						finishDate: 'desc'
+						groups: {
+							select: {
+								students: {
+									select: {
+										name: true,
+										surname: true,
+										secondName: true,
+										medicalCertificates: {
+											select: {
+												startDate: true,
+												finishDate: true
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -35,20 +45,95 @@ export class StatisticsService {
 	}
 
 	//лист здоровья по для всех групп с указанием даты выдачи справки
-	async getHealthReportForAllGroups() {
-		const healthReport = await this.prisma.healthGroup.findMany({
-			select: {
-				name: true,
-				medicalCertificates: {
-					select: {
-						id: true,
-						startDate: true
+	async getStudentsCertificatesInfoWithDepartment(departmentId: number) {
+		const studentsWithCertificatesWithDepartment =
+			await this.prisma.department.findMany({
+				where: {
+					id: +departmentId
+				},
+				select: {
+					id: true,
+					name: true,
+					courses: {
+						select: {
+							groups: {
+								select: {
+									students: {
+										select: {
+											name: true,
+											surname: true,
+											secondName: true,
+											medicalCertificates: {
+												select: {
+													startDate: true,
+													finishDate: true,
+													healthGroup: {
+														select: {
+															name: true
+														}
+													},
+													physicalEducation: {
+														select: {
+															name: true
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
-			}
-		})
+			})
 
-		return healthReport
+		return studentsWithCertificatesWithDepartment
+	}
+	async getStudentsCertificatesInfoWithGroup(groupId: number) {
+		const studentsWithCertificatesWithGroup =
+			await this.prisma.department.findMany({
+				select: {
+					id: true,
+					name: true,
+					courses: {
+						select: {
+							groups: {
+								where: {
+									id: +groupId
+								},
+								select: {
+									students: {
+										select: {
+											name: true,
+											surname: true,
+											secondName: true,
+											medicalCertificates: {
+												select: {
+													startDate: true,
+													finishDate: true,
+													healthGroup: {
+														select: {
+															name: true
+														}
+													},
+													physicalEducation: {
+														select: {
+															name: true
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			})
+
+		return studentsWithCertificatesWithGroup
 	}
 
 	//отчеты за период времени/конкретную дату в разрезе различных показателей медицинских справок
