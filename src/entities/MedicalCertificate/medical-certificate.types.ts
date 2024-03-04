@@ -1,3 +1,5 @@
+import { IHealthGroup } from '@entities/HealthGroup'
+import { IPhysicalEducation } from '@entities/PhysicalEducation'
 import { IBase } from '@shared/config'
 
 export interface IMedicalCertificate extends IBase {
@@ -7,6 +9,8 @@ export interface IMedicalCertificate extends IBase {
 	studentId: number | undefined
 	healthGroupId: number
 	physicalEducationId: number
+	healthGroup: IHealthGroup
+	physicalEducation: IPhysicalEducation
 }
 
 export type TypeMedicalCertificateForm = Omit<IMedicalCertificate, 'id'>
