@@ -9,8 +9,8 @@ export class StatisticsService {
 
 	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия определенного отделения
 
-	async getStudentsCertificatesInfo(departmentId: number) {
-		const studentsWithCertificates = await this.prisma.department.findMany({
+	async getDepartmentReport(departmentId: number) {
+		const departmentReport = await this.prisma.department.findMany({
 			where: {
 				id: +departmentId
 			},
@@ -41,7 +41,7 @@ export class StatisticsService {
 			}
 		})
 
-		return studentsWithCertificates
+		return departmentReport
 	}
 
 	//лист здоровья по для всех групп с указанием даты выдачи справки

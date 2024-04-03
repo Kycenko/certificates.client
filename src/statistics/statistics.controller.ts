@@ -7,9 +7,9 @@ export class StatisticsController {
 
 	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия
 
-	@Get('certificates-info/:id')
-	async getStudentsCertificatesInfo(@Param('id') departmentId: number) {
-		return this.statisticsService.getStudentsCertificatesInfo(departmentId)
+	@Get('department-report/:id')
+	async getDepartmentReport(@Param('id') departmentId: number) {
+		return this.statisticsService.getDepartmentReport(departmentId)
 	}
 
 	//лист здоровья по для всех групп с указанием даты выдачи справки
