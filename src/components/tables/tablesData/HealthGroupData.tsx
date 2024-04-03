@@ -6,7 +6,10 @@ import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 
-import { IHealthGroup, TypeHealthGroupForm } from '@/types/health-group.types.ts'
+import {
+	IHealthGroup,
+	TypeHealthGroupForm
+} from '@/types/health-group.types.ts'
 
 import useModal from '@/hooks/useModal.ts'
 

@@ -14,3 +14,7 @@ export const deleteToast = () => {
 export const authToast = () => {
 	toast.success('Авторизация прошла успешно')
 }
+
+export const reportToast = () => {
+	toast.success('Отчёт сформирован успешно')
+}

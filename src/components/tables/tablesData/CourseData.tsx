@@ -57,7 +57,7 @@ const CourseData: FC<CourseDataProps> = ({
 
 	const { sortedData } = useSortData(data as ICourse[], sortOrder)
 
-	updateHistory(null, 'asc')
+	updateHistory(null, sortOrder)
 	return (
 		<>
 			{!sortedData || sortedData.length === 0 ? (
@@ -85,6 +85,7 @@ const CourseData: FC<CourseDataProps> = ({
 									?.map(({ name }) => name)}
 							</span>
 						</td>
+
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
 								<CustomButton onClick={() => setEditId(id)}>

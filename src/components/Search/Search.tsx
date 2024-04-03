@@ -1,24 +1,24 @@
 import { SearchIcon } from 'lucide-react'
-import { ChangeEvent, FC, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useEffect } from 'react'
 
 import useDebounce from '@/hooks/useDebounce'
+import useFilters from '@/hooks/useFilters'
 
 import styles from './Search.module.scss'
 
 const Search: FC = () => {
-	const [searchValue, setSearchValue] = useState<string>('')
-
-	const debouncedValue = useDebounce(searchValue, 300)
+	const { searchTerm, setSearchTerm } = useFilters()
+	const debouncedValue = useDebounce(searchTerm, 500)
 	useEffect(() => {}, [debouncedValue])
 
 	return (
 		<div className={styles.container}>
 			<input
 				className={styles.input}
-				value={searchValue}
+				value={searchTerm}
 				placeholder={'Поиск...'}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
-					setSearchValue(e.target.value)
+					setSearchTerm(e.target.value)
 				}
 			/>
 			<SearchIcon className={styles.icon} />

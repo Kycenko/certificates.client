@@ -38,6 +38,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.22.0
     version: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+  react-to-print:
+    specifier: ^2.15.1
+    version: 2.15.1(react-dom@18.2.0)(react@18.2.0)
   sass:
     specifier: ^1.70.0
     version: 1.71.0
@@ -2538,6 +2541,16 @@ packages:
     dependencies:
       '@remix-run/router': 1.15.1
       react: 18.2.0
+    dev: false
+
+  /react-to-print@2.15.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-1foogIFbCpzAVxydkhBiDfMiFYhIMphiagDOfcG4X/EcQ+fBPqJ0rby9Wv/emzY1YLkIQy/rEgOrWQT+rBKhjw==}
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:

@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
+import StudentData from '@/components/tables/tablesData/StudentData'
+import TableHeads from '@/components/tables/tablesHeads/TableHeads'
+
 import { PAGES_URL } from '@/constants/enums'
 import { StudentHeads } from '@/constants/heads'
 
@@ -9,8 +12,6 @@ import useModal from '@/hooks/useModal'
 
 import Search from '../Search/Search'
 import SortOrder from '../SortOrder/SortOrder'
-import TableHeads from '@/components/tables/tablesHeads/TableHeads'
-import StudentData from '@/components/tables/tablesData/StudentData'
 import CustomLoader from '../ui/loader/CustomLoader'
 
 import styles from '@/app/styles/Tables.module.scss'

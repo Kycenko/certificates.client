@@ -1,11 +1,12 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import HealthGroupData from '@/components/tables/tablesData/HealthGroupData'
+
 import { TypeHealthGroupForm } from '@/types/health-group.types'
 
 import useModal from '@/hooks/useModal'
 
 import Layout from './Layout/Layout'
-import HealthGroupData from '@/components/tables/tablesData/HealthGroupData'
 import CreateButton from './ui/buttons/CreateButton'
 import ErrorMessage from './ui/fields/ErrorMessage'
 import Heading from './ui/fields/Heading'

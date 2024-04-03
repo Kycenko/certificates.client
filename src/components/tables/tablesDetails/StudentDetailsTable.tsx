@@ -2,6 +2,8 @@ import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
+import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
+
 import { DetailsStudentHeads } from '@/constants/heads.ts'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types.ts'
@@ -14,7 +16,6 @@ import getDaysUntilExpiry from '@/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/utils/getValidityPeriod.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'

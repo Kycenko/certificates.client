@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
+
+import useFilters from '@/hooks/useFilters'
 
 import styles from './SortOrder.module.scss'
 
 const SortOrder = () => {
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-
+	const { sortOrder, setSortOrder } = useFilters()
 	const handleSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		setSortOrder(e.target.value as 'asc' | 'desc')
 	}

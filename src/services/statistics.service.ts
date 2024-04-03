@@ -1,21 +1,11 @@
 import instance from '@/api/api.instance'
 
-import { IGetStatisticsByStudentsCertificates } from '../types/statistics.types'
+import { IGetDepartmentReport } from '../types/statistics.types'
 
 export const StatisticService = {
-	async getStatisticsByGroup() {
-		return instance.get('/statistics/health-report')
-	},
-
-	async getStatisticsByStudentsCertificates(id: string | undefined) {
-		return instance.get<IGetStatisticsByStudentsCertificates[]>(
-			`/statistics/certificates-info/${id}`
+	async getDepartmentReport(id: string | undefined) {
+		return instance.get<IGetDepartmentReport[]>(
+			`/statistics/department-report/${id}`
 		)
-	},
-
-	async getStatisticsByStudentsCertificatesWithDepartment(
-		id: string | undefined
-	) {
-		return instance.get(`/statistics/certificates-with-department-info/${id}`)
 	}
 }

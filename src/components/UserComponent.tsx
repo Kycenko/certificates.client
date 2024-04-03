@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import UserData from '@/components/tables/tablesData/UserData'
+
 import { PAGES_URL } from '@/constants/enums'
 
 import { IRegister } from '@/types/auth.types'
@@ -8,7 +10,6 @@ import { IRegister } from '@/types/auth.types'
 import useModal from '@/hooks/useModal'
 
 import Layout from './Layout/Layout'
-import UserData from '@/components/tables/tablesData/UserData'
 import CreateButton from './ui/buttons/CreateButton'
 import ErrorMessage from './ui/fields/ErrorMessage'
 import Heading from './ui/fields/Heading'

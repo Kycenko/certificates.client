@@ -1,18 +1,13 @@
-<<<<<<< HEAD
-=======
-import { Layout } from '@app/layout'
-import { useGetStudentsCertificatesWithDepartment } from '@entities/Statistics/statistics.queries'
-import usePrint from '@shared/hooks/usePrint'
->>>>>>> 2f5ff3517175309caaa5c67a3f9e90183287eb2b
 import { format } from 'date-fns'
 import { Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 
-<<<<<<< HEAD
+import Layout from '@/components/Layout/Layout'
+
+import usePrint from '@/hooks/usePrint'
+
+import styles from '@/app/styles/Tables.module.scss'
 import { useGetStudentsCertificatesWithDepartment } from '@/queries/statistics.queries'
-=======
-import styles from '@shared/styles/Tables.module.scss'
->>>>>>> 2f5ff3517175309caaa5c67a3f9e90183287eb2b
 
 const GetStudentsCertificatesWithDepartment = () => {
 	const { id } = useParams()

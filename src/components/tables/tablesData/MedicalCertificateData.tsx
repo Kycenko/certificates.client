@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -28,19 +28,19 @@ interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined
 	onEdit: (id: number | string, data: TypeMedicalCertificateForm) => void
 	onDelete: (id: number | string) => void
-	onInfo: (id: number | string) => void
 }
 
 const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	data,
 	onDelete,
-	onEdit,
-	onInfo
+	onEdit
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
 	const { students } = useGetStudents()
+
+	const studentId = data?.find(id => id.id === editId)?.studentId
 
 	const {
 		register,
@@ -54,8 +54,6 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		setDeleteId(null)
 	}
 
-	useEffect(() => {})
-
 	const handleEdit = (
 		id: number | string,
 		data: TypeMedicalCertificateForm
@@ -63,7 +61,8 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		const newData = {
 			...data,
 			healthGroupId: Number(data.healthGroupId),
-			physicalEducationId: Number(data.physicalEducationId)
+			physicalEducationId: Number(data.physicalEducationId),
+			studentId: studentId
 		}
 		onEdit(id, newData)
 		setEditId(null)
@@ -115,9 +114,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 								>
 									Изменить
 								</CustomButton>
-								<CustomButton onClick={() => onInfo(id)}>
-									Подробнее
-								</CustomButton>
+
 								<CustomButton onClick={() => setDeleteId(id)}>
 									Удалить
 								</CustomButton>

@@ -1,5 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
+import CourseData from '@/components/tables/tablesData/CourseData'
+import TableHeads from '@/components/tables/tablesHeads/TableHeads'
+
 import { PAGES_URL } from '@/constants/enums'
 import { CourseHeads } from '@/constants/heads'
 
@@ -8,8 +11,6 @@ import { TypeCourseForm } from '@/types/course.types'
 import useModal from '@/hooks/useModal'
 
 import SortOrder from '../SortOrder/SortOrder'
-import TableHeads from '@/components/tables/tablesHeads/TableHeads'
-import CourseData from '@/components/tables/tablesData/CourseData'
 import CustomLoader from '../ui/loader/CustomLoader'
 
 import styles from '@/app/styles/Tables.module.scss'

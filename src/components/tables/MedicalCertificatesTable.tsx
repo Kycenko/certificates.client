@@ -1,14 +1,12 @@
-import { useNavigate } from 'react-router-dom'
+import MedicalCertificateData from '@/components/tables/tablesData/MedicalCertificateData'
+import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
-import { PAGES_URL } from '@/constants/enums'
 import { CertificatesHeads } from '@/constants/heads'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types'
 
 import useModal from '@/hooks/useModal'
 
-import TableHeads from '@/components/tables/tablesHeads/TableHeads'
-import MedicalCertificateData from '@/components/tables/tablesData/MedicalCertificateData'
 import CustomLoader from '../ui/loader/CustomLoader'
 
 import styles from '@/app/styles/Tables.module.scss'
@@ -19,7 +17,6 @@ import {
 } from '@/queries/medical-certificate.queries'
 
 const MedicalCertificatesTable = () => {
-	const navigate = useNavigate()
 	const { certificates, isLoading, refetch } = useGetMedicalCertificates()
 
 	const { closeModal } = useModal()
@@ -42,10 +39,6 @@ const MedicalCertificatesTable = () => {
 		await refetch()
 	}
 
-	const handleInfo = (id: number | string) => {
-		navigate(`${PAGES_URL.MEDICAL_CERTIFICATES}/${id}`)
-	}
-
 	if (isLoading) return <CustomLoader />
 	return (
 		<div className={styles.container}>
@@ -62,7 +55,6 @@ const MedicalCertificatesTable = () => {
 							data={certificates}
 							onDelete={handleDelete}
 							onEdit={handleEdit}
-							onInfo={handleInfo}
 						/>
 					</tbody>
 				</table>

@@ -1,6 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
+import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
+
 import { PAGES_URL } from '@/constants/enums.ts'
 import { DetailsCourseHeads } from '@/constants/heads.ts'
 
@@ -9,7 +11,6 @@ import { TypeGroupForm } from '@/types/group.types.ts'
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'

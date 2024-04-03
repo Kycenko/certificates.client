@@ -1,6 +1,9 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import DepartmentData from '@/components/tables/tablesData/DepartmentData'
+import TableHeads from '@/components/tables/tablesHeads/TableHeads'
+
 import { PAGES_URL } from '@/constants/enums'
 import { DepartmentHeads } from '@/constants/heads'
 
@@ -10,8 +13,6 @@ import useModal from '@/hooks/useModal'
 
 import Search from '../Search/Search'
 import SortOrder from '../SortOrder/SortOrder'
-import TableHeads from '@/components/tables/tablesHeads/TableHeads'
-import DepartmentData from '@/components/tables/tablesData/DepartmentData'
 import CustomButton from '../ui/buttons/CustomButton'
 import ErrorMessage from '../ui/fields/ErrorMessage'
 import CustomModalForm from '../ui/forms/CustomModalForm/CustomModalForm'

@@ -1,17 +1,14 @@
-
-
-
-
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomSelect from '@/components/ui/selects/CustomSelect'
+
+import useAuth from '@/hooks/useAuth.ts'
 
 import Dropdown from './DropDown'
 import { useGetDepartments } from '@/queries/department.queries.ts'
-import useAuth from '@/hooks/useAuth.ts'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomSelect from '@/components/ui/selects/CustomSelect'
-import { useNavigate } from 'react-router-dom'
 
 interface FormState {
 	departmentId: number | string
@@ -21,17 +18,13 @@ const Header = () => {
 	const navigate = useNavigate()
 	const { user } = useAuth()
 	const [isOpen, setIsOpen] = useState(false)
-	const [isOpen1, setIsOpen1] = useState(false)
+
 	const { departments } = useGetDepartments()
 	const { handleSubmit, register } = useForm<FormState>()
 
 	const onSubmit = (data: FormState) => {
-		navigate(`/statistics/certificates-info/${data.departmentId}`)
-	}
-	const onSubmit1 = (data: FormState) => {
-		navigate(
-			`/statistics/certificates-with-department-info/${data.departmentId}`
-		)
+		navigate(`/statistics/department-report/${data.departmentId}`)
+		setIsOpen(false)
 	}
 
 	return user?.isAdmin ? (
@@ -43,16 +36,7 @@ const Header = () => {
 							onClick={() => setIsOpen(true)}
 							className='block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-100'
 						>
-							Отчёт по справкам отделения
-						</li>
-						<li
-							onClick={() => setIsOpen1(true)}
-							className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-						>
-							Отчёт по справкам с группами отделения
-						</li>
-						<li className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'>
-							Option 3
+							Отчёт по отделению
 						</li>
 					</Dropdown>
 
@@ -67,28 +51,6 @@ const Header = () => {
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
 				onSubmit={handleSubmit(onSubmit)}
-			>
-				<CustomSelect
-					id='departmentId'
-					label='Выберите отделение'
-					{...register('departmentId')}
-				>
-					{departments?.map(({ id, name }) => (
-						<option
-							key={id}
-							value={id}
-						>
-							{name}
-						</option>
-					))}
-				</CustomSelect>
-			</CustomModalForm>
-			<CustomModalForm
-				buttonTitle='Сформировать'
-				formTitle='Отчет'
-				isOpen={isOpen1}
-				onClose={() => setIsOpen1(false)}
-				onSubmit={handleSubmit(onSubmit1)}
 			>
 				<CustomSelect
 					id='departmentId'
