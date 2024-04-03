@@ -1,21 +1,24 @@
-<<<<<<< HEAD:src/components/Header/Header.tsx
-import useAuth from '@/hooks/useAuth'
-=======
-import { useGetDepartments } from '@entities/Department'
-import { useAuth } from '@shared/hooks'
-import { CustomModalForm, CustomSelect } from '@shared/ui'
+
+
+
+
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
->>>>>>> 2f5ff3517175309caaa5c67a3f9e90183287eb2b:src/app/layout/Header/Header.tsx
+
 
 import Dropdown from './DropDown'
+import { useGetDepartments } from '@/queries/department.queries.ts'
+import useAuth from '@/hooks/useAuth.ts'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomSelect from '@/components/ui/selects/CustomSelect'
+import { useNavigate } from 'react-router-dom'
 
 interface FormState {
 	departmentId: number | string
 }
 
 const Header = () => {
+	const navigate = useNavigate()
 	const { user } = useAuth()
 	const [isOpen, setIsOpen] = useState(false)
 	const [isOpen1, setIsOpen1] = useState(false)
