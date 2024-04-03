@@ -1,14 +1,14 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CustomButton from '@/components/ui/buttons/CustomButton'
-import ErrorMessage from '@/components/ui/fields/ErrorMessage'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm'
-import CustomInput from '@/components/ui/inputs/CustomInput'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 
-import { IHealthGroup, TypeHealthGroupForm } from '@/types/health-group.types'
+import { IHealthGroup, TypeHealthGroupForm } from '@/types/health-group.types.ts'
 
-import useModal from '@/hooks/useModal'
+import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
 

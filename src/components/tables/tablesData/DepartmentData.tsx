@@ -1,18 +1,18 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CustomButton from '@/components/ui/buttons/CustomButton'
-import ErrorMessage from '@/components/ui/fields/ErrorMessage'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm'
-import CustomInput from '@/components/ui/inputs/CustomInput'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 
-import { IDepartment, TypeDepartmentForm } from '@/types/department.types'
+import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
 
-import useFilters from '@/hooks/useFilters'
-import useModal from '@/hooks/useModal'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData'
+import useFilters from '@/hooks/useFilters.ts'
+import useModal from '@/hooks/useModal.ts'
+import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
-import updateHistory from '@/utils/updateHistory'
+import updateHistory from '@/utils/updateHistory.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
 

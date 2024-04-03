@@ -1,12 +1,12 @@
 import { FC } from 'react'
 
-import CustomButton from '@/components/ui/buttons/CustomButton'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
 
-import { IUser } from '@/types/user.types'
+import { IUser } from '@/types/user.types.ts'
 
-import useAuth from '@/hooks/useAuth'
-import useModal from '@/hooks/useModal'
+import useAuth from '@/hooks/useAuth.ts'
+import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
 

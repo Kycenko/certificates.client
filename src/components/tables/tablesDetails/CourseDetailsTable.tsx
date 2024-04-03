@@ -1,25 +1,25 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { PAGES_URL } from '@/constants/enums'
-import { DetailsCourseHeads } from '@/constants/heads'
+import { PAGES_URL } from '@/constants/enums.ts'
+import { DetailsCourseHeads } from '@/constants/heads.ts'
 
-import { TypeGroupForm } from '@/types/group.types'
+import { TypeGroupForm } from '@/types/group.types.ts'
 
-import useModal from '@/hooks/useModal'
+import useModal from '@/hooks/useModal.ts'
 
-import Layout from '../Layout/Layout'
-import DetailsTableHeads from '../heads/DetailsTableHeads'
-import CreateButton from '../ui/buttons/CreateButton'
-import ErrorMessage from '../ui/fields/ErrorMessage'
-import Heading from '../ui/fields/Heading'
-import CustomModalForm from '../ui/forms/CustomModalForm/CustomModalForm'
-import CustomInput from '../ui/inputs/CustomInput'
-import CustomLoader from '../ui/loader/CustomLoader'
+import Layout from '../../Layout/Layout.tsx'
+import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
+import CreateButton from '../../ui/buttons/CreateButton.tsx'
+import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
+import Heading from '../../ui/fields/Heading.tsx'
+import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '../../ui/inputs/CustomInput.tsx'
+import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
-import { useGetCourse } from '@/queries/course.queries'
-import { useCreateGroup } from '@/queries/group.queries'
+import { useGetCourse } from '@/queries/course.queries.ts'
+import { useCreateGroup } from '@/queries/group.queries.ts'
 
 const CourseDetailsTable = () => {
 	const { id } = useParams()

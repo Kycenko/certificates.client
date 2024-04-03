@@ -7,8 +7,8 @@ import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types'
 
 import useModal from '@/hooks/useModal'
 
-import TableHeads from '../heads/TableHeads'
-import MedicalCertificateData from '../tablesData/MedicalCertificateData'
+import TableHeads from '@/components/tables/tablesHeads/TableHeads'
+import MedicalCertificateData from '@/components/tables/tablesData/MedicalCertificateData'
 import CustomLoader from '../ui/loader/CustomLoader'
 
 import styles from '@/app/styles/Tables.module.scss'

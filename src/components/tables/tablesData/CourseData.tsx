@@ -1,21 +1,21 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CustomButton from '@/components/ui/buttons/CustomButton'
-import ErrorMessage from '@/components/ui/fields/ErrorMessage'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm'
-import CustomSelect from '@/components/ui/selects/CustomSelect'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
-import { ICourse, TypeCourseForm } from '@/types/course.types'
+import { ICourse, TypeCourseForm } from '@/types/course.types.ts'
 
-import useFilters from '@/hooks/useFilters'
-import useModal from '@/hooks/useModal'
-import useSortData from '@/hooks/useSortData'
+import useFilters from '@/hooks/useFilters.ts'
+import useModal from '@/hooks/useModal.ts'
+import useSortData from '@/hooks/useSortData.ts'
 
-import updateHistory from '@/utils/updateHistory'
+import updateHistory from '@/utils/updateHistory.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetDepartments } from '@/queries/department.queries'
+import { useGetDepartments } from '@/queries/department.queries.ts'
 
 interface CourseDataProps {
 	data: ICourse[] | undefined

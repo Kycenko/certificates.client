@@ -8,8 +8,8 @@ import { TypeCourseForm } from '@/types/course.types'
 import useModal from '@/hooks/useModal'
 
 import SortOrder from '../SortOrder/SortOrder'
-import TableHeads from '../heads/TableHeads'
-import CourseData from '../tablesData/CourseData'
+import TableHeads from '@/components/tables/tablesHeads/TableHeads'
+import CourseData from '@/components/tables/tablesData/CourseData'
 import CustomLoader from '../ui/loader/CustomLoader'
 
 import styles from '@/app/styles/Tables.module.scss'

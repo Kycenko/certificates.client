@@ -2,22 +2,22 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CustomButton from '@/components/ui/buttons/CustomButton'
-import ErrorMessage from '@/components/ui/fields/ErrorMessage'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm'
-import CustomInput from '@/components/ui/inputs/CustomInput'
-import CustomSelect from '@/components/ui/selects/CustomSelect'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
+import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
-import { IStudent, TypeStudentForm } from '@/types/student.types'
+import { IStudent, TypeStudentForm } from '@/types/student.types.ts'
 
-import useFilters from '@/hooks/useFilters'
-import useModal from '@/hooks/useModal'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData'
+import useFilters from '@/hooks/useFilters.ts'
+import useModal from '@/hooks/useModal.ts'
+import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
-import updateHistory from '@/utils/updateHistory'
+import updateHistory from '@/utils/updateHistory.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetGroups } from '@/queries/group.queries'
+import { useGetGroups } from '@/queries/group.queries.ts'
 
 interface StudentDataProps {
 	data: IStudent[] | undefined

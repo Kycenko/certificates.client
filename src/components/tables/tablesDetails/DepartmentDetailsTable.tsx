@@ -1,24 +1,24 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { PAGES_URL } from '@/constants/enums'
-import { DetailsDepartmentHeads } from '@/constants/heads'
+import { PAGES_URL } from '@/constants/enums.ts'
+import { DetailsDepartmentHeads } from '@/constants/heads.ts'
 
-import { TypeCourseForm } from '@/types/course.types'
+import { TypeCourseForm } from '@/types/course.types.ts'
 
-import useModal from '@/hooks/useModal'
+import useModal from '@/hooks/useModal.ts'
 
-import Layout from '../Layout/Layout'
-import DetailsTableHeads from '../heads/DetailsTableHeads'
-import CreateButton from '../ui/buttons/CreateButton'
-import Heading from '../ui/fields/Heading'
-import CustomModalForm from '../ui/forms/CustomModalForm/CustomModalForm'
-import CustomLoader from '../ui/loader/CustomLoader'
-import CustomSelect from '../ui/selects/CustomSelect'
+import Layout from '../../Layout/Layout.tsx'
+import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
+import CreateButton from '../../ui/buttons/CreateButton.tsx'
+import Heading from '../../ui/fields/Heading.tsx'
+import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomLoader from '../../ui/loader/CustomLoader.tsx'
+import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
-import { useCreateCourse } from '@/queries/course.queries'
-import { useGetDepartment } from '@/queries/department.queries'
+import { useCreateCourse } from '@/queries/course.queries.ts'
+import { useGetDepartment } from '@/queries/department.queries.ts'
 
 const DepartmentDetailsTable = () => {
 	const navigate = useNavigate()

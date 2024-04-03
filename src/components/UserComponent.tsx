@@ -8,7 +8,7 @@ import { IRegister } from '@/types/auth.types'
 import useModal from '@/hooks/useModal'
 
 import Layout from './Layout/Layout'
-import UserData from './tablesData/UserData'
+import UserData from '@/components/tables/tablesData/UserData'
 import CreateButton from './ui/buttons/CreateButton'
 import ErrorMessage from './ui/fields/ErrorMessage'
 import Heading from './ui/fields/Heading'

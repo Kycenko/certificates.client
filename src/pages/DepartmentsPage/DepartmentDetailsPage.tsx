@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout/Layout'
-import DepartmentDetailsTable from '@/components/detailsTables/DepartmentDetailsTable'
+import DepartmentDetailsTable from '@/components/tables/tablesDetails/DepartmentDetailsTable'
 
 const DepartmentDetailsPage = () => {
 	return (

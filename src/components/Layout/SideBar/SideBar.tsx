@@ -1,8 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 
-import { removeFromStorage } from '@/config/auth.helper'
+import { removeFromStorage } from '@/config/auth.helper.ts'
 
-import useAuth from '@/hooks/useAuth'
+import useAuth from '@/hooks/useAuth.ts'
 
 import styles from './SideBar.module.scss'
 

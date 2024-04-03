@@ -2,26 +2,26 @@ import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { PAGES_URL } from '@/constants/enums'
-import { DetailsGroupHeads } from '@/constants/heads'
+import { PAGES_URL } from '@/constants/enums.ts'
+import { DetailsGroupHeads } from '@/constants/heads.ts'
 
-import { TypeStudentForm } from '@/types/student.types'
+import { TypeStudentForm } from '@/types/student.types.ts'
 
-import useAuth from '@/hooks/useAuth'
-import useModal from '@/hooks/useModal'
+import useAuth from '@/hooks/useAuth.ts'
+import useModal from '@/hooks/useModal.ts'
 
-import Layout from '../Layout/Layout'
-import DetailsTableHeads from '../heads/DetailsTableHeads'
-import CreateButton from '../ui/buttons/CreateButton'
-import ErrorMessage from '../ui/fields/ErrorMessage'
-import Heading from '../ui/fields/Heading'
-import CustomModalForm from '../ui/forms/CustomModalForm/CustomModalForm'
-import CustomInput from '../ui/inputs/CustomInput'
-import CustomLoader from '../ui/loader/CustomLoader'
+import Layout from '../../Layout/Layout.tsx'
+import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
+import CreateButton from '../../ui/buttons/CreateButton.tsx'
+import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
+import Heading from '../../ui/fields/Heading.tsx'
+import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '../../ui/inputs/CustomInput.tsx'
+import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
-import { useGetGroup } from '@/queries/group.queries'
-import { useCreateStudent } from '@/queries/student.queries'
+import { useGetGroup } from '@/queries/group.queries.ts'
+import { useCreateStudent } from '@/queries/student.queries.ts'
 
 const GroupDetailsTable = () => {
 	const navigate = useNavigate()

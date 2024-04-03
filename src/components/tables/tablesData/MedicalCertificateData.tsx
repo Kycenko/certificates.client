@@ -2,27 +2,27 @@ import { format } from 'date-fns'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CustomButton from '@/components/ui/buttons/CustomButton'
-import ErrorMessage from '@/components/ui/fields/ErrorMessage'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm'
-import CustomInput from '@/components/ui/inputs/CustomInput'
-import CustomSelect from '@/components/ui/selects/CustomSelect'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
+import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
 import {
 	IMedicalCertificate,
 	TypeMedicalCertificateForm
-} from '@/types/medical-certificate.types'
+} from '@/types/medical-certificate.types.ts'
 
-import useModal from '@/hooks/useModal'
+import useModal from '@/hooks/useModal.ts'
 
-import daysUntilTheEnd from '@/utils/daysUntilTheEnd'
-import getDaysUntilExpiry from '@/utils/getDaysUntilExpiry'
-import getValidityPeriod from '@/utils/getValidityPeriod'
+import daysUntilTheEnd from '@/utils/daysUntilTheEnd.ts'
+import getDaysUntilExpiry from '@/utils/getDaysUntilExpiry.ts'
+import getValidityPeriod from '@/utils/getValidityPeriod.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetHealthGroups } from '@/queries/health-group.query'
-import { useGetPhysicalEducations } from '@/queries/physical-education.queries'
-import { useGetStudents } from '@/queries/student.queries'
+import { useGetHealthGroups } from '@/queries/health-group.query.ts'
+import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
+import { useGetStudents } from '@/queries/student.queries.ts'
 
 interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined

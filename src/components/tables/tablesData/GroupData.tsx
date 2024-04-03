@@ -2,25 +2,25 @@ import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import CustomButton from '@/components/ui/buttons/CustomButton'
-import ErrorMessage from '@/components/ui/fields/ErrorMessage'
-import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm'
-import CustomInput from '@/components/ui/inputs/CustomInput'
-import CustomSelect from '@/components/ui/selects/CustomSelect'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
+import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
-import { PAGES_URL } from '@/constants/enums'
+import { PAGES_URL } from '@/constants/enums.ts'
 
-import { IGroup, TypeGroupForm } from '@/types/group.types'
+import { IGroup, TypeGroupForm } from '@/types/group.types.ts'
 
-import useAuth from '@/hooks/useAuth'
-import useFilters from '@/hooks/useFilters'
-import useModal from '@/hooks/useModal'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData'
+import useAuth from '@/hooks/useAuth.ts'
+import useFilters from '@/hooks/useFilters.ts'
+import useModal from '@/hooks/useModal.ts'
+import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
-import updateHistory from '@/utils/updateHistory'
+import updateHistory from '@/utils/updateHistory.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetCourses } from '@/queries/course.queries'
+import { useGetCourses } from '@/queries/course.queries.ts'
 
 interface GroupDataProps {
 	data: IGroup[] | undefined

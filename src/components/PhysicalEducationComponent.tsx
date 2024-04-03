@@ -5,7 +5,7 @@ import { TypePhysicalEducationForm } from '@/types/physical-education.types'
 import useModal from '@/hooks/useModal'
 
 import Layout from './Layout/Layout'
-import PhysicalEducationData from './tablesData/PhysicalEducationData'
+import PhysicalEducationData from '@/components/tables/tablesData/PhysicalEducationData'
 import CreateButton from './ui/buttons/CreateButton'
 import ErrorMessage from './ui/fields/ErrorMessage'
 import Heading from './ui/fields/Heading'
