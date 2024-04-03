@@ -1,5 +1,5 @@
-import { Layout } from '@app/layout'
-import { CourseDetailsTable } from '@widgets/detailsTables'
+import Layout from '@/components/Layout/Layout'
+import CourseDetailsTable from '@/components/detailsTables/CourseDetailsTable'
 
 const CourseDetailsPage = () => {
 	return (

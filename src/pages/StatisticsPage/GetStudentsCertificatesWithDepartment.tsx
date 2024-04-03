@@ -1,6 +1,7 @@
-import { useGetStudentsCertificatesWithDepartment } from '@entities/Statistics/statistics.queries'
 import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
+
+import { useGetStudentsCertificatesWithDepartment } from '@/queries/statistics.queries'
 
 const GetStudentsCertificatesWithDepartment = () => {
 	const { id } = useParams()

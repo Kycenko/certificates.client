@@ -1,4 +1,4 @@
-import { UserDetailsComponent } from '@widgets/components'
+import UserDetailsComponent from '@/components/UserDetailsComponent'
 
 const UserDetailsPage = () => {
 	return <UserDetailsComponent />

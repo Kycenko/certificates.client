@@ -1,4 +1,4 @@
-import { Layout } from '@app/layout'
+import Layout from '@/components/Layout/Layout'
 
 const HomePage = () => {
 	return <Layout></Layout>

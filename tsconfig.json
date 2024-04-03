@@ -7,14 +7,18 @@
 		"skipLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@*": ["src/*"],
-			"@app/*": ["src/app/*"],
-			"@shared/*": ["src/shared/*"],
-			"@entities/*": ["src/entities/*"],
-			"@features/*": ["src/features/*"],
-			"@widgets/*": ["src/widgets/*"],
-			"@components/*": ["src/components/*"],
-			"@pages/*": ["src/pages/*"]
+			"@/*": ["src/*"],
+			"@/api": ["src/api/*"],
+			"@/app/*": ["src/app/*"],
+			"@/components/*": ["src/components/*"],
+			"@/config/*": ["src/config/*"],
+			"@/constants/*": ["src/constants/*"],
+			"@/hooks/*": ["src/hooks/*"],
+			"@/pages/*": ["src/pages/*"],
+			"@/queries/*": ["src/queries/*"],
+			"@/services/*": ["src/services/*"],
+			"@/types/*": ["src/types/*"],
+			"@/utils/*": ["src/utils/*"]
 		},
 		/* Bundler mode */
 		"moduleResolution": "bundler",

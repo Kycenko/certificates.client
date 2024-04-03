@@ -1,12 +1,12 @@
-import App from '@app/App'
-import { AuthProvider } from '@app/providers/AuthProvider'
-import { StoreProvider } from '@app/providers/StoreProvider'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ReactDOM from 'react-dom/client'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter } from 'react-router-dom'
 
-import '@app/styles/index.scss'
+import App from './app/App'
+import AuthProvider from './app/providers/AuthProvider'
+import FiltersProvider from './app/providers/FiltersProvider'
+import '@/app/styles/index.scss'
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -17,14 +17,15 @@ const queryClient = new QueryClient({
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<StoreProvider>
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-				<AuthProvider>
+	<QueryClientProvider client={queryClient}>
+		<BrowserRouter>
+			<AuthProvider>
+				<FiltersProvider>
 					<App />
-					<Toaster position='bottom-right' />
-				</AuthProvider>
-			</BrowserRouter>
-		</QueryClientProvider>
-	</StoreProvider>
+				</FiltersProvider>
+
+				<Toaster position='bottom-right' />
+			</AuthProvider>
+		</BrowserRouter>
+	</QueryClientProvider>
 )

@@ -1,4 +1,4 @@
-import { HealthGroupComponent } from '@widgets/components'
+import HealthGroupComponent from '@/components/HealthGroupComponent'
 
 const HealthGroupsPage = () => {
 	return <HealthGroupComponent />

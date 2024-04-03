@@ -1,5 +1,5 @@
-import { Layout } from '@app/layout'
-import { GroupDetailsTable } from '@widgets/detailsTables'
+import Layout from '@/components/Layout/Layout'
+import GroupDetailsTable from '@/components/detailsTables/GroupDetailsTable'
 
 const GroupDetailsPage = () => {
 	return (

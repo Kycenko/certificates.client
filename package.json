@@ -11,7 +11,6 @@
 		"prettier": "npx prettier --write **/*.{ts,tsx,json,scss}"
 	},
 	"dependencies": {
-		"@reduxjs/toolkit": "^2.2.1",
 		"@tanstack/react-query": "^5.20.5",
 		"axios": "^1.6.7",
 		"date-fns": "^3.3.1",
@@ -22,7 +21,6 @@
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.50.1",
 		"react-hot-toast": "^2.4.1",
-		"react-redux": "^9.1.0",
 		"react-router-dom": "^6.22.0",
 		"sass": "^1.70.0"
 	},

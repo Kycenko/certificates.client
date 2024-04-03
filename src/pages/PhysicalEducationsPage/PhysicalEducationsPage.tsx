@@ -1,4 +1,4 @@
-import { PhysicalEducationComponent } from '@widgets/components'
+import PhysicalEducationComponent from '@/components/PhysicalEducationComponent'
 
 const PhysicalEducationPage = () => {
 	return <PhysicalEducationComponent />

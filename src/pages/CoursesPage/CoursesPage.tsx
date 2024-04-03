@@ -1,6 +1,6 @@
-import { Layout } from '@app/layout'
-import { Heading } from '@shared/ui'
-import { CoursesTable } from '@widgets/tables'
+import Layout from '@/components/Layout/Layout'
+import CoursesTable from '@/components/tables/CoursesTable'
+import Heading from '@/components/ui/fields/Heading'
 
 const CoursesPage = () => {
 	return (

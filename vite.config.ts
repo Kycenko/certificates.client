@@ -9,14 +9,18 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'@': path.resolve(__dirname, './src'),
-			'@app': path.resolve(__dirname, './src/app'),
-			'@shared': path.resolve(__dirname, './src/shared'),
-			'@widgets': path.resolve(__dirname, './src/widgets'),
-			'@features': path.resolve(__dirname, './src/features'),
-			'@entities': path.resolve(__dirname, './src/entities'),
-			'@components': path.resolve(__dirname, './src/components'),
-			'@pages': path.resolve(__dirname, './src/pages')
+			'@/': path.resolve(__dirname, './src'),
+			'@/api': path.resolve(__dirname, './src/api'),
+			'@/app': path.resolve(__dirname, './src/app'),
+			'@/components': path.resolve(__dirname, './src/components'),
+			'@/config': path.resolve(__dirname, './src/config'),
+			'@/constants': path.resolve(__dirname, './src/constants'),
+			'@/hooks': path.resolve(__dirname, './src/hooks'),
+			'@/pages': path.resolve(__dirname, './src/pages'),
+			'@/queries': path.resolve(__dirname, './src/queries'),
+			'@/services': path.resolve(__dirname, './src/services'),
+			'@/types': path.resolve(__dirname, './src/types'),
+			'@/utils': path.resolve(__dirname, './src/utils')
 		}
 	}
 })
