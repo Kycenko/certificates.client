@@ -74,7 +74,7 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 							id={'name'}
 							{...register('name', {
 								required: 'Обязательное поле',
-								minLength: { value: 5, message: 'Минимум 5 символов' },
+								minLength: { value: 3, message: 'Минимум 3 символа' },
 								maxLength: { value: 15, message: 'Максимум 15 символов' }
 							})}
 						/>
