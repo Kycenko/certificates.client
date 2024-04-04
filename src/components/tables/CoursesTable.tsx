@@ -4,7 +4,7 @@ import CourseData from '@/components/tables/tablesData/CourseData'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
 import { PAGES_URL } from '@/constants/enums'
-import { CourseHeads } from '@/constants/heads'
+import { CourseHeads } from '@/constants/table-heads.ts'
 
 import { TypeCourseForm } from '@/types/course.types'
 
@@ -19,6 +19,7 @@ import {
 	useGetCourses,
 	useUpdateCourse
 } from '@/queries/course.queries'
+
 
 const CoursesTable = () => {
 	const navigate = useNavigate()

@@ -1,3 +1,4 @@
+import { Info, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -12,10 +13,10 @@ import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
 import useSortData from '@/hooks/useSortData.ts'
 
-import updateHistory from '@/utils/updateHistory.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import updateHistory from '@/lib/utils/updateHistory.ts'
 import { useGetDepartments } from '@/queries/department.queries.ts'
+
 
 interface CourseDataProps {
 	data: ICourse[] | undefined
@@ -75,10 +76,10 @@ const CourseData: FC<CourseDataProps> = ({
 						className={styles.contentCell}
 						key={id}
 					>
-						<td>
+						<td className={styles.cellPadding}>
 							<span>{number}-й курс</span>
 						</td>
-						<td>
+						<td className={styles.cellPadding}>
 							<span>
 								{departments
 									?.filter(({ id }) => id === departmentId)
@@ -89,13 +90,13 @@ const CourseData: FC<CourseDataProps> = ({
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
 								<CustomButton onClick={() => setEditId(id)}>
-									Изменить
+									<Pencil />
 								</CustomButton>
 								<CustomButton onClick={() => onInfo(id)}>
-									Подробнее
+									<Info />
 								</CustomButton>
 								<CustomButton onClick={() => setDeleteId(id)}>
-									Удалить
+									<Trash2 />
 								</CustomButton>
 							</div>
 						</td>

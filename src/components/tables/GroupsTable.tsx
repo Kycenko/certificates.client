@@ -4,7 +4,7 @@ import GroupData from '@/components/tables/tablesData/GroupData'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
 import { PAGES_URL } from '@/constants/enums'
-import { GroupHeads } from '@/constants/heads'
+import { GroupHeads } from '@/constants/table-heads.ts'
 
 import { TypeGroupForm } from '@/types/group.types'
 
@@ -20,6 +20,7 @@ import {
 	useGetGroups,
 	useUpdateGroup
 } from '@/queries/group.queries'
+
 
 const GroupsTable = () => {
 	const navigate = useNavigate()
@@ -52,7 +53,7 @@ const GroupsTable = () => {
 			<div className={styles.tableContainer}>
 				<div className={styles.headerContainer}>
 					<div className={styles.header}>
-						<Search />
+						<Search placeholder={'Поиск по названию группы...'} />
 						<SortOrder />
 					</div>
 				</div>

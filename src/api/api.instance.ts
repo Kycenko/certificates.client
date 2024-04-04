@@ -2,10 +2,10 @@ import axios from 'axios'
 
 import { BASE_URL } from '@/constants/enums'
 
-import { getAccessToken, removeFromStorage } from '@/config/auth.helper'
-
 import errorCatch from './api.error'
+import { getAccessToken, removeFromStorage } from '@/lib/helpers/auth.helper.ts'
 import { AuthService } from '@/services/auth.service'
+
 
 export const instance = axios.create({
 	baseURL: BASE_URL.BASE_URL,

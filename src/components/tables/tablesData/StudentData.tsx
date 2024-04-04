@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { History, Info, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -14,22 +15,26 @@ import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
 import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
-import updateHistory from '@/utils/updateHistory.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import { saveStudentHistory } from '@/lib/utils/saveStudentHistory'
+import updateHistory from '@/lib/utils/updateHistory.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
+
 
 interface StudentDataProps {
 	data: IStudent[] | undefined
 	onEdit: (id: number | string, data: TypeStudentForm) => void
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
+	onHistory: (id: number | string) => void
 }
+
 const StudentData: FC<StudentDataProps> = ({
 	data,
 	onDelete,
 	onEdit,
-	onInfo
+	onInfo,
+	onHistory
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { groups } = useGetGroups()
@@ -44,7 +49,7 @@ const StudentData: FC<StudentDataProps> = ({
 	const onSubmit = (id: number | string, data: TypeStudentForm) => {
 		const newData = { ...data, groupId: Number(data.groupId) }
 		onEdit(id, newData)
-
+		saveStudentHistory(id, data)
 		setEditId(null)
 		reset()
 	}
@@ -77,38 +82,41 @@ const StudentData: FC<StudentDataProps> = ({
 							className={styles.contentCell}
 							key={id}
 						>
-							<td>
+							<td className={styles.cellPadding}>
 								<span>{surname}</span>
 							</td>
-							<td>
+							<td className={styles.cellPadding}>
 								<span>{name}</span>
 							</td>
-							<td>
+							<td className={styles.cellPadding}>
 								<span>{secondName ? secondName : 'Не указано'}</span>
 							</td>
-							<td>
+							<td className={styles.cellPadding}>
 								<span>{format(new Date(birthDate), 'dd.MM.yyyy')}</span>
 							</td>
-							<td>
+							<td className={styles.cellPadding}>
 								{groups
 									?.filter(({ id }) => id === groupId)
 									.map(({ name }) => name)}
 							</td>
 							<td className={styles.editCellContainer}>
 								<div className={styles.adminEditCell}>
+									<CustomButton onClick={() => onHistory(id)}>
+										<History />
+									</CustomButton>
 									<CustomButton
 										onClick={() => {
 											setEditId(id)
 											reset()
 										}}
 									>
-										Изменить
+										<Pencil />
 									</CustomButton>
 									<CustomButton onClick={() => onInfo(id)}>
-										Подробнее
+										<Info />
 									</CustomButton>
 									<CustomButton onClick={() => setDeleteId(id)}>
-										Удалить
+										<Trash2 />
 									</CustomButton>
 								</div>
 							</td>

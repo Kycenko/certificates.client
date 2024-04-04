@@ -6,7 +6,12 @@ import useFilters from '@/hooks/useFilters'
 
 import styles from './Search.module.scss'
 
-const Search: FC = () => {
+
+interface SearchProps {
+	placeholder?: string
+}
+
+const Search: FC<SearchProps> = ({ placeholder }) => {
 	const { searchTerm, setSearchTerm } = useFilters()
 	const debouncedValue = useDebounce(searchTerm, 500)
 	useEffect(() => {}, [debouncedValue])
@@ -16,7 +21,7 @@ const Search: FC = () => {
 			<input
 				className={styles.input}
 				value={searchTerm}
-				placeholder={'Поиск...'}
+				placeholder={placeholder ? placeholder : 'Поиск...'}
 				onChange={(e: ChangeEvent<HTMLInputElement>) =>
 					setSearchTerm(e.target.value)
 				}

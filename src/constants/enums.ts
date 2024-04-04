@@ -12,6 +12,7 @@ export const enum PAGES_URL {
 	COURSES = '/courses',
 	GROUPS = '/groups',
 	STUDENTS = '/students',
+	STUDENT_HISTORY = '/students/history',
 	MEDICAL_CERTIFICATES = '/medical-certificates'
 }
 
@@ -36,7 +37,8 @@ export const enum TOKENS {
 }
 
 export const enum LOCAL_STORAGE_KEY {
-	USER = 'user'
+	USER = 'user',
+	STUDENT_HISTORY = 'student-history'
 }
 
 export const enum QUERY_KEYS {

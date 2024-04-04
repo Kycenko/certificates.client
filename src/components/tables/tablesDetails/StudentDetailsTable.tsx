@@ -4,16 +4,12 @@ import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 
-import { DetailsStudentHeads } from '@/constants/heads.ts'
+import { DetailsStudentHeads } from '@/constants/table-heads.ts'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types.ts'
 
 import useAuth from '@/hooks/useAuth.ts'
 import useModal from '@/hooks/useModal.ts'
-
-import daysUntilTheEnd from '@/utils/daysUntilTheEnd.ts'
-import getDaysUntilExpiry from '@/utils/getDaysUntilExpiry.ts'
-import getValidityPeriod from '@/utils/getValidityPeriod.ts'
 
 import Layout from '../../Layout/Layout.tsx'
 import CreateButton from '../../ui/buttons/CreateButton.tsx'
@@ -25,10 +21,14 @@ import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
+import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
+import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
+import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useCreateMedicalCertificate } from '@/queries/medical-certificate.queries.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
 import { useGetStudent } from '@/queries/student.queries.ts'
+
 
 const StudentDetailsTable = () => {
 	const { id } = useParams()
@@ -82,6 +82,7 @@ const StudentDetailsTable = () => {
 					{student?.surname} {student?.name} {student?.secondName}
 				</span>
 			</Heading>
+
 			{user?.isAdmin ? (
 				<CreateButton onClick={openModal}>Добавить справку</CreateButton>
 			) : null}

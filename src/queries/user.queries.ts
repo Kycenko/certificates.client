@@ -2,11 +2,12 @@ import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
 import { QUERY_KEYS } from '@/constants/enums'
-import { deleteToast, editToast } from '@/constants/toasts'
+import { deleteToast, editToast } from '@/constants/notification-toasts.ts'
 
 import { IUser, TypeUserForm } from '@/types/user.types'
 
 import { UserService } from '@/services/user.service'
+
 
 export const useGetUsers = () => {
 	const {

@@ -1,3 +1,4 @@
+import { Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -14,6 +15,7 @@ import {
 import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
+
 
 interface HealthGroupProps {
 	data: IHealthGroup[] | undefined
@@ -51,8 +53,13 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 				>
 					<h2 className={styles.title}>{name}</h2>
 					<div className={styles.buttons}>
-						<CustomButton onClick={() => setEditId(id)}>Изменить</CustomButton>
-						<CustomButton onClick={() => setDeleteId(id)}>Удалить</CustomButton>
+						<CustomButton onClick={() => setEditId(id)}>
+							<Pencil />
+						</CustomButton>
+
+						<CustomButton onClick={() => setDeleteId(id)}>
+							<Trash2 />
+						</CustomButton>
 					</div>
 					<CustomModalForm
 						onSubmit={() => handleDelete(id)}

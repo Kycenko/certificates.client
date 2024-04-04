@@ -2,11 +2,16 @@ import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
 import { QUERY_KEYS } from '@/constants/enums'
-import { createToast, deleteToast, editToast } from '@/constants/toasts'
+import {
+	createToast,
+	deleteToast,
+	editToast
+} from '@/constants/notification-toasts.ts'
 
 import { ICourse, TypeCourseForm } from '@/types/course.types'
 
 import { CourseService } from '@/services/course.service'
+
 
 export const useCreateCourse = () => {
 	const queryClient = new QueryClient()

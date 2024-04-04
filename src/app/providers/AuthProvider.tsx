@@ -13,9 +13,9 @@ import { LOCAL_STORAGE_KEY } from '@/constants/enums'
 
 import { IUser } from '@/types/user.types'
 
-import { getAccessToken, removeFromStorage } from '@/config/auth.helper'
+import { getAccessToken, removeFromStorage } from '@/lib/helpers/auth.helper.ts'
+import getLocalStorage from '@/lib/utils/getLocalStorage'
 
-import getLocalStorage from '@/utils/getLocalStorage'
 
 interface IAuthContext {
 	user: IUser | null

@@ -2,7 +2,11 @@ import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
 import { QUERY_KEYS } from '@/constants/enums'
-import { createToast, deleteToast, editToast } from '@/constants/toasts'
+import {
+	createToast,
+	deleteToast,
+	editToast
+} from '@/constants/notification-toasts.ts'
 
 import {
 	IMedicalCertificate,
@@ -10,6 +14,7 @@ import {
 } from '@/types/medical-certificate.types'
 
 import { MedicalCertificateService } from '@/services/medical-certificate.service'
+
 
 export const useCreateMedicalCertificate = () => {
 	const queryClient = new QueryClient()

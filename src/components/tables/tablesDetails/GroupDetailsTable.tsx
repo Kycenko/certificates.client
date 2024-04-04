@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 
 import { PAGES_URL } from '@/constants/enums.ts'
-import { DetailsGroupHeads } from '@/constants/heads.ts'
+import { DetailsGroupHeads } from '@/constants/table-heads.ts'
 
 import { TypeStudentForm } from '@/types/student.types.ts'
 
@@ -23,6 +23,7 @@ import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { useGetGroup } from '@/queries/group.queries.ts'
 import { useCreateStudent } from '@/queries/student.queries.ts'
+
 
 const GroupDetailsTable = () => {
 	const navigate = useNavigate()

@@ -1,3 +1,4 @@
+import { Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -9,6 +10,7 @@ import useAuth from '@/hooks/useAuth.ts'
 import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
+
 
 interface UserDataProps {
 	data: IUser[] | undefined
@@ -29,9 +31,12 @@ const UserData: FC<UserDataProps> = ({ data, onEdit, onDelete }) => {
 					>
 						<h2 className={styles.title}>{login}</h2>
 						<div className={styles.buttons}>
-							<CustomButton onClick={() => onEdit(id)}>Изменить</CustomButton>
+							<CustomButton onClick={() => onEdit(id)}>
+								<Pencil />
+							</CustomButton>
+
 							<CustomButton onClick={() => setDeleteId(id)}>
-								Удалить
+								<Trash2 />
 							</CustomButton>
 						</div>
 						<CustomModalForm

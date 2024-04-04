@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -15,14 +16,14 @@ import {
 
 import useModal from '@/hooks/useModal.ts'
 
-import daysUntilTheEnd from '@/utils/daysUntilTheEnd.ts'
-import getDaysUntilExpiry from '@/utils/getDaysUntilExpiry.ts'
-import getValidityPeriod from '@/utils/getValidityPeriod.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
+import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
+import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
 import { useGetStudents } from '@/queries/student.queries.ts'
+
 
 interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined
@@ -86,7 +87,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 						className={styles.contentCell}
 						key={id}
 					>
-						<td>
+						<td className={styles.cellPadding}>
 							{students
 								?.filter(({ id }) => id === studentId)
 								.map(
@@ -94,15 +95,21 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 										`${surname} ${name} ${secondName}`
 								)}
 						</td>
-						<td>
+						<td className={styles.cellPadding}>
 							<span>{format(new Date(startDate), 'dd.MM.yyyy')}</span>
 						</td>
-						<td>
+						<td className={styles.cellPadding}>
 							<span>{format(new Date(finishDate), 'dd.MM.yyyy')}</span>
 						</td>
-						<td>{getValidityPeriod(finishDate, startDate)}</td>
-						<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
-						<td>{daysUntilTheEnd(finishDate)}</td>
+						<td className={styles.cellPadding}>
+							{getValidityPeriod(finishDate, startDate)}
+						</td>
+						<td className={styles.cellPadding}>
+							{getDaysUntilExpiry(finishDate, startDate)}
+						</td>
+						<td className={styles.cellPadding}>
+							{daysUntilTheEnd(finishDate)}
+						</td>
 
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
@@ -112,11 +119,11 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 										reset()
 									}}
 								>
-									Изменить
+									<Pencil />
 								</CustomButton>
 
 								<CustomButton onClick={() => setDeleteId(id)}>
-									Удалить
+									<Trash2 />
 								</CustomButton>
 							</div>
 						</td>

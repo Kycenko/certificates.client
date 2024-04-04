@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 
 import { PAGES_URL } from '@/constants/enums.ts'
-import { DetailsDepartmentHeads } from '@/constants/heads.ts'
+import { DetailsDepartmentHeads } from '@/constants/table-heads.ts'
 
 import { TypeCourseForm } from '@/types/course.types.ts'
 
@@ -20,6 +20,7 @@ import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { useCreateCourse } from '@/queries/course.queries.ts'
 import { useGetDepartment } from '@/queries/department.queries.ts'
+
 
 const DepartmentDetailsTable = () => {
 	const navigate = useNavigate()

@@ -1,7 +1,6 @@
-import { IBase } from '@/config/base.interface'
-
 import { IHealthGroup } from './health-group.types'
 import { IPhysicalEducation } from './physical-education.types'
+import { IBase } from '@/base/base.interface'
 
 export interface IMedicalCertificate extends IBase {
 	id: number

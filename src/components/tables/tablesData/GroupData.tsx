@@ -1,3 +1,4 @@
+import { Info, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -17,10 +18,10 @@ import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
 import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
-import updateHistory from '@/utils/updateHistory.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import updateHistory from '@/lib/utils/updateHistory.ts'
 import { useGetCourses } from '@/queries/course.queries.ts'
+
 
 interface GroupDataProps {
 	data: IGroup[] | undefined
@@ -28,6 +29,7 @@ interface GroupDataProps {
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
 }
+
 const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 	const navigate = useNavigate()
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
@@ -85,10 +87,10 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 								className={styles.contentCell}
 								key={id}
 							>
-								<td>
+								<td className={styles.cellPadding}>
 									<span>{name}</span>
 								</td>
-								<td>
+								<td className={styles.cellPadding}>
 									{courses
 										?.filter(({ id }) => id === courseId)
 										?.map(({ number }) => `${number}-й курс`)}
@@ -96,13 +98,13 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 								<td className={styles.editCellContainer}>
 									<div className={styles.adminEditCell}>
 										<CustomButton onClick={() => handleEdit(id)}>
-											Изменить
+											<Pencil />
 										</CustomButton>
 										<CustomButton onClick={() => onInfo(id)}>
-											Подробнее
+											<Info />
 										</CustomButton>
 										<CustomButton onClick={() => setDeleteId(id)}>
-											Удалить
+											<Trash2 />
 										</CustomButton>
 									</div>
 								</td>

@@ -1,14 +1,16 @@
 import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
 
-import { reportToast } from '@/constants/toasts'
+import { reportToast } from '@/constants/notification-toasts.ts'
 
 import usePrint from '@/hooks/usePrint'
 
 import Layout from '../Layout/Layout'
 
 import styles from '@/app/styles/Tables.module.scss'
+import formatFullName from '@/lib/utils/formatFullName'
 import { useGetDepartmentReport } from '@/queries/statistics.queries'
+
 
 const DepartmentReport = () => {
 	const { id } = useParams()
@@ -16,7 +18,7 @@ const DepartmentReport = () => {
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
 
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: `department-report-${id}}`,
+		documentTitle: `department-report-${id}`,
 		onAfterPrint: () => reportToast()
 	})
 
@@ -42,7 +44,7 @@ const DepartmentReport = () => {
 				<table className={styles.table}>
 					<thead className={'border-b-2 border-t-2'}>
 						<tr>
-							<th>ФИО</th>
+							<th>Cтудент</th>
 							<th>Дата начала действия</th>
 							<th>Дата окончания действия</th>
 						</tr>
@@ -60,7 +62,7 @@ const DepartmentReport = () => {
 														key={`${id}-${name}-${surname}-${index}`}
 													>
 														<td className='p-2'>
-															{surname} {name} {secondName}
+															{formatFullName(surname, name, secondName)}
 														</td>
 														<td>{format(new Date(startDate), 'dd.MM.yyyy')}</td>
 														<td>

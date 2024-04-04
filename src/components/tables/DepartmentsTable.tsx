@@ -5,7 +5,7 @@ import DepartmentData from '@/components/tables/tablesData/DepartmentData'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
 import { PAGES_URL } from '@/constants/enums'
-import { DepartmentHeads } from '@/constants/heads'
+import { DepartmentHeads } from '@/constants/table-heads.ts'
 
 import { TypeDepartmentForm } from '@/types/department.types'
 
@@ -26,6 +26,7 @@ import {
 	useGetDepartments,
 	useUpdateDepartment
 } from '@/queries/department.queries'
+
 
 const DepartmentsTable = () => {
 	const navigate = useNavigate()
@@ -74,7 +75,7 @@ const DepartmentsTable = () => {
 				<div className={styles.tableContainer}>
 					<div className={styles.headerContainer}>
 						<div className={styles.header}>
-							<Search />
+							<Search placeholder={'Поиск по названию отделения...'} />
 							<SortOrder />
 						</div>
 						<CustomButton

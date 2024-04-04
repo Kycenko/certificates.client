@@ -2,13 +2,14 @@ import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
 import { SERVICE_URL } from '@/constants/enums'
-import { authToast, createToast } from '@/constants/toasts'
+import { authToast, createToast } from '@/constants/notification-toasts.ts'
 
 import { ILogin, IRegister } from '@/types/auth.types'
 
 import useAuth from '@/hooks/useAuth'
 
 import { AuthService } from '@/services/auth.service'
+
 
 export const useLogin = () => {
 	const navigate = useNavigate()

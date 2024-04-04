@@ -1,10 +1,11 @@
 .main {
-	@apply flex-col bg-clip-border bg-white text-gray-700 flex h-screen w-full fixed z-50 top-0 left-0 max-w-[20rem] justify-between rounded-none border-r bg-opacity-50 p-4 shadow-xl;
+  @apply flex-col bg-clip-border bg-white text-gray-700 flex h-screen w-full fixed z-50 top-0 left-0 max-w-[270px] justify-between rounded-none border-r bg-opacity-50 p-4 shadow-xl;
 }
 
 .linksContainer {
-	@apply flex flex-col justify-between;
+  @apply flex flex-col justify-between;
 }
+
 .link {
-	@apply flex items-center p-3 rounded-lg outline-none hover:bg-gray-200 w-full;
+  @apply flex items-center p-3  rounded-lg outline-none hover:bg-gray-200 w-full;
 }

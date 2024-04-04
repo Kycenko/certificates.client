@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 
 import { PAGES_URL } from '@/constants/enums.ts'
-import { DetailsCourseHeads } from '@/constants/heads.ts'
+import { DetailsCourseHeads } from '@/constants/table-heads.ts'
 
 import { TypeGroupForm } from '@/types/group.types.ts'
 
@@ -21,6 +21,7 @@ import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { useGetCourse } from '@/queries/course.queries.ts'
 import { useCreateGroup } from '@/queries/group.queries.ts'
+
 
 const CourseDetailsTable = () => {
 	const { id } = useParams()

@@ -4,9 +4,10 @@ import { BASE_URL, SERVICE_URL, TOKENS } from '@/constants/enums'
 
 import { IAuthResponse, ILogin, IRegister } from '@/types/auth.types'
 
-import { saveToStorage } from '@/config/auth.helper'
-
 import instance from '@/api/api.instance'
+
+import { saveToStorage } from '@/lib/helpers/auth.helper.ts'
+
 
 export const AuthService = {
 	async login(data: ILogin) {

@@ -1,7 +1,7 @@
 import MedicalCertificateData from '@/components/tables/tablesData/MedicalCertificateData'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
-import { CertificatesHeads } from '@/constants/heads'
+import { CertificatesHeads } from '@/constants/table-heads.ts'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types'
 
@@ -15,6 +15,7 @@ import {
 	useGetMedicalCertificates,
 	useUpdateMedicalCertificate
 } from '@/queries/medical-certificate.queries'
+
 
 const MedicalCertificatesTable = () => {
 	const { certificates, isLoading, refetch } = useGetMedicalCertificates()

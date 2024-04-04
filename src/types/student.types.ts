@@ -1,6 +1,5 @@
-import { IBase } from '@/config/base.interface'
-
 import { IMedicalCertificate } from './medical-certificate.types'
+import { IBase } from '@/base/base.interface'
 
 export interface IStudent extends IBase {
 	id: number

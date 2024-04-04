@@ -4,7 +4,7 @@ import StudentData from '@/components/tables/tablesData/StudentData'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
 import { PAGES_URL } from '@/constants/enums'
-import { StudentHeads } from '@/constants/heads'
+import { StudentHeads } from '@/constants/table-heads.ts'
 
 import { TypeStudentForm } from '@/types/student.types'
 
@@ -20,6 +20,7 @@ import {
 	useGetStudents,
 	useUpdateStudent
 } from '@/queries/student.queries'
+
 
 const StudentsTable = () => {
 	const navigate = useNavigate()
@@ -45,6 +46,9 @@ const StudentsTable = () => {
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.STUDENTS}/${id}`)
 	}
+	const onHistory = (id: number | string) => {
+		navigate(`${PAGES_URL.STUDENT_HISTORY}/${id}`)
+	}
 
 	if (isLoading) return <CustomLoader />
 	return (
@@ -53,7 +57,7 @@ const StudentsTable = () => {
 				<div className={styles.tableContainer}>
 					<div className={styles.headerContainer}>
 						<div className={styles.header}>
-							<Search />
+							<Search placeholder={'Поиск по имени обучающегося...'} />
 							<SortOrder />
 						</div>
 					</div>
@@ -67,6 +71,7 @@ const StudentsTable = () => {
 								onDelete={handleDelete}
 								onEdit={handleEdit}
 								onInfo={handleInfo}
+								onHistory={onHistory}
 							/>
 						</tbody>
 					</table>

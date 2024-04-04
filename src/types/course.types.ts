@@ -1,6 +1,5 @@
-import { IBase } from '@/config/base.interface'
-
 import { IGroup } from './group.types'
+import { IBase } from '@/base/base.interface'
 
 export interface ICourse extends IBase {
 	id: number
