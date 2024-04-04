@@ -20,7 +20,6 @@ import { saveStudentHistory } from '@/lib/utils/saveStudentHistory'
 import updateHistory from '@/lib/utils/updateHistory.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
 
-
 interface StudentDataProps {
 	data: IStudent[] | undefined
 	onEdit: (id: number | string, data: TypeStudentForm) => void

@@ -12,7 +12,6 @@ import { IStudent, TypeStudentForm } from '@/types/student.types'
 
 import { StudentService } from '@/services/student.service'
 
-
 export const useCreateStudent = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({

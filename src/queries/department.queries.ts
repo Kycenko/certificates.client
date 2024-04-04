@@ -12,7 +12,6 @@ import { IDepartment, TypeDepartmentForm } from '@/types/department.types'
 
 import { DepartmentService } from '@/services/department.service'
 
-
 export const useCreateDepartment = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({

@@ -6,7 +6,6 @@ import useFilters from '@/hooks/useFilters'
 
 import styles from './Search.module.scss'
 
-
 interface SearchProps {
 	placeholder?: string
 }

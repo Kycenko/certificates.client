@@ -11,7 +11,6 @@ import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
 
-
 interface UserDataProps {
 	data: IUser[] | undefined
 	onDelete: (id: string | number) => void

@@ -18,7 +18,6 @@ import StudentsPage from '@/pages/StudentsPage/StudentsPage'
 import UserDetailsPage from '@/pages/UsersPage/UserDetailsPage'
 import UsersPage from '@/pages/UsersPage/UsersPage'
 
-
 export const enum AppRoutes {
 	LOGIN = 'login',
 	HOME = 'home',

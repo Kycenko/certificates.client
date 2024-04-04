@@ -16,7 +16,6 @@ import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
 
-
 interface PhysicalEducationDataProps {
 	data: IPhysicalEducation[] | undefined
 	onEdit: (id: number | string, data: TypePhysicalEducationForm) => void

@@ -15,7 +15,6 @@ import {
 
 import { MedicalCertificateService } from '@/services/medical-certificate.service'
 
-
 export const useCreateMedicalCertificate = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({

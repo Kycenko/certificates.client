@@ -16,7 +16,6 @@ import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
 
-
 interface HealthGroupProps {
 	data: IHealthGroup[] | undefined
 	onDelete: (id: string | number) => void

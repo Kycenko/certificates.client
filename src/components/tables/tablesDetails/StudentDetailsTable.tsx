@@ -29,7 +29,6 @@ import { useCreateMedicalCertificate } from '@/queries/medical-certificate.queri
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
 import { useGetStudent } from '@/queries/student.queries.ts'
 
-
 const StudentDetailsTable = () => {
 	const { id } = useParams()
 	const { user } = useAuth()

@@ -12,7 +12,6 @@ import { IHealthGroup, TypeHealthGroupForm } from '@/types/health-group.types'
 
 import { HealthGroupService } from '@/services/health-group.service'
 
-
 export function useCreateHealthGroup() {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({

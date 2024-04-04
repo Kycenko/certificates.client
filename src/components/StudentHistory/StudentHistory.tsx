@@ -7,7 +7,6 @@ import styles from '@/app/styles/Tables.module.scss'
 import { getStudentHistory } from '@/lib/utils/saveStudentHistory.ts'
 import { useGetStudent } from '@/queries/student.queries.ts'
 
-
 const StudentHistory = () => {
 	const { id } = useParams()
 	const { student } = useGetStudent(id)

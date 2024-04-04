@@ -16,7 +16,6 @@ import { IUser } from '@/types/user.types'
 import { getAccessToken, removeFromStorage } from '@/lib/helpers/auth.helper.ts'
 import getLocalStorage from '@/lib/utils/getLocalStorage'
 
-
 interface IAuthContext {
 	user: IUser | null
 	//setUser: ActionCreatorWithPayload<IUser | null, 'user/setUser'>

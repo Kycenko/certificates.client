@@ -16,7 +16,6 @@ import {
 	useUpdateMedicalCertificate
 } from '@/queries/medical-certificate.queries'
 
-
 const MedicalCertificatesTable = () => {
 	const { certificates, isLoading, refetch } = useGetMedicalCertificates()
 

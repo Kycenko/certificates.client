@@ -21,7 +21,6 @@ import {
 	useUpdateGroup
 } from '@/queries/group.queries'
 
-
 const GroupsTable = () => {
 	const navigate = useNavigate()
 	const { groups, isLoading, refetch } = useGetGroups()

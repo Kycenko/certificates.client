@@ -20,7 +20,6 @@ import {
 	useUpdateCourse
 } from '@/queries/course.queries'
 
-
 const CoursesTable = () => {
 	const navigate = useNavigate()
 	const { courses, isLoading, refetch } = useGetCourses()

@@ -21,7 +21,6 @@ import styles from '@/app/styles/DetailsTables.module.scss'
 import { useCreateCourse } from '@/queries/course.queries.ts'
 import { useGetDepartment } from '@/queries/department.queries.ts'
 
-
 const DepartmentDetailsTable = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()

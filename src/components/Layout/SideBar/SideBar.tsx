@@ -5,7 +5,6 @@ import useAuth from '@/hooks/useAuth.ts'
 import styles from './SideBar.module.scss'
 import { removeFromStorage } from '@/lib/helpers/auth.helper.ts'
 
-
 const Sidebar = () => {
 	const navigate = useNavigate()
 	const { user } = useAuth()

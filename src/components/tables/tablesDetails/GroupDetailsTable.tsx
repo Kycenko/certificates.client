@@ -24,7 +24,6 @@ import styles from '@/app/styles/DetailsTables.module.scss'
 import { useGetGroup } from '@/queries/group.queries.ts'
 import { useCreateStudent } from '@/queries/student.queries.ts'
 
-
 const GroupDetailsTable = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()

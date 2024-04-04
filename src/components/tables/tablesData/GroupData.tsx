@@ -22,7 +22,6 @@ import styles from '@/app/styles/Tables.module.scss'
 import updateHistory from '@/lib/utils/updateHistory.ts'
 import { useGetCourses } from '@/queries/course.queries.ts'
 
-
 interface GroupDataProps {
 	data: IGroup[] | undefined
 	onEdit: (id: number | string, data: TypeGroupForm) => void

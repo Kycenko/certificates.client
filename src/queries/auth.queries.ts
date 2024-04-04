@@ -10,7 +10,6 @@ import useAuth from '@/hooks/useAuth'
 
 import { AuthService } from '@/services/auth.service'
 
-
 export const useLogin = () => {
 	const navigate = useNavigate()
 	const { setUser } = useAuth()

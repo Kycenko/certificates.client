@@ -8,7 +8,6 @@ import { IUser, TypeUserForm } from '@/types/user.types'
 
 import { UserService } from '@/services/user.service'
 
-
 export const useGetUsers = () => {
 	const {
 		data: users,

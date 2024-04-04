@@ -16,7 +16,6 @@ import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import updateHistory from '@/lib/utils/updateHistory.ts'
 
-
 interface DepartmentDataProps {
 	data: IDepartment[] | undefined
 	onEdit: (id: number | string, data: TypeDepartmentForm) => void

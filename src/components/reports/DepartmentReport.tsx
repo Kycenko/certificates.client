@@ -11,7 +11,6 @@ import styles from '@/app/styles/Tables.module.scss'
 import formatFullName from '@/lib/utils/formatFullName'
 import { useGetDepartmentReport } from '@/queries/statistics.queries'
 
-
 const DepartmentReport = () => {
 	const { id } = useParams()
 	const { data } = useGetDepartmentReport(id)

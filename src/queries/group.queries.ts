@@ -12,7 +12,6 @@ import { IGroup, TypeGroupForm } from '@/types/group.types'
 
 import { GroupService } from '@/services/group.service'
 
-
 export const useCreateGroup = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({

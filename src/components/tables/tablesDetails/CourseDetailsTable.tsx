@@ -22,7 +22,6 @@ import styles from '@/app/styles/DetailsTables.module.scss'
 import { useGetCourse } from '@/queries/course.queries.ts'
 import { useCreateGroup } from '@/queries/group.queries.ts'
 
-
 const CourseDetailsTable = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()

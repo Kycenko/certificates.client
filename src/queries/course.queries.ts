@@ -12,7 +12,6 @@ import { ICourse, TypeCourseForm } from '@/types/course.types'
 
 import { CourseService } from '@/services/course.service'
 
-
 export const useCreateCourse = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({

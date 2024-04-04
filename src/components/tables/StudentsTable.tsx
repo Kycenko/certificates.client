@@ -21,7 +21,6 @@ import {
 	useUpdateStudent
 } from '@/queries/student.queries'
 
-
 const StudentsTable = () => {
 	const navigate = useNavigate()
 	const { students, isLoading, refetch } = useGetStudents()

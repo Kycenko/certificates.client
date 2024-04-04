@@ -15,7 +15,6 @@ import {
 
 import { PhysicalEducationService } from '@/services/physical-education.service'
 
-
 export const useCreatePhysicalEducation = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({

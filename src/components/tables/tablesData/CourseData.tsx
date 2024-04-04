@@ -17,7 +17,6 @@ import styles from '@/app/styles/Tables.module.scss'
 import updateHistory from '@/lib/utils/updateHistory.ts'
 import { useGetDepartments } from '@/queries/department.queries.ts'
 
-
 interface CourseDataProps {
 	data: ICourse[] | undefined
 	onEdit: (id: number | string, data: TypeCourseForm) => void
