@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
@@ -15,6 +16,7 @@ import {
 import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
+import { healthGroupValidationSchema } from '@/lib/validation/validation.schema.ts'
 
 interface HealthGroupProps {
 	data: IHealthGroup[] | undefined
@@ -30,7 +32,10 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 		handleSubmit,
 		reset,
 		formState: { errors }
-	} = useForm<TypeHealthGroupForm>({ mode: 'onChange' })
+	} = useForm<TypeHealthGroupForm>({
+		mode: 'onChange',
+		resolver: zodResolver(healthGroupValidationSchema)
+	})
 
 	const handleDelete = (id: number | string) => {
 		onDelete(id)
@@ -55,7 +60,6 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 						<CustomButton onClick={() => setEditId(id)}>
 							<Pencil />
 						</CustomButton>
-
 						<CustomButton onClick={() => setDeleteId(id)}>
 							<Trash2 />
 						</CustomButton>
@@ -81,11 +85,7 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 							defaultValue={name}
 							placeholder={'Введите название'}
 							id={'name'}
-							{...register('name', {
-								required: 'Обязательное поле',
-								minLength: { value: 5, message: 'Минимум 5 символов' },
-								maxLength: { value: 15, message: 'Максимум 15 символов' }
-							})}
+							{...register('name')}
 						/>
 						<ErrorMessage error={errors.name} />
 					</CustomModalForm>

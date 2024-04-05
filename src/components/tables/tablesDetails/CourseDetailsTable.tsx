@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -19,6 +20,7 @@ import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
+import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourse } from '@/queries/course.queries.ts'
 import { useCreateGroup } from '@/queries/group.queries.ts'
 
@@ -33,7 +35,10 @@ const CourseDetailsTable = () => {
 		handleSubmit,
 		reset,
 		formState: { errors }
-	} = useForm<TypeGroupForm>({ mode: 'onChange' })
+	} = useForm<TypeGroupForm>({
+		mode: 'onChange',
+		resolver: zodResolver(groupValidationSchema)
+	})
 
 	const handleCreate: SubmitHandler<TypeGroupForm> = async data => {
 		const newData = { ...data, courseId: course?.id }
@@ -69,7 +74,7 @@ const CourseDetailsTable = () => {
 							key={id}
 						>
 							<td className={styles.cellPadding}>{name}</td>
-							<td className={styles.cellPadding}>
+							<td className={styles.cellPaxdding}>
 								{students ? students.length : 0}
 							</td>
 							<td>{course.number}-й Курс</td>
@@ -88,11 +93,7 @@ const CourseDetailsTable = () => {
 					label={'Название'}
 					id={'name'}
 					placeholder={'Введите название'}
-					{...register('name', {
-						required: 'Обязательное поле',
-						minLength: { value: 5, message: 'Минимум 5 символов' },
-						maxLength: { value: 5, message: 'Максимум 5 символов' }
-					})}
+					{...register('name')}
 				/>
 
 				<ErrorMessage error={errors.name} />

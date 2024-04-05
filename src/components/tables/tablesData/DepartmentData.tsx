@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Info, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
@@ -15,6 +16,7 @@ import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
 import updateHistory from '@/lib/utils/updateHistory.ts'
+import { departmentValidationSchema } from '@/lib/validation/validation.schema.ts'
 
 interface DepartmentDataProps {
 	data: IDepartment[] | undefined
@@ -36,7 +38,10 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeDepartmentForm>({ mode: 'onChange' })
+	} = useForm<TypeDepartmentForm>({
+		mode: 'onChange',
+		resolver: zodResolver(departmentValidationSchema)
+	})
 
 	const handleDelete = (id: number | string) => {
 		onDelete(id)
@@ -105,11 +110,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 								label='Название'
 								placeholder={'Введите название'}
 								defaultValue={name}
-								{...register('name', {
-									required: 'Обязательное поле',
-									minLength: { value: 4, message: 'Минимум 4 символа' },
-									maxLength: { value: 15, message: 'Максимум 60 символов' }
-								})}
+								{...register('name')}
 							/>
 							<ErrorMessage error={errors.name} />
 						</CustomModalForm>

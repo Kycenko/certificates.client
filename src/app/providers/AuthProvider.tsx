@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { LOCAL_STORAGE_KEY } from '@/constants/enums'
+import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/constants/enums'
 
 import { IUser } from '@/types/user.types'
 
@@ -18,7 +18,7 @@ import getLocalStorage from '@/lib/utils/getLocalStorage'
 
 interface IAuthContext {
 	user: IUser | null
-	//setUser: ActionCreatorWithPayload<IUser | null, 'user/setUser'>
+
 	setUser: Dispatch<SetStateAction<IUser | null>>
 }
 
@@ -26,8 +26,7 @@ export const AuthContext = createContext<IAuthContext | null>(null)
 
 const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 	const navigate = useNavigate()
-	//const dispatch = useAppDispatch()
-	//const user = useSelector((state: RootState) => state.user.user)
+
 	const [user, setUser] = useState<IUser | null>(null)
 
 	useEffect(() => {
@@ -37,8 +36,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
 			if (!accessToken) {
 				removeFromStorage()
-				navigate('/login', { replace: true })
-				navigate(0)
+				navigate(`${PAGES_URL.LOGIN}`, { replace: true })
 				return
 			}
 
@@ -47,7 +45,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 		}
 
 		initializeAuth()
-	}, [user])
+	}, [navigate, user])
 
 	return (
 		<AuthContext.Provider value={{ user, setUser }}>

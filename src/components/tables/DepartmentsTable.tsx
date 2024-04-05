@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -20,6 +21,7 @@ import CustomInput from '../ui/inputs/CustomInput'
 import CustomLoader from '../ui/loader/CustomLoader'
 
 import styles from '@/app/styles/Tables.module.scss'
+import { departmentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import {
 	useCreateDepartment,
 	useDeleteDepartment,
@@ -38,7 +40,10 @@ const DepartmentsTable = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeDepartmentForm>()
+	} = useForm<TypeDepartmentForm>({
+		mode: 'onChange',
+		resolver: zodResolver(departmentValidationSchema)
+	})
 
 	const { create } = useCreateDepartment()
 	const { update } = useUpdateDepartment()
@@ -110,11 +115,7 @@ const DepartmentsTable = () => {
 					label={'Название'}
 					id={'name'}
 					placeholder={'Введите название'}
-					{...register('name', {
-						required: 'Обязательное поле',
-						minLength: { value: 4, message: 'Минимум 4 символа' },
-						maxLength: { value: 60, message: 'Максимум 60 символов' }
-					})}
+					{...register('name')}
 				/>
 				<ErrorMessage error={errors.name}></ErrorMessage>
 			</CustomModalForm>

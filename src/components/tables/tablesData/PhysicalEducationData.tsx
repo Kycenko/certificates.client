@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
@@ -15,6 +16,7 @@ import {
 import useModal from '@/hooks/useModal.ts'
 
 import styles from '@/app/styles/Cards.module.scss'
+import { physicalEducationValidationSchema } from '@/lib/validation/validation.schema.ts'
 
 interface PhysicalEducationDataProps {
 	data: IPhysicalEducation[] | undefined
@@ -33,7 +35,10 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 		handleSubmit,
 		reset,
 		formState: { errors }
-	} = useForm<TypePhysicalEducationForm>({ mode: 'onChange' })
+	} = useForm<TypePhysicalEducationForm>({
+		mode: 'onChange',
+		resolver: zodResolver(physicalEducationValidationSchema)
+	})
 
 	const onSubmit = (id: number | string, data: TypePhysicalEducationForm) => {
 		onEdit(id, data)
@@ -78,11 +83,7 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 							defaultValue={name}
 							placeholder={'Введите название'}
 							id={'name'}
-							{...register('name', {
-								required: 'Обязательное поле',
-								minLength: { value: 3, message: 'Минимум 3 символа' },
-								maxLength: { value: 15, message: 'Максимум 15 символов' }
-							})}
+							{...register('name')}
 						/>
 						<ErrorMessage error={errors.name} />
 					</CustomModalForm>

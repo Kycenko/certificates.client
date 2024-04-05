@@ -36,6 +36,7 @@ const CourseData: FC<CourseDataProps> = ({
 		register,
 		handleSubmit,
 		formState: { errors },
+
 		reset
 	} = useForm<TypeCourseForm>()
 
@@ -110,7 +111,7 @@ const CourseData: FC<CourseDataProps> = ({
 								id='number'
 								label='Выберите номер курса'
 								defaultValue={number}
-								{...register('number', { required: 'Обязательное поле' })}
+								{...register('number')}
 							>
 								<option
 									key={1}

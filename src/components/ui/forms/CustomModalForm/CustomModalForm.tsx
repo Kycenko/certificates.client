@@ -75,6 +75,7 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = ({
 								<button
 									className={styles.closeBtn}
 									onClick={onClose}
+									type={'button'}
 								>
 									Закрыть
 								</button>

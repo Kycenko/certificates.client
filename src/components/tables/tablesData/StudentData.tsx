@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { History, Info, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
@@ -18,6 +19,7 @@ import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import { saveStudentHistory } from '@/lib/utils/saveStudentHistory'
 import updateHistory from '@/lib/utils/updateHistory.ts'
+import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
 
 interface StudentDataProps {
@@ -43,7 +45,10 @@ const StudentData: FC<StudentDataProps> = ({
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeStudentForm>({ mode: 'onChange' })
+	} = useForm<TypeStudentForm>({
+		mode: 'onChange',
+		resolver: zodResolver(studentValidationSchema)
+	})
 
 	const onSubmit = (id: number | string, data: TypeStudentForm) => {
 		const newData = { ...data, groupId: Number(data.groupId) }
@@ -131,11 +136,7 @@ const StudentData: FC<StudentDataProps> = ({
 									id={'surname'}
 									defaultValue={surname}
 									placeholder={'Введите фамилию'}
-									{...register('surname', {
-										required: 'Обязательное поле',
-										minLength: { value: 5, message: 'Минимум 5 символов' },
-										maxLength: { value: 30, message: 'Максимум 30 символов' }
-									})}
+									{...register('surname')}
 								/>
 								<ErrorMessage error={errors.surname} />
 								<CustomInput
@@ -143,11 +144,7 @@ const StudentData: FC<StudentDataProps> = ({
 									id={'name'}
 									defaultValue={name}
 									placeholder={'Введите имя'}
-									{...register('name', {
-										required: 'Обязательное поле',
-										minLength: { value: 3, message: 'Минимум 3 символа' },
-										maxLength: { value: 30, message: 'Максимум 30 символов' }
-									})}
+									{...register('name')}
 								/>
 								<ErrorMessage error={errors.name} />
 								<CustomInput

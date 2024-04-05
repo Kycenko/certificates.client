@@ -4,7 +4,7 @@ export const enum BASE_URL {
 
 export const enum PAGES_URL {
 	HOME = '/',
-	AUTH_LOGIN = '/auth/login',
+	LOGIN = '/login',
 	USERS = '/users',
 	HEALTHS_GROUPS = '/health-groups',
 	PHYSICAL_EDUCATIONS = '/physical-educations',
@@ -21,7 +21,6 @@ export const enum SERVICE_URL {
 	AUTH = 'auth',
 	AUTH_ACCESS_TOKEN = 'auth/login/access-token',
 	USERS = 'users',
-	PROFILE = 'users/profile',
 	STUDENTS = 'students',
 	PHYSICAL_EDUCATIONS = 'physical-educations',
 	HEALTH_GROUPS = 'health-groups',

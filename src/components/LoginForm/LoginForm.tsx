@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -8,6 +9,7 @@ import ErrorMessage from '../ui/fields/ErrorMessage'
 import CustomInput from '../ui/inputs/CustomInput'
 
 import styles from './LoginForm.module.scss'
+import { loginValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useLogin } from '@/queries/auth.queries'
 
 const LoginForm = () => {
@@ -15,19 +17,22 @@ const LoginForm = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		setError,
 		reset
-	} = useForm<ILogin>({ mode: 'onChange' })
+	} = useForm<ILogin>({
+		mode: 'onChange',
+		resolver: zodResolver(loginValidationSchema)
+	})
 
 	const { mutateAsync } = useLogin()
-	const [loginError, setLoginError] = useState<string | null>(null)
+
 	const [showPassword, setShowPassword] = useState(false)
 
 	const handleLogin = async (data: ILogin) => {
 		try {
 			await mutateAsync(data)
-			setLoginError(null)
 		} catch (error) {
-			setLoginError('Неверный логин или пароль')
+			setError('root', { message: 'Неверный логин или пароль' })
 			reset()
 		}
 	}
@@ -41,11 +46,7 @@ const LoginForm = () => {
 						<CustomInput
 							id={'name'}
 							label={'Логин:'}
-							{...register('login', {
-								required: 'Обязательное поле',
-								minLength: { value: 5, message: 'Минимум 5 символов' },
-								maxLength: { value: 30, message: 'Максимум 30 символов' }
-							})}
+							{...register('login')}
 						/>
 					</div>
 					<ErrorMessage error={errors.login} />
@@ -54,11 +55,7 @@ const LoginForm = () => {
 							id={'password'}
 							label={'Пароль:'}
 							type={showPassword ? 'text' : 'password'}
-							{...register('password', {
-								required: 'Обязательное поле',
-								minLength: { value: 6, message: 'Минимум 6 символов' },
-								maxLength: { value: 40, message: 'Максимум 40 символов' }
-							})}
+							{...register('password')}
 						/>
 						<button
 							type='button'
@@ -69,7 +66,7 @@ const LoginForm = () => {
 						</button>
 					</div>
 					<ErrorMessage error={errors.password} />
-					{loginError && <p className='text-red-500'>{loginError}</p>}
+					{errors.root && <p className='text-red-500'>{errors.root.message}</p>}
 					<div className={styles.btnContainer}>
 						<button
 							className={styles.loginBtn}

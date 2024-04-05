@@ -89,7 +89,7 @@ const DepartmentDetailsTable = () => {
 				<CustomSelect
 					id='number'
 					label='Выберите номер курса'
-					{...register('number', { required: 'Обязательное поле' })}
+					{...register('number')}
 				>
 					<option
 						key={1}

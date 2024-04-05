@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Info, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
@@ -20,6 +21,7 @@ import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
 import updateHistory from '@/lib/utils/updateHistory.ts'
+import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourses } from '@/queries/course.queries.ts'
 
 interface GroupDataProps {
@@ -40,7 +42,10 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeGroupForm>({ mode: 'onChange' })
+	} = useForm<TypeGroupForm>({
+		mode: 'onChange',
+		resolver: zodResolver(groupValidationSchema)
+	})
 	const handleEdit = (id: number | string) => {
 		setEditId(id)
 		reset()
@@ -136,11 +141,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 								label='Название'
 								defaultValue={name}
 								placeholder={'Введите название'}
-								{...register('name', {
-									required: 'Обязательное поле',
-									minLength: { value: 5, message: 'Минимум 5 символов' },
-									maxLength: { value: 5, message: 'Максимум 5 символов' }
-								})}
+								{...register('name')}
 							/>
 							<ErrorMessage error={errors.name} />
 							<CustomSelect
