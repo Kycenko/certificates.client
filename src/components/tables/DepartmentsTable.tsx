@@ -30,7 +30,6 @@ import {
 	useUpdateDepartment
 } from '@/queries/department.queries'
 
-
 const DepartmentsTable = () => {
 	const navigate = useNavigate()
 	const { departments, isLoading, refetch } = useGetDepartments()

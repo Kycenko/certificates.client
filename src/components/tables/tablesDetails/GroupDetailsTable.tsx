@@ -26,7 +26,6 @@ import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroup } from '@/queries/group.queries.ts'
 import { useCreateStudent } from '@/queries/student.queries.ts'
 
-
 const GroupDetailsTable = () => {
 	const navigate = useNavigate()
 	const { id } = useParams()

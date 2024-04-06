@@ -22,7 +22,6 @@ import updateHistory from '@/lib/utils/updateHistory.ts'
 import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
 
-
 interface StudentDataProps {
 	data: IStudent[] | undefined
 	onEdit: (id: number | string, data: TypeStudentForm) => void

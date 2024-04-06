@@ -24,7 +24,6 @@ import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
 import { useGetStudents } from '@/queries/student.queries.ts'
 
-
 interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined
 	onEdit: (id: number | string, data: TypeMedicalCertificateForm) => void

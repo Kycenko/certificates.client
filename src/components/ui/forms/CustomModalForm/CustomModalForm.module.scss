@@ -1,45 +1,44 @@
 .modalOpen {
-  @apply fixed inset-0 flex items-center justify-center z-50;
-  background-color: rgba(0, 0, 0, 0.5);
+	@apply fixed inset-0 flex items-center justify-center z-50;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modalClose {
-  display: none;
+	display: none;
 }
 
 .container {
-  @apply justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none;
+	@apply justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none;
 }
 
 .main {
-  @apply relative w-auto my-6 mx-auto max-w-5xl;
+	@apply relative w-auto my-6 mx-auto max-w-5xl;
 }
 
 .form {
-  @apply border-0 rounded-lg shadow-lg relative flex flex-col w-full min-w-96  bg-white outline-none focus:outline-none;
+	@apply border-0 rounded-lg shadow-lg relative flex flex-col w-full min-w-96  bg-white outline-none focus:outline-none;
 }
 
 .header {
-  @apply flex items-start justify-between p-5 border-b border-solid;
+	@apply flex items-start justify-between p-5 border-b border-solid;
 }
 
 .title {
-  @apply text-3xl font-semibold;
+	@apply text-3xl font-semibold;
 }
 
 .cross {
-  @apply cursor-pointer;
+	@apply cursor-pointer;
 }
 
 .content {
-  @apply relative p-6 flex-auto;
+	@apply relative p-6 flex-auto;
 }
 
 .footer {
-  @apply flex items-center justify-end p-6 border-t border-solid;
+	@apply flex items-center justify-end p-6 border-t border-solid;
 }
 
-
 .closeBtn {
-  @apply text-black font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150;
+	@apply text-black font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150;
 }
