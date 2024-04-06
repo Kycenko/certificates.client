@@ -48,5 +48,10 @@ export const studentValidationSchema = z.object({
 		.string()
 		.min(3, { message: 'Минимум 3 символа' })
 		.max(30, { message: 'Максимум 30 символов' }),
-	birthDate: z.date()
+	birthDate: z.string().datetime({ message: 'Обязательное поле' })
+})
+
+export const medicalCertificateValidationSchema = z.object({
+	startDate: z.string().datetime({ message: 'Обязательное поле' }),
+	finishDate: z.string().datetime({ message: 'Обязательное поле' })
 })

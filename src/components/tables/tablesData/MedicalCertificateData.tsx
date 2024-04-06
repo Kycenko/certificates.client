@@ -24,6 +24,7 @@ import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
 import { useGetStudents } from '@/queries/student.queries.ts'
 
+
 interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined
 	onEdit: (id: number | string, data: TypeMedicalCertificateForm) => void
@@ -138,7 +139,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 								label='Выберите дату начала'
 								type='date'
 								defaultValue={format(new Date(startDate), 'yyyy-MM-dd')}
-								{...register('startDate', { required: 'Обязательное поле' })}
+								{...register('startDate')}
 							/>
 							<ErrorMessage error={errors.startDate} />
 							<CustomInput
@@ -146,15 +147,13 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 								label='Выберите дату окончания'
 								type='date'
 								defaultValue={format(new Date(finishDate), 'yyyy-MM-dd')}
-								{...register('finishDate', { required: 'Обязательное поле' })}
+								{...register('finishDate')}
 							/>
 							<ErrorMessage error={errors.finishDate} />
 							<CustomSelect
 								id='healthGroupId'
 								label='Выберите группу здоровья'
-								{...register('healthGroupId', {
-									required: 'Обязательное поле'
-								})}
+								{...register('healthGroupId')}
 							>
 								{physicalEducations?.map(({ id, name }) => (
 									<option
@@ -169,9 +168,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 							<CustomSelect
 								id='physicalEducationId'
 								label='Выберите группу по физкультуре'
-								{...register('physicalEducationId', {
-									required: 'Обязательное поле'
-								})}
+								{...register('physicalEducationId')}
 							>
 								{healthGroups?.map(({ id, name }) => (
 									<option

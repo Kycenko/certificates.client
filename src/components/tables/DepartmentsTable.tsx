@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -29,6 +30,7 @@ import {
 	useUpdateDepartment
 } from '@/queries/department.queries'
 
+
 const DepartmentsTable = () => {
 	const navigate = useNavigate()
 	const { departments, isLoading, refetch } = useGetDepartments()
@@ -39,7 +41,8 @@ const DepartmentsTable = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset
+		reset,
+		setFocus
 	} = useForm<TypeDepartmentForm>({
 		mode: 'onChange',
 		resolver: zodResolver(departmentValidationSchema)
@@ -48,6 +51,10 @@ const DepartmentsTable = () => {
 	const { create } = useCreateDepartment()
 	const { update } = useUpdateDepartment()
 	const { remove } = useDeleteDepartment()
+
+	useEffect(() => {
+		setFocus('name')
+	}, [setFocus])
 
 	const handleCreate: SubmitHandler<TypeDepartmentForm> = async data => {
 		await create(data)

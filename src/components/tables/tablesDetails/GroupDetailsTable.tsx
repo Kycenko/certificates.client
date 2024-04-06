@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -21,8 +22,10 @@ import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
+import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroup } from '@/queries/group.queries.ts'
 import { useCreateStudent } from '@/queries/student.queries.ts'
+
 
 const GroupDetailsTable = () => {
 	const navigate = useNavigate()
@@ -36,7 +39,10 @@ const GroupDetailsTable = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeStudentForm>({ mode: 'onChange' })
+	} = useForm<TypeStudentForm>({
+		mode: 'onChange',
+		resolver: zodResolver(studentValidationSchema)
+	})
 
 	const { create } = useCreateStudent()
 
@@ -108,22 +114,14 @@ const GroupDetailsTable = () => {
 					label={'Фамилия'}
 					id={'surname'}
 					placeholder={'Введите фамилию'}
-					{...register('surname', {
-						required: 'Обязательное поле',
-						minLength: { value: 5, message: 'Минимум 5 символов' },
-						maxLength: { value: 30, message: 'Максимум 30 символов' }
-					})}
+					{...register('surname')}
 				/>
 				<ErrorMessage error={errors.surname} />
 				<CustomInput
 					label={'Имя'}
 					id={'name'}
 					placeholder={'Введите имя'}
-					{...register('name', {
-						required: 'Обязательное поле',
-						minLength: { value: 3, message: 'Минимум 3 символа' },
-						maxLength: { value: 30, message: 'Максимум 30 символов' }
-					})}
+					{...register('name')}
 				/>
 				<ErrorMessage error={errors.name} />
 				<CustomInput
@@ -138,7 +136,7 @@ const GroupDetailsTable = () => {
 					label='Выберите дату рождения'
 					type='date'
 					max={format(new Date(), 'yyyy-MM-dd')}
-					{...register('birthDate', { required: 'Обязательное поле' })}
+					{...register('birthDate')}
 				/>
 				<ErrorMessage error={errors.birthDate} />
 			</CustomModalForm>

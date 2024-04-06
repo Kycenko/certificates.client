@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -24,6 +25,7 @@ import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourse } from '@/queries/course.queries.ts'
 import { useCreateGroup } from '@/queries/group.queries.ts'
 
+
 const CourseDetailsTable = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
@@ -34,11 +36,15 @@ const CourseDetailsTable = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors }
+		formState: { errors },
+		setFocus
 	} = useForm<TypeGroupForm>({
 		mode: 'onChange',
 		resolver: zodResolver(groupValidationSchema)
 	})
+	useEffect(() => {
+		setFocus('name')
+	}, [setFocus])
 
 	const handleCreate: SubmitHandler<TypeGroupForm> = async data => {
 		const newData = { ...data, courseId: course?.id }

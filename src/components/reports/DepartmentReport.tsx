@@ -1,8 +1,6 @@
 import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
 
-import { reportToast } from '@/constants/notification-toasts.ts'
-
 import usePrint from '@/hooks/usePrint'
 
 import Layout from '../Layout/Layout'
@@ -15,12 +13,10 @@ const DepartmentReport = () => {
 	const { id } = useParams()
 	const { data } = useGetDepartmentReport(id)
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
-
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: `department-report-${id}`,
-		onAfterPrint: () => reportToast()
+		documentTitle: `department-report-${id}`
 	})
-
+	console.log(data)
 	return (
 		<Layout>
 			<button onClick={handlePrint}>Экспорт</button>
@@ -44,6 +40,9 @@ const DepartmentReport = () => {
 					<thead className={'border-b-2 border-t-2'}>
 						<tr>
 							<th>Cтудент</th>
+							<th>Группа</th>
+							<th>Отделение</th>
+							<th>Группа по физкультуре</th>
 							<th>Дата начала действия</th>
 							<th>Дата окончания действия</th>
 						</tr>
@@ -53,7 +52,13 @@ const DepartmentReport = () => {
 							courses?.flatMap(({ groups }) =>
 								groups.flatMap(({ students }) =>
 									students.flatMap(
-										({ name, surname, secondName, medicalCertificates }) =>
+										({
+											name,
+											surname,
+
+											secondName,
+											medicalCertificates
+										}) =>
 											medicalCertificates?.map(
 												({ startDate, finishDate }, index) => (
 													<tr
@@ -63,6 +68,9 @@ const DepartmentReport = () => {
 														<td className='p-2'>
 															{formatFullName(surname, name, secondName)}
 														</td>
+														<td>Группа</td>
+														<td>{departmentName}</td>
+
 														<td>{format(new Date(startDate), 'dd.MM.yyyy')}</td>
 														<td>
 															{format(new Date(finishDate), 'dd.MM.yyyy')}

@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { addMonths, format } from 'date-fns'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -25,10 +26,12 @@ import styles from '@/app/styles/DetailsTables.module.scss'
 import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
 import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'
+import { medicalCertificateValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useCreateMedicalCertificate } from '@/queries/medical-certificate.queries.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
 import { useGetStudent } from '@/queries/student.queries.ts'
+
 
 const StudentDetailsTable = () => {
 	const { id } = useParams()
@@ -48,7 +51,10 @@ const StudentDetailsTable = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeMedicalCertificateForm>()
+	} = useForm<TypeMedicalCertificateForm>({
+		mode: 'onChange',
+		resolver: zodResolver(medicalCertificateValidationSchema)
+	})
 
 	const { create } = useCreateMedicalCertificate()
 
@@ -151,29 +157,32 @@ const StudentDetailsTable = () => {
 				formTitle={'Создание'}
 			>
 				{isDurationSelected ? (
-					<CustomSelect
-						id='finishDate'
-						label='Выберите продолжительность'
-						{...register('finishDate')}
-					>
-						<option value='3'>3 месяца</option>
-						<option value='6'>6 месяцев</option>
-						<option value='12'>12 месяцев</option>
-					</CustomSelect>
+					<>
+						<CustomSelect
+							id='finishDate'
+							label='Выберите продолжительность'
+							{...register('finishDate')}
+						>
+							<option value='3'>3 месяца</option>
+							<option value='6'>6 месяцев</option>
+							<option value='12'>12 месяцев</option>
+						</CustomSelect>
+						<ErrorMessage error={errors.finishDate} />
+					</>
 				) : (
 					<>
 						<CustomInput
 							id='startDate'
 							label='Выберите дату начала'
 							type='date'
-							{...register('startDate', { required: 'Обязательное поле' })}
+							{...register('startDate')}
 						/>
 						<ErrorMessage error={errors.startDate} />
 						<CustomInput
 							id='finishDate'
 							label='Выберите дату окончания'
 							type='date'
-							{...register('finishDate', { required: 'Обязательное поле' })}
+							{...register('finishDate')}
 						/>
 						<ErrorMessage error={errors.finishDate} />
 					</>
