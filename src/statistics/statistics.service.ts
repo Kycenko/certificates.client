@@ -21,6 +21,7 @@ export class StatisticsService {
 					select: {
 						groups: {
 							select: {
+								name: true,
 								students: {
 									select: {
 										name: true,
@@ -29,7 +30,9 @@ export class StatisticsService {
 										medicalCertificates: {
 											select: {
 												startDate: true,
-												finishDate: true
+												finishDate: true,
+												physicalEducation: true,
+												healthGroup: true
 											}
 										}
 									}
