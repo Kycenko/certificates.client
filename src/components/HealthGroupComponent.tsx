@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import HealthGroupData from '@/components/tables/tablesData/HealthGroupData'
@@ -13,6 +14,7 @@ import Heading from './ui/fields/Heading'
 import CustomModalForm from './ui/forms/CustomModalForm/CustomModalForm'
 import CustomInput from './ui/inputs/CustomInput'
 import CustomLoader from './ui/loader/CustomLoader'
+import { healthGroupValidationSchema } from '@/lib/validation/validation.schema'
 import {
 	useCreateHealthGroup,
 	useDeleteHealthGroup,
@@ -28,7 +30,11 @@ const HealthGroupComponent = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypeHealthGroupForm>({ mode: 'onChange' })
+	} = useForm<TypeHealthGroupForm>({
+		mode: 'onChange',
+		resolver: zodResolver(healthGroupValidationSchema)
+	})
+
 	const { create } = useCreateHealthGroup()
 	const { update } = useUpdateHealthGroup()
 	const { remove } = useDeleteHealthGroup()
@@ -76,11 +82,7 @@ const HealthGroupComponent = () => {
 					label={'Название'}
 					id={'name'}
 					placeholder={'Введите название'}
-					{...register('name', {
-						required: 'Обязательное поле',
-						minLength: { value: 5, message: 'Минимум 5 символов' },
-						maxLength: { value: 15, message: 'Максимум 15 символов' }
-					})}
+					{...register('name')}
 				/>
 				<ErrorMessage error={errors.name} />
 			</CustomModalForm>

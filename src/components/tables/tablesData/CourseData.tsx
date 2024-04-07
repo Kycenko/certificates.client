@@ -11,7 +11,7 @@ import { ICourse, TypeCourseForm } from '@/types/course.types.ts'
 
 import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
-import useSortData from '@/hooks/useSortData.ts'
+import useSortData from '@/hooks/useSortData'
 
 import styles from '@/app/styles/Tables.module.scss'
 import updateHistory from '@/lib/utils/updateHistory.ts'
@@ -54,11 +54,17 @@ const CourseData: FC<CourseDataProps> = ({
 		setEditId(null)
 		reset()
 	}
+
 	const { sortOrder } = useFilters()
 
-	const { sortedData } = useSortData(data as ICourse[], sortOrder)
+	const { sortedData } = useSortData(
+		data as ICourse[],
+
+		sortOrder
+	)
 
 	updateHistory(null, sortOrder)
+
 	return (
 		<>
 			{!sortedData || sortedData.length === 0 ? (
@@ -71,7 +77,7 @@ const CourseData: FC<CourseDataProps> = ({
 					</td>
 				</tr>
 			) : (
-				sortedData.map(({ id, number, departmentId }) => (
+				sortedData.map(({ id, number, departmentId, groups }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}
@@ -86,6 +92,7 @@ const CourseData: FC<CourseDataProps> = ({
 									?.map(({ name }) => name)}
 							</span>
 						</td>
+						<td className={styles.cellPadding}>{groups?.length}</td>
 
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>

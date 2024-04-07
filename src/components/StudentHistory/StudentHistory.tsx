@@ -31,14 +31,18 @@ const StudentHistory = () => {
 				<tbody>
 					{studentHistory.map(item => (
 						<tr
-							className={styles.contentCell}
+							className={'text-center'}
 							key={item.id}
 						>
-							<td>
+							<td className='text-center'>
 								{item.surname} {item.name} {item.secondName}
 							</td>
-							<td>{format(new Date(item.birthDate), 'dd.MM.yyyy')}</td>
-							<td>{format(new Date(item.updatedAt), 'dd.MM.yyyy HH:mm:ss')}</td>
+							<td className='text-center'>
+								{format(new Date(item.birthDate), 'dd.MM.yyyy')}
+							</td>
+							<td className='text-center'>
+								{format(new Date(item.updatedAt), 'dd.MM.yyyy HH:mm:ss')}
+							</td>
 						</tr>
 					))}
 				</tbody>

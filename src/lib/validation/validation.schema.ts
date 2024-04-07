@@ -11,6 +11,17 @@ export const loginValidationSchema = z.object({
 		.max(40, { message: 'Максимум 40 символов' })
 })
 
+export const userValidationSchema = z.object({
+	login: z
+		.string()
+		.min(5, { message: 'Минимум 5 символов' })
+		.max(30, { message: 'Максимум 30 символов' }),
+	password: z
+		.string()
+		.min(6, { message: 'Минимум 6 символов' })
+		.max(40, { message: 'Максимум 40 символов' })
+})
+
 export const departmentValidationSchema = z.object({
 	name: z
 		.string()
@@ -21,8 +32,9 @@ export const departmentValidationSchema = z.object({
 export const groupValidationSchema = z.object({
 	name: z
 		.string()
-		.min(6, { message: 'Минимум 5 символов' })
-		.max(5, { message: 'Максимум 5 символов' })
+		.min(5, { message: 'Минимум 5 символов' })
+		.max(5, { message: 'Максимум 5 символов' }),
+	courseId: z.string().optional()
 })
 
 export const healthGroupValidationSchema = z.object({
@@ -48,7 +60,8 @@ export const studentValidationSchema = z.object({
 		.string()
 		.min(3, { message: 'Минимум 3 символа' })
 		.max(30, { message: 'Максимум 30 символов' }),
-	birthDate: z.string().datetime({ message: 'Обязательное поле' })
+	birthDate: z.string().optional(),
+	groupId: z.string().optional()
 })
 
 export const medicalCertificateValidationSchema = z.object({

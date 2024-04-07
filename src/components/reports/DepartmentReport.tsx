@@ -19,8 +19,7 @@ const DepartmentReport = () => {
 	console.log(data)
 	return (
 		<Layout>
-			<button onClick={handlePrint}>Экспорт</button>
-			<div ref={printRef}>
+			<div>
 				<div className={'justify-center'}>
 					<div className={'mb-2 flex justify-center'}>
 						<img
@@ -28,6 +27,17 @@ const DepartmentReport = () => {
 							alt='Logo'
 						/>
 					</div>
+
+					<div className='justify-center flex'>
+						<button
+							className='p-2 bg-red-500 text-white rounded-md mb-4'
+							onClick={handlePrint}
+						>
+							Экспорт в PDF
+						</button>
+					</div>
+				</div>
+				<div ref={printRef}>
 					<div className='text-center '>
 						Частное учреждение образования "Колледж бизнеса и права"
 					</div>
@@ -35,55 +45,61 @@ const DepartmentReport = () => {
 						Отчет по медицинским показателем обучающихся отделения:
 						<b className='ml-2'>{departmentName}</b>
 					</div>
-				</div>
-				<table className={styles.table}>
-					<thead className={'border-b-2 border-t-2'}>
-						<tr>
-							<th>Cтудент</th>
-							<th>Группа</th>
-							<th>Отделение</th>
-							<th>Группа по физкультуре</th>
-							<th>Дата начала действия</th>
-							<th>Дата окончания действия</th>
-						</tr>
-					</thead>
-					<tbody className='text-center'>
-						{data?.map(({ id, courses }) =>
-							courses?.flatMap(({ groups }) =>
-								groups.flatMap(({ students }) =>
-									students.flatMap(
-										({
-											name,
-											surname,
-
-											secondName,
-											medicalCertificates
-										}) =>
-											medicalCertificates?.map(
-												({ startDate, finishDate }, index) => (
-													<tr
-														className='border'
-														key={`${id}-${name}-${surname}-${index}`}
-													>
-														<td className='p-2'>
-															{formatFullName(surname, name, secondName)}
-														</td>
-														<td>Группа</td>
-														<td>{departmentName}</td>
-
-														<td>{format(new Date(startDate), 'dd.MM.yyyy')}</td>
-														<td>
-															{format(new Date(finishDate), 'dd.MM.yyyy')}
-														</td>
-													</tr>
+					<table className={styles.table}>
+						<thead className={'border-b-2 border-t-2'}>
+							<tr>
+								<th>Cтудент</th>
+								<th>Группа</th>
+								<th>Отделение</th>
+								<th>Группа по физкультуре</th>
+								<th>Группа здоровья</th>
+								<th>Дата начала действия</th>
+								<th>Дата окончания действия</th>
+							</tr>
+						</thead>
+						<tbody className='text-center'>
+							{data?.map(({ id, courses }) =>
+								courses?.flatMap(({ groups }) =>
+									groups.flatMap(({ students, name: groupName }) =>
+										students.flatMap(
+											({ name, surname, secondName, medicalCertificates }) =>
+												medicalCertificates?.map(
+													(
+														{
+															startDate,
+															finishDate,
+															healthGroup,
+															physicalEducation
+														},
+														index
+													) => (
+														<tr
+															className='border'
+															key={`${id}-${name}-${surname}-${index}`}
+														>
+															<td className='p-2'>
+																{formatFullName(surname, name, secondName)}
+															</td>
+															<td>{groupName}</td>
+															<td>{departmentName}</td>
+															<td>{physicalEducation.name}</td>
+															<td>{healthGroup.name}</td>
+															<td>
+																{format(new Date(startDate), 'dd.MM.yyyy')}
+															</td>
+															<td>
+																{format(new Date(finishDate), 'dd.MM.yyyy')}
+															</td>
+														</tr>
+													)
 												)
-											)
+										)
 									)
 								)
-							)
-						)}
-					</tbody>
-				</table>
+							)}
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</Layout>
 	)

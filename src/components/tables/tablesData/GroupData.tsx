@@ -21,7 +21,7 @@ import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
 import updateHistory from '@/lib/utils/updateHistory.ts'
-import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
+import { groupValidationSchema } from '@/lib/validation/validation.schema'
 import { useGetCourses } from '@/queries/course.queries.ts'
 
 interface GroupDataProps {
@@ -67,7 +67,8 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 	const { sortedData } = useSortAndFilterData(
 		data as IGroup[],
 		searchTerm,
-		sortOrder
+		sortOrder,
+		'name'
 	)
 
 	updateHistory(searchTerm, sortOrder)
@@ -130,7 +131,13 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 							</tr>
 						)}
 						<CustomModalForm
-							onSubmit={handleSubmit(data => onSubmit(id, data))}
+							onSubmit={handleSubmit(data => {
+								const newData = {
+									...data,
+									courseId: Number(data.courseId)
+								}
+								onSubmit(id, newData)
+							})}
 							isOpen={editId === id}
 							onClose={() => setEditId(null)}
 							formTitle='Изменение'

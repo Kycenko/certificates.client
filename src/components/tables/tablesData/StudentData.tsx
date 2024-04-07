@@ -63,7 +63,8 @@ const StudentData: FC<StudentDataProps> = ({
 	const { sortedData } = useSortAndFilterData(
 		data as IStudent[],
 		searchTerm,
-		sortOrder
+		sortOrder,
+		'name'
 	)
 
 	updateHistory(searchTerm, sortOrder)

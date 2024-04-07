@@ -58,7 +58,8 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 	const { sortedData } = useSortAndFilterData(
 		data as IDepartment[],
 		searchTerm,
-		sortOrder
+		sortOrder,
+		'name'
 	)
 
 	updateHistory(searchTerm, sortOrder)

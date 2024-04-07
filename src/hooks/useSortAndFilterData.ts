@@ -1,10 +1,11 @@
 const useSortAndFilterData = (
 	data: any[],
 	searchTerm: string,
-	sortOrder: 'asc' | 'desc'
+	sortOrder: 'asc' | 'desc',
+	sortField: string
 ) => {
 	const filteredData = data?.filter(item =>
-		item.name.toLowerCase().includes(searchTerm.toLowerCase())
+		item[sortField].toLowerCase().includes(searchTerm.toLowerCase())
 	)
 	const sortedData = filteredData?.sort((a, b) => {
 		return sortOrder === 'asc'

@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import PhysicalEducationData from '@/components/tables/tablesData/PhysicalEducationData'
@@ -13,6 +14,7 @@ import Heading from './ui/fields/Heading'
 import CustomModalForm from './ui/forms/CustomModalForm/CustomModalForm'
 import CustomInput from './ui/inputs/CustomInput'
 import CustomLoader from './ui/loader/CustomLoader'
+import { physicalEducationValidationSchema } from '@/lib/validation/validation.schema'
 import {
 	useCreatePhysicalEducation,
 	useDeletePhysicalEducation,
@@ -30,7 +32,10 @@ const PhysicalEducationComponent = () => {
 		handleSubmit,
 		formState: { errors },
 		reset
-	} = useForm<TypePhysicalEducationForm>({ mode: 'onChange' })
+	} = useForm<TypePhysicalEducationForm>({
+		mode: 'onChange',
+		resolver: zodResolver(physicalEducationValidationSchema)
+	})
 
 	const { create } = useCreatePhysicalEducation()
 	const { update } = useUpdatePhysicalEducation()
@@ -87,11 +92,7 @@ const PhysicalEducationComponent = () => {
 					label={'Название'}
 					id={'name'}
 					placeholder={'Введите название'}
-					{...register('name', {
-						required: 'Обязательное поле',
-						minLength: { value: 3, message: 'Минимум 3 символа' },
-						maxLength: { value: 15, message: 'Максимум 15 символов' }
-					})}
+					{...register('name')}
 				/>
 				<ErrorMessage error={errors.name} />
 			</CustomModalForm>
