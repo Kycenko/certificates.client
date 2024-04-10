@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom'
+
 import MedicalCertificateData from '@/components/tables/tablesData/MedicalCertificateData'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
+import { PAGES_URL } from '@/constants/enums'
 import { CertificatesHeads } from '@/constants/table-heads.ts'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types'
@@ -17,6 +20,7 @@ import {
 } from '@/queries/medical-certificate.queries'
 
 const MedicalCertificatesTable = () => {
+	const navigate = useNavigate()
 	const { certificates, isLoading, refetch } = useGetMedicalCertificates()
 
 	const { closeModal } = useModal()
@@ -38,6 +42,9 @@ const MedicalCertificatesTable = () => {
 		closeModal()
 		await refetch()
 	}
+	const onHistory = (id: number | string) => {
+		navigate(`${PAGES_URL.MEDICAL_CERTIFICATE_HISTORY}/${id}`)
+	}
 
 	if (isLoading) return <CustomLoader />
 	return (
@@ -55,6 +62,7 @@ const MedicalCertificatesTable = () => {
 							data={certificates}
 							onDelete={handleDelete}
 							onEdit={handleEdit}
+							onHistory={onHistory}
 						/>
 					</tbody>
 				</table>

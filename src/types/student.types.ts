@@ -8,6 +8,7 @@ export interface IStudent extends IBase {
 	birthDate: Date
 	secondName: string
 	groupId: number | undefined
+	isExpelled: boolean
 	medicalCertificates: IMedicalCertificate[]
 }
 

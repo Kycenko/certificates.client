@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { Pencil, Trash2 } from 'lucide-react'
+import { History, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -9,6 +9,7 @@ import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalFo
 import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
+import { TypeMedicalCertificateHistoryForm } from '@/types/medical-certificate-history.types'
 import {
 	IMedicalCertificate,
 	TypeMedicalCertificateForm
@@ -21,6 +22,7 @@ import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
 import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
+import { useCreateMedicalCertificateHistory } from '@/queries/medical-certificate-history.queries'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
 import { useGetStudents } from '@/queries/student.queries.ts'
 
@@ -28,18 +30,20 @@ interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined
 	onEdit: (id: number | string, data: TypeMedicalCertificateForm) => void
 	onDelete: (id: number | string) => void
+	onHistory: (id: number | string) => void
 }
 
 const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	data,
 	onDelete,
-	onEdit
+	onEdit,
+	onHistory
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
 	const { students } = useGetStudents()
-
+	const { create } = useCreateMedicalCertificateHistory()
 	const studentId = data?.find(id => id.id === editId)?.studentId
 
 	const {
@@ -54,7 +58,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		setDeleteId(null)
 	}
 
-	const handleEdit = (
+	const handleEdit = async (
 		id: number | string,
 		data: TypeMedicalCertificateForm
 	) => {
@@ -64,7 +68,16 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 			physicalEducationId: Number(data.physicalEducationId),
 			studentId: studentId
 		}
+		const historyData = {
+			medicalCertificateId: Number(id),
+			startDate: data.startDate,
+			finishDate: data.finishDate,
+			healthGroupId: Number(data.healthGroupId),
+			physicalEducationId: Number(data.physicalEducationId)
+		}
+		await create(historyData as TypeMedicalCertificateHistoryForm)
 		onEdit(id, newData)
+
 		setEditId(null)
 		reset()
 	}
@@ -81,118 +94,132 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 					</td>
 				</tr>
 			) : (
-				data?.map(({ id, startDate, finishDate, studentId }) => (
-					<tr
-						className={styles.contentCell}
-						key={id}
-					>
-						<td className={styles.cellPadding}>
-							{students
-								?.filter(({ id }) => id === studentId)
-								.map(
-									({ name, surname, secondName }) =>
-										`${surname} ${name} ${secondName}`
-								)}
-						</td>
-						<td className={styles.cellPadding}>
-							<span>{format(new Date(startDate), 'dd.MM.yyyy')}</span>
-						</td>
-						<td className={styles.cellPadding}>
-							<span>{format(new Date(finishDate), 'dd.MM.yyyy')}</span>
-						</td>
-						<td className={styles.cellPadding}>
-							{getValidityPeriod(finishDate, startDate)}
-						</td>
-						<td className={styles.cellPadding}>
-							{getDaysUntilExpiry(finishDate, startDate)}
-						</td>
-						<td className={styles.cellPadding}>
-							{daysUntilTheEnd(finishDate)}
-						</td>
+				data?.map(
+					({
+						id,
+						startDate,
+						finishDate,
+						studentId,
+						healthGroupId,
+						physicalEducationId
+					}) => (
+						<tr
+							className={styles.contentCell}
+							key={id}
+						>
+							<td className={styles.cellPadding}>
+								{students
+									?.filter(({ id }) => id === studentId)
+									.map(
+										({ name, surname, secondName }) =>
+											`${surname} ${name} ${secondName ? secondName : ''}`
+									)}
+							</td>
+							<td className={styles.cellPadding}>
+								<span>{format(new Date(startDate), 'dd.MM.yyyy')}</span>
+							</td>
+							<td className={styles.cellPadding}>
+								<span>{format(new Date(finishDate), 'dd.MM.yyyy')}</span>
+							</td>
+							<td className={styles.cellPadding}>
+								{getValidityPeriod(finishDate, startDate)}
+							</td>
+							<td className={styles.cellPadding}>
+								{getDaysUntilExpiry(finishDate, startDate)}
+							</td>
+							<td className={styles.cellPadding}>
+								{daysUntilTheEnd(finishDate)}
+							</td>
 
-						<td className={styles.editCellContainer}>
-							<div className={styles.adminEditCell}>
-								<CustomButton
-									onClick={() => {
-										setEditId(id)
-										reset()
-									}}
+							<td className={styles.editCellContainer}>
+								<div className={styles.adminEditCell}>
+									<CustomButton onClick={() => onHistory(id)}>
+										<History />
+									</CustomButton>
+									<CustomButton
+										onClick={() => {
+											setEditId(id)
+											reset()
+										}}
+									>
+										<Pencil />
+									</CustomButton>
+
+									<CustomButton onClick={() => setDeleteId(id)}>
+										<Trash2 />
+									</CustomButton>
+								</div>
+							</td>
+							<CustomModalForm
+								onSubmit={handleSubmit(data => handleEdit(id, data))}
+								isOpen={editId === id}
+								onClose={() => setEditId(null)}
+								formTitle='Изменение'
+								buttonTitle='Изменить'
+							>
+								<CustomInput
+									id='startDate'
+									label='Выберите дату начала'
+									type='date'
+									defaultValue={format(new Date(startDate), 'yyyy-MM-dd')}
+									{...register('startDate')}
+								/>
+								<ErrorMessage error={errors.startDate} />
+								<CustomInput
+									id='finishDate'
+									label='Выберите дату окончания'
+									type='date'
+									defaultValue={format(new Date(finishDate), 'yyyy-MM-dd')}
+									{...register('finishDate')}
+								/>
+								<ErrorMessage error={errors.finishDate} />
+								<CustomSelect
+									id='healthGroupId'
+									label='Выберите группу здоровья'
+									defaultValue={healthGroupId}
+									{...register('healthGroupId')}
 								>
-									<Pencil />
-								</CustomButton>
+									{physicalEducations?.map(({ id, name }) => (
+										<option
+											value={id}
+											key={id}
+										>
+											{name}
+										</option>
+									))}
+								</CustomSelect>
 
-								<CustomButton onClick={() => setDeleteId(id)}>
-									<Trash2 />
-								</CustomButton>
-							</div>
-						</td>
-						<CustomModalForm
-							onSubmit={handleSubmit(data => handleEdit(id, data))}
-							isOpen={editId === id}
-							onClose={() => setEditId(null)}
-							formTitle='Изменение'
-							buttonTitle='Изменить'
-						>
-							<CustomInput
-								id='startDate'
-								label='Выберите дату начала'
-								type='date'
-								defaultValue={format(new Date(startDate), 'yyyy-MM-dd')}
-								{...register('startDate')}
-							/>
-							<ErrorMessage error={errors.startDate} />
-							<CustomInput
-								id='finishDate'
-								label='Выберите дату окончания'
-								type='date'
-								defaultValue={format(new Date(finishDate), 'yyyy-MM-dd')}
-								{...register('finishDate')}
-							/>
-							<ErrorMessage error={errors.finishDate} />
-							<CustomSelect
-								id='healthGroupId'
-								label='Выберите группу здоровья'
-								{...register('healthGroupId')}
+								<CustomSelect
+									id='physicalEducationId'
+									label='Выберите группу по физкультуре'
+									defaultValue={physicalEducationId}
+									{...register('physicalEducationId')}
+								>
+									{healthGroups?.map(({ id, name }) => (
+										<option
+											value={id}
+											key={id}
+										>
+											{name}
+										</option>
+									))}
+								</CustomSelect>
+							</CustomModalForm>
+							<CustomModalForm
+								onSubmit={() => handleDelete(id)}
+								buttonTitle={'Удалить'}
+								isOpen={deleteId === id}
+								onClose={() => setDeleteId(null)}
+								formTitle={'Удаление'}
 							>
-								{physicalEducations?.map(({ id, name }) => (
-									<option
-										value={id}
-										key={id}
-									>
-										{name}
-									</option>
-								))}
-							</CustomSelect>
-
-							<CustomSelect
-								id='physicalEducationId'
-								label='Выберите группу по физкультуре'
-								{...register('physicalEducationId')}
-							>
-								{healthGroups?.map(({ id, name }) => (
-									<option
-										value={id}
-										key={id}
-									>
-										{name}
-									</option>
-								))}
-							</CustomSelect>
-						</CustomModalForm>
-						<CustomModalForm
-							onSubmit={() => handleDelete(id)}
-							buttonTitle={'Удалить'}
-							isOpen={deleteId === id}
-							onClose={() => setDeleteId(null)}
-							formTitle={'Удаление'}
-						>
-							<p>Дата начала: {format(new Date(startDate), 'dd.MM.yyyy')}</p>
-							<p>
-								Дата окончания: {format(new Date(finishDate), 'dd.MM.yyyy')}
-							</p>
-						</CustomModalForm>
-					</tr>
-				))
+								<p>Дата начала: {format(new Date(startDate), 'dd.MM.yyyy')}</p>
+								<p>
+									Дата окончания: {format(new Date(finishDate), 'dd.MM.yyyy')}
+								</p>
+							</CustomModalForm>
+						</tr>
+					)
+				)
 			)}
 		</>
 	)

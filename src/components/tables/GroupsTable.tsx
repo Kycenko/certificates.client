@@ -8,8 +8,10 @@ import { GroupHeads } from '@/constants/table-heads.ts'
 
 import { TypeGroupForm } from '@/types/group.types'
 
+import useFilters from '@/hooks/useFilters'
 import useModal from '@/hooks/useModal'
 
+import FilterCourse from '../FilterCourse/FilterCourse'
 import Search from '../Search/Search'
 import SortOrder from '../SortOrder/SortOrder'
 import CustomLoader from '../ui/loader/CustomLoader'
@@ -22,6 +24,7 @@ import {
 } from '@/queries/group.queries'
 
 const GroupsTable = () => {
+	const { courseNumber } = useFilters()
 	const navigate = useNavigate()
 	const { groups, isLoading, refetch } = useGetGroups()
 
@@ -54,6 +57,7 @@ const GroupsTable = () => {
 					<div className={styles.header}>
 						<Search placeholder={'Поиск по названию группы...'} />
 						<SortOrder />
+						<FilterCourse />
 					</div>
 				</div>
 				<table className={styles.table}>

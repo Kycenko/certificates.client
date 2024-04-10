@@ -1,12 +1,15 @@
 export const DepartmentHeads = ['Название']
 export const CourseHeads = ['Номер курса', 'Отделение', 'Количество групп']
-export const GroupHeads = ['Название', 'Номер курса']
+export const GroupHeads = ['Название', 'Номер курса', 'Количество учащихся']
 export const StudentHeads = [
 	'Фамилия',
 	'Имя',
 	'Отчество',
 	'Дата рождения',
-	'Название группы'
+	'Название группы',
+
+	'Количество справок',
+	'Отчислен?'
 ]
 export const CertificatesHeads = [
 	'Владелец',

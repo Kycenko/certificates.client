@@ -1,4 +1,3 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { addMonths, format } from 'date-fns'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -26,7 +25,6 @@ import styles from '@/app/styles/DetailsTables.module.scss'
 import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
 import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'
-import { medicalCertificateValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useCreateMedicalCertificate } from '@/queries/medical-certificate.queries.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
@@ -51,8 +49,8 @@ const StudentDetailsTable = () => {
 		formState: { errors },
 		reset
 	} = useForm<TypeMedicalCertificateForm>({
-		mode: 'onChange',
-		resolver: zodResolver(medicalCertificateValidationSchema)
+		mode: 'onChange'
+		//resolver: zodResolver(medicalCertificateValidationSchema)
 	})
 
 	const { create } = useCreateMedicalCertificate()
@@ -60,24 +58,47 @@ const StudentDetailsTable = () => {
 	const handleCreate: SubmitHandler<
 		TypeMedicalCertificateForm
 	> = async data => {
+		let proposedEndDate // Предлагаемая дата окончания справки
+
+		if (isDurationSelected) {
+			const durationMonths = parseInt(data.finishDate.toString())
+			if (!isNaN(durationMonths)) {
+				proposedEndDate = addMonths(new Date(), durationMonths)
+			} else {
+				console.error('Invalid duration provided:', data.finishDate)
+				return // Прерываем, так как продолжительность некорректна
+			}
+		} else {
+			// Если есть явно выбранная дата окончания, используем ее
+			proposedEndDate = new Date(data.finishDate)
+		}
+
+		// Выбираем последнюю медицинскую справку
+		let lastCertificateEndDate
+		if (student?.medicalCertificates?.length) {
+			lastCertificateEndDate = new Date(
+				student.medicalCertificates[
+					student.medicalCertificates.length - 1
+				].finishDate
+			)
+		}
+
+		// Проверяем, что предлагаемая дата окончания справки не раньше окончания предыдущей
+		if (lastCertificateEndDate && proposedEndDate <= lastCertificateEndDate) {
+			alert(
+				'Дата окончания новой справки должна быть позже даты окончания предыдущей справки.'
+			)
+			return // Прерываем выполнение функции, чтобы не создавать справку
+		}
+
+		// Если все проверки прошли успешно, присваиваем data.finishDate
+		data.finishDate = proposedEndDate
 		const newDate = {
 			...data,
 			healthGroupId: Number(data.healthGroupId),
 			physicalEducationId: Number(data.physicalEducationId),
 			studentId: student?.id,
 			startDate: new Date()
-		}
-
-		if (isDurationSelected) {
-			const durationMonths = parseInt(data.finishDate.toString())
-			if (!isNaN(durationMonths)) {
-				const currentDate = new Date()
-				const res = addMonths(currentDate, durationMonths)
-				data.finishDate = new Date(res)
-				console.log(res)
-			} else {
-				console.error('Invalid duration provided:', data.finishDate)
-			}
 		}
 
 		await create(newDate)

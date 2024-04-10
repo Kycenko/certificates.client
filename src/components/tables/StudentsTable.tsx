@@ -8,8 +8,10 @@ import { StudentHeads } from '@/constants/table-heads.ts'
 
 import { TypeStudentForm } from '@/types/student.types'
 
+import useFilters from '@/hooks/useFilters'
 import useModal from '@/hooks/useModal'
 
+import FilterComponent from '../FilterComponent/FilterComponent'
 import Search from '../Search/Search'
 import SortOrder from '../SortOrder/SortOrder'
 import CustomLoader from '../ui/loader/CustomLoader'
@@ -22,8 +24,9 @@ import {
 } from '@/queries/student.queries'
 
 const StudentsTable = () => {
+	const { groupName } = useFilters()
 	const navigate = useNavigate()
-	const { students, isLoading, refetch } = useGetStudents()
+	const { students, isLoading, refetch } = useGetStudents(groupName)
 
 	const { closeModal } = useModal()
 
@@ -45,9 +48,6 @@ const StudentsTable = () => {
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.STUDENTS}/${id}`)
 	}
-	const onHistory = (id: number | string) => {
-		navigate(`${PAGES_URL.STUDENT_HISTORY}/${id}`)
-	}
 
 	if (isLoading) return <CustomLoader />
 	return (
@@ -58,6 +58,7 @@ const StudentsTable = () => {
 						<div className={styles.header}>
 							<Search placeholder={'Поиск по имени обучающегося...'} />
 							<SortOrder />
+							<FilterComponent />
 						</div>
 					</div>
 					<table className={styles.table}>
@@ -70,7 +71,6 @@ const StudentsTable = () => {
 								onDelete={handleDelete}
 								onEdit={handleEdit}
 								onInfo={handleInfo}
-								onHistory={onHistory}
 							/>
 						</tbody>
 					</table>

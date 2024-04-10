@@ -8,8 +8,11 @@ export const GroupService = {
 	async create(data: TypeGroupForm) {
 		return instance.post<IGroup>(SERVICE_URL.GROUPS, data)
 	},
-	async getAll() {
-		return instance.get<IGroup[]>(SERVICE_URL.GROUPS)
+	async getAll(course?: number) {
+		const url = course
+			? `${SERVICE_URL.GROUPS}?course=${course}`
+			: SERVICE_URL.GROUPS
+		return instance.get<IGroup[]>(url)
 	},
 
 	async getById(id: string | undefined) {

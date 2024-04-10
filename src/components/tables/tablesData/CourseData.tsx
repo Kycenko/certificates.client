@@ -92,7 +92,7 @@ const CourseData: FC<CourseDataProps> = ({
 									?.map(({ name }) => name)}
 							</span>
 						</td>
-						<td className={styles.cellPadding}>{groups?.length}</td>
+						<td className={styles.cellPadding}>{groups?.length} групп(а/ы)</td>
 
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>

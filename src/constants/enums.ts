@@ -13,7 +13,8 @@ export const enum PAGES_URL {
 	GROUPS = '/groups',
 	STUDENTS = '/students',
 	STUDENT_HISTORY = '/students/history',
-	MEDICAL_CERTIFICATES = '/medical-certificates'
+	MEDICAL_CERTIFICATES = '/medical-certificates',
+	MEDICAL_CERTIFICATE_HISTORY = '/medical-certificate-history'
 }
 
 export const enum SERVICE_URL {
@@ -27,7 +28,8 @@ export const enum SERVICE_URL {
 	GROUPS = 'groups',
 	DEPARTMENTS = 'departments',
 	COURSES = 'courses',
-	MEDICAL_CERTIFICATES = 'medical-certificates'
+	MEDICAL_CERTIFICATES = 'medical-certificates',
+	MEDICAL_CERTIFICATE_HISTORY = 'medical-certificate-history'
 }
 
 export const enum TOKENS {
@@ -46,6 +48,7 @@ export const enum QUERY_KEYS {
 	GROUPS = 'groups',
 	HEALTH_GROUPS = 'health-groups',
 	MEDICAL_CERTIFICATES = 'medical-certificates',
+	MEDICAL_CERTIFICATE_HISTORY = 'medical-certificate-history',
 	PHYSICAL_EDUCATIONS = 'physical-educations',
 	STUDENTS = 'students',
 	USERS = 'users'

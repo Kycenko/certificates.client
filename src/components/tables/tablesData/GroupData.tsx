@@ -85,7 +85,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 					</td>
 				</tr>
 			) : (
-				sortedData?.map(({ id, name, courseId }) => (
+				sortedData?.map(({ id, name, courseId, students }) => (
 					<>
 						{user?.isAdmin ? (
 							<tr
@@ -99,6 +99,9 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 									{courses
 										?.filter(({ id }) => id === courseId)
 										?.map(({ number }) => `${number}-й курс`)}
+								</td>
+								<td className={styles.cellPadding}>
+									{students?.length} учащихся(йся)
 								</td>
 								<td className={styles.editCellContainer}>
 									<div className={styles.adminEditCell}>

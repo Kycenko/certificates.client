@@ -8,8 +8,12 @@ export const StudentService = {
 	async create(data: TypeStudentForm) {
 		return instance.post<IStudent>(SERVICE_URL.STUDENTS, data)
 	},
-	async getAll() {
-		return instance.get<IStudent[]>(SERVICE_URL.STUDENTS)
+	async getAll(groupName?: string) {
+		const url = groupName
+			? `${SERVICE_URL.STUDENTS}?group=${groupName}`
+			: SERVICE_URL.STUDENTS
+
+		return instance.get<IStudent[]>(url)
 	},
 
 	async getById(id: string | undefined) {
