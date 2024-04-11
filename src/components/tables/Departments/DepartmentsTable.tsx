@@ -1,25 +1,25 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import DepartmentData from '@/components/tables/Departments/DepartmentData.tsx'
-import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
+import DepartmentData from '@/components/tables/tablesData/DepartmentData'
+import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
-import { PAGES_URL } from '@/constants/enums.ts'
+import { PAGES_URL } from '@/constants/enums'
 import { DepartmentHeads } from '@/constants/table-heads.ts'
 
-import { TypeDepartmentForm } from '@/types/department.types.ts'
+import { TypeDepartmentForm } from '@/types/department.types'
 
-import useModal from '@/hooks/useModal.ts'
+import useModal from '@/hooks/useModal'
 
-import Search from '../../Search/Search.tsx'
-import SortOrder from '../../SortOrder/SortOrder.tsx'
-import CustomButton from '../../ui/buttons/CustomButton.tsx'
-import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
-import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '../../ui/inputs/CustomInput.tsx'
-import CustomLoader from '../../ui/loader/CustomLoader.tsx'
+import Search from '../Search/Search'
+import SortOrder from '../SortOrder/SortOrder'
+import CustomButton from '../ui/buttons/CustomButton'
+import ErrorMessage from '../ui/fields/ErrorMessage'
+import CustomModalForm from '../ui/forms/CustomModalForm/CustomModalForm'
+import CustomInput from '../ui/inputs/CustomInput'
+import CustomLoader from '../ui/loader/CustomLoader'
 
 import styles from '@/app/styles/Tables.module.scss'
 import { departmentValidationSchema } from '@/lib/validation/validation.schema.ts'
@@ -28,11 +28,10 @@ import {
 	useDeleteDepartment,
 	useGetDepartments,
 	useUpdateDepartment
-} from '@/queries/department.queries.ts'
+} from '@/queries/department.queries'
 
 const DepartmentsTable = () => {
 	const navigate = useNavigate()
-	const [searchTerm, setSearchTerm] = useState<string>('')
 	const { departments, isLoading, refetch } = useGetDepartments()
 
 	const { isOpen, openModal, closeModal } = useModal()
@@ -86,11 +85,7 @@ const DepartmentsTable = () => {
 				<div className={styles.tableContainer}>
 					<div className={styles.headerContainer}>
 						<div className={styles.header}>
-							<Search
-								searchTerm={searchTerm}
-								setSearchTerm={setSearchTerm}
-								placeholder={'Поиск по названию отделения...'}
-							/>
+							<Search placeholder={'Поиск по названию отделения...'} />
 							<SortOrder />
 						</div>
 						<CustomButton
