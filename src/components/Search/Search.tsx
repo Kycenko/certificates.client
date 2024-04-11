@@ -1,17 +1,22 @@
 import { SearchIcon } from 'lucide-react'
-import { ChangeEvent, FC, useEffect } from 'react'
+import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect } from 'react'
 
 import useDebounce from '@/hooks/useDebounce'
-import useFilters from '@/hooks/useFilters'
 
 import styles from './Search.module.scss'
 
 interface SearchProps {
+	searchTerm: string
+	setSearchTerm: Dispatch<SetStateAction<string>>
 	placeholder?: string
 }
 
-const Search: FC<SearchProps> = ({ placeholder }) => {
-	const { searchTerm, setSearchTerm } = useFilters()
+const Search: FC<SearchProps> = ({
+	searchTerm,
+	setSearchTerm,
+	placeholder
+}) => {
+	// const { searchTerm, setSearchTerm } = useFilters()
 	const debouncedValue = useDebounce(searchTerm, 500)
 	useEffect(() => {}, [debouncedValue])
 

@@ -32,16 +32,16 @@ export const useCreateMedicalCertificate = () => {
 	return { create, isPending }
 }
 
-export const useGetMedicalCertificates = () => {
+export const useGetMedicalCertificates = (groupName?: string) => {
 	const {
 		data: certificates,
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES],
+		queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES, { groupName }],
 		queryFn: async () => {
 			const response: AxiosResponse<IMedicalCertificate[]> =
-				await MedicalCertificateService.getAll()
+				await MedicalCertificateService.getAll(groupName)
 			return response.data
 		}
 	})

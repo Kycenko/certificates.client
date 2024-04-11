@@ -9,15 +9,11 @@ import {
 
 interface IFiltersContext {
 	searchTerm: string
-	sortOrder: 'asc' | 'desc'
 	setSearchTerm: Dispatch<SetStateAction<string>>
+	sortOrder: 'asc' | 'desc'
 	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
-	groupName: string
-	setGroupName: Dispatch<SetStateAction<string>>
-	courseNumber: string
-	setCourseNumber: Dispatch<SetStateAction<string>>
-	departmentName: string
-	setDepartmentName: Dispatch<SetStateAction<string>>
+	filterValue: string
+	setFilterValue: Dispatch<SetStateAction<string>>
 }
 
 export const FiltersContext = createContext<IFiltersContext | null>(null)
@@ -25,9 +21,7 @@ export const FiltersContext = createContext<IFiltersContext | null>(null)
 const FiltersProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [groupName, setGroupName] = useState<string>('')
-	const [courseNumber, setCourseNumber] = useState<string>('')
-	const [departmentName, setDepartmentName] = useState<string>('')
+	const [filterValue, setFilterValue] = useState<string>('')
 
 	return (
 		<FiltersContext.Provider
@@ -36,12 +30,8 @@ const FiltersProvider: FC<PropsWithChildren> = ({ children }) => {
 				sortOrder,
 				setSearchTerm,
 				setSortOrder,
-				groupName,
-				setGroupName,
-				courseNumber,
-				setCourseNumber,
-				departmentName,
-				setDepartmentName
+				filterValue,
+				setFilterValue
 			}}
 		>
 			{children}

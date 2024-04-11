@@ -14,8 +14,11 @@ export const MedicalCertificateService = {
 			data
 		)
 	},
-	async getAll() {
-		return instance.get<IMedicalCertificate[]>(SERVICE_URL.MEDICAL_CERTIFICATES)
+	async getAll(groupName?: string) {
+		const url = groupName
+			? `${SERVICE_URL.MEDICAL_CERTIFICATES}?group=${groupName}`
+			: SERVICE_URL.MEDICAL_CERTIFICATES
+		return instance.get<IMedicalCertificate[]>(url)
 	},
 
 	async getById(id: string | undefined) {

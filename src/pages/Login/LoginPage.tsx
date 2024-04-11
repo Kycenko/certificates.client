@@ -1,4 +1,4 @@
-import LoginForm from '@/components/LoginForm/LoginForm'
+import LoginForm from '@/components/ui/forms/LoginForm/LoginForm'
 
 import styles from './LoginPage.module.scss'
 
