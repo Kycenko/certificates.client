@@ -8,15 +8,14 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  login    String  @unique
-  password String
-  isAdmin  Boolean @default(false) @map("is_admin")
-
+  id        Int      @id @default(autoincrement())
+  login     String   @unique
+  password  String
+  isAdmin   Boolean  @default(false) @map("is_admin")
   groupId   Int?     @map("group_id")
-  group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@map("users")
 }
@@ -28,59 +27,78 @@ model Student {
   secondName          String?              @map("second_name")
   birthDate           DateTime             @map("birth_date")
   groupId             Int?                 @map("group_id")
-  medicalCertificates MedicalCertificate[]
-  group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
   createdAt           DateTime             @default(now()) @map("created_at")
   updatedAt           DateTime             @updatedAt @map("updated_at")
+  isExpelled          Boolean              @default(false)
+  medicalCertificates MedicalCertificate[]
+  group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@map("students")
 }
 
 model HealthGroup {
-  id                  Int                  @id @default(autoincrement())
-  name                String               @unique
-  medicalCertificates MedicalCertificate[]
-  createdAt           DateTime             @default(now()) @map("created_at")
-  updatedAt           DateTime             @updatedAt @map("updated_at")
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @unique
+  createdAt                 DateTime                    @default(now()) @map("created_at")
+  updatedAt                 DateTime                    @updatedAt @map("updated_at")
+  medicalCertificates       MedicalCertificate[]
+  MedicalCertificateHistory MedicalCertificateHistory[]
 
   @@map("health_groups")
 }
 
 model PhysicalEducation {
-  id                  Int                  @id @default(autoincrement())
-  name                String               @unique
-  medicalCertificates MedicalCertificate[]
-  createdAt           DateTime             @default(now()) @map("created_at")
-  updatedAt           DateTime             @updatedAt @map("updated_at")
+  id                        Int                         @id @default(autoincrement())
+  name                      String                      @unique
+  createdAt                 DateTime                    @default(now()) @map("created_at")
+  updatedAt                 DateTime                    @updatedAt @map("updated_at")
+  medicalCertificates       MedicalCertificate[]
+  MedicalCertificateHistory MedicalCertificateHistory[]
 
   @@map("physical_educations")
 }
 
 model MedicalCertificate {
-  id                  Int               @id @default(autoincrement())
-  startDate           DateTime          @map("start_date")
-  finishDate          DateTime          @map("finish_date")
-  studentId           Int               @map("student_id")
-  healthGroupId       Int               @map("health_group_id")
-  physicalEducationId Int               @map("physical_education_id")
-  healthGroup         HealthGroup       @relation(fields: [healthGroupId], references: [id], onDelete: Cascade)
-  physicalEducation   PhysicalEducation @relation(fields: [physicalEducationId], references: [id], onDelete: Cascade)
-  student             Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  createdAt           DateTime          @default(now()) @map("created_at")
-  updatedAt           DateTime          @updatedAt @map("updated_at")
+  id                        Int                         @id @default(autoincrement())
+  startDate                 DateTime                    @map("start_date")
+  finishDate                DateTime                    @map("finish_date")
+  studentId                 Int                         @map("student_id")
+  healthGroupId             Int                         @map("health_group_id")
+  physicalEducationId       Int                         @map("physical_education_id")
+  createdAt                 DateTime                    @default(now()) @map("created_at")
+  updatedAt                 DateTime                    @updatedAt @map("updated_at")
+  MedicalCertificateHistory MedicalCertificateHistory[]
+  healthGroup               HealthGroup                 @relation(fields: [healthGroupId], references: [id], onDelete: Cascade)
+  physicalEducation         PhysicalEducation           @relation(fields: [physicalEducationId], references: [id], onDelete: Cascade)
+  student                   Student                     @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@map("medical_certificates")
+}
+
+model MedicalCertificateHistory {
+  id                   Int                @id @default(autoincrement())
+  medicalCertificateId Int                @map("medical_certificate_id")
+  startDate            DateTime?          @map("start_date")
+  finishDate           DateTime?          @map("finish_date")
+  healthGroupId        Int?               @map("health_group_id")
+  physicalEducationId  Int?               @map("physical_education_id")
+  createdAt            DateTime           @default(now()) @map("created_at")
+  medicalCertificate   MedicalCertificate @relation(fields: [medicalCertificateId], references: [id])
+  healthGroup          HealthGroup?       @relation(fields: [healthGroupId], references: [id])
+  physicalEducation    PhysicalEducation? @relation(fields: [physicalEducationId], references: [id])
+
+  @@map("medical_certificate_histories")
 }
 
 model Group {
   id        Int       @id @default(autoincrement())
   name      String
   courseId  Int       @map("course_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
   course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
   students  Student[]
   User      User[]
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
 
   @@unique([name, courseId])
   @@map("groups")
@@ -89,9 +107,9 @@ model Group {
 model Department {
   id        Int      @id @default(autoincrement())
   name      String   @unique
-  courses   Course[]
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  courses   Course[]
 
   @@map("departments")
 }
@@ -100,10 +118,10 @@ model Course {
   id           Int        @id @default(autoincrement())
   number       Int
   departmentId Int        @map("department_id")
-  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
-  groups       Group[]
   createdAt    DateTime   @default(now()) @map("created_at")
   updatedAt    DateTime   @updatedAt @map("updated_at")
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  groups       Group[]
 
   @@unique([number, departmentId])
   @@map("courses")

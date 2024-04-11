@@ -7,6 +7,7 @@ import {
 	Param,
 	Post,
 	Put,
+	Query,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
@@ -26,8 +27,8 @@ export class GroupController {
 
 	@Get()
 	@Auth()
-	async getAll() {
-		return this.groupService.getAll()
+	async getAll(@Query('course') course?: number) {
+		return this.groupService.getAll(course)
 	}
 
 	@Get(':id')

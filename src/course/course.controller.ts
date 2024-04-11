@@ -6,6 +6,7 @@ import {
 	Param,
 	Post,
 	Put,
+	Query,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
@@ -27,8 +28,8 @@ export class CourseController {
 
 	@Get()
 	@Auth()
-	async getAll() {
-		return this.courseService.getAll()
+	async getAll(@Query('department') departmentName?: string) {
+		return this.courseService.getAll(departmentName)
 	}
 
 	@Get(':id')

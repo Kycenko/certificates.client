@@ -6,6 +6,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
@@ -29,8 +30,8 @@ export class MedicalCertificateController {
 
 	@Get()
 	@Auth('admin')
-	async getAll() {
-		return this.medicalCertificateService.getAll()
+	async getAll(@Query('group') groupName?: string) {
+		return this.medicalCertificateService.getAll(groupName)
 	}
 
 	@Get(':id')

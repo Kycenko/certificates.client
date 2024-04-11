@@ -13,12 +13,23 @@ export class StudentService {
 		})
 	}
 
-	async getAll() {
+	async getAll(groupName?: string) {
+		const whereClause = groupName
+			? {
+					group: {
+						name: groupName
+					}
+				}
+			: {}
+
 		const students = await this.prisma.student.findMany({
+			where: whereClause,
 			include: {
-				medicalCertificates: true
+				medicalCertificates: true,
+				group: true
 			}
 		})
+
 		if (!students || students.length === 0)
 			throw new NotFoundException('Студенты не найдены!')
 		return students

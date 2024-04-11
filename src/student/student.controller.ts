@@ -7,6 +7,7 @@ import {
 	Param,
 	Patch,
 	Post,
+	Query,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
@@ -26,8 +27,8 @@ export class StudentController {
 
 	@Get()
 	@Auth()
-	async getAll() {
-		return this.studentService.getAll()
+	async getAll(@Query('group') group?: string) {
+		return this.studentService.getAll(group)
 	}
 
 	@Get(':id')

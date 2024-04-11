@@ -17,8 +17,43 @@ export class MedicalCertificateService {
 		})
 	}
 
-	async getAll() {
-		const medicalCertificates = await this.prisma.medicalCertificate.findMany()
+	async getAll(groupName?: string) {
+		// const whereData = studentSurname
+		// 	? {
+		// 			student: {
+		// 				surname: studentSurname
+		// 			}
+		// 		}
+		// 	: {}
+		const medicalCertificates = await this.prisma.medicalCertificate.findMany({
+			orderBy: {
+				student: {
+					surname: 'asc'
+				}
+			},
+			where: {
+				student: {
+					group: {
+						name: groupName
+					}
+				}
+			},
+			include: {
+				student: {
+					include: {
+						group: {
+							select: {
+								course: {
+									select: {
+										department: true
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		})
 		if (!medicalCertificates || medicalCertificates.length === 0)
 			throw new NotFoundException('Медицинские справки не найдены!')
 		return medicalCertificates
