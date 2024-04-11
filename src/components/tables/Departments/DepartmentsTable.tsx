@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import DepartmentData from '@/components/tables/tablesData/DepartmentData'
+import DepartmentData from '@/components/tables/Departments/DepartmentData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
 import { PAGES_URL } from '@/constants/enums'
@@ -29,6 +29,7 @@ import {
 	useGetDepartments,
 	useUpdateDepartment
 } from '@/queries/department.queries'
+
 
 const DepartmentsTable = () => {
 	const navigate = useNavigate()
