@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 
-import useFilters from '@/hooks/useFilters'
+import useFilters from '@/hooks/useFilters.ts'
 
 import styles from './SortOrder.module.scss'
 

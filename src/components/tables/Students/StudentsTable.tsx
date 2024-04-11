@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
-import Filter from '@/components/Filter/Filter.tsx'
+import Filter from '@/components/filters/Filter/Filter.tsx'
+import Search from '@/components/filters/Search/Search.tsx'
+import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import StudentData from '@/components/tables/Students/StudentData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
@@ -12,8 +14,6 @@ import { TypeStudentForm } from '@/types/student.types.ts'
 import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
 
-import Search from '../../Search/Search.tsx'
-import SortOrder from '../../SortOrder/SortOrder.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'

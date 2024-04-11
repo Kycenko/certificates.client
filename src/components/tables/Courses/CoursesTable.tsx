@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Filter from '@/components/Filter/Filter.tsx'
+import Filter from '@/components/filters/Filter/Filter.tsx'
+import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import CourseData from '@/components/tables/Courses/CourseData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
@@ -12,7 +13,6 @@ import { TypeCourseForm } from '@/types/course.types.ts'
 
 import useModal from '@/hooks/useModal.ts'
 
-import SortOrder from '../../SortOrder/SortOrder.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Filter from '@/components/Filter/Filter.tsx'
+import Filter from '@/components/filters/Filter/Filter.tsx'
 import MedicalCertificateData from '@/components/tables/MedicalCertificates/MedicalCertificateData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 

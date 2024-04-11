@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { Toaster } from 'react-hot-toast'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -18,7 +18,7 @@ const queryClient = new QueryClient({
 	}
 })
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById('root')!).render(
 	<QueryClientProvider client={queryClient}>
 		<BrowserRouter>
 			<AuthProvider>
