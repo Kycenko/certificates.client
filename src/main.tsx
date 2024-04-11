@@ -8,7 +8,6 @@ import AuthProvider from './app/providers/AuthProvider'
 import FiltersProvider from './app/providers/FiltersProvider'
 import '@/app/styles/index.scss'
 
-
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
