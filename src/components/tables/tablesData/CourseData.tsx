@@ -57,11 +57,7 @@ const CourseData: FC<CourseDataProps> = ({
 
 	const { sortOrder } = useFilters()
 
-	const { sortedData } = useSortData(
-		data as ICourse[],
-
-		sortOrder
-	)
+	const { sortedData } = useSortData(data as ICourse[], sortOrder)
 
 	updateHistory(null, sortOrder)
 

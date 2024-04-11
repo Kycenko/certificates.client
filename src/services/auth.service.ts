@@ -8,6 +8,7 @@ import instance from '@/api/api.instance'
 
 import { saveToStorage } from '@/lib/helpers/auth.helper.ts'
 
+
 export const AuthService = {
 	async login(data: ILogin) {
 		const response = await instance.post<IAuthResponse>(
@@ -19,6 +20,7 @@ export const AuthService = {
 			return response.data
 		} else return undefined
 	},
+
 	async register(data: IRegister) {
 		const response = await instance.post<IAuthResponse>(
 			`${SERVICE_URL.AUTH}/register`,

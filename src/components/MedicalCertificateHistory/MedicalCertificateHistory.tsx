@@ -12,7 +12,7 @@ const MedicalCertificateHistory = () => {
 
 	return (
 		<div>
-			<Heading title={'История изменений'}></Heading>
+			<Heading title={'История изменений медицинской справки'}></Heading>
 
 			<table className={styles.table}>
 				<thead className={styles.tHeads}>
@@ -21,7 +21,7 @@ const MedicalCertificateHistory = () => {
 						<th>Дата окончания</th>
 						<th>Группа здоровья</th>
 						<th>Группа по физкультуре</th>
-						<th>Дата создания</th>
+						<th>Дата и время создания</th>
 					</tr>
 				</thead>
 				<tbody>

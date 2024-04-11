@@ -8,8 +8,10 @@ import { CourseHeads } from '@/constants/table-heads.ts'
 
 import { TypeCourseForm } from '@/types/course.types'
 
+import useFilters from '@/hooks/useFilters'
 import useModal from '@/hooks/useModal'
 
+import Search from '../Search/Search'
 import SortOrder from '../SortOrder/SortOrder'
 import CustomLoader from '../ui/loader/CustomLoader'
 
@@ -21,8 +23,10 @@ import {
 } from '@/queries/course.queries'
 
 const CoursesTable = () => {
+	const { departmentName } = useFilters()
 	const navigate = useNavigate()
-	const { courses, isLoading, refetch } = useGetCourses()
+	//TODO: Сделать поиск по названию отделения
+	const { courses, isLoading, refetch } = useGetCourses(departmentName)
 
 	const { closeModal } = useModal()
 
@@ -51,6 +55,7 @@ const CoursesTable = () => {
 			<div className={styles.tableContainer}>
 				<div className={styles.headerContainer}>
 					<div className={styles.header}>
+						<Search placeholder='Поиск по названию отделения...' />
 						<SortOrder />
 					</div>
 				</div>

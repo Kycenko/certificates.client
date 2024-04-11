@@ -8,8 +8,11 @@ export const CourseService = {
 	async create(data: TypeCourseForm) {
 		return instance.post<ICourse>(SERVICE_URL.COURSES, data)
 	},
-	async getAll() {
-		return instance.get<ICourse[]>(SERVICE_URL.COURSES)
+	async getAll(departmentName?: string) {
+		const url = departmentName
+			? `${SERVICE_URL.COURSES}?department=${departmentName}`
+			: SERVICE_URL.COURSES
+		return instance.get<ICourse[]>(url)
 	},
 
 	async getById(id: string | undefined) {

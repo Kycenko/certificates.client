@@ -11,7 +11,7 @@ import { TypeStudentForm } from '@/types/student.types'
 import useFilters from '@/hooks/useFilters'
 import useModal from '@/hooks/useModal'
 
-import FilterComponent from '../FilterComponent/FilterComponent'
+import FilterComponent from '../FilterGroup/FilterComponent'
 import Search from '../Search/Search'
 import SortOrder from '../SortOrder/SortOrder'
 import CustomLoader from '../ui/loader/CustomLoader'

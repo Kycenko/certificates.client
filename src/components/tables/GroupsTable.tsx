@@ -26,7 +26,7 @@ import {
 const GroupsTable = () => {
 	const { courseNumber } = useFilters()
 	const navigate = useNavigate()
-	const { groups, isLoading, refetch } = useGetGroups()
+	const { groups, isLoading, refetch } = useGetGroups(courseNumber)
 
 	const { closeModal } = useModal()
 

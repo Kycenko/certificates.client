@@ -27,7 +27,7 @@ export const useCreateGroup = () => {
 	return { create, isPending }
 }
 
-export const useGetGroups = (course?: number) => {
+export const useGetGroups = (course?: string) => {
 	const {
 		data: groups,
 		isLoading,

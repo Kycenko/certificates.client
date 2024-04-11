@@ -4,8 +4,10 @@ import { LOCAL_STORAGE_KEY, TOKENS } from '@/constants/enums.ts'
 
 import { IAuthResponse, ITokens } from '@/types/auth.types.ts'
 
+
 export const getAccessToken = async () => {
 	const accessToken = Cookies.get(TOKENS.ACCESS_TOKEN)
+
 	return accessToken || null
 }
 
@@ -15,6 +17,7 @@ export const getUserFromStorage = async () => {
 
 export const saveTokensToStorage = (data: ITokens) => {
 	Cookies.set(TOKENS.ACCESS_TOKEN, data.accessToken)
+	Cookies.set(TOKENS.REFRESH_TOKEN, data.refreshToken)
 }
 
 export const removeFromStorage = () => {

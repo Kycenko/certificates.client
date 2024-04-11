@@ -16,6 +16,7 @@ import { IUser } from '@/types/user.types'
 import { getAccessToken, removeFromStorage } from '@/lib/helpers/auth.helper.ts'
 import getLocalStorage from '@/lib/utils/getLocalStorage'
 
+
 interface IAuthContext {
 	user: IUser | null
 
@@ -36,6 +37,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
 			if (!accessToken) {
 				removeFromStorage()
+
 				navigate(`${PAGES_URL.LOGIN}`, { replace: true })
 				return
 			}
