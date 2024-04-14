@@ -12,7 +12,7 @@ export class GroupService {
 		})
 	}
 
-	async getAll(course?: number) {
+	async getAll(groupName?: string, course?: number) {
 		const whereCourse = course
 			? {
 					course: {

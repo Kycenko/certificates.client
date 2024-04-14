@@ -14,7 +14,7 @@ export class StudentService {
 	}
 
 	async getAll(groupName?: string) {
-		const whereClause = groupName
+		const whereCourse = groupName
 			? {
 					group: {
 						name: groupName
@@ -23,7 +23,7 @@ export class StudentService {
 			: {}
 
 		const students = await this.prisma.student.findMany({
-			where: whereClause,
+			where: whereCourse,
 			include: {
 				medicalCertificates: true,
 				group: true

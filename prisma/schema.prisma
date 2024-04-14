@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./prisma-client"
 }
 
 datasource db {
@@ -32,8 +33,20 @@ model Student {
   isExpelled          Boolean              @default(false)
   medicalCertificates MedicalCertificate[]
   group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  StudentHistory      StudentHistory[]
 
   @@map("students")
+}
+
+model StudentHistory {
+  id        Int      @id @default(autoincrement())
+  studentId Int      @map("student_id")
+  student   Student  @relation(fields: [studentId], references: [id])
+  groupId   Int?     @map("group_id")
+  group     Group?   @relation(fields: [groupId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("student_histories")
 }
 
 model HealthGroup {
@@ -91,14 +104,15 @@ model MedicalCertificateHistory {
 }
 
 model Group {
-  id        Int       @id @default(autoincrement())
-  name      String
-  courseId  Int       @map("course_id")
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime  @updatedAt @map("updated_at")
-  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  students  Student[]
-  User      User[]
+  id             Int              @id @default(autoincrement())
+  name           String
+  courseId       Int              @map("course_id")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+  course         Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  students       Student[]
+  User           User[]
+  StudentHistory StudentHistory[]
 
   @@unique([name, courseId])
   @@map("groups")

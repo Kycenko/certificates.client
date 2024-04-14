@@ -6,6 +6,7 @@ import {
 	Param,
 	Post,
 	Put,
+	Query,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
@@ -27,8 +28,11 @@ export class DepartmentController {
 
 	@Get()
 	@Auth('admin')
-	async getAll() {
-		return this.departmentService.getAll()
+	async getAll(
+		@Query('name') departmentName?: string,
+		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
+	) {
+		return this.departmentService.getAll(departmentName, sortOrder)
 	}
 
 	@Get(':id')

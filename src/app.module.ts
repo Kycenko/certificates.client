@@ -12,6 +12,8 @@ import { StatisticsModule } from '@statistics/statistics.module'
 import { StudentModule } from '@student/student.module'
 import { UserModule } from '@user/user.module'
 import { MedicalCertificateHistoryModule } from './medical-certificate-history/medical-certificate-history.module';
+import { StudentHistoryModule } from './student-history/student-history.module';
+import { StudentHistoryModule } from './student-history/student-history.module';
 
 @Module({
 	imports: [
@@ -26,7 +28,8 @@ import { MedicalCertificateHistoryModule } from './medical-certificate-history/m
 		MedicalCertificateModule,
 		CourseModule,
 		StatisticsModule,
-		MedicalCertificateHistoryModule
+		MedicalCertificateHistoryModule,
+		StudentHistoryModule
 	],
 	controllers: [],
 	providers: [PrismaService]

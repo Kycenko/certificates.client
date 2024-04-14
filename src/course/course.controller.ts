@@ -28,8 +28,11 @@ export class CourseController {
 
 	@Get()
 	@Auth()
-	async getAll(@Query('department') departmentName?: string) {
-		return this.courseService.getAll(departmentName)
+	async getAll(
+		@Query('department') departmentName?: string,
+		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
+	) {
+		return this.courseService.getAll(departmentName, sortOrder)
 	}
 
 	@Get(':id')
