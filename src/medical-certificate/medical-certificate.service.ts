@@ -17,18 +17,11 @@ export class MedicalCertificateService {
 		})
 	}
 
-	async getAll(groupName?: string) {
-		// const whereData = studentSurname
-		// 	? {
-		// 			student: {
-		// 				surname: studentSurname
-		// 			}
-		// 		}
-		// 	: {}
+	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
 		const medicalCertificates = await this.prisma.medicalCertificate.findMany({
 			orderBy: {
 				student: {
-					surname: 'asc'
+					surname: sortOrder
 				}
 			},
 			where: {

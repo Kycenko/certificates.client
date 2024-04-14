@@ -13,7 +13,7 @@ export class StudentService {
 		})
 	}
 
-	async getAll(groupName?: string) {
+	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
 		const whereCourse = groupName
 			? {
 					group: {
@@ -23,6 +23,9 @@ export class StudentService {
 			: {}
 
 		const students = await this.prisma.student.findMany({
+			orderBy: {
+				surname: sortOrder
+			},
 			where: whereCourse,
 			include: {
 				medicalCertificates: true,

@@ -30,8 +30,11 @@ export class MedicalCertificateController {
 
 	@Get()
 	@Auth('admin')
-	async getAll(@Query('group') groupName?: string) {
-		return this.medicalCertificateService.getAll(groupName)
+	async getAll(
+		@Query('group') groupName?: string,
+		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
+	) {
+		return this.medicalCertificateService.getAll(groupName, sortOrder)
 	}
 
 	@Get(':id')

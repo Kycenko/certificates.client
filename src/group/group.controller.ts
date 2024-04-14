@@ -27,8 +27,11 @@ export class GroupController {
 
 	@Get()
 	@Auth()
-	async getAll(@Query('course') course?: number) {
-		return this.groupService.getAll(course)
+	async getAll(
+		@Query('course') course?: number,
+		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
+	) {
+		return this.groupService.getAll(course, sortOrder)
 	}
 
 	@Get(':id')

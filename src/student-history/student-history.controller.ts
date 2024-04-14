@@ -1,11 +1,35 @@
-import { Controller } from '@nestjs/common'
+import { Auth } from '@auth/decorators/auth.decorator'
+import {
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Post,
+	UsePipes,
+	ValidationPipe
+} from '@nestjs/common'
+import { StudentHistoryDto } from './dto/student-history.dto'
 import { StudentHistoryService } from './student-history.service'
 
 @Controller('student-history')
 export class StudentHistoryController {
 	constructor(private readonly studentHistoryService: StudentHistoryService) {}
 
-	async getById(studentId: number) {
-		return this.studentHistoryService.getById(studentId)
+	@Post()
+	@UsePipes(new ValidationPipe())
+	@Auth('admin')
+	async create(dto: StudentHistoryDto) {
+		return this.studentHistoryService.create(dto)
+	}
+
+	@Get(':studentId')
+	@Auth('admin')
+	async getAll(@Param('studentId') studentId: number) {
+		return this.studentHistoryService.getAll(studentId)
+	}
+	@Auth('admin')
+	@Delete(':id')
+	async delete(id: number) {
+		return this.studentHistoryService.delete(id)
 	}
 }

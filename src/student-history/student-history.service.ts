@@ -10,9 +10,17 @@ export class StudentHistoryService {
 		return this.prisma.studentHistory.create({ data: dto })
 	}
 
-	async getById(studentId: number) {
-		return this.prisma.studentHistory.findUnique({
-			where: { studentId: studentId }
+	async getAll(studentId: number) {
+		return this.prisma.studentHistory.findMany({
+			where: { studentId: +studentId },
+			include: {
+				group: true,
+				student: true
+			}
 		})
+	}
+
+	async delete(id: number) {
+		return this.prisma.studentHistory.delete({ where: { id: +id } })
 	}
 }
