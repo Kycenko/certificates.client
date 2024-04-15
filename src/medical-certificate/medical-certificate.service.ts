@@ -18,38 +18,97 @@ export class MedicalCertificateService {
 	}
 
 	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
-		const medicalCertificates = await this.prisma.medicalCertificate.findMany({
-			orderBy: {
-				student: {
-					surname: sortOrder
-				}
-			},
-			where: {
-				student: {
+		const studentsIds = await this.prisma.student
+			.findMany({
+				orderBy: { surname: sortOrder },
+				select: {
+					id: true
+				},
+				where: {
 					group: {
 						name: groupName
 					}
 				}
-			},
-			include: {
-				student: {
-					include: {
+			})
+			.then(students => students.map(student => student.id))
+
+		const latestCertificatesPromises = studentsIds.map(studentId => {
+			return this.prisma.medicalCertificate.findFirst({
+				orderBy: { startDate: 'desc' },
+
+				where: {
+					studentId: studentId,
+					student: {
 						group: {
-							select: {
-								course: {
-									select: {
-										department: true
+							name: groupName
+						}
+					}
+				},
+				include: {
+					student: {
+						include: {
+							group: {
+								select: {
+									course: {
+										select: {
+											department: true
+										}
 									}
 								}
 							}
 						}
 					}
 				}
-			}
+			})
 		})
-		if (!medicalCertificates || medicalCertificates.length === 0)
+
+		const latestCertificates = (
+			await Promise.all(latestCertificatesPromises)
+		).filter(certificate => certificate !== null)
+
+		if (latestCertificates.length === 0)
 			throw new NotFoundException('Медицинские справки не найдены!')
-		return medicalCertificates
+
+		return latestCertificates
+
+		// const medicalCertificates = await this.prisma.medicalCertificate.findMany({
+		// 	orderBy: [
+		// 		{
+		// 			startDate: 'desc'
+		// 		},
+
+		// 		{
+		// 			student: {
+		// 				surname: sortOrder
+		// 			}
+		// 		}
+		// 	],
+		// 	where: {
+		// 		student: {
+		// 			group: {
+		// 				name: groupName
+		// 			}
+		// 		}
+		// 	},
+		// 	include: {
+		// 		student: {
+		// 			include: {
+		// 				group: {
+		// 					select: {
+		// 						course: {
+		// 							select: {
+		// 								department: true
+		// 							}
+		// 						}
+		// 					}
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// })
+		// if (!medicalCertificates || medicalCertificates.length === 0)
+		// 	throw new NotFoundException('Медицинские справки не найдены!')
+		// return medicalCertificates
 	}
 
 	async getById(id: number) {

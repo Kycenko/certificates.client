@@ -8,7 +8,7 @@ import { MedicalCertificateModule } from '@medical-certificate/medical-certifica
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { PhysicalEducationModule } from '@physical-education/physical-education.module'
-import { StatisticsModule } from '@statistics/statistics.module'
+import { ReportsModule } from '@reports/reports.module'
 import { StudentHistoryModule } from '@student-history/student-history.module'
 import { StudentModule } from '@student/student.module'
 import { UserModule } from '@user/user.module'
@@ -26,7 +26,7 @@ import { MedicalCertificateHistoryModule } from './medical-certificate-history/m
 		PhysicalEducationModule,
 		MedicalCertificateModule,
 		CourseModule,
-		StatisticsModule,
+		ReportsModule,
 		MedicalCertificateHistoryModule,
 		StudentHistoryModule
 	],
