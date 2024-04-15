@@ -8,10 +8,10 @@ export const GroupService = {
 	async create(data: TypeGroupForm) {
 		return instance.post<IGroup>(SERVICE_URL.GROUPS, data)
 	},
-	async getAll(course?: string) {
+	async getAll(course?: string, sortOrder: 'asc' | 'desc' = 'asc') {
 		const url = course
-			? `${SERVICE_URL.GROUPS}?course=${course}`
-			: SERVICE_URL.GROUPS
+			? `${SERVICE_URL.GROUPS}?course=${course}&sort=${sortOrder}`
+			: `${SERVICE_URL.GROUPS}?sort=${sortOrder}`
 		return instance.get<IGroup[]>(url)
 	},
 

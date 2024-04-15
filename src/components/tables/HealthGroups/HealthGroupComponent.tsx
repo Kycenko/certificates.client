@@ -66,7 +66,7 @@ const HealthGroupComponent = () => {
 	return (
 		<Layout>
 			<Heading title='Список групп здоровья' />
-			<CreateButton onClick={openModal}>Создать группу здоровья</CreateButton>
+			<CreateButton onClick={openModal}>Добавить группу здоровья</CreateButton>
 			<HealthGroupData
 				data={healthGroups}
 				onDelete={handleDelete}
@@ -74,10 +74,10 @@ const HealthGroupComponent = () => {
 			/>
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
-				buttonTitle={'Создать'}
+				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}
-				formTitle={'Создание'}
+				formTitle={'Добавление'}
 			>
 				<CustomInput
 					label={'Название'}

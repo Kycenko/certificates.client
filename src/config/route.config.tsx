@@ -12,8 +12,10 @@ import LoginPage from '@/pages/Login/LoginPage'
 import MedicalCertificateHistoryPage from '@/pages/MedicalCertificates/MedicalCertificateHistoryPage'
 import MedicalCertificatesPage from '@/pages/MedicalCertificates/MedicalCertificatesPage'
 import PhysicalEducationPage from '@/pages/PhysicalEducations/PhysicalEducationsPage'
-import GetDepartmentReportPage from '@/pages/Statistics/GetDepartmentReportPage'
+import GetDepartmentReportPage from '@/pages/Reports/GetDepartmentReportPage'
+import GetGroupReportPage from '@/pages/Reports/GetGroupReportPage'
 import StudentDetailsPage from '@/pages/Students/StudentDetailsPage'
+import StudentHistoryPage from '@/pages/Students/StudentHistoryPage'
 import StudentsPage from '@/pages/Students/StudentsPage'
 import UserDetailsPage from '@/pages/Users/UserDetailsPage'
 import UsersPage from '@/pages/Users/UsersPage'
@@ -32,10 +34,12 @@ export const enum AppRoutes {
 	GROUPS = 'groups',
 	GROUP_DETAILS = 'group-details',
 	STUDENTS = 'students',
+	STUDENT_HISTORY = 'student-history',
 	STUDENT_DETAILS = 'student-details',
 	MEDICAL_CERTIFICATES = 'medical-certificates',
 	MEDICAL_CERTIFICATE_HISTORY = 'medical-certificate-history',
-	GET_DEPARTMENT_REPORT = 'department-report'
+	GET_DEPARTMENT_REPORT = 'department-report',
+	GET_GROUP_REPORT = 'group-report'
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -52,10 +56,12 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.GROUPS]: '/groups',
 	[AppRoutes.GROUP_DETAILS]: '/groups/:id',
 	[AppRoutes.STUDENTS]: '/students',
+	[AppRoutes.STUDENT_HISTORY]: '/student-history/:id',
 	[AppRoutes.STUDENT_DETAILS]: '/students/:id',
 	[AppRoutes.MEDICAL_CERTIFICATES]: '/medical-certificates',
 	[AppRoutes.MEDICAL_CERTIFICATE_HISTORY]: '/medical-certificate-history/:id',
-	[AppRoutes.GET_DEPARTMENT_REPORT]: '/statistics/department-report/:id'
+	[AppRoutes.GET_DEPARTMENT_REPORT]: '/reports/department-report/:id',
+	[AppRoutes.GET_GROUP_REPORT]: '/reports/group-report/:id'
 }
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -111,6 +117,10 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 		path: RoutePath.students,
 		element: <StudentsPage />
 	},
+	[AppRoutes.STUDENT_HISTORY]: {
+		path: RoutePath['student-history'],
+		element: <StudentHistoryPage />
+	},
 
 	[AppRoutes.STUDENT_DETAILS]: {
 		path: RoutePath['student-details'],
@@ -127,5 +137,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.GET_DEPARTMENT_REPORT]: {
 		path: RoutePath['department-report'],
 		element: <GetDepartmentReportPage />
+	},
+	[AppRoutes.GET_GROUP_REPORT]: {
+		path: RoutePath['group-report'],
+		element: <GetGroupReportPage />
 	}
 }

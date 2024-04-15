@@ -1,11 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 
-import { PAGES_URL } from '@/constants/enums.ts'
 import { DetailsGroupHeads } from '@/constants/table-heads.ts'
 
 import { TypeStudentForm } from '@/types/student.types.ts'
@@ -21,13 +20,13 @@ import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
+import GroupDetailsData from './GroupDetailsData.tsx'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroup } from '@/queries/group.queries.ts'
 import { useCreateStudent } from '@/queries/student.queries.ts'
 
 const GroupDetailsTable = () => {
-	const navigate = useNavigate()
 	const { id } = useParams()
 	const { user } = useAuth()
 	const { group, refetch, isLoading } = useGetGroup(id)
@@ -73,41 +72,15 @@ const GroupDetailsTable = () => {
 					<DetailsTableHeads data={DetailsGroupHeads} />
 				</thead>
 				<tbody>
-					{group?.students?.map(
-						({
-							id,
-							surname,
-							name,
-							secondName,
-							birthDate,
-							medicalCertificates
-						}) => (
-							<tr
-								onClick={() => navigate(`${PAGES_URL.STUDENTS}/${id}`)}
-								className={styles.cell}
-								key={id}
-							>
-								<td className={styles.cellPadding}>{surname}</td>
-								<td className={styles.cellPadding}>{name}</td>
-								<td className={styles.cellPadding}>
-									{secondName ? secondName : 'Не указано'}
-								</td>
-								<td className={styles.cellPadding}>
-									{format(new Date(birthDate), 'dd.MM.yyyy')}
-								</td>
-								<td className={styles.cellPadding}>{group.name}</td>
-								<td>{medicalCertificates?.length}</td>
-							</tr>
-						)
-					)}
+					<GroupDetailsData data={group} />
 				</tbody>
 			</table>
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
-				buttonTitle={'Создать'}
+				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}
-				formTitle={'Создание'}
+				formTitle={'Добавление'}
 			>
 				<CustomInput
 					label={'Фамилия'}

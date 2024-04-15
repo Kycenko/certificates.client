@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Filter from '@/components/filters/Filter/Filter.tsx'
@@ -9,10 +10,10 @@ import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/constants/enums.ts'
 import { StudentHeads } from '@/constants/table-heads.ts'
 
-import { TypeStudentForm } from '@/types/student.types.ts'
+import { IStudent, TypeStudentForm } from '@/types/student.types.ts'
 
-import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
+import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
@@ -25,10 +26,19 @@ import {
 } from '@/queries/student.queries.ts'
 
 const StudentsTable = () => {
-	const { searchTerm, setSearchTerm, filterValue, setFilterValue } =
-		useFilters()
 	const navigate = useNavigate()
+	const [searchTerm, setSearchTerm] = useState<string>('')
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+	const [filterValue, setFilterValue] = useState<string>('')
+
 	const { students, isLoading, refetch } = useGetStudents(filterValue)
+
+	const { sortedData } = useSortAndFilterData(
+		students as IStudent[],
+		searchTerm,
+		sortOrder,
+		'surname'
+	)
 	const { groups } = useGetGroups()
 	const { closeModal } = useModal()
 
@@ -51,6 +61,16 @@ const StudentsTable = () => {
 		navigate(`${PAGES_URL.STUDENTS}/${id}`)
 	}
 
+	const handleHistory = (studentId: number | string) => {
+		navigate(`${PAGES_URL.STUDENT_HISTORY}/${studentId}`)
+	}
+
+	window.history.pushState(
+		null,
+		'',
+		`?search=${searchTerm}&filter=${filterValue}&sort=${sortOrder}`
+	)
+
 	if (isLoading) return <CustomLoader />
 	return (
 		<>
@@ -63,7 +83,10 @@ const StudentsTable = () => {
 								setSearchTerm={setSearchTerm}
 								placeholder={'Поиск по фамилии обучающегося...'}
 							/>
-							<SortOrder />
+							<SortOrder
+								sortOrder={sortOrder}
+								setSortOrder={setSortOrder}
+							/>
 							<Filter
 								label='Фильтрация по названию группы'
 								filterValue={filterValue}
@@ -87,10 +110,11 @@ const StudentsTable = () => {
 						</thead>
 						<tbody>
 							<StudentData
-								data={students}
+								data={sortedData}
 								onDelete={handleDelete}
 								onEdit={handleEdit}
 								onInfo={handleInfo}
+								onHistory={handleHistory}
 							/>
 						</tbody>
 					</table>

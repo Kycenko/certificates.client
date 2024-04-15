@@ -1,3 +1,4 @@
+import { IGroup } from './group.types'
 import { IMedicalCertificate } from './medical-certificate.types'
 import { IBase } from '@/base/base.interface'
 
@@ -8,6 +9,7 @@ export interface IStudent extends IBase {
 	birthDate: Date
 	secondName: string
 	groupId: number | undefined
+	group: IGroup
 	isExpelled: boolean
 	medicalCertificates: IMedicalCertificate[]
 }

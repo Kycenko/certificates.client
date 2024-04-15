@@ -15,12 +15,9 @@ import { PAGES_URL } from '@/constants/enums.ts'
 import { IGroup, TypeGroupForm } from '@/types/group.types.ts'
 
 import useAuth from '@/hooks/useAuth.ts'
-import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import updateHistory from '@/lib/utils/updateHistory.ts'
 import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourses } from '@/queries/course.queries.ts'
 
@@ -62,20 +59,9 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 		reset()
 	}
 
-	const { searchTerm, sortOrder } = useFilters()
-
-	const { sortedData } = useSortAndFilterData(
-		data as IGroup[],
-		searchTerm,
-		sortOrder,
-		'name'
-	)
-
-	updateHistory(searchTerm, sortOrder)
-
 	return (
 		<>
-			{!sortedData || sortedData.length === 0 ? (
+			{!data || data.length === 0 ? (
 				<tr>
 					<td
 						colSpan={2}
@@ -85,7 +71,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 					</td>
 				</tr>
 			) : (
-				sortedData?.map(({ id, name, courseId, students }) => (
+				data?.map(({ id, name, courseId, students }) => (
 					<>
 						{user?.isAdmin ? (
 							<tr

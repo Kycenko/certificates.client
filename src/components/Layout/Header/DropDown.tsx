@@ -1,5 +1,7 @@
 import { ChevronDown } from 'lucide-react'
-import { FC, PropsWithChildren, useEffect, useRef, useState } from 'react'
+import { FC, PropsWithChildren, useRef, useState } from 'react'
+
+import useClickOutside from '@/hooks/useClickOutside'
 
 const Dropdown: FC<PropsWithChildren> = ({ children }) => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -8,23 +10,7 @@ const Dropdown: FC<PropsWithChildren> = ({ children }) => {
 	const toggleDropdown = () => setIsOpen(!isOpen)
 
 	const closeDropdown = () => setIsOpen(false)
-
-	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				dropdownRef.current &&
-				!dropdownRef.current.contains(event.target as Node)
-			) {
-				closeDropdown()
-			}
-		}
-
-		document.addEventListener('mousedown', handleClickOutside)
-
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside)
-		}
-	}, [])
+	useClickOutside(dropdownRef, closeDropdown)
 
 	return (
 		<div

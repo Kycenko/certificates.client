@@ -1,18 +1,20 @@
-import { ChangeEvent } from 'react'
-
-import useFilters from '@/hooks/useFilters.ts'
+import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react'
 
 import styles from './SortOrder.module.scss'
 
-const SortOrder = () => {
-	const { sortOrder, setSortOrder } = useFilters()
+interface SortOrderProps {
+	sortOrder: 'asc' | 'desc'
+	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
+}
+
+const SortOrder: FC<SortOrderProps> = ({ sortOrder, setSortOrder }) => {
 	const handleSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		setSortOrder(e.target.value as 'asc' | 'desc')
 	}
 
 	return (
 		<div className={styles.container}>
-			<label className={styles.label}>Сортировка:</label>
+			<label className={styles.label}>Сортировка по:</label>
 			<select
 				value={sortOrder}
 				onChange={handleSortChange}

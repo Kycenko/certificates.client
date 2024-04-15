@@ -27,13 +27,16 @@ export const useCreateGroup = () => {
 	return { create, isPending }
 }
 
-export const useGetGroups = (course?: string) => {
+export const useGetGroups = (
+	course?: string,
+	sortOrder: 'asc' | 'desc' = 'asc'
+) => {
 	const {
 		data: groups,
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.GROUPS, { course }],
+		queryKey: [QUERY_KEYS.GROUPS, { course, sortOrder }],
 		queryFn: async () => {
 			const response: AxiosResponse<IGroup[]> =
 				await GroupService.getAll(course)

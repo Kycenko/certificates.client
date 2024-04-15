@@ -9,12 +9,11 @@ import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
 import { ICourse, TypeCourseForm } from '@/types/course.types.ts'
 
-import useFilters from '@/hooks/useFilters.ts'
+import CourseOptions from '@/config/course.options'
+
 import useModal from '@/hooks/useModal.ts'
-import useSortData from '@/hooks/useSortData.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import updateHistory from '@/lib/utils/updateHistory.ts'
 import { useGetDepartments } from '@/queries/department.queries.ts'
 
 interface CourseDataProps {
@@ -55,15 +54,9 @@ const CourseData: FC<CourseDataProps> = ({
 		reset()
 	}
 
-	const { sortOrder } = useFilters()
-
-	const { sortedData } = useSortData(data as ICourse[], sortOrder)
-
-	updateHistory(null, sortOrder)
-
 	return (
 		<>
-			{!sortedData || sortedData.length === 0 ? (
+			{!data || data.length === 0 ? (
 				<tr>
 					<td
 						colSpan={2}
@@ -73,7 +66,7 @@ const CourseData: FC<CourseDataProps> = ({
 					</td>
 				</tr>
 			) : (
-				sortedData.map(({ id, number, departmentId, groups }) => (
+				data.map(({ id, number, departmentId, groups }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}
@@ -119,30 +112,7 @@ const CourseData: FC<CourseDataProps> = ({
 								defaultValue={number}
 								{...register('number')}
 							>
-								<option
-									key={1}
-									value={1}
-								>
-									1 курс
-								</option>
-								<option
-									key={2}
-									value={2}
-								>
-									2 курс
-								</option>
-								<option
-									key={3}
-									value={3}
-								>
-									3 курс
-								</option>
-								<option
-									key={4}
-									value={4}
-								>
-									4 курс
-								</option>
+								<CourseOptions />
 							</CustomSelect>
 
 							<ErrorMessage error={errors.number} />

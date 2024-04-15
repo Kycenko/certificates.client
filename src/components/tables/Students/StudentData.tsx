@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { Info, Pencil, Trash2 } from 'lucide-react'
+import { History, Info, Pencil, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -10,32 +10,34 @@ import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalFo
 import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
+import { TypeStudentHistoryForm } from '@/types/student-history.types'
 import { IStudent, TypeStudentForm } from '@/types/student.types.ts'
 
-import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import updateHistory from '@/lib/utils/updateHistory.ts'
 import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
+import { useCreateStudentHistory } from '@/queries/student-history.queries'
 
 interface StudentDataProps {
 	data: IStudent[] | undefined
 	onEdit: (id: number | string, data: TypeStudentForm) => void
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
+	onHistory: (id: number | string) => void
 }
 
 const StudentData: FC<StudentDataProps> = ({
 	data,
 	onDelete,
 	onEdit,
-	onInfo
+	onInfo,
+	onHistory
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { groups } = useGetGroups()
+	const { create } = useCreateStudentHistory()
 
 	const {
 		register,
@@ -47,27 +49,22 @@ const StudentData: FC<StudentDataProps> = ({
 		resolver: zodResolver(studentValidationSchema)
 	})
 
-	const onSubmit = (id: number | string, data: TypeStudentForm) => {
+	const onSubmit = async (id: number | string, data: TypeStudentForm) => {
 		const newData = { ...data, groupId: Number(data.groupId) }
+
+		const historyData = {
+			studentId: Number(id),
+			groupId: Number(data.groupId)
+		}
+		await create(historyData as TypeStudentHistoryForm)
 		onEdit(id, newData)
 		setEditId(null)
 		reset()
 	}
 
-	const { searchTerm, sortOrder } = useFilters()
-
-	const { sortedData } = useSortAndFilterData(
-		data as IStudent[],
-		searchTerm,
-		sortOrder,
-		'surname'
-	)
-
-	updateHistory(searchTerm, sortOrder)
-
 	return (
 		<>
-			{!sortedData || sortedData.length === 0 ? (
+			{!data || data.length === 0 ? (
 				<tr>
 					<td
 						colSpan={5}
@@ -77,7 +74,7 @@ const StudentData: FC<StudentDataProps> = ({
 					</td>
 				</tr>
 			) : (
-				sortedData?.map(
+				data?.map(
 					({
 						id,
 						name,
@@ -115,6 +112,9 @@ const StudentData: FC<StudentDataProps> = ({
 
 							<td className={styles.editCellContainer}>
 								<div className={styles.adminEditCell}>
+									<CustomButton onClick={() => onHistory(id)}>
+										<History />
+									</CustomButton>
 									<CustomButton
 										onClick={() => {
 											setEditId(id)

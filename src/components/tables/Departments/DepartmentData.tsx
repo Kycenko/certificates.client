@@ -10,12 +10,9 @@ import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 
 import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
 
-import useFilters from '@/hooks/useFilters.ts'
 import useModal from '@/hooks/useModal.ts'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import styles from '@/app/styles/Tables.module.scss'
-import updateHistory from '@/lib/utils/updateHistory.ts'
 import { departmentValidationSchema } from '@/lib/validation/validation.schema.ts'
 
 interface DepartmentDataProps {
@@ -53,20 +50,9 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 		reset()
 	}
 
-	const { searchTerm, sortOrder } = useFilters()
-
-	const { sortedData } = useSortAndFilterData(
-		data as IDepartment[],
-		searchTerm,
-		sortOrder,
-		'name'
-	)
-
-	updateHistory(searchTerm, sortOrder)
-
 	return (
 		<>
-			{!sortedData || sortedData.length === 0 ? (
+			{!data || data.length === 0 ? (
 				<tr>
 					<td
 						colSpan={2}
@@ -76,7 +62,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 					</td>
 				</tr>
 			) : (
-				sortedData?.map(({ id, name }) => (
+				data?.map(({ id, name }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}
@@ -102,7 +88,10 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 						<CustomModalForm
 							onSubmit={handleSubmit(data => onSubmit(id, data))}
 							isOpen={editId === id}
-							onClose={() => setEditId(null)}
+							onClose={() => {
+								setEditId(null)
+								reset()
+							}}
 							formTitle='Изменение'
 							buttonTitle='Изменить'
 						>

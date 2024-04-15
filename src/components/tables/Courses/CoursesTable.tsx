@@ -25,10 +25,10 @@ import { useGetDepartments } from '@/queries/department.queries.ts'
 
 const CoursesTable = () => {
 	const [filterValue, setFilterValue] = useState<string>('')
-
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 	const navigate = useNavigate()
 
-	const { courses, isLoading, refetch } = useGetCourses(filterValue)
+	const { courses, isLoading, refetch } = useGetCourses(filterValue, sortOrder)
 	const { departments } = useGetDepartments()
 	const { closeModal } = useModal()
 
@@ -51,13 +51,18 @@ const CoursesTable = () => {
 		navigate(`${PAGES_URL.COURSES}/${id}`)
 	}
 
+	window.history.pushState(null, '', `?sort=${sortOrder}&filter=${filterValue}`)
+
 	if (isLoading) return <CustomLoader />
 	return (
 		<div className={styles.container}>
 			<div className={styles.tableContainer}>
 				<div className={styles.headerContainer}>
 					<div className={styles.header}>
-						<SortOrder />
+						<SortOrder
+							sortOrder={sortOrder}
+							setSortOrder={setSortOrder}
+						/>
 						<Filter
 							label='Фильтрация по отделению:'
 							filterValue={filterValue}

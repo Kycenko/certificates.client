@@ -1,4 +1,4 @@
-import { addMonths, format } from 'date-fns'
+import { addMonths } from 'date-fns'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
@@ -21,10 +21,8 @@ import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 
+import StudentDetailsData from './StudentDetailsData.tsx'
 import styles from '@/app/styles/DetailsTables.module.scss'
-import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
-import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
-import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useCreateMedicalCertificate } from '@/queries/medical-certificate.queries.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
@@ -58,7 +56,7 @@ const StudentDetailsTable = () => {
 	const handleCreate: SubmitHandler<
 		TypeMedicalCertificateForm
 	> = async data => {
-		let proposedEndDate // Предлагаемая дата окончания справки
+		let proposedEndDate
 
 		if (isDurationSelected) {
 			const durationMonths = parseInt(data.finishDate.toString())
@@ -66,14 +64,12 @@ const StudentDetailsTable = () => {
 				proposedEndDate = addMonths(new Date(), durationMonths)
 			} else {
 				console.error('Invalid duration provided:', data.finishDate)
-				return // Прерываем, так как продолжительность некорректна
+				return
 			}
 		} else {
-			// Если есть явно выбранная дата окончания, используем ее
 			proposedEndDate = new Date(data.finishDate)
 		}
 
-		// Выбираем последнюю медицинскую справку
 		let lastCertificateEndDate
 		if (student?.medicalCertificates?.length) {
 			lastCertificateEndDate = new Date(
@@ -83,15 +79,13 @@ const StudentDetailsTable = () => {
 			)
 		}
 
-		// Проверяем, что предлагаемая дата окончания справки не раньше окончания предыдущей
 		if (lastCertificateEndDate && proposedEndDate <= lastCertificateEndDate) {
 			alert(
 				'Дата окончания новой справки должна быть позже даты окончания предыдущей справки.'
 			)
-			return // Прерываем выполнение функции, чтобы не создавать справку
+			return
 		}
 
-		// Если все проверки прошли успешно, присваиваем data.finishDate
 		data.finishDate = proposedEndDate
 		const newDate = {
 			...data,
@@ -129,52 +123,19 @@ const StudentDetailsTable = () => {
 					<DetailsTableHeads data={DetailsStudentHeads} />
 				</thead>
 				<tbody>
-					{student?.medicalCertificates?.map(
-						({
-							id,
-							startDate,
-							finishDate,
-							healthGroupId,
-							physicalEducationId
-						}) => (
-							<tr
-								className={`
-								${styles.daysCell}
-								${daysUntilTheEnd(finishDate) === 'Да' ? styles.greenBg : styles.redBg}
-								${getDaysUntilExpiry(finishDate, startDate) < 30 ? styles.yellowBg : null}
-							`}
-								key={id}
-							>
-								<td className={styles.cellPadding}>
-									{format(new Date(startDate), 'dd.MM.yyyy')}
-								</td>
-								<td className={styles.cellPadding}>
-									{format(new Date(finishDate), 'dd.MM.yyyy')}
-								</td>
-								<td>{getValidityPeriod(finishDate, startDate)} </td>
-								<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
-								<td>
-									{healthGroups
-										?.filter(({ id }) => id === healthGroupId)
-										?.map(({ name }) => name)}
-								</td>
-								<td>
-									{physicalEducations
-										?.filter(({ id }) => id === physicalEducationId)
-										?.map(({ name }) => name)}
-								</td>
-								<td>{daysUntilTheEnd(finishDate)}</td>
-							</tr>
-						)
-					)}
+					<StudentDetailsData
+						data={student}
+						healthGroups={healthGroups}
+						physicalEducations={physicalEducations}
+					/>
 				</tbody>
 			</table>
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
-				buttonTitle={'Создать'}
+				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}
-				formTitle={'Создание'}
+				formTitle={'Добавление'}
 			>
 				{isDurationSelected ? (
 					<>
@@ -212,7 +173,7 @@ const StudentDetailsTable = () => {
 					checked={isDurationSelected}
 					onChange={toggleDurationSelect}
 				/>
-				<label htmlFor=''>Использовать конечную дату?</label>
+				<label className={'ml-1'}>Использовать конечную дату?</label>
 				<CustomSelect
 					id='healthGroupId'
 					label='Выберите группу здоровья'

@@ -77,7 +77,10 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 						onSubmit={handleSubmit(data => onSubmit(id, data))}
 						buttonTitle={'Изменить'}
 						isOpen={editId === id}
-						onClose={() => setEditId(null)}
+						onClose={() => {
+							setEditId(null)
+							reset()
+						}}
 						formTitle={'Изменение'}
 					>
 						<CustomInput

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Filter from '@/components/filters/Filter/Filter.tsx'
@@ -9,10 +10,12 @@ import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/constants/enums.ts'
 import { GroupHeads } from '@/constants/table-heads.ts'
 
-import { TypeGroupForm } from '@/types/group.types.ts'
+import { IGroup, TypeGroupForm } from '@/types/group.types.ts'
 
-import useFilters from '@/hooks/useFilters.ts'
+import CourseOptions from '@/config/course.options.tsx'
+
 import useModal from '@/hooks/useModal.ts'
+import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
@@ -24,11 +27,19 @@ import {
 } from '@/queries/group.queries.ts'
 
 const GroupsTable = () => {
-	const { searchTerm, setSearchTerm, filterValue, setFilterValue } =
-		useFilters()
 	const navigate = useNavigate()
-	const { groups, isLoading, refetch } = useGetGroups(filterValue)
+	const [searchTerm, setSearchTerm] = useState<string>('')
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+	const [filterValue, setFilterValue] = useState<string>('')
 
+	const { groups, isLoading, refetch } = useGetGroups(filterValue, sortOrder)
+
+	const { sortedData } = useSortAndFilterData(
+		groups as IGroup[],
+		searchTerm,
+		sortOrder,
+		'name'
+	)
 	const { closeModal } = useModal()
 
 	const { update } = useUpdateGroup()
@@ -49,6 +60,7 @@ const GroupsTable = () => {
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.GROUPS}/${id}`)
 	}
+	window.history.pushState(null, '', `?filter=${filterValue}&sort=${sortOrder}`)
 
 	if (isLoading) return <CustomLoader />
 	return (
@@ -61,42 +73,16 @@ const GroupsTable = () => {
 							setSearchTerm={setSearchTerm}
 							placeholder={'Поиск по названию группы...'}
 						/>
-						<SortOrder />
+						<SortOrder
+							sortOrder={sortOrder}
+							setSortOrder={setSortOrder}
+						/>
 						<Filter
 							label='Фильтрация по номеру курса:'
 							filterValue={filterValue}
 							setFilterValue={setFilterValue}
 						>
-							<option
-								key={0}
-								value={''}
-							>
-								Все курсы
-							</option>
-							<option
-								key={1}
-								value={1}
-							>
-								1 курс
-							</option>
-							<option
-								key={2}
-								value={2}
-							>
-								2 курс
-							</option>
-							<option
-								key={3}
-								value={3}
-							>
-								3 курс
-							</option>
-							<option
-								key={4}
-								value={4}
-							>
-								4 курс
-							</option>
+							<CourseOptions />
 						</Filter>
 					</div>
 				</div>
@@ -106,7 +92,7 @@ const GroupsTable = () => {
 					</thead>
 					<tbody>
 						<GroupData
-							data={groups}
+							data={sortedData}
 							onDelete={handleDelete}
 							onEdit={handleEdit}
 							onInfo={handleInfo}

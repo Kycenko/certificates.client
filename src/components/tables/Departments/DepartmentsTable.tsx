@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,9 +11,10 @@ import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/constants/enums.ts'
 import { DepartmentHeads } from '@/constants/table-heads.ts'
 
-import { TypeDepartmentForm } from '@/types/department.types.ts'
+import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
 
 import useModal from '@/hooks/useModal.ts'
+import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import CustomButton from '../../ui/buttons/CustomButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
@@ -33,7 +34,18 @@ import {
 const DepartmentsTable = () => {
 	const navigate = useNavigate()
 	const [searchTerm, setSearchTerm] = useState<string>('')
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+
 	const { departments, isLoading, refetch } = useGetDepartments()
+
+	const { sortedData } = useSortAndFilterData(
+		departments as IDepartment[],
+		searchTerm,
+		sortOrder,
+		'name'
+	)
+
+	window.history.pushState(null, '', `?search=${searchTerm}&sort=${sortOrder}`)
 
 	const { isOpen, openModal, closeModal } = useModal()
 
@@ -41,8 +53,7 @@ const DepartmentsTable = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset,
-		setFocus
+		reset
 	} = useForm<TypeDepartmentForm>({
 		mode: 'onChange',
 		resolver: zodResolver(departmentValidationSchema)
@@ -51,10 +62,6 @@ const DepartmentsTable = () => {
 	const { create } = useCreateDepartment()
 	const { update } = useUpdateDepartment()
 	const { remove } = useDeleteDepartment()
-
-	useEffect(() => {
-		setFocus('name')
-	}, [setFocus])
 
 	const handleCreate: SubmitHandler<TypeDepartmentForm> = async data => {
 		await create(data)
@@ -91,22 +98,26 @@ const DepartmentsTable = () => {
 								setSearchTerm={setSearchTerm}
 								placeholder={'Поиск по названию отделения...'}
 							/>
-							<SortOrder />
+							<SortOrder
+								sortOrder={sortOrder}
+								setSortOrder={setSortOrder}
+							/>
 						</div>
 						<CustomButton
 							className={styles.createBtn}
 							onClick={openModal}
 						>
-							Создать отделение
+							Добавить отделение
 						</CustomButton>
 					</div>
+
 					<table className={styles.table}>
 						<thead className={styles.tHeads}>
 							<TableHeads data={DepartmentHeads} />
 						</thead>
 						<tbody>
 							<DepartmentData
-								data={departments}
+								data={sortedData}
 								onDelete={handleDelete}
 								onEdit={handleEdit}
 								onInfo={handleInfo}
@@ -117,10 +128,10 @@ const DepartmentsTable = () => {
 			</div>
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
-				buttonTitle={'Создать'}
+				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}
-				formTitle={'Создание'}
+				formTitle={'Добавление'}
 			>
 				<CustomInput
 					label={'Название'}

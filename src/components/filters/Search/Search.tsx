@@ -16,9 +16,11 @@ const Search: FC<SearchProps> = ({
 	setSearchTerm,
 	placeholder
 }) => {
-	// const { searchTerm, setSearchTerm } = useFilters()
 	const debouncedValue = useDebounce(searchTerm, 500)
-	useEffect(() => {}, [debouncedValue])
+
+	useEffect(() => {
+		setSearchTerm(debouncedValue)
+	}, [debouncedValue, setSearchTerm])
 
 	return (
 		<div className={styles.container}>
@@ -34,5 +36,4 @@ const Search: FC<SearchProps> = ({
 		</div>
 	)
 }
-
 export default Search

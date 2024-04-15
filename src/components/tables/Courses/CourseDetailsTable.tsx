@@ -1,11 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 
-import { PAGES_URL } from '@/constants/enums.ts'
 import { DetailsCourseHeads } from '@/constants/table-heads.ts'
 
 import { TypeGroupForm } from '@/types/group.types.ts'
@@ -20,6 +19,7 @@ import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
+import CourseDetailsData from './CourseDetailsData.tsx'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourse } from '@/queries/course.queries.ts'
@@ -27,7 +27,7 @@ import { useCreateGroup } from '@/queries/group.queries.ts'
 
 const CourseDetailsTable = () => {
 	const { id } = useParams()
-	const navigate = useNavigate()
+
 	const { course, isLoading, refetch } = useGetCourse(id)
 	const { isOpen, closeModal, openModal } = useModal()
 	const { create } = useCreateGroup()
@@ -65,34 +65,22 @@ const CourseDetailsTable = () => {
 			<Heading title='Описание курса'>
 				<span className={styles.title}>{course?.number}-й Курс</span>
 			</Heading>
-			<CreateButton onClick={openModal}>Создать группу</CreateButton>
+			<CreateButton onClick={openModal}>Добавить группу</CreateButton>
 
 			<table className={styles.table}>
 				<thead>
 					<DetailsTableHeads data={DetailsCourseHeads} />
 				</thead>
 				<tbody>
-					{course?.groups?.map(({ id, name, students }) => (
-						<tr
-							onClick={() => navigate(`${PAGES_URL.GROUPS}/${id}`)}
-							className={styles.cell}
-							key={id}
-						>
-							<td className={styles.cellPadding}>{name}</td>
-							<td className={styles.cellPaxdding}>
-								{students ? students.length : 0}
-							</td>
-							<td>{course.number}-й Курс</td>
-						</tr>
-					))}
+					<CourseDetailsData data={course} />
 				</tbody>
 			</table>
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
-				buttonTitle={'Создать'}
+				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}
-				formTitle={'Создание'}
+				formTitle={'Добавление'}
 			>
 				<CustomInput
 					label={'Название'}

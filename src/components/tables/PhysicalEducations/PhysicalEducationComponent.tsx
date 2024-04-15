@@ -75,7 +75,7 @@ const PhysicalEducationComponent = () => {
 		<Layout>
 			<Heading title='Список групп по физкультуре' />
 			<CreateButton onClick={openModal}>
-				Создать группу по физкультуре
+				Добавить группу по физкультуре
 			</CreateButton>
 			<PhysicalEducationData
 				data={physicalEducations}
@@ -84,10 +84,10 @@ const PhysicalEducationComponent = () => {
 			/>
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
-				buttonTitle={'Создать'}
+				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}
-				formTitle={'Создание'}
+				formTitle={'Добавление'}
 			>
 				<CustomInput
 					label={'Название'}

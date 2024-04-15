@@ -1,16 +1,17 @@
 export const DepartmentHeads = ['Название']
 export const CourseHeads = ['Номер курса', 'Отделение', 'Количество групп']
 export const GroupHeads = ['Название', 'Номер курса', 'Количество учащихся']
+
 export const StudentHeads = [
 	'Фамилия',
 	'Имя',
 	'Отчество',
 	'Дата рождения',
 	'Название группы',
-
 	'Количество справок',
 	'Отчислен?'
 ]
+export const StudentHistoryHeads = ['Учебная группа', 'Дата и время создания']
 export const CertificatesHeads = [
 	'Владелец',
 	'Дата начала',
@@ -18,6 +19,13 @@ export const CertificatesHeads = [
 	'Срок действия',
 	'Дней до конца действия',
 	'Действительна?'
+]
+export const CertificateHistoryHeads = [
+	'Дата начала',
+	'Дата окончания',
+	'Группа здоровья',
+	'Группа по физкультуре',
+	'Дата и время создания'
 ]
 
 export const DetailsDepartmentHeads = [
@@ -42,4 +50,23 @@ export const DetailsStudentHeads = [
 	'Группа здоровья',
 	'Группа по физкультуре',
 	'Действительна?'
+]
+
+export const DepartmentReportHeads = [
+	'Студент',
+	'Группа',
+	'Отделение',
+	'Группа по физкультуре',
+	'Группа здоровья',
+	'Дата начала действия',
+	'Дата окончания действия'
+]
+
+export const GroupReportHeads = [
+	'Студент',
+	'Курс',
+	'Группа по физкультуре',
+	'Группа здоровья',
+	'Дата начала действия',
+	'Дата окончания действия'
 ]

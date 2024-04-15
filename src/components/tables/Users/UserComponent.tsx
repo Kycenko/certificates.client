@@ -63,7 +63,7 @@ const UserComponent = () => {
 		<Layout>
 			<Heading title='Список пользователей' />
 
-			<CreateButton onClick={openModal}>Создать пользователя</CreateButton>
+			<CreateButton onClick={openModal}>Добавить пользователя</CreateButton>
 
 			<UserData
 				data={users}

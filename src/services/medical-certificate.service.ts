@@ -14,10 +14,10 @@ export const MedicalCertificateService = {
 			data
 		)
 	},
-	async getAll(groupName?: string) {
+	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
 		const url = groupName
-			? `${SERVICE_URL.MEDICAL_CERTIFICATES}?group=${groupName}`
-			: SERVICE_URL.MEDICAL_CERTIFICATES
+			? `${SERVICE_URL.MEDICAL_CERTIFICATES}?group=${groupName}&sort=${sortOrder}`
+			: `${SERVICE_URL.MEDICAL_CERTIFICATES}?sort=${sortOrder}`
 		return instance.get<IMedicalCertificate[]>(url)
 	},
 

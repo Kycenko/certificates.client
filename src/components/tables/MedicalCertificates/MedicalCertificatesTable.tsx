@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Filter from '@/components/filters/Filter/Filter.tsx'
+import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import MedicalCertificateData from '@/components/tables/MedicalCertificates/MedicalCertificateData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
@@ -25,8 +26,11 @@ import {
 const MedicalCertificatesTable = () => {
 	const navigate = useNavigate()
 	const [filterValue, setFilterValue] = useState<string>('')
-	const { certificates, isLoading, refetch } =
-		useGetMedicalCertificates(filterValue)
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+	const { certificates, isLoading, refetch } = useGetMedicalCertificates(
+		filterValue,
+		sortOrder
+	)
 	const { groups } = useGetGroups()
 	const { closeModal } = useModal()
 
@@ -51,12 +55,18 @@ const MedicalCertificatesTable = () => {
 		navigate(`${PAGES_URL.MEDICAL_CERTIFICATE_HISTORY}/${id}`)
 	}
 
+	window.history.pushState(null, '', `?sort=${sortOrder}&filter=${filterValue}`)
+
 	if (isLoading) return <CustomLoader />
 	return (
 		<div className={styles.container}>
 			<div className={styles.tableContainer}>
 				<div className={styles.headerContainer}>
 					<div className={styles.header}>
+						<SortOrder
+							sortOrder={sortOrder}
+							setSortOrder={setSortOrder}
+						/>
 						<Filter
 							label='Фильтрация по группам:'
 							filterValue={filterValue}

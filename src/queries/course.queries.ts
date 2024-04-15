@@ -27,16 +27,21 @@ export const useCreateCourse = () => {
 	return { create, isPending }
 }
 
-export const useGetCourses = (departmentName?: string) => {
+export const useGetCourses = (
+	departmentName?: string,
+	sortOrder: 'asc' | 'desc' = 'asc'
+) => {
 	const {
 		data: courses,
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.COURSES, { departmentName }],
+		queryKey: [QUERY_KEYS.COURSES, { departmentName, sortOrder }],
 		queryFn: async () => {
-			const response: AxiosResponse<ICourse[]> =
-				await CourseService.getAll(departmentName)
+			const response: AxiosResponse<ICourse[]> = await CourseService.getAll(
+				departmentName,
+				sortOrder
+			)
 			return response.data
 		}
 	})

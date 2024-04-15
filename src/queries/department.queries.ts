@@ -27,16 +27,19 @@ export const useCreateDepartment = () => {
 	return { create, isPending }
 }
 
-export const useGetDepartments = () => {
+export const useGetDepartments = (
+	departmentName?: string,
+	sortOrder: 'asc' | 'desc' = 'asc'
+) => {
 	const {
 		data: departments,
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.DEPARTMENTS],
+		queryKey: [QUERY_KEYS.DEPARTMENTS, { departmentName, sortOrder }],
 		queryFn: async () => {
 			const response: AxiosResponse<IDepartment[]> =
-				await DepartmentService.getAll()
+				await DepartmentService.getAll(departmentName, sortOrder)
 			return response.data
 		}
 	})
