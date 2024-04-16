@@ -8,15 +8,25 @@ import {
 	Patch,
 	Post,
 	Query,
+	UploadedFile,
+	UseInterceptors,
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
+import { FileInterceptor } from '@nestjs/platform-express'
 import { StudentDto } from './dto/student.dto'
 import { StudentService } from './student.service'
 
 @Controller('students')
 export class StudentController {
 	constructor(private readonly studentService: StudentService) {}
+
+	@Post('import')
+	@Auth('admin')
+	@UseInterceptors(FileInterceptor('file'))
+	async importStudents(@UploadedFile() file: Express.Multer.File) {
+		return this.studentService.importStudents(file)
+	}
 
 	@Post()
 	@Auth('admin')
