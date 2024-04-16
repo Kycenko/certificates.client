@@ -5,7 +5,7 @@ import { IHealthGroup } from '@/types/health-group.types'
 import { IPhysicalEducation } from '@/types/physical-education.types'
 import { IStudent } from '@/types/student.types'
 
-import styles from '@/app/styles/Tables.module.scss'
+import styles from '@/app/styles/DetailsTables.module.scss'
 import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd'
 import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry'
 import getValidityPeriod from '@/lib/utils/getValidityPeriod'

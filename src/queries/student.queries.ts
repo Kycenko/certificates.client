@@ -8,9 +8,28 @@ import {
 	editToast
 } from '@/constants/notification-toasts.ts'
 
-import { IStudent, TypeStudentForm } from '@/types/student.types'
+import {
+	IStudent,
+	TypeStudentForm,
+	TypeUploadStudentForm
+} from '@/types/student.types'
 
 import { StudentService } from '@/services/student.service'
+
+export const useUploadStudents = () => {
+	const queryClient = new QueryClient()
+	const { mutateAsync: create, isPending } = useMutation({
+		mutationFn: async (data: TypeUploadStudentForm[]) => {
+			const response = await StudentService.upload(data)
+			return response.data
+		},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
+			createToast()
+		}
+	})
+	return { create, isPending }
+}
 
 export const useCreateStudent = () => {
 	const queryClient = new QueryClient()

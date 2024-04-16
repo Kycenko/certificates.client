@@ -93,6 +93,7 @@ const StudentsTable = () => {
 								setFilterValue={setFilterValue}
 							>
 								<option value=''>Все группы</option>
+
 								{groups?.map(({ id, name }) => (
 									<option
 										key={id}

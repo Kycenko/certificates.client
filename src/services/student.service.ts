@@ -1,10 +1,25 @@
 import { SERVICE_URL } from '@/constants/enums'
 
-import { IStudent, TypeStudentForm } from '@/types/student.types'
+import {
+	IStudent,
+	IUploadStudent,
+	TypeStudentForm,
+	TypeUploadStudentForm
+} from '@/types/student.types'
 
 import instance from '@/api/api.instance'
 
 export const StudentService = {
+	async upload(data: TypeUploadStudentForm[]) {
+		return instance.post<IUploadStudent[]>(
+			`${SERVICE_URL.STUDENTS}/import`,
+			data,
+			{
+				headers: { 'Content-Type': 'multipart/form-data' }
+			}
+		)
+	},
+
 	async create(data: TypeStudentForm) {
 		return instance.post<IStudent>(SERVICE_URL.STUDENTS, data)
 	},

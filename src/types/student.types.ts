@@ -14,4 +14,13 @@ export interface IStudent extends IBase {
 	medicalCertificates: IMedicalCertificate[]
 }
 
+export interface IUploadStudent extends IBase {
+	id: number
+	surname: string
+	name: string
+	secondName: string
+	birthDate: Date
+}
+
 export type TypeStudentForm = Omit<IStudent, 'id'>
+export type TypeUploadStudentForm = Omit<IUploadStudent, 'id'>

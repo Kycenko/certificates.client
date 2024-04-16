@@ -34,6 +34,7 @@ export const enum AppRoutes {
 	GROUPS = 'groups',
 	GROUP_DETAILS = 'group-details',
 	STUDENTS = 'students',
+
 	STUDENT_HISTORY = 'student-history',
 	STUDENT_DETAILS = 'student-details',
 	MEDICAL_CERTIFICATES = 'medical-certificates',
@@ -56,6 +57,7 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.GROUPS]: '/groups',
 	[AppRoutes.GROUP_DETAILS]: '/groups/:id',
 	[AppRoutes.STUDENTS]: '/students',
+
 	[AppRoutes.STUDENT_HISTORY]: '/student-history/:id',
 	[AppRoutes.STUDENT_DETAILS]: '/students/:id',
 	[AppRoutes.MEDICAL_CERTIFICATES]: '/medical-certificates',
@@ -117,6 +119,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 		path: RoutePath.students,
 		element: <StudentsPage />
 	},
+
 	[AppRoutes.STUDENT_HISTORY]: {
 		path: RoutePath['student-history'],
 		element: <StudentHistoryPage />
