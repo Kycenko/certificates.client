@@ -7,7 +7,12 @@ export class StudentHistoryService {
 	constructor(private prisma: PrismaService) {}
 
 	async create(dto: StudentHistoryDto) {
-		return this.prisma.studentHistory.create({ data: dto })
+		return this.prisma.studentHistory.create({
+			data: {
+				studentId: dto.studentId,
+				groupId: dto.groupId
+			}
+		})
 	}
 
 	async getAll(studentId: number) {

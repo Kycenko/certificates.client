@@ -1,5 +1,6 @@
 import { Auth } from '@auth/decorators/auth.decorator'
 import {
+	Body,
 	Controller,
 	Delete,
 	Get,
@@ -18,7 +19,7 @@ export class StudentHistoryController {
 	@Post()
 	@UsePipes(new ValidationPipe())
 	@Auth('admin')
-	async create(dto: StudentHistoryDto) {
+	async create(@Body() dto: StudentHistoryDto) {
 		return this.studentHistoryService.create(dto)
 	}
 

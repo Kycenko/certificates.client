@@ -1,4 +1,5 @@
 import {
+	IsBoolean,
 	IsNotEmpty,
 	IsNumber,
 	IsOptional,
@@ -27,4 +28,7 @@ export class StudentDto {
 	@IsNumber()
 	@IsOptional()
 	groupId: number
+	@IsBoolean()
+	@IsOptional()
+	isExpelled?: boolean
 }

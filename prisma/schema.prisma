@@ -97,7 +97,7 @@ model MedicalCertificateHistory {
   createdAt            DateTime           @default(now()) @map("created_at")
   medicalCertificate   MedicalCertificate @relation(fields: [medicalCertificateId], references: [id])
   healthGroup          HealthGroup?       @relation(fields: [healthGroupId], references: [id])
-  physicalEducation    PhysicalEducation? @relation(fields: [physicalEducationId], references: [id])
+  physicalEducation    PhysicalEducation? @relation(fields: [physicalEducationId], references: [id], onDelete: Cascade)
 
   @@map("medical_certificate_histories")
 }
