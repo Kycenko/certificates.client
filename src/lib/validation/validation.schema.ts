@@ -48,7 +48,7 @@ export const physicalEducationValidationSchema = z.object({
 	name: z
 		.string()
 		.min(3, { message: 'Минимум 3 символа' })
-		.max(15, { message: 'Максимум 15 символов' })
+		.max(16, { message: 'Максимум 16 символов' })
 })
 
 export const studentValidationSchema = z.object({

@@ -9,9 +9,10 @@ import instance from '@/api/api.instance.ts'
 
 export const StudentHistoryService = {
 	async create(data: TypeStudentHistoryForm) {
-		return instance.post<IStudentHistory>(`${SERVICE_URL.STUDENT_HISTORY}`, {
-			data: data
-		})
+		return instance.post<IStudentHistory>(
+			`${SERVICE_URL.STUDENT_HISTORY}`,
+			data
+		)
 	},
 
 	async getAll(studentId: string | undefined) {

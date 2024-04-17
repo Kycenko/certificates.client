@@ -50,8 +50,12 @@ const StudentData: FC<StudentDataProps> = ({
 	})
 
 	const onSubmit = async (id: number | string, data: TypeStudentForm) => {
-		const newData = { ...data, groupId: Number(data.groupId) }
-
+		const newData = {
+			...data,
+			groupId: Number(data.groupId)
+			// isExpelled: data.isExpelled !== undefined
+		}
+		console.log(newData)
 		const historyData = {
 			studentId: Number(id),
 			groupId: Number(data.groupId)
@@ -106,9 +110,9 @@ const StudentData: FC<StudentDataProps> = ({
 							<td className={styles.cellPadding}>
 								{medicalCertificates?.length} справок(а/и)
 							</td>
-							<td className={styles.cellPadding}>
+							{/* <td className={styles.cellPadding}>
 								{isExpelled === true ? 'Да' : 'Нет'}
-							</td>
+							</td> */}
 
 							<td className={styles.editCellContainer}>
 								<div className={styles.adminEditCell}>
@@ -186,6 +190,17 @@ const StudentData: FC<StudentDataProps> = ({
 										</option>
 									))}
 								</CustomSelect>
+								{/* <CustomSelect
+									id='isExpelled'
+									label='Отчислен?'
+									defaultValue={String(isExpelled)}
+									{...register('isExpelled', {
+										setValueAs: value => (value === 'true' ? true : false)
+									})}
+								>
+									<option value={'false'}>Нет</option>
+									<option value={'true'}>Да</option>
+								</CustomSelect> */}
 							</CustomModalForm>
 							<CustomModalForm
 								onSubmit={() => {

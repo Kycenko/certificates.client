@@ -8,8 +8,8 @@ export const StudentHeads = [
 	'Отчество',
 	'Дата рождения',
 	'Название группы',
-	'Количество справок',
-	'Отчислен?'
+	'Количество справок'
+	// 'Отчислен?'
 ]
 export const StudentHistoryHeads = ['Учебная группа', 'Дата и время создания']
 export const CertificatesHeads = [
@@ -69,4 +69,11 @@ export const GroupReportHeads = [
 	'Группа здоровья',
 	'Дата начала действия',
 	'Дата окончания действия'
+]
+
+export const UploadStudentsHeads = [
+	'Фамилия',
+	'Имя',
+	'Отчество',
+	'Дата рождения'
 ]

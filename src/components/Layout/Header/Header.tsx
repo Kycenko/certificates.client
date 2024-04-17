@@ -37,11 +37,11 @@ const Header = () => {
 	return user?.isAdmin ? (
 		<div className={'border-b-2 flex justify-start py-4'}>
 			<div className={'justify-start text-blue-gray-900'}>
-				<ul className={'flex flex-row gap-2 cursor-pointer'}>
+				<ul className={'ml-2 flex flex-row gap-2 cursor-pointer'}>
 					<Dropdown>
 						<li
 							onClick={() => setIsOpen(true)}
-							className='block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-100'
+							className=' block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-100'
 						>
 							Отчёт по отделению
 						</li>
@@ -52,10 +52,6 @@ const Header = () => {
 							Отчёт по группе
 						</li>
 					</Dropdown>
-
-					<li className={'flex items-center  hover:text-blue-500'}>
-						Загрузить
-					</li>
 				</ul>
 			</div>
 			<CustomModalForm
