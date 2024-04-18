@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Pencil, Trash2 } from 'lucide-react'
+import { PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -54,11 +54,17 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 				>
 					<h2 className={styles.title}>{name}</h2>
 					<div className={styles.buttons}>
-						<CustomButton onClick={() => setEditId(id)}>
-							<Pencil />
+						<CustomButton
+							className={styles.iconBtn}
+							onClick={() => setEditId(id)}
+						>
+							<PencilLine />
 						</CustomButton>
 
-						<CustomButton onClick={() => setDeleteId(id)}>
+						<CustomButton
+							className={styles.iconBtn}
+							onClick={() => setDeleteId(id)}
+						>
 							<Trash2 />
 						</CustomButton>
 					</div>

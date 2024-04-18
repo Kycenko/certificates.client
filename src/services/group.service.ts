@@ -1,8 +1,8 @@
-import { SERVICE_URL } from '@/constants/enums'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 import { IGroup, TypeGroupForm } from '@/types/group.types'
 
-import instance from '@/api/api.instance'
+import instance from '@/lib/api/api.instance'
 
 export const GroupService = {
 	async create(data: TypeGroupForm) {

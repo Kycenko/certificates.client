@@ -20,7 +20,7 @@ const UploadStudentsData: FC<UploadStudentsDataProps> = ({ data }) => {
 					<td className='p-2'>{surname}</td>
 					<td className='p-2'>{name}</td>
 					<td className='p-2'>{secondName ? secondName : 'Не указано'} </td>
-					{/* <td className='p-2'>{format(new Date(birthDate), 'yyyy-mm-dd')}</td> */}
+
 					<td className='p-2'>{correctFormatDate(birthDate)}</td>
 				</tr>
 			))}

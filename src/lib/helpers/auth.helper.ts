@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 
-import { LOCAL_STORAGE_KEY, TOKENS } from '@/constants/enums.ts'
+import { LOCAL_STORAGE_KEY, TOKENS } from '@/lib/constants/enums.ts'
 
 import { IAuthResponse, ITokens } from '@/types/auth.types.ts'
 

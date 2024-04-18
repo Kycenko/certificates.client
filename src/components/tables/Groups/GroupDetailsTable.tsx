@@ -4,8 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
-
-import { DetailsGroupHeads } from '@/constants/table-heads.ts'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeStudentForm } from '@/types/student.types.ts'
 
@@ -13,7 +12,6 @@ import useAuth from '@/hooks/useAuth.ts'
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -21,6 +19,7 @@ import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import GroupDetailsData from './GroupDetailsData.tsx'
+import { DetailsGroupHeads } from './group-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroup } from '@/queries/group.queries.ts'
@@ -65,7 +64,12 @@ const GroupDetailsTable = () => {
 				<span className={styles.title}>{group?.name}</span>
 			</Heading>
 			{user?.isAdmin ? (
-				<CreateButton onClick={openModal}>Добавить ученика</CreateButton>
+				<CustomButton
+					className={styles.createBtn}
+					onClick={openModal}
+				>
+					Добавить ученика
+				</CustomButton>
 			) : null}
 			<table className={styles.table}>
 				<thead>

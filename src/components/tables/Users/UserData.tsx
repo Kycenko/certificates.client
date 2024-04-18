@@ -1,4 +1,4 @@
-import { Pencil, Trash2 } from 'lucide-react'
+import { PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -30,11 +30,17 @@ const UserData: FC<UserDataProps> = ({ data, onEdit, onDelete }) => {
 					>
 						<h2 className={styles.title}>{login}</h2>
 						<div className={styles.buttons}>
-							<CustomButton onClick={() => onEdit(id)}>
-								<Pencil />
+							<CustomButton
+								className={styles.iconBtn}
+								onClick={() => onEdit(id)}
+							>
+								<PencilLine />
 							</CustomButton>
 
-							<CustomButton onClick={() => setDeleteId(id)}>
+							<CustomButton
+								className={styles.iconBtn}
+								onClick={() => setDeleteId(id)}
+							>
 								<Trash2 />
 							</CustomButton>
 						</div>

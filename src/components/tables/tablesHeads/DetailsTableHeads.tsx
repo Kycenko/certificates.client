@@ -1,10 +1,12 @@
+import styles from '@/app/styles/DetailsTables.module.scss'
+
 const DetailsTableHeads = ({ data }: { data: string[] }) => {
 	return (
-		<tr className={'border'}>
+		<tr className={styles.tHeads}>
 			{data?.map(head => (
 				<th
 					key={head}
-					className={'p-2'}
+					className={styles.head}
 				>
 					{head}
 				</th>

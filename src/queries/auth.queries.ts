@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
-import { SERVICE_URL } from '@/constants/enums'
-import { authToast, createToast } from '@/constants/notification-toasts.ts'
+import { SERVICE_URL } from '@/lib/constants/enums'
+import { authToast, createToast } from '@/lib/constants/notification-toasts.ts'
 
 import { ILogin, IRegister } from '@/types/auth.types'
 

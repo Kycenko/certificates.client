@@ -6,6 +6,14 @@
 	@apply min-w-full border-gray-300;
 }
 
+.tHeads {
+	@apply shadow-md text-xs uppercase bg-gray-50;
+}
+
+.head {
+	@apply text-center py-3 px-2 font-bold;
+}
+
 .cell {
 	@apply border hover:bg-gray-200 cursor-pointer  justify-center text-center items-center;
 }
@@ -25,4 +33,7 @@
 
 .daysCell {
 	@apply border text-center;
+}
+.createBtn {
+	@apply mb-4 rounded border font-medium bg-[#5bc0de] px-2 py-2 text-white hover:bg-[#46b8da];
 }

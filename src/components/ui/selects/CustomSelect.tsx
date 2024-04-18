@@ -13,7 +13,7 @@ const CustomSelect = forwardRef<HTMLSelectElement, CustomSelectProps>(
 	({ id, label, children, className, ...props }, ref) => {
 		return (
 			<div className={styles.container}>
-				<label className={styles.label}>{label}</label>
+				<label>{label}</label>
 				<select
 					id={id}
 					ref={ref}

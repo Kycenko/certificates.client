@@ -2,19 +2,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import HealthGroupData from '@/components/tables/HealthGroups/HealthGroupData.tsx'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeHealthGroupForm } from '@/types/health-group.types.ts'
 
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
+import styles from '@/app/styles/Fields.module.scss'
 import { healthGroupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import {
 	useCreateHealthGroup,
@@ -66,7 +67,12 @@ const HealthGroupComponent = () => {
 	return (
 		<Layout>
 			<Heading title='Список групп здоровья' />
-			<CreateButton onClick={openModal}>Добавить группу здоровья</CreateButton>
+			<CustomButton
+				className={styles.createBtn}
+				onClick={openModal}
+			>
+				Добавить группу здоровья
+			</CustomButton>
 			<HealthGroupData
 				data={healthGroups}
 				onDelete={handleDelete}

@@ -1,6 +1,6 @@
 import { IHealthGroup } from './health-group.types'
 import { IPhysicalEducation } from './physical-education.types'
-import { IBase } from '@/base/base.interface'
+import { IBase } from '@/lib/base/base.interface'
 
 export interface IMedicalCertificateHistory extends IBase {
 	id: number

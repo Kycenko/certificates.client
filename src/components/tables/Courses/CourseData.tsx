@@ -1,4 +1,4 @@
-import { Info, Pencil, Trash2 } from 'lucide-react'
+import { Eye, PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -9,7 +9,7 @@ import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
 import { ICourse, TypeCourseForm } from '@/types/course.types.ts'
 
-import CourseOptions from '@/config/course.options'
+import CourseOptions from '@/lib/config/course.options'
 
 import useModal from '@/hooks/useModal.ts'
 
@@ -81,17 +81,26 @@ const CourseData: FC<CourseDataProps> = ({
 									?.map(({ name }) => name)}
 							</span>
 						</td>
-						<td className={styles.cellPadding}>{groups?.length} групп(а/ы)</td>
+						<td className={styles.cellPadding}>{groups?.length}</td>
 
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
-								<CustomButton onClick={() => setEditId(id)}>
-									<Pencil />
+								<CustomButton
+									className={styles.iconBtn}
+									onClick={() => setEditId(id)}
+								>
+									<PencilLine />
 								</CustomButton>
-								<CustomButton onClick={() => onInfo(id)}>
-									<Info />
+								<CustomButton
+									className={styles.iconBtn}
+									onClick={() => onInfo(id)}
+								>
+									<Eye />
 								</CustomButton>
-								<CustomButton onClick={() => setDeleteId(id)}>
+								<CustomButton
+									className={styles.iconBtn}
+									onClick={() => setDeleteId(id)}
+								>
 									<Trash2 />
 								</CustomButton>
 							</div>

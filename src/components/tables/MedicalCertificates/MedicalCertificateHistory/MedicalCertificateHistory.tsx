@@ -2,9 +2,8 @@ import { useParams } from 'react-router-dom'
 
 import Heading from '@/components/ui/fields/Heading.tsx'
 
-import { CertificateHistoryHeads } from '@/constants/table-heads'
-
 import TableHeads from '../../tablesHeads/TableHeads'
+import { CertificateHistoryHeads } from '../certificates-heads'
 
 import MedicalCertificateHistoryData from './MedicalCertificateHistoryData'
 import styles from '@/app/styles/Tables.module.scss'

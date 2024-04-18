@@ -2,23 +2,22 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
-
-import { DetailsDepartmentHeads } from '@/constants/table-heads.ts'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeCourseForm } from '@/types/course.types.ts'
 
-import CourseOptions from '@/config/course.options.tsx'
+import CourseOptions from '@/lib/config/course.options.tsx'
 
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 
 import DepartmentDetailsData from './DepartmentDetailsData.tsx'
+import { DetailsDepartmentHeads } from './department-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { useCreateCourse } from '@/queries/course.queries.ts'
 import { useGetDepartment } from '@/queries/department.queries.ts'
@@ -54,7 +53,12 @@ const DepartmentDetailsTable = () => {
 			<Heading title={'Описание отделения'}>
 				<span className={styles.title}>{department?.name}</span>
 			</Heading>
-			<CreateButton onClick={openModal}>Добавить курс</CreateButton>
+			<CustomButton
+				className={styles.createBtn}
+				onClick={openModal}
+			>
+				Добавить курс
+			</CustomButton>
 			<table className={styles.table}>
 				<thead>
 					<DetailsTableHeads data={DetailsDepartmentHeads} />

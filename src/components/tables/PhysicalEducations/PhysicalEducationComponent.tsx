@@ -2,19 +2,20 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import PhysicalEducationData from '@/components/tables/PhysicalEducations/PhysicalEducationData.tsx'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypePhysicalEducationForm } from '@/types/physical-education.types.ts'
 
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
+import styles from '@/app/styles/Fields.module.scss'
 import { physicalEducationValidationSchema } from '@/lib/validation/validation.schema.ts'
 import {
 	useCreatePhysicalEducation,
@@ -74,9 +75,12 @@ const PhysicalEducationComponent = () => {
 	return (
 		<Layout>
 			<Heading title='Список групп по физкультуре' />
-			<CreateButton onClick={openModal}>
+			<CustomButton
+				className={styles.createBtn}
+				onClick={openModal}
+			>
 				Добавить группу по физкультуре
-			</CreateButton>
+			</CustomButton>
 			<PhysicalEducationData
 				data={physicalEducations}
 				onDelete={handleDelete}

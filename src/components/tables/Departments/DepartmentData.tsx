@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Info, Pencil, Trash2 } from 'lucide-react'
+import { Eye, PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -53,14 +53,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 	return (
 		<>
 			{!data || data.length === 0 ? (
-				<tr>
-					<td
-						colSpan={2}
-						className={styles.noData}
-					>
-						Данные не найдены
-					</td>
-				</tr>
+				<div className={styles.noData}>Данные не найдены</div>
 			) : (
 				data?.map(({ id, name }) => (
 					<tr
@@ -74,13 +67,22 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 						</td>
 						<td className={styles.editCellContainer}>
 							<div className={styles.adminEditCell}>
-								<CustomButton onClick={() => setEditId(id)}>
-									<Pencil />
+								<CustomButton
+									onClick={() => setEditId(id)}
+									className={styles.iconBtn}
+								>
+									<PencilLine />
 								</CustomButton>
-								<CustomButton onClick={() => onInfo(id)}>
-									<Info />
+								<CustomButton
+									className={styles.iconBtn}
+									onClick={() => onInfo(id)}
+								>
+									<Eye />
 								</CustomButton>
-								<CustomButton onClick={() => setDeleteId(id)}>
+								<CustomButton
+									className={styles.iconBtn}
+									onClick={() => setDeleteId(id)}
+								>
 									<Trash2 />
 								</CustomButton>
 							</div>

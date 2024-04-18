@@ -2,9 +2,8 @@ import { useParams } from 'react-router-dom'
 
 import Heading from '@/components/ui/fields/Heading'
 
-import { StudentHistoryHeads } from '@/constants/table-heads'
-
 import TableHeads from '../../tablesHeads/TableHeads'
+import { StudentHistoryHeads } from '../student-heads'
 
 import StudentHistoryData from './StudentHistoryData'
 import styles from '@/app/styles/Tables.module.scss'

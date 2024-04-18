@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import Layout from '@/components/Layout/Layout'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
-import { GroupReportHeads } from '@/constants/table-heads'
+import { GroupReportHeads } from '@/lib/constants/table-heads'
 
 import usePrint from '@/hooks/usePrint'
 

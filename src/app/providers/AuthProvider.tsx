@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/constants/enums'
+import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/lib/constants/enums'
 
 import { IUser } from '@/types/user.types'
 

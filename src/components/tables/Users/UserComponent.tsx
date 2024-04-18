@@ -2,22 +2,22 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import UserData from '@/components/tables/Users/UserData.tsx'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
-import { PAGES_URL } from '@/constants/enums.ts'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
 
 import { IRegister } from '@/types/auth.types.ts'
 
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
-import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 
+import styles from '@/app/styles/Fields.module.scss'
 import { useRegister } from '@/queries/auth.queries.ts'
 import { useDeleteUser, useGetUsers } from '@/queries/user.queries.ts'
 
@@ -63,7 +63,12 @@ const UserComponent = () => {
 		<Layout>
 			<Heading title='Список пользователей' />
 
-			<CreateButton onClick={openModal}>Добавить пользователя</CreateButton>
+			<CustomButton
+				className={styles.createBtn}
+				onClick={openModal}
+			>
+				Добавить пользователя
+			</CustomButton>
 
 			<UserData
 				data={users}
@@ -100,17 +105,12 @@ const UserComponent = () => {
 					})}
 				/>
 				<ErrorMessage error={errors.password} />
-
-				<CustomSelect
+				<CustomInput
+					type='checkbox'
 					id={'isAdmin'}
-					label='Администратор?'
-					{...register('isAdmin', {
-						setValueAs: value => value === 'true'
-					})}
-				>
-					<option value='false'>Нет</option>
-					<option value='true'>Да</option>
-				</CustomSelect>
+					label={'Администратор?'}
+					{...register('isAdmin')}
+				/>
 			</CustomModalForm>
 		</Layout>
 	)

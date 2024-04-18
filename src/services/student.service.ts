@@ -1,4 +1,4 @@
-import { SERVICE_URL } from '@/constants/enums'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 import {
 	IStudent,
@@ -7,7 +7,7 @@ import {
 	TypeUploadStudentForm
 } from '@/types/student.types'
 
-import instance from '@/api/api.instance'
+import instance from '@/lib/api/api.instance'
 
 export const StudentService = {
 	async upload(data: TypeUploadStudentForm[]) {

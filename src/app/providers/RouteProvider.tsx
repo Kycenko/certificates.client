@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import { routeConfig } from '../../config/route.config'
+import { routeConfig } from '@/lib/config/route.config'
 
 const RouteProvider: FC = () => {
 	return (

@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { PAGES_URL } from '@/constants/enums'
+import { PAGES_URL } from '@/lib/constants/enums'
 
 import { IGroup } from '@/types/group.types'
 

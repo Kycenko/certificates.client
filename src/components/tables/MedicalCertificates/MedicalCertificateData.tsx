@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { History, Pencil, Trash2 } from 'lucide-react'
+import { History, PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -85,14 +85,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	return (
 		<>
 			{!data || data.length === 0 ? (
-				<tr>
-					<td
-						className={styles.noData}
-						colSpan={2}
-					>
-						Данные не найдены
-					</td>
-				</tr>
+				<div className={styles.noData}>Данные не найдены</div>
 			) : (
 				data?.map(
 					({
@@ -133,19 +126,26 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 
 							<td className={styles.editCellContainer}>
 								<div className={styles.adminEditCell}>
-									<CustomButton onClick={() => onHistory(id)}>
+									<CustomButton
+										className={styles.iconBtn}
+										onClick={() => onHistory(id)}
+									>
 										<History />
 									</CustomButton>
 									<CustomButton
+										className={styles.iconBtn}
 										onClick={() => {
 											setEditId(id)
 											reset()
 										}}
 									>
-										<Pencil />
+										<PencilLine />
 									</CustomButton>
 
-									<CustomButton onClick={() => setDeleteId(id)}>
+									<CustomButton
+										className={styles.iconBtn}
+										onClick={() => setDeleteId(id)}
+									>
 										<Trash2 />
 									</CustomButton>
 								</div>

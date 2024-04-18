@@ -82,21 +82,19 @@ const UserDetailsComponent = () => {
 							<ErrorMessage error={errors.password} />
 						</div>
 
-						<CustomSelect
+						<CustomInput
+							type='checkbox'
 							id={'isAdmin'}
 							label={'Администратор?'}
-							{...register('isAdmin', {
-								setValueAs: value => value === 'true'
-							})}
-						>
-							<option value={'false'}>Нет</option>
-							<option value={'true'}>Да</option>
-						</CustomSelect>
+							{...register('isAdmin')}
+						/>
+
 						<CustomSelect
 							id={'groupId'}
 							label={'Группа'}
 							{...register('groupId')}
 						>
+							<option value={''}>Не выбрана</option>
 							{groups?.map(({ id, name }) => (
 								<option
 									key={id}

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 
-import { DepartmentReportHeads } from '@/constants/table-heads'
+import { DepartmentReportHeads } from '@/lib/constants/table-heads'
 
 import usePrint from '@/hooks/usePrint'
 

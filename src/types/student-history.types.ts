@@ -1,6 +1,6 @@
 import { IGroup } from './group.types'
 import { IStudent } from './student.types'
-import { IBase } from '@/base/base.interface.ts'
+import { IBase } from '@/lib/base/base.interface.ts'
 
 export interface IStudentHistory extends IBase {
 	id: number

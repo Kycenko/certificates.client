@@ -1,4 +1,4 @@
-import { IBase } from '@/base/base.interface'
+import { IBase } from '@/lib/base/base.interface'
 
 export interface IUser extends IBase {
 	id: string

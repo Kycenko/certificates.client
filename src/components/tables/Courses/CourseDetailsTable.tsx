@@ -4,15 +4,13 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
-
-import { DetailsCourseHeads } from '@/constants/table-heads.ts'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeGroupForm } from '@/types/group.types.ts'
 
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -20,6 +18,7 @@ import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import CourseDetailsData from './CourseDetailsData.tsx'
+import { DetailsCourseHeads } from './course-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourse } from '@/queries/course.queries.ts'
@@ -65,7 +64,12 @@ const CourseDetailsTable = () => {
 			<Heading title='Описание курса'>
 				<span className={styles.title}>{course?.number}-й Курс</span>
 			</Heading>
-			<CreateButton onClick={openModal}>Добавить группу</CreateButton>
+			<CustomButton
+				className={styles.createBtn}
+				onClick={openModal}
+			>
+				Добавить группу
+			</CustomButton>
 
 			<table className={styles.table}>
 				<thead>

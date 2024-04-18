@@ -10,12 +10,14 @@ const CustomButton = ({
 	...rest
 }: PropsWithChildren<TypeButton>) => {
 	return (
-		<button
-			className={className ? className : styles.customBtn}
-			{...rest}
-		>
-			{children}
-		</button>
+		<div className={styles.btnContainer}>
+			<button
+				className={className ? className : styles.customBtn}
+				{...rest}
+			>
+				{children}
+			</button>
+		</div>
 	)
 }
 

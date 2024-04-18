@@ -1,3 +1,7 @@
+import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
+
+import { UploadStudentsHeads } from '@/lib/constants/table-heads.ts'
+
 import useStudentsUpload from '@/hooks/useStudentsUpload'
 
 import Layout from '../Layout/Layout'
@@ -51,13 +55,13 @@ const UploadStudentsTable = () => {
 			{data && (
 				<table className={styles.table}>
 					<thead className={'border-b-2 border-t-2 m-4'}>
-						{/* <TableHeads data={UploadStudentsHeads} /> */}
-						<tr className=''>
-							<th className='p-2 uppercase font-bold'>Фамилия</th>
-							<th className='p-2 uppercase font-bold'>Имя</th>
-							<th className='p-2 uppercase font-bold'>Отчество</th>
-							<th className='p-2 uppercase font-bold'>Дата рождения</th>
-						</tr>
+						<TableHeads data={UploadStudentsHeads} />
+						{/*<tr className=''>*/}
+						{/*	<th className='p-2 uppercase font-bold'>Фамилия</th>*/}
+						{/*	<th className='p-2 uppercase font-bold'>Имя</th>*/}
+						{/*	<th className='p-2 uppercase font-bold'>Отчество</th>*/}
+						{/*	<th className='p-2 uppercase font-bold'>Дата рождения</th>*/}
+						{/*</tr>*/}
 					</thead>
 					<tbody className='text-center'>
 						<UploadStudentsData data={data} />

@@ -11,8 +11,6 @@
 			"@/api": ["src/api/*"],
 			"@/app/*": ["src/app/*"],
 			"@/components/*": ["src/components/*"],
-			"@/config/*": ["src/config/*"],
-			"@/constants/*": ["src/constants/*"],
 			"@/hooks/*": ["src/hooks/*"],
 			"@/pages/*": ["src/pages/*"],
 			"@/queries/*": ["src/queries/*"],

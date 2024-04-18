@@ -1,5 +1,5 @@
 import { ICourse } from './course.types'
-import { IBase } from '@/base/base.interface'
+import { IBase } from '@/lib/base/base.interface'
 
 export interface IDepartment extends IBase {
 	id: number

@@ -8,8 +8,7 @@ import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import DepartmentData from '@/components/tables/Departments/DepartmentData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import { PAGES_URL } from '@/constants/enums.ts'
-import { DepartmentHeads } from '@/constants/table-heads.ts'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
 
 import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
 
@@ -22,6 +21,7 @@ import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
+import { DepartmentHeads } from './department-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import { departmentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import {

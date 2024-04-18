@@ -4,8 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
-
-import { DetailsStudentHeads } from '@/constants/table-heads.ts'
+import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types.ts'
 
@@ -13,7 +12,6 @@ import useAuth from '@/hooks/useAuth.ts'
 import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import CreateButton from '../../ui/buttons/CreateButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -22,6 +20,7 @@ import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 
 import StudentDetailsData from './StudentDetailsData.tsx'
+import { DetailsStudentHeads } from './student-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useCreateMedicalCertificate } from '@/queries/medical-certificate.queries.ts'
@@ -116,7 +115,12 @@ const StudentDetailsTable = () => {
 			</Heading>
 
 			{user?.isAdmin ? (
-				<CreateButton onClick={openModal}>Добавить справку</CreateButton>
+				<CustomButton
+					className={styles.createBtn}
+					onClick={openModal}
+				>
+					Добавить справку
+				</CustomButton>
 			) : null}
 			<table className={styles.table}>
 				<thead>

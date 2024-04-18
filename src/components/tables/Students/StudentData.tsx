@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { History, Info, Pencil, Trash2 } from 'lucide-react'
+import { Eye, History, PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -53,7 +53,6 @@ const StudentData: FC<StudentDataProps> = ({
 		const newData = {
 			...data,
 			groupId: Number(data.groupId)
-			// isExpelled: data.isExpelled !== undefined
 		}
 		console.log(newData)
 		const historyData = {
@@ -69,14 +68,7 @@ const StudentData: FC<StudentDataProps> = ({
 	return (
 		<>
 			{!data || data.length === 0 ? (
-				<tr>
-					<td
-						colSpan={5}
-						className={styles.noData}
-					>
-						Данные не найдены
-					</td>
-				</tr>
+				<div className={styles.noData}>Данные не найдены</div>
 			) : (
 				data?.map(
 					({
@@ -106,31 +98,43 @@ const StudentData: FC<StudentDataProps> = ({
 							<td className={styles.cellPadding}>
 								<span>{format(new Date(birthDate), 'dd.MM.yyyy')}</span>
 							</td>
-							<td className={styles.cellPadding}>{group?.name}</td>
 							<td className={styles.cellPadding}>
-								{medicalCertificates?.length} справок(а/и)
+								{group?.name ? group?.name : 'Не указана'}
 							</td>
-							{/* <td className={styles.cellPadding}>
+							<td className={styles.cellPadding}>
+								{medicalCertificates?.length}
+							</td>
+							<td className={styles.cellPadding}>
 								{isExpelled === true ? 'Да' : 'Нет'}
-							</td> */}
+							</td>
 
 							<td className={styles.editCellContainer}>
 								<div className={styles.adminEditCell}>
-									<CustomButton onClick={() => onHistory(id)}>
+									<CustomButton
+										className={styles.iconBtn}
+										onClick={() => onHistory(id)}
+									>
 										<History />
 									</CustomButton>
 									<CustomButton
+										className={styles.iconBtn}
 										onClick={() => {
 											setEditId(id)
 											reset()
 										}}
 									>
-										<Pencil />
+										<PencilLine />
 									</CustomButton>
-									<CustomButton onClick={() => onInfo(id)}>
-										<Info />
+									<CustomButton
+										className={styles.iconBtn}
+										onClick={() => onInfo(id)}
+									>
+										<Eye />
 									</CustomButton>
-									<CustomButton onClick={() => setDeleteId(id)}>
+									<CustomButton
+										className={styles.iconBtn}
+										onClick={() => setDeleteId(id)}
+									>
 										<Trash2 />
 									</CustomButton>
 								</div>
@@ -190,17 +194,6 @@ const StudentData: FC<StudentDataProps> = ({
 										</option>
 									))}
 								</CustomSelect>
-								{/* <CustomSelect
-									id='isExpelled'
-									label='Отчислен?'
-									defaultValue={String(isExpelled)}
-									{...register('isExpelled', {
-										setValueAs: value => (value === 'true' ? true : false)
-									})}
-								>
-									<option value={'false'}>Нет</option>
-									<option value={'true'}>Да</option>
-								</CustomSelect> */}
 							</CustomModalForm>
 							<CustomModalForm
 								onSubmit={() => {

@@ -1,8 +1,8 @@
-import { SERVICE_URL } from '@/constants/enums'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 import { IDepartment, TypeDepartmentForm } from '@/types/department.types'
 
-import instance from '@/api/api.instance'
+import instance from '@/lib/api/api.instance'
 
 export const DepartmentService = {
 	async create(data: TypeDepartmentForm) {

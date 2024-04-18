@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Info, Pencil, Trash2 } from 'lucide-react'
+import { Eye, PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -10,7 +10,7 @@ import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalFo
 import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
-import { PAGES_URL } from '@/constants/enums.ts'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
 
 import { IGroup, TypeGroupForm } from '@/types/group.types.ts'
 
@@ -62,14 +62,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 	return (
 		<>
 			{!data || data.length === 0 ? (
-				<tr>
-					<td
-						colSpan={2}
-						className={styles.noData}
-					>
-						Данные не найдены
-					</td>
-				</tr>
+				<div className={styles.noData}>Данные не найдены</div>
 			) : (
 				data?.map(({ id, name, courseId, students }) => (
 					<>
@@ -86,18 +79,25 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 										?.filter(({ id }) => id === courseId)
 										?.map(({ number }) => `${number}-й курс`)}
 								</td>
-								<td className={styles.cellPadding}>
-									{students?.length} учащихся(йся)
-								</td>
+								<td className={styles.cellPadding}>{students?.length}</td>
 								<td className={styles.editCellContainer}>
 									<div className={styles.adminEditCell}>
-										<CustomButton onClick={() => handleEdit(id)}>
-											<Pencil />
+										<CustomButton
+											className={styles.iconBtn}
+											onClick={() => handleEdit(id)}
+										>
+											<PencilLine />
 										</CustomButton>
-										<CustomButton onClick={() => onInfo(id)}>
-											<Info />
+										<CustomButton
+											className={styles.iconBtn}
+											onClick={() => onInfo(id)}
+										>
+											<Eye />
 										</CustomButton>
-										<CustomButton onClick={() => setDeleteId(id)}>
+										<CustomButton
+											className={styles.iconBtn}
+											onClick={() => setDeleteId(id)}
+										>
 											<Trash2 />
 										</CustomButton>
 									</div>
