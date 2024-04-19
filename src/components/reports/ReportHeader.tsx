@@ -1,10 +1,4 @@
-import { FC } from 'react'
-
-interface ReportHeaderProps {
-	onPrint: () => void
-}
-
-const ReportHeader: FC<ReportHeaderProps> = ({ onPrint }) => {
+const ReportHeader = ({ onPrint }: { onPrint: () => void }) => {
 	return (
 		<div>
 			<div className={'justify-center'}>

@@ -8,9 +8,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeStudentForm } from '@/types/student.types.ts'
 
-import useAuth from '@/hooks/useAuth.ts'
-import useModal from '@/hooks/useModal.ts'
-
 import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
@@ -21,6 +18,8 @@ import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import GroupDetailsData from './GroupDetailsData.tsx'
 import { DetailsGroupHeads } from './group-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
+import useAuth from '@/lib/hooks/useAuth.ts'
+import useModal from '@/lib/hooks/useModal.ts'
 import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroup } from '@/queries/group.queries.ts'
 import { useCreateStudent } from '@/queries/student.queries.ts'
@@ -65,7 +64,7 @@ const GroupDetailsTable = () => {
 			</Heading>
 			{user?.isAdmin ? (
 				<CustomButton
-					className={styles.createBtn}
+					variant='create'
 					onClick={openModal}
 				>
 					Добавить ученика

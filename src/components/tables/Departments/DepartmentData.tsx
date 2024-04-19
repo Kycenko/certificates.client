@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -10,9 +10,8 @@ import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 
 import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
 
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import useModal from '@/lib/hooks/useModal.ts'
 import { departmentValidationSchema } from '@/lib/validation/validation.schema.ts'
 
 interface DepartmentDataProps {
@@ -34,12 +33,15 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset
+		reset,
+		setFocus
 	} = useForm<TypeDepartmentForm>({
 		mode: 'onChange',
 		resolver: zodResolver(departmentValidationSchema)
 	})
-
+	useEffect(() => {
+		setFocus('name')
+	})
 	const handleDelete = (id: number | string) => {
 		onDelete(id)
 		setDeleteId(null)

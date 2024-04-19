@@ -1,0 +1,6 @@
+.heading {
+	@apply mt-5 text-center  text-2xl font-bold flex flex-col;
+}
+.underLine {
+	@apply my-3 h-[1.5px] bg-gray-400 bg-opacity-20 w-full;
+}

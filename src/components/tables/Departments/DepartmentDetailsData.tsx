@@ -1,11 +1,10 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { PAGES_URL } from '@/lib/constants/enums'
-
 import { IDepartment } from '@/types/department.types'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
+import { PAGES_URL } from '@/lib/constants/enums'
 
 interface DepartmentDetailsDataProps {
 	data: IDepartment | undefined

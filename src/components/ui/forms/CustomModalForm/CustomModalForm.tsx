@@ -2,9 +2,8 @@ import { X } from 'lucide-react'
 import { FC, ReactNode, useRef } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
-import useClickOutside from '@/hooks/useClickOutside.ts'
-
 import styles from './CustomModalForm.module.scss'
+import useClickOutside from '@/lib/hooks/useClickOutside.ts'
 
 interface CustomModalFormProps {
 	isOpen: boolean

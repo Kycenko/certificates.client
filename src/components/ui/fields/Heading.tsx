@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import styles from '@/app/styles/Fields.module.scss'
+import styles from './Heading.module.scss'
 
 interface IHeading {
 	title: string

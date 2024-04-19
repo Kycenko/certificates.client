@@ -6,16 +6,14 @@ import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import MedicalCertificateData from '@/components/tables/MedicalCertificates/MedicalCertificateData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import { PAGES_URL } from '@/lib/constants/enums.ts'
-
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types.ts'
-
-import useModal from '@/hooks/useModal.ts'
 
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import { CertificatesHeads } from './certificates-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
+import useModal from '@/lib/hooks/useModal.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
 import {
 	useDeleteMedicalCertificate,

@@ -6,10 +6,9 @@ import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalFo
 
 import { IUser } from '@/types/user.types.ts'
 
-import useAuth from '@/hooks/useAuth.ts'
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Cards.module.scss'
+import useAuth from '@/lib/hooks/useAuth.ts'
+import useModal from '@/lib/hooks/useModal.ts'
 
 interface UserDataProps {
 	data: IUser[] | undefined

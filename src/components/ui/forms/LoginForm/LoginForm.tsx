@@ -17,7 +17,7 @@ const LoginForm = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		setError,
+
 		reset
 	} = useForm<ILogin>({
 		mode: 'onChange',
@@ -25,14 +25,14 @@ const LoginForm = () => {
 	})
 
 	const { mutateAsync } = useLogin()
-
-	const [showPassword, setShowPassword] = useState(false)
+	const [loginError, setLoginError] = useState<string | null>(null)
+	const [showPassword, setShowPassword] = useState<boolean>(false)
 
 	const handleLogin = async (data: ILogin) => {
 		try {
 			await mutateAsync(data)
 		} catch (error) {
-			setError('root', { message: 'Неверный логин или пароль' })
+			setLoginError('Неверный логин или пароль')
 			reset()
 		}
 	}
@@ -66,7 +66,7 @@ const LoginForm = () => {
 						</button>
 					</div>
 					<ErrorMessage error={errors.password} />
-					{errors.root && <p className='text-red-500'>{errors.root.message}</p>}
+					{loginError && <p>{loginError}</p>}
 					<div className={styles.btnContainer}>
 						<button
 							className={styles.loginBtn}

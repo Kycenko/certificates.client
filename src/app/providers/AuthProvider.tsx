@@ -9,10 +9,9 @@ import {
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/lib/constants/enums'
-
 import { IUser } from '@/types/user.types'
 
+import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/lib/constants/enums'
 import { getAccessToken, removeFromStorage } from '@/lib/helpers/auth.helper.ts'
 import getLocalStorage from '@/lib/utils/getLocalStorage'
 

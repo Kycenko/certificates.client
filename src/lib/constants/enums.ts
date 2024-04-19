@@ -40,8 +40,7 @@ export const enum TOKENS {
 }
 
 export const enum LOCAL_STORAGE_KEY {
-	USER = 'user',
-	STUDENT_HISTORY = 'student-history'
+	USER = 'user'
 }
 
 export const enum QUERY_KEYS {

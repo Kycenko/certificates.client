@@ -1,18 +1,34 @@
+import clsx from 'clsx'
 import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 
-import styles from '@/app/styles/Fields.module.scss'
+import styles from './CustomButton.module.scss'
 
-type TypeButton = ButtonHTMLAttributes<HTMLButtonElement>
+type ButtonVariant = 'primary' | 'create'
+
+// Расширяем интерфейс кнопки, добавляя свойство variant
+interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	variant?: ButtonVariant
+}
 
 const CustomButton = ({
 	children,
 	className,
+	variant,
 	...rest
-}: PropsWithChildren<TypeButton>) => {
+}: PropsWithChildren<CustomButtonProps>) => {
+	const variantStyles = {
+		primary: styles.primaryBtn,
+		create: styles.createBtn
+	}
+
+	const buttonStyles = variant
+		? variantStyles[variant]
+		: variantStyles['primary']
+
 	return (
-		<div className={styles.btnContainer}>
+		<div className={styles.container}>
 			<button
-				className={className ? className : styles.customBtn}
+				className={clsx(buttonStyles, className)}
 				{...rest}
 			>
 				{children}

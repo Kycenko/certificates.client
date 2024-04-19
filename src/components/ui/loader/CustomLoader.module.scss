@@ -1,0 +1,7 @@
+.container {
+	@apply flex justify-end items-center;
+}
+
+.loader {
+	@apply animate-spin h-8 w-8 text-black;
+}

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,14 +10,13 @@ import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalFo
 import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
 import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
-import { PAGES_URL } from '@/lib/constants/enums.ts'
-
 import { IGroup, TypeGroupForm } from '@/types/group.types.ts'
 
-import useAuth from '@/hooks/useAuth.ts'
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import CourseOptions from '@/lib/config/course.options'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
+import useAuth from '@/lib/hooks/useAuth.ts'
+import useModal from '@/lib/hooks/useModal.ts'
 import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourses } from '@/queries/course.queries.ts'
 
@@ -38,11 +37,17 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset
+		reset,
+		setFocus
 	} = useForm<TypeGroupForm>({
 		mode: 'onChange',
 		resolver: zodResolver(groupValidationSchema)
 	})
+
+	useEffect(() => {
+		setFocus('name')
+	})
+
 	const handleEdit = (id: number | string) => {
 		setEditId(id)
 		reset()
@@ -146,14 +151,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 								defaultValue={courseId}
 								{...register('courseId')}
 							>
-								{courses?.map(({ id, number }) => (
-									<option
-										key={id}
-										value={id}
-									>
-										{number}-й курс
-									</option>
-								))}
+								<CourseOptions />
 							</CustomSelect>
 						</CustomModalForm>
 						<CustomModalForm

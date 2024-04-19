@@ -14,6 +14,7 @@ import MedicalCertificatesPage from '@/pages/MedicalCertificates/MedicalCertific
 import PhysicalEducationPage from '@/pages/PhysicalEducations/PhysicalEducationsPage.tsx'
 import GetDepartmentReportPage from '@/pages/Reports/GetDepartmentReportPage.tsx'
 import GetGroupReportPage from '@/pages/Reports/GetGroupReportPage.tsx'
+import GetHealthReportPage from '@/pages/Reports/GetHealthReportPage'
 import StudentDetailsPage from '@/pages/Students/StudentDetailsPage.tsx'
 import StudentHistoryPage from '@/pages/Students/StudentHistoryPage.tsx'
 import StudentsPage from '@/pages/Students/StudentsPage.tsx'
@@ -34,13 +35,13 @@ export const enum AppRoutes {
 	GROUPS = 'groups',
 	GROUP_DETAILS = 'group-details',
 	STUDENTS = 'students',
-
 	STUDENT_HISTORY = 'student-history',
 	STUDENT_DETAILS = 'student-details',
 	MEDICAL_CERTIFICATES = 'medical-certificates',
 	MEDICAL_CERTIFICATE_HISTORY = 'medical-certificate-history',
 	GET_DEPARTMENT_REPORT = 'department-report',
-	GET_GROUP_REPORT = 'group-report'
+	GET_GROUP_REPORT = 'group-report',
+	GET_HEALTH_REPORT = 'check-list-report'
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -63,7 +64,8 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.MEDICAL_CERTIFICATES]: '/medical-certificates',
 	[AppRoutes.MEDICAL_CERTIFICATE_HISTORY]: '/medical-certificate-history/:id',
 	[AppRoutes.GET_DEPARTMENT_REPORT]: '/reports/department-report/:id',
-	[AppRoutes.GET_GROUP_REPORT]: '/reports/group-report/:id'
+	[AppRoutes.GET_GROUP_REPORT]: '/reports/group-report/:id',
+	[AppRoutes.GET_HEALTH_REPORT]: '/reports/check-list-report'
 }
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -144,5 +146,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.GET_GROUP_REPORT]: {
 		path: RoutePath['group-report'],
 		element: <GetGroupReportPage />
+	},
+	[AppRoutes.GET_HEALTH_REPORT]: {
+		path: RoutePath['check-list-report'],
+		element: <GetHealthReportPage />
 	}
 }

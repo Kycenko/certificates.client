@@ -6,16 +6,14 @@ import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import CourseData from '@/components/tables/Courses/CourseData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import { PAGES_URL } from '@/lib/constants/enums.ts'
-
 import { TypeCourseForm } from '@/types/course.types.ts'
-
-import useModal from '@/hooks/useModal.ts'
 
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import { CourseHeads } from './course-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
+import useModal from '@/lib/hooks/useModal.ts'
 import {
 	useDeleteCourse,
 	useGetCourses,

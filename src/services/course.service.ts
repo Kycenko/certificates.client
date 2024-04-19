@@ -1,8 +1,7 @@
-import { SERVICE_URL } from '@/lib/constants/enums'
-
 import { ICourse, TypeCourseForm } from '@/types/course.types'
 
 import instance from '@/lib/api/api.instance'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 export const CourseService = {
 	async create(data: TypeCourseForm) {

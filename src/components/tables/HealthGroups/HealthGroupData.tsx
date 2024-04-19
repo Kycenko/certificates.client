@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -13,9 +13,8 @@ import {
 	TypeHealthGroupForm
 } from '@/types/health-group.types.ts'
 
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Cards.module.scss'
+import useModal from '@/lib/hooks/useModal.ts'
 import { healthGroupValidationSchema } from '@/lib/validation/validation.schema.ts'
 
 interface HealthGroupProps {
@@ -31,10 +30,15 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors }
+		formState: { errors },
+		setFocus
 	} = useForm<TypeHealthGroupForm>({
 		mode: 'onChange',
 		resolver: zodResolver(healthGroupValidationSchema)
+	})
+
+	useEffect(() => {
+		setFocus('name')
 	})
 
 	const handleDelete = (id: number | string) => {

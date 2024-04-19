@@ -8,9 +8,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types.ts'
 
-import useAuth from '@/hooks/useAuth.ts'
-import useModal from '@/hooks/useModal.ts'
-
 import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
@@ -22,6 +19,8 @@ import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 import StudentDetailsData from './StudentDetailsData.tsx'
 import { DetailsStudentHeads } from './student-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
+import useAuth from '@/lib/hooks/useAuth.ts'
+import useModal from '@/lib/hooks/useModal.ts'
 import { useGetHealthGroups } from '@/queries/health-group.query.ts'
 import { useCreateMedicalCertificate } from '@/queries/medical-certificate.queries.ts'
 import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
@@ -116,7 +115,7 @@ const StudentDetailsTable = () => {
 
 			{user?.isAdmin ? (
 				<CustomButton
-					className={styles.createBtn}
+					variant='create'
 					onClick={openModal}
 				>
 					Добавить справку

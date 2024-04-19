@@ -1,12 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import PhysicalEducationData from '@/components/tables/PhysicalEducations/PhysicalEducationData.tsx'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypePhysicalEducationForm } from '@/types/physical-education.types.ts'
-
-import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
@@ -15,7 +14,7 @@ import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
-import styles from '@/app/styles/Fields.module.scss'
+import useModal from '@/lib/hooks/useModal.ts'
 import { physicalEducationValidationSchema } from '@/lib/validation/validation.schema.ts'
 import {
 	useCreatePhysicalEducation,
@@ -33,10 +32,15 @@ const PhysicalEducationComponent = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset
+		reset,
+		setFocus
 	} = useForm<TypePhysicalEducationForm>({
 		mode: 'onChange',
 		resolver: zodResolver(physicalEducationValidationSchema)
+	})
+
+	useEffect(() => {
+		setFocus('name')
 	})
 
 	const { create } = useCreatePhysicalEducation()
@@ -76,7 +80,7 @@ const PhysicalEducationComponent = () => {
 		<Layout>
 			<Heading title='Список групп по физкультуре' />
 			<CustomButton
-				className={styles.createBtn}
+				variant='create'
 				onClick={openModal}
 			>
 				Добавить группу по физкультуре

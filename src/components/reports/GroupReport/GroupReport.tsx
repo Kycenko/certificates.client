@@ -1,17 +1,15 @@
 import { useParams } from 'react-router-dom'
 
 import Layout from '@/components/Layout/Layout'
+import { GroupReportHeads } from '@/components/reports/GroupReport/group-report-heads.ts'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
-
-import { GroupReportHeads } from '@/lib/constants/table-heads'
-
-import usePrint from '@/hooks/usePrint'
 
 import ReportBody from '../ReportBody'
 import ReportHeader from '../ReportHeader'
 
 import GroupReportData from './GroupReportData'
 import styles from '@/app/styles/Tables.module.scss'
+import usePrint from '@/lib/hooks/usePrint'
 import { useGetGroupReport } from '@/queries/reports.queries'
 
 const GroupReport = () => {

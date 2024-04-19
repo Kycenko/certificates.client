@@ -1,11 +1,9 @@
 import Cookies from 'js-cookie'
 
-import { BASE_URL, SERVICE_URL, TOKENS } from '@/lib/constants/enums'
-
 import { IAuthResponse, ILogin, IRegister } from '@/types/auth.types'
 
 import instance from '@/lib/api/api.instance'
-
+import { BASE_URL, SERVICE_URL, TOKENS } from '@/lib/constants/enums'
 import { saveToStorage } from '@/lib/helpers/auth.helper.ts'
 
 export const AuthService = {

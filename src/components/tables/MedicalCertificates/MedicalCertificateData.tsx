@@ -15,9 +15,8 @@ import {
 	TypeMedicalCertificateForm
 } from '@/types/medical-certificate.types.ts'
 
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import useModal from '@/lib/hooks/useModal.ts'
 import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
 import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'

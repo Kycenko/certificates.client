@@ -9,11 +9,9 @@ import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
 import { ICourse, TypeCourseForm } from '@/types/course.types.ts'
 
-import CourseOptions from '@/lib/config/course.options'
-
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import CourseOptions from '@/lib/config/course.options'
+import useModal from '@/lib/hooks/useModal.ts'
 import { useGetDepartments } from '@/queries/department.queries.ts'
 
 interface CourseDataProps {

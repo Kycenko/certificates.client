@@ -1,8 +1,6 @@
 import { useParams } from 'react-router-dom'
 
-import { DepartmentReportHeads } from '@/lib/constants/table-heads'
-
-import usePrint from '@/hooks/usePrint'
+import { DepartmentReportHeads } from '@/components/reports/DepartmentReport/department-report-heads.ts'
 
 import Layout from '../../Layout/Layout'
 import TableHeads from '../../tables/tablesHeads/TableHeads'
@@ -11,6 +9,7 @@ import ReportHeader from '../ReportHeader'
 
 import DepartmentReportData from './DepartmentReportData'
 import styles from '@/app/styles/Tables.module.scss'
+import usePrint from '@/lib/hooks/usePrint'
 import { useGetDepartmentReport } from '@/queries/reports.queries.ts'
 
 const DepartmentReport = () => {
@@ -30,7 +29,7 @@ const DepartmentReport = () => {
 				title={departmentName}
 			>
 				<table className={styles.table}>
-					<thead className={'border-b-2 border-t-2'}>
+					<thead className={styles.tHeads}>
 						<TableHeads data={DepartmentReportHeads} />
 					</thead>
 					<tbody className='text-center'>

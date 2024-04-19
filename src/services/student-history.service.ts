@@ -1,11 +1,10 @@
-import { SERVICE_URL } from '@/lib/constants/enums.ts'
-
 import {
 	IStudentHistory,
 	TypeStudentHistoryForm
 } from '@/types/student-history.types.ts'
 
 import instance from '@/lib/api/api.instance.ts'
+import { SERVICE_URL } from '@/lib/constants/enums.ts'
 
 export const StudentHistoryService = {
 	async create(data: TypeStudentHistoryForm) {

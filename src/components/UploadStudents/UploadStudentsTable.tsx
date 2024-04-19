@@ -1,14 +1,12 @@
+import { UploadStudentsHeads } from '@/components/UploadStudents/upload-students-heads.ts'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
-
-import { UploadStudentsHeads } from '@/lib/constants/table-heads.ts'
-
-import useStudentsUpload from '@/hooks/useStudentsUpload'
 
 import Layout from '../Layout/Layout'
 import Heading from '../ui/fields/Heading'
 
 import UploadStudentsData from './UploadStudentsData'
 import styles from '@/app/styles/Tables.module.scss'
+import useStudentsUpload from '@/lib/hooks/useStudentsUpload'
 import { useUploadStudents } from '@/queries/student.queries'
 
 const UploadStudentsTable = () => {
@@ -56,12 +54,6 @@ const UploadStudentsTable = () => {
 				<table className={styles.table}>
 					<thead className={'border-b-2 border-t-2 m-4'}>
 						<TableHeads data={UploadStudentsHeads} />
-						{/*<tr className=''>*/}
-						{/*	<th className='p-2 uppercase font-bold'>Фамилия</th>*/}
-						{/*	<th className='p-2 uppercase font-bold'>Имя</th>*/}
-						{/*	<th className='p-2 uppercase font-bold'>Отчество</th>*/}
-						{/*	<th className='p-2 uppercase font-bold'>Дата рождения</th>*/}
-						{/*</tr>*/}
 					</thead>
 					<tbody className='text-center'>
 						<UploadStudentsData data={data} />

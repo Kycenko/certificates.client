@@ -83,6 +83,7 @@ const UserDetailsComponent = () => {
 						</div>
 
 						<CustomInput
+							className={'flex items-center'}
 							type='checkbox'
 							id={'isAdmin'}
 							label={'Администратор?'}

@@ -8,8 +8,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeGroupForm } from '@/types/group.types.ts'
 
-import useModal from '@/hooks/useModal.ts'
-
 import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
@@ -20,6 +18,7 @@ import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import CourseDetailsData from './CourseDetailsData.tsx'
 import { DetailsCourseHeads } from './course-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
+import useModal from '@/lib/hooks/useModal.ts'
 import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourse } from '@/queries/course.queries.ts'
 import { useCreateGroup } from '@/queries/group.queries.ts'
@@ -65,7 +64,7 @@ const CourseDetailsTable = () => {
 				<span className={styles.title}>{course?.number}-й Курс</span>
 			</Heading>
 			<CustomButton
-				className={styles.createBtn}
+				variant='create'
 				onClick={openModal}
 			>
 				Добавить группу

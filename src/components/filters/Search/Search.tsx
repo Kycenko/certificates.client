@@ -1,9 +1,8 @@
 import { SearchIcon } from 'lucide-react'
 import { ChangeEvent, Dispatch, FC, SetStateAction, useEffect } from 'react'
 
-import useDebounce from '@/hooks/useDebounce.ts'
-
 import styles from './Search.module.scss'
+import useDebounce from '@/lib/hooks/useDebounce.ts'
 
 interface SearchProps {
 	searchTerm: string

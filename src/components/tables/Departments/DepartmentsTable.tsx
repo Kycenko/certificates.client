@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,12 +8,7 @@ import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import DepartmentData from '@/components/tables/Departments/DepartmentData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import { PAGES_URL } from '@/lib/constants/enums.ts'
-
 import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
-
-import useModal from '@/hooks/useModal.ts'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import CustomButton from '../../ui/buttons/CustomButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
@@ -23,6 +18,9 @@ import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import { DepartmentHeads } from './department-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
+import useModal from '@/lib/hooks/useModal.ts'
+import useSortAndFilterData from '@/lib/hooks/useSortAndFilterData.ts'
 import { departmentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import {
 	useCreateDepartment,
@@ -53,10 +51,15 @@ const DepartmentsTable = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		reset
+		reset,
+		setFocus
 	} = useForm<TypeDepartmentForm>({
 		mode: 'onChange',
 		resolver: zodResolver(departmentValidationSchema)
+	})
+
+	useEffect(() => {
+		setFocus('name')
 	})
 
 	const { create } = useCreateDepartment()

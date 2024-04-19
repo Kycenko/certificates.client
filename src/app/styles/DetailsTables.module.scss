@@ -15,7 +15,7 @@
 }
 
 .cell {
-	@apply border hover:bg-gray-200 cursor-pointer  justify-center text-center items-center;
+	@apply border hover:bg-gray-200 cursor-pointer justify-center text-center items-center;
 }
 .cellPadding {
 	@apply p-2;

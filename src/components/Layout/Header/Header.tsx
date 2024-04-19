@@ -5,15 +5,24 @@ import { useNavigate } from 'react-router-dom'
 import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/components/ui/selects/CustomSelect'
 
-import useAuth from '@/hooks/useAuth.ts'
-
 import Dropdown from './DropDown'
+import CourseOptions from '@/lib/config/course.options'
+import useAuth from '@/lib/hooks/useAuth.ts'
 import { useGetDepartments } from '@/queries/department.queries.ts'
 import { useGetGroups } from '@/queries/group.queries'
+import { useGetPhysicalEducations } from '@/queries/physical-education.queries'
 
 interface FormState {
-	departmentId: number | string
-	groupId: number | string
+	departmentId: string | undefined
+	groupId: string | undefined
+	courseId: string | undefined
+	physicalEducationId: string | undefined
+}
+
+interface HealthFormState {
+	departmentId: string | undefined
+	courseId: string | undefined
+	physicalEducationId: string | undefined
 }
 
 const Header = () => {
@@ -21,8 +30,11 @@ const Header = () => {
 	const { user } = useAuth()
 	const [isOpen, setIsOpen] = useState(false)
 	const [isOpen1, setIsOpen1] = useState(false)
+	const [isOpen2, setIsOpen2] = useState(false)
 	const { departments } = useGetDepartments()
 	const { groups } = useGetGroups()
+
+	const { physicalEducations } = useGetPhysicalEducations()
 	const { handleSubmit, register } = useForm<FormState>()
 
 	const onSubmit = (data: FormState) => {
@@ -30,8 +42,14 @@ const Header = () => {
 		setIsOpen(false)
 	}
 	const onSubmit1 = (data: FormState) => {
-		navigate(`/reports/group-report/${data.groupId}`)
+		navigate(`/reports/group-report/${data.courseId}`)
 		setIsOpen1(false)
+	}
+	const onSubmit2 = (data: HealthFormState) => {
+		navigate(
+			`/reports/check-list-report?department=${data.departmentId}&course=${data.courseId}&physical-education=${data.physicalEducationId}`
+		)
+		setIsOpen2(false)
 	}
 
 	return user?.isAdmin ? (
@@ -50,6 +68,13 @@ const Header = () => {
 							className='block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-100'
 						>
 							Отчёт по группе
+						</li>
+
+						<li
+							onClick={() => setIsOpen2(true)}
+							className='block px-4 py-2 text-sm  text-gray-700 hover:bg-gray-100'
+						>
+							Листок здоровья
 						</li>
 					</Dropdown>
 				</ul>
@@ -89,6 +114,49 @@ const Header = () => {
 					{...register('groupId')}
 				>
 					{groups?.map(({ id, name }) => (
+						<option
+							key={id}
+							value={id}
+						>
+							{name}
+						</option>
+					))}
+				</CustomSelect>
+			</CustomModalForm>
+			<CustomModalForm
+				buttonTitle='Сформировать'
+				formTitle='Отчет'
+				isOpen={isOpen2}
+				onClose={() => setIsOpen2(false)}
+				onSubmit={handleSubmit(onSubmit2)}
+			>
+				<CustomSelect
+					id='departmentId'
+					label='Выберите отделение'
+					{...register('departmentId')}
+				>
+					{departments?.map(({ id, name }) => (
+						<option
+							key={id}
+							value={id}
+						>
+							{name}
+						</option>
+					))}
+				</CustomSelect>
+				<CustomSelect
+					id='courseId'
+					label='Выберите курс'
+					{...register('courseId')}
+				>
+					<CourseOptions />
+				</CustomSelect>
+				<CustomSelect
+					id='physicalEducationId'
+					label='Выберите группу по физкультуре'
+					{...register('physicalEducationId')}
+				>
+					{physicalEducations?.map(({ id, name }) => (
 						<option
 							key={id}
 							value={id}

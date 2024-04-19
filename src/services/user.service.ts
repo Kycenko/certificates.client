@@ -1,8 +1,7 @@
-import { SERVICE_URL } from '@/lib/constants/enums'
-
 import { IUser, TypeUserForm } from '@/types/user.types'
 
 import instance from '@/lib/api/api.instance'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 export const UserService = {
 	async getAll() {

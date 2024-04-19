@@ -1,7 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
-import { IDepartmentReport, IGroupReport } from '@/types/reports.types'
+import {
+	IDepartmentReport,
+	IGroupReport,
+	IHealthReport
+} from '@/types/reports.types'
 
 import { ReportsService } from '@/services/reports.service.ts'
 
@@ -23,6 +27,28 @@ export const useGetGroupReport = (groupId: string | undefined) => {
 		queryFn: async () => {
 			const response: AxiosResponse =
 				await ReportsService.getGroupReport(groupId)
+			return response.data
+		}
+	})
+	return { data, isLoading }
+}
+
+export const useGetHealthReport = (
+	departmentId: string | undefined,
+	courseId: string | undefined,
+	physicalEducationId: string | undefined
+) => {
+	const { data, isLoading } = useQuery<IHealthReport[]>({
+		queryKey: [
+			'check-list-report',
+			{ departmentId, courseId, physicalEducationId }
+		],
+		queryFn: async () => {
+			const response: AxiosResponse = await ReportsService.getHealthReport(
+				departmentId,
+				courseId,
+				physicalEducationId
+			)
 			return response.data
 		}
 	})

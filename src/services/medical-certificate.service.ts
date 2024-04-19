@@ -1,11 +1,10 @@
-import { SERVICE_URL } from '@/lib/constants/enums'
-
 import {
 	IMedicalCertificate,
 	TypeMedicalCertificateForm
 } from '@/types/medical-certificate.types'
 
 import instance from '@/lib/api/api.instance'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 export const MedicalCertificateService = {
 	async create(data: TypeMedicalCertificateForm) {

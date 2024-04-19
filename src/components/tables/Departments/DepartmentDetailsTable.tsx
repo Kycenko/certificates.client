@@ -6,10 +6,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeCourseForm } from '@/types/course.types.ts'
 
-import CourseOptions from '@/lib/config/course.options.tsx'
-
-import useModal from '@/hooks/useModal.ts'
-
 import Layout from '../../Layout/Layout.tsx'
 import Heading from '../../ui/fields/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -19,6 +15,8 @@ import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 import DepartmentDetailsData from './DepartmentDetailsData.tsx'
 import { DetailsDepartmentHeads } from './department-heads.ts'
 import styles from '@/app/styles/DetailsTables.module.scss'
+import CourseOptions from '@/lib/config/course.options.tsx'
+import useModal from '@/lib/hooks/useModal.ts'
 import { useCreateCourse } from '@/queries/course.queries.ts'
 import { useGetDepartment } from '@/queries/department.queries.ts'
 
@@ -54,7 +52,7 @@ const DepartmentDetailsTable = () => {
 				<span className={styles.title}>{department?.name}</span>
 			</Heading>
 			<CustomButton
-				className={styles.createBtn}
+				variant='create'
 				onClick={openModal}
 			>
 				Добавить курс

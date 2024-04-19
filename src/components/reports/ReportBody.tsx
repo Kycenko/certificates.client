@@ -1,7 +1,7 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 
 interface ReportBodyProps {
-	printRef: React.RefObject<HTMLDivElement>
+	printRef: RefObject<HTMLDivElement>
 	header: string
 	title: any
 	children: ReactNode
@@ -14,7 +14,7 @@ const ReportBody: FC<ReportBodyProps> = ({
 }) => {
 	return (
 		<div ref={printRef}>
-			<div className='text-center '>
+			<div className='text-center'>
 				Частное учреждение образования "Колледж бизнеса и права"
 			</div>
 			<div className='justify-center flex flex-row py-4'>

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -13,9 +13,8 @@ import {
 	TypePhysicalEducationForm
 } from '@/types/physical-education.types.ts'
 
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Cards.module.scss'
+import useModal from '@/lib/hooks/useModal.ts'
 import { physicalEducationValidationSchema } from '@/lib/validation/validation.schema.ts'
 
 interface PhysicalEducationDataProps {
@@ -34,10 +33,15 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors }
+		formState: { errors },
+		setFocus
 	} = useForm<TypePhysicalEducationForm>({
 		mode: 'onChange',
 		resolver: zodResolver(physicalEducationValidationSchema)
+	})
+
+	useEffect(() => {
+		setFocus('name')
 	})
 
 	const onSubmit = (id: number | string, data: TypePhysicalEducationForm) => {

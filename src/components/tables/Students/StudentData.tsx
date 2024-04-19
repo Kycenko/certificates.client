@@ -13,9 +13,8 @@ import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 import { TypeStudentHistoryForm } from '@/types/student-history.types'
 import { IStudent, TypeStudentForm } from '@/types/student.types.ts'
 
-import useModal from '@/hooks/useModal.ts'
-
 import styles from '@/app/styles/Tables.module.scss'
+import useModal from '@/lib/hooks/useModal.ts'
 import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
 import { useCreateStudentHistory } from '@/queries/student-history.queries'

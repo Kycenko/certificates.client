@@ -1,8 +1,7 @@
-import { SERVICE_URL } from '@/lib/constants/enums'
-
 import { IHealthGroup, TypeHealthGroupForm } from '@/types/health-group.types'
 
 import instance from '@/lib/api/api.instance'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 export const HealthGroupService = {
 	async create(data: TypeHealthGroupForm) {

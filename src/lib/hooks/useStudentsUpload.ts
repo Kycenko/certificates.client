@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react'
 import * as XLSX from 'xlsx'
 
-import { IUploadStudent } from '@/types/student.types'
+import { IUploadStudent } from '@/types/student.types.ts'
 
 const useStudentsUpload = () => {
 	const [file, setFile] = useState<File | null>(null)

@@ -1,9 +1,8 @@
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 
-import { QUERY_KEYS } from '@/lib/constants/enums.ts'
-
 import { TypeStudentHistoryForm } from '@/types/student-history.types.ts'
 
+import { QUERY_KEYS } from '@/lib/constants/enums.ts'
 import { StudentHistoryService } from '@/services/student-history.service.ts'
 
 export const useCreateStudentHistory = () => {

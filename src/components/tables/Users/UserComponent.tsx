@@ -4,11 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import UserData from '@/components/tables/Users/UserData.tsx'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
-import { PAGES_URL } from '@/lib/constants/enums.ts'
-
 import { IRegister } from '@/types/auth.types.ts'
-
-import useModal from '@/hooks/useModal.ts'
 
 import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
@@ -17,7 +13,8 @@ import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '../../ui/inputs/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
-import styles from '@/app/styles/Fields.module.scss'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
+import useModal from '@/lib/hooks/useModal.ts'
 import { useRegister } from '@/queries/auth.queries.ts'
 import { useDeleteUser, useGetUsers } from '@/queries/user.queries.ts'
 
@@ -64,7 +61,7 @@ const UserComponent = () => {
 			<Heading title='Список пользователей' />
 
 			<CustomButton
-				className={styles.createBtn}
+				variant='create'
 				onClick={openModal}
 			>
 				Добавить пользователя
@@ -106,6 +103,7 @@ const UserComponent = () => {
 				/>
 				<ErrorMessage error={errors.password} />
 				<CustomInput
+					className='mt-4 flex items-center'
 					type='checkbox'
 					id={'isAdmin'}
 					label={'Администратор?'}

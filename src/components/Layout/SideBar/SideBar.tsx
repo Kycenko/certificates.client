@@ -11,123 +11,123 @@ import {
 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import useAuth from '@/hooks/useAuth.ts'
-
 import styles from './SideBar.module.scss'
+import { PAGES_URL } from '@/lib/constants/enums'
 import { removeFromStorage } from '@/lib/helpers/auth.helper.ts'
+import useAuth from '@/lib/hooks/useAuth.ts'
 
 const Sidebar = () => {
 	const navigate = useNavigate()
 	const { user } = useAuth()
 	const handleLogout = () => {
 		removeFromStorage()
-		navigate('/login', { replace: true })
+		navigate(`${PAGES_URL.LOGIN}`, { replace: true })
 	}
 
 	return user?.isAdmin ? (
 		<div className={styles.main}>
 			<div className={styles.linksContainer}>
 				<Link
-					to={'/'}
+					to={`${PAGES_URL.HOME}`}
 					className={styles.link}
 				>
 					<LayoutGrid
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Главная
 				</Link>
 				<hr />
 				<Link
-					to={'/users'}
+					to={`${PAGES_URL.USERS}`}
 					className={styles.link}
 				>
 					<UserCog
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Пользователи
 				</Link>
 				<Link
-					to={'/physical-educations'}
+					to={`${PAGES_URL.PHYSICAL_EDUCATIONS}`}
 					className={styles.link}
 				>
 					<Zap
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Группы по физкультуре
 				</Link>
 				<Link
-					to={'/health-groups'}
+					to={`${PAGES_URL.HEALTHS_GROUPS}`}
 					className={styles.link}
 				>
 					<HeartPulse
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Группы здоровья
 				</Link>
 				<hr />
 				<Link
-					to={'/departments'}
+					to={`${PAGES_URL.DEPARTMENTS}`}
 					className={styles.link}
 				>
 					<Component
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Отделения
 				</Link>
 				<Link
-					to={'/courses'}
+					to={`${PAGES_URL.COURSES}`}
 					className={styles.link}
 				>
 					<Component
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Курсы
 				</Link>
 				<Link
-					to={'/groups'}
+					to={`${PAGES_URL.GROUPS}`}
 					className={styles.link}
 				>
 					<Component
+						className={styles.padding}
 						size={15}
-						className='mr-1'
 					/>
 					Группы
 				</Link>
 				<Link
-					to={'/students'}
+					to={`${PAGES_URL.STUDENTS}`}
 					className={styles.link}
 				>
 					<Users
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Ученики
 				</Link>
 				<Link
-					to={'/medical-certificates'}
+					to={`${PAGES_URL.MEDICAL_CERTIFICATES}`}
 					className={styles.link}
 				>
 					<ClipboardPlus
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Медицинские справки
 				</Link>
 			</div>
 			<div>
 				<Link
-					to={`/users/${user?.id}`}
+					to={`${PAGES_URL.USERS}/${user?.id}`}
 					className={styles.link}
 				>
 					<CircleUserRound
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Профиль
 				</Link>
@@ -137,7 +137,7 @@ const Sidebar = () => {
 				>
 					<LogOut
 						size={15}
-						className='mr-1'
+						className={styles.padding}
 					/>
 					Выйти
 				</button>
@@ -147,7 +147,7 @@ const Sidebar = () => {
 		<div className={styles.main}>
 			<div className={styles.linksContainer}>
 				<Link
-					to={'/groups'}
+					to={`${PAGES_URL.GROUPS}`}
 					className={styles.link}
 				>
 					Группы

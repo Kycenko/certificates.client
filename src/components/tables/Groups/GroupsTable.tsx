@@ -7,19 +7,16 @@ import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import GroupData from '@/components/tables/Groups/GroupData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import { PAGES_URL } from '@/lib/constants/enums.ts'
-
 import { IGroup, TypeGroupForm } from '@/types/group.types.ts'
-
-import CourseOptions from '@/lib/config/course.options.tsx'
-
-import useModal from '@/hooks/useModal.ts'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import { GroupHeads } from './group-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
+import CourseOptions from '@/lib/config/course.options.tsx'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
+import useModal from '@/lib/hooks/useModal.ts'
+import useSortAndFilterData from '@/lib/hooks/useSortAndFilterData.ts'
 import {
 	useDeleteGroup,
 	useGetGroups,

@@ -1,0 +1,11 @@
+.container {
+	@apply flex justify-center;
+}
+
+.primaryBtn {
+	@apply rounded border px-2 py-2 text-black hover:bg-primary hover:text-white bg-[#ffffff];
+}
+
+.createBtn {
+	@apply mb-4 rounded border font-medium bg-primary px-2 py-2 text-white hover:bg-primary;
+}

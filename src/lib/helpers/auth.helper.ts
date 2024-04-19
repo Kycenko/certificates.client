@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie'
 
-import { LOCAL_STORAGE_KEY, TOKENS } from '@/lib/constants/enums.ts'
-
 import { IAuthResponse, ITokens } from '@/types/auth.types.ts'
+
+import { LOCAL_STORAGE_KEY, TOKENS } from '@/lib/constants/enums.ts'
 
 export const getAccessToken = async () => {
 	const accessToken = Cookies.get(TOKENS.ACCESS_TOKEN)

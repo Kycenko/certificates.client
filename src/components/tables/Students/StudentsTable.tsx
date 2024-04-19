@@ -7,17 +7,15 @@ import SortOrder from '@/components/filters/SortOrder/SortOrder.tsx'
 import StudentData from '@/components/tables/Students/StudentData.tsx'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import { PAGES_URL } from '@/lib/constants/enums.ts'
-
 import { IStudent, TypeStudentForm } from '@/types/student.types.ts'
-
-import useModal from '@/hooks/useModal.ts'
-import useSortAndFilterData from '@/hooks/useSortAndFilterData.ts'
 
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import { StudentHeads } from './student-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
+import { PAGES_URL } from '@/lib/constants/enums.ts'
+import useModal from '@/lib/hooks/useModal.ts'
+import useSortAndFilterData from '@/lib/hooks/useSortAndFilterData.ts'
 import { useGetGroups } from '@/queries/group.queries.ts'
 import {
 	useDeleteStudent,

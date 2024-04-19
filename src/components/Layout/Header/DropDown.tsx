@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import { FC, PropsWithChildren, useRef, useState } from 'react'
 
-import useClickOutside from '@/hooks/useClickOutside'
+import useClickOutside from '@/lib/hooks/useClickOutside'
 
 const Dropdown: FC<PropsWithChildren> = ({ children }) => {
 	const [isOpen, setIsOpen] = useState(false)

@@ -1,8 +1,7 @@
 import axios from 'axios'
 
-import { BASE_URL } from '@/lib/constants/enums.ts'
-
 import errorCatch from './api.error.ts'
+import { BASE_URL } from '@/lib/constants/enums.ts'
 import { getAccessToken, removeFromStorage } from '@/lib/helpers/auth.helper.ts'
 import { AuthService } from '@/services/auth.service.ts'
 
@@ -14,9 +13,6 @@ instance.interceptors.request.use(async config => {
 	const accessToken = await getAccessToken()
 	if (config.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
-	}
-	if (!config.headers.Authorization || !accessToken) {
-		location.replace('/login')
 	}
 
 	return config

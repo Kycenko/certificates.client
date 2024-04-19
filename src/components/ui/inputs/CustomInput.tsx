@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, forwardRef } from 'react'
 
-import styles from '@/app/styles/Fields.module.scss'
+import styles from './CustomInput.module.scss'
 
 interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	label: string
@@ -13,10 +13,16 @@ interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
 	({ id, label, className, placeholder, type, ...props }, ref) => {
 		return (
-			<div className={styles.container}>
+			<div className={className ? className : styles.container}>
 				<label className={styles.label}>{label}</label>
 				<input
-					className={className ? className : styles.field}
+					className={
+						type === 'checkbox'
+							? styles.checkbox
+							: className
+								? className
+								: styles.input
+					}
 					id={id}
 					ref={ref}
 					placeholder={placeholder}

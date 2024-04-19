@@ -1,11 +1,10 @@
-import { SERVICE_URL } from '@/lib/constants/enums'
-
 import {
 	IPhysicalEducation,
 	TypePhysicalEducationForm
 } from '@/types/physical-education.types'
 
 import instance from '@/lib/api/api.instance'
+import { SERVICE_URL } from '@/lib/constants/enums'
 
 export const PhysicalEducationService = {
 	async create(data: TypePhysicalEducationForm) {
