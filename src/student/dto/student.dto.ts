@@ -23,6 +23,7 @@ export class StudentDto {
 	@IsOptional()
 	secondName: string
 	@IsString()
+	@IsString()
 	@IsNotEmpty({ message: 'Обязательное поле!' })
 	birthDate: Date
 	@IsNumber()

@@ -41,7 +41,11 @@ export class ReportsService {
 														name: true
 													}
 												}
-											}
+											},
+											orderBy: {
+												startDate: 'desc'
+											},
+											take: 1
 										}
 									}
 								}
@@ -87,7 +91,11 @@ export class ReportsService {
 										name: true
 									}
 								}
-							}
+							},
+							orderBy: {
+								startDate: 'desc'
+							},
+							take: 1
 						}
 					}
 				}
@@ -134,19 +142,19 @@ export class ReportsService {
 
 	//лист здоровья
 	async getPhysicalGroupCheckListReport(
-		departmentName: string,
-		courseNumber: number,
-		healthName: string
+		departmentId: number,
+		courseId: number,
+		physicalEducationId: number
 	) {
 		return this.prisma.department.findMany({
 			where: {
-				name: departmentName
+				id: +departmentId
 			},
 			select: {
 				name: true,
 				courses: {
 					where: {
-						number: +courseNumber
+						number: +courseId
 					},
 					select: {
 						number: true,
@@ -161,7 +169,7 @@ export class ReportsService {
 										medicalCertificates: {
 											where: {
 												physicalEducation: {
-													name: healthName
+													id: +physicalEducationId
 												}
 											},
 											select: {

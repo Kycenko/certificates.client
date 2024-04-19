@@ -31,14 +31,14 @@ export class ReportsController {
 	@Auth('admin')
 	@Get('check-list-report')
 	async getPhysicalGroupCheckListReport(
-		@Query('department') departmentName: string,
-		@Query('course') courseNumber: number,
-		@Query('health') healthName: string
+		@Query('department') departmentId: number,
+		@Query('course') courseId: number,
+		@Query('physical-education') physicalEducationId: number
 	) {
 		return this.reportsService.getPhysicalGroupCheckListReport(
-			departmentName,
-			courseNumber,
-			healthName
+			departmentId,
+			courseId,
+			physicalEducationId
 		)
 	}
 }

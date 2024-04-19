@@ -70,45 +70,6 @@ export class MedicalCertificateService {
 			throw new NotFoundException('Медицинские справки не найдены!')
 
 		return latestCertificates
-
-		// const medicalCertificates = await this.prisma.medicalCertificate.findMany({
-		// 	orderBy: [
-		// 		{
-		// 			startDate: 'desc'
-		// 		},
-
-		// 		{
-		// 			student: {
-		// 				surname: sortOrder
-		// 			}
-		// 		}
-		// 	],
-		// 	where: {
-		// 		student: {
-		// 			group: {
-		// 				name: groupName
-		// 			}
-		// 		}
-		// 	},
-		// 	include: {
-		// 		student: {
-		// 			include: {
-		// 				group: {
-		// 					select: {
-		// 						course: {
-		// 							select: {
-		// 								department: true
-		// 							}
-		// 						}
-		// 					}
-		// 				}
-		// 			}
-		// 		}
-		// 	}
-		// })
-		// if (!medicalCertificates || medicalCertificates.length === 0)
-		// 	throw new NotFoundException('Медицинские справки не найдены!')
-		// return medicalCertificates
 	}
 
 	async getById(id: number) {

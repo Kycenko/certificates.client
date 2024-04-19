@@ -1,6 +1,7 @@
 import { PrismaService } from '@config/prisma.service'
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { formatISO } from 'date-fns'
+import { format, formatISO } from 'date-fns'
+
 import * as XLSX from 'xlsx'
 import { StudentDto } from './dto/student.dto'
 @Injectable()
@@ -27,21 +28,18 @@ export class StudentService {
 		}>
 
 		for (const item of data) {
-			// Вы можете добавить дополнительную валидацию например с хелпером class-validator
-			// ...
-
 			await this.prisma.student.create({
 				data: {
 					surname: item.surname,
 					name: item.name,
 					secondName: item.secondName || null,
-					birthDate: formatISO(item.birthDate)
+					birthDate: format(item.birthDate, 'dd.MM.yyyy HH:mm:ss.SSS ')
 				}
 			})
 			console.log(data)
 		}
 
-		return { success: true, message: 'Студенты добавлены' }
+		return { success: true, message: 'Студенты добавлены', data: data }
 	}
 
 	async create(dto: StudentDto) {
