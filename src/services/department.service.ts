@@ -14,6 +14,7 @@ export const DepartmentService = {
 		return instance.get<IDepartment[]>(url)
 	},
 
+
 	async getById(id: string | undefined) {
 		return instance.get<IDepartment>(`${SERVICE_URL.DEPARTMENTS}/${id}`)
 	},

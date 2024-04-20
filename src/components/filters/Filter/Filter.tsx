@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, FC, ReactNode, SetStateAction } from 'react'
 
-import styles from '@/components/filters/SortOrder/SortOrder.module.scss'
+import styles from './Filter.module.scss'
 
 interface FilterProps {
 	filterValue: string

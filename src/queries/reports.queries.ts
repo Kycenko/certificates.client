@@ -11,7 +11,7 @@ import { ReportsService } from '@/services/reports.service.ts'
 
 export const useGetDepartmentReport = (departmentId: string | undefined) => {
 	const { data, isLoading } = useQuery<IDepartmentReport[]>({
-		queryKey: ['department-report', departmentId],
+		queryKey: ['department-report', { departmentId }],
 		queryFn: async () => {
 			const response: AxiosResponse =
 				await ReportsService.getDepartmentReport(departmentId)
@@ -34,9 +34,9 @@ export const useGetGroupReport = (groupId: string | undefined) => {
 }
 
 export const useGetHealthReport = (
-	departmentId: string | undefined,
-	courseId: string | undefined,
-	physicalEducationId: string | undefined
+	departmentId: string | null,
+	courseId: string | null,
+	physicalEducationId: string | null
 ) => {
 	const { data, isLoading } = useQuery<IHealthReport[]>({
 		queryKey: [

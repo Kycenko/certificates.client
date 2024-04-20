@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout'
 import DepartmentsTable from '@/components/tables/Departments/DepartmentsTable.tsx'
-import Heading from '@/components/ui/fields/Heading'
+import Heading from '@/components/ui/fields/Heading/Heading'
 
 const DepartmentsPage = () => {
 	return (

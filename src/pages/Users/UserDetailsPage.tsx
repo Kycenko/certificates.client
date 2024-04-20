@@ -1,4 +1,4 @@
-import UserDetailsComponent from '@/components/tables/Users/UserDetailsComponent.tsx'
+import UserDetailsComponent from '@/components/tables/Users/UserDetailsComponent/UserDetailsComponent.tsx'
 
 const UserDetailsPage = () => {
 	return <UserDetailsComponent />

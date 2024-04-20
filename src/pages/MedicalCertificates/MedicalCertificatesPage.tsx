@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout'
 import MedicalCertificatesTable from '@/components/tables/MedicalCertificates/MedicalCertificatesTable.tsx'
-import Heading from '@/components/ui/fields/Heading'
+import Heading from '@/components/ui/fields/Heading/Heading'
 
 const MedicalCertificatesPage = () => {
 	return (

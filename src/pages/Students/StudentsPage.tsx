@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout'
 import StudentsTable from '@/components/tables/Students/StudentsTable.tsx'
-import Heading from '@/components/ui/fields/Heading'
+import Heading from '@/components/ui/fields/Heading/Heading'
 
 const StudentsPage = () => {
 	return (

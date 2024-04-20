@@ -1,7 +1,7 @@
 import { format, parse } from 'date-fns'
 import { FC } from 'react'
 
-import { IUploadStudent } from '@/types/student.types'
+import { IUploadStudent } from '@/types/student.types.ts'
 
 interface UploadStudentsDataProps {
 	data: IUploadStudent[] | undefined

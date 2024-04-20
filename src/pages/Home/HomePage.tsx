@@ -1,4 +1,4 @@
-import UploadStudentsTable from '@/components/UploadStudents/UploadStudentsTable'
+import UploadStudentsTable from '@/components/tables/Students/UploadStudents/UploadStudentsTable'
 
 const HomePage = () => {
 	return <UploadStudentsTable />

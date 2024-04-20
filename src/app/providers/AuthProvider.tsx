@@ -40,12 +40,25 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 				return
 			}
 
-			if (storedUser && (!user || storedUser.id !== user.id))
+			if (storedUser && (!user || storedUser.id !== user.id)) {
 				setUser(storedUser)
+			} else if (
+				!storedUser &&
+				!user &&
+				location.pathname !== `${PAGES_URL.LOGIN}`
+			) {
+				navigate(`${PAGES_URL.LOGIN}`, { replace: true })
+			} else if (
+				storedUser &&
+				user &&
+				location.pathname === `${PAGES_URL.LOGIN}`
+			) {
+				navigate(`${PAGES_URL.HOME}`, { replace: true })
+			}
 		}
 
 		initializeAuth()
-	}, [navigate, user])
+	}, [navigate, user, location])
 
 	return (
 		<AuthContext.Provider value={{ user, setUser }}>

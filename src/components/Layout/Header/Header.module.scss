@@ -1,0 +1,11 @@
+.adminContainer {
+	@apply border-b-2 flex justify-start py-4 px-2;
+}
+
+.userContainer {
+	@apply border-b-2 flex justify-end py-4 px-2;
+}
+
+.liItem {
+	@apply block px-4 py-2 text-sm cursor-pointer  text-gray-700 hover:bg-gray-100;
+}

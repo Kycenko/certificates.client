@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import { FC, PropsWithChildren, useRef, useState } from 'react'
 
+import styles from './DropDown.module.scss'
 import useClickOutside from '@/lib/hooks/useClickOutside'
 
 const Dropdown: FC<PropsWithChildren> = ({ children }) => {
@@ -15,25 +16,20 @@ const Dropdown: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<div
 			ref={dropdownRef}
-			className='relative inline-block z-50 text-left'
+			className={styles.container}
 		>
 			<button
 				type='button'
-				className='inline-flex justify-center items-center p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-300 focus:ring focus:ring-blue-200'
+				className={styles.button}
 				onClick={toggleDropdown}
 			>
-				<span className='mr-2'>Отчеты</span>
+				<span>Отчеты</span>
 				<ChevronDown />
 			</button>
 
 			{isOpen && (
-				<div className='origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black  ring-opacity-5'>
-					<div
-						className='py-1'
-						onClick={closeDropdown}
-					>
-						{children}
-					</div>
+				<div className={styles.open}>
+					<ul onClick={closeDropdown}>{children}</ul>
 				</div>
 			)}
 		</div>

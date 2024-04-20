@@ -20,6 +20,7 @@ import StudentHistoryPage from '@/pages/Students/StudentHistoryPage.tsx'
 import StudentsPage from '@/pages/Students/StudentsPage.tsx'
 import UserDetailsPage from '@/pages/Users/UserDetailsPage.tsx'
 import UsersPage from '@/pages/Users/UsersPage.tsx'
+import NotFoundPage from "@/pages/NotFound/NotFoundPage.tsx";
 
 export const enum AppRoutes {
 	LOGIN = 'login',
@@ -41,7 +42,9 @@ export const enum AppRoutes {
 	MEDICAL_CERTIFICATE_HISTORY = 'medical-certificate-history',
 	GET_DEPARTMENT_REPORT = 'department-report',
 	GET_GROUP_REPORT = 'group-report',
-	GET_HEALTH_REPORT = 'check-list-report'
+	GET_HEALTH_REPORT = 'check-list-report',
+
+	NOT_FOUND = 'not-found'
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -65,7 +68,8 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.MEDICAL_CERTIFICATE_HISTORY]: '/medical-certificate-history/:id',
 	[AppRoutes.GET_DEPARTMENT_REPORT]: '/reports/department-report/:id',
 	[AppRoutes.GET_GROUP_REPORT]: '/reports/group-report/:id',
-	[AppRoutes.GET_HEALTH_REPORT]: '/reports/check-list-report'
+	[AppRoutes.GET_HEALTH_REPORT]: '/reports/check-list-report',
+	[AppRoutes.NOT_FOUND]: '*'
 }
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -150,5 +154,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.GET_HEALTH_REPORT]: {
 		path: RoutePath['check-list-report'],
 		element: <GetHealthReportPage />
+	},
+	[AppRoutes.NOT_FOUND]: {
+		path: RoutePath['not-found'],
+		element: <NotFoundPage />
 	}
 }

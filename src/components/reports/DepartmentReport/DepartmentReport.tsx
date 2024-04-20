@@ -14,6 +14,7 @@ import { useGetDepartmentReport } from '@/queries/reports.queries.ts'
 
 const DepartmentReport = () => {
 	const { id } = useParams()
+
 	const { data } = useGetDepartmentReport(id)
 
 	const { printRef, handlePrint } = usePrint({
@@ -23,6 +24,7 @@ const DepartmentReport = () => {
 	return (
 		<Layout>
 			<ReportHeader onPrint={handlePrint} />
+
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по медицинским показателем обучающихся отделения:'

@@ -23,7 +23,7 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = ({ data }) => {
 										index
 									) => (
 										<tr
-											className='border'
+											className='border '
 											key={`${id}-${name}-${surname}-${index}`}
 										>
 											<td className='p-2'>

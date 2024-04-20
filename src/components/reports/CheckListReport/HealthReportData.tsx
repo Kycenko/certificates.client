@@ -16,10 +16,10 @@ const HealthReportData: FC<HealthReportData> = ({ data }) => {
 					groups.flatMap(({ students, name: groupName }) =>
 						students.flatMap(
 							({ name, surname, secondName, medicalCertificates }) =>
-								medicalCertificates?.map(({ physicalEducation }, index) => (
+								medicalCertificates?.map(({ physicalEducation }) => (
 									<tr
 										className='border'
-										key={`${id}-${name}-${surname}-${index}`}
+										key={`${id}-${name}-${surname}`}
 									>
 										<td className='p-2'>
 											{formatFullName(surname, name, secondName)}

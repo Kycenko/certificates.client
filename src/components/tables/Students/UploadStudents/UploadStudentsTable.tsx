@@ -1,13 +1,13 @@
-import { UploadStudentsHeads } from '@/components/UploadStudents/upload-students-heads.ts'
+import { UploadStudentsHeads } from '@/components/tables/Students/UploadStudents/upload-students-heads.ts'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import Layout from '../Layout/Layout'
-import Heading from '../ui/fields/Heading'
+import Layout from '../../../Layout/Layout.tsx'
+import Heading from '../../../ui/fields/Heading/Heading.tsx'
 
-import UploadStudentsData from './UploadStudentsData'
+import UploadStudentsData from './UploadStudentsData.tsx'
 import styles from '@/app/styles/Tables.module.scss'
-import useStudentsUpload from '@/lib/hooks/useStudentsUpload'
-import { useUploadStudents } from '@/queries/student.queries'
+import useStudentsUpload from '@/lib/hooks/useStudentsUpload.ts'
+import { useUploadStudents } from '@/queries/student.queries.ts'
 
 const UploadStudentsTable = () => {
 	const { file, setFile, data, setData, handleFileUpload } = useStudentsUpload()

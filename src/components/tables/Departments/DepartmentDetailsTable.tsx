@@ -7,7 +7,7 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 import { TypeCourseForm } from '@/types/course.types.ts'
 
 import Layout from '../../Layout/Layout.tsx'
-import Heading from '../../ui/fields/Heading.tsx'
+import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import CustomSelect from '../../ui/selects/CustomSelect.tsx'

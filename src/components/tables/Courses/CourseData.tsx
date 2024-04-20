@@ -146,7 +146,7 @@ const CourseData: FC<CourseDataProps> = ({
 							onClose={() => setDeleteId(null)}
 							formTitle={'Удаление'}
 						>
-							{number}
+							{number}-й курс
 						</CustomModalForm>
 					</tr>
 				))

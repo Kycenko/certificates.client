@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 
-import Heading from '@/components/ui/fields/Heading'
+import Heading from '@/components/ui/fields/Heading/Heading'
 
 import TableHeads from '../../tablesHeads/TableHeads'
 import { StudentHistoryHeads } from '../student-heads'

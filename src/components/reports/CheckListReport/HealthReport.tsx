@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import Layout from '@/components/Layout/Layout'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
@@ -13,19 +13,14 @@ import usePrint from '@/lib/hooks/usePrint'
 import { useGetHealthReport } from '@/queries/reports.queries'
 
 const HealthReport = () => {
-	const location = useLocation()
-	const params = new URLSearchParams(location.search)
-	const department = params.get('department')
-	const course = params.get('course')
-	const physicalEducation = params.get('physical-education')
+	const [search] = useSearchParams()
+	const department = search.get('department')
+	const course = search.get('course')
+	const physicalEducation = search.get('physical-education')
 
-	const { data } = useGetHealthReport(
-		department as any,
-		course as any,
-		physicalEducation as any
-	)
+	const { data } = useGetHealthReport(department, course, physicalEducation)
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: `department-report-${department}`
+		documentTitle: `health-report-${department}`
 	})
 
 	return (
@@ -33,8 +28,8 @@ const HealthReport = () => {
 			<ReportHeader onPrint={handlePrint} />
 			<ReportBody
 				printRef={printRef}
-				header='Отчет по медицинским показателем обучающихся отделения:'
-				title={'f'}
+				header='Листок здоровья отделения:'
+				title={`${data?.map(({ name }) => name)}`}
 			>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>

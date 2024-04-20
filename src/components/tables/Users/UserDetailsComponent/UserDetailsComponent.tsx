@@ -3,15 +3,15 @@ import { useParams } from 'react-router-dom'
 
 import { TypeUserForm } from '@/types/user.types.ts'
 
-import Layout from '../../Layout/Layout.tsx'
-import CustomButton from '../../ui/buttons/CustomButton.tsx'
-import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
-import Heading from '../../ui/fields/Heading.tsx'
-import CustomInput from '../../ui/inputs/CustomInput.tsx'
-import CustomSelect from '../../ui/selects/CustomSelect.tsx'
+import Layout from '../../../Layout/Layout.tsx'
+import CustomButton from '../../../ui/buttons/CustomButton.tsx'
+import ErrorMessage from '../../../ui/fields/ErrorMessage.tsx'
+import Heading from '../../../ui/fields/Heading/Heading.tsx'
+import CustomInput from '../../../ui/inputs/CustomInput.tsx'
+import CustomSelect from '../../../ui/selects/CustomSelect.tsx'
 
-import useUserInitialData from './useUserInitialData.tsx'
-import styles from '@/app/styles/UserDetails.module.scss'
+import useUserInitialData from '../useUserInitialData.tsx'
+import styles from './UserDetailsComponent.module.scss'
 import { useGetGroups } from '@/queries/group.queries.ts'
 import { useGetUser, useUpdateUser } from '@/queries/user.queries.ts'
 

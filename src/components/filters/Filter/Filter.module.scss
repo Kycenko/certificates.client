@@ -1,0 +1,10 @@
+.container {
+	@apply flex items-center space-x-2;
+}
+
+.label {
+	@apply text-gray-700;
+}
+.select {
+	@apply rounded border border-gray-300 px-2 py-1 focus:border-primary  focus:outline-none;
+}

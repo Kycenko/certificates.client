@@ -21,9 +21,9 @@ export const ReportsService = {
 	},
 
 	async getHealthReport(
-		departmentId: string | undefined,
-		courseId: string | undefined,
-		physicalEducationId: string | undefined
+		departmentId: string | null,
+		courseId: string | null,
+		physicalEducationId: string | null
 	) {
 		return instance.get<IHealthReport[]>(
 			`${SERVICE_URL.REPORTS}/check-list-report?department=${departmentId}&course=${courseId}&physical-education=${physicalEducationId}`
