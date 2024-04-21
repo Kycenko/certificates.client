@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-import Dropdown from './DropDown/DropDown'
-import styles from './Header.module.scss'
 import ModalDepartmentReport from '@/components/Layout/Header/report-modals/ModalDepartmentReport'
 import ModalGroupReport from '@/components/Layout/Header/report-modals/ModalGroupReport'
 import ModalHealthReport from '@/components/Layout/Header/report-modals/ModalHealthReport'
+
+import Dropdown from './DropDown/DropDown'
+import styles from './Header.module.scss'
 import useAuth from '@/lib/hooks/useAuth.ts'
 
 const Header = () => {

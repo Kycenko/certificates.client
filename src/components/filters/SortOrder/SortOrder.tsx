@@ -14,15 +14,19 @@ const SortOrder: FC<SortOrderProps> = ({ sortOrder, setSortOrder }) => {
 
 	return (
 		<div className={styles.container}>
-			<label className={styles.label}>Сортировка по:</label>
-			<select
-				value={sortOrder}
-				onChange={handleSortChange}
-				className={styles.select}
-			>
-				<option value='asc'>По возрастанию</option>
-				<option value='desc'>По убыванию</option>
-			</select>
+			<label className='form-control w-full max-w-xs'>
+				<div className='label'>
+					<span className='label-text'>Выберите тип сортировки</span>
+				</div>
+				<select
+					className='select select-bordered'
+					value={sortOrder}
+					onChange={handleSortChange}
+				>
+					<option value='asc'>По возрастанию</option>
+					<option value='desc'>По убыванию</option>
+				</select>
+			</label>
 		</div>
 	)
 }

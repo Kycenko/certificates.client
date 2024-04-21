@@ -11,7 +11,7 @@
 }
 
 .headerContainer {
-	@apply flex justify-between py-4 px-1;
+	@apply flex justify-between items-end pb-4;
 }
 
 .header {
@@ -51,7 +51,7 @@
 }
 
 .iconBtn {
-	@apply rounded border px-1 py-1 text-black hover:bg-gray-200  bg-[#ffffff];
+	@apply rounded border px-1 py-1 text-black hover:bg-gray-200 hover:text-black  bg-[#ffffff];
 }
 
 .userEditCell {

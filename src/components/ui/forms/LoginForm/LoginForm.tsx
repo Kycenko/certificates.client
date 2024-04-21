@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { ILogin } from '@/types/auth.types.ts'
 
 import ErrorMessage from '../../fields/ErrorMessage.tsx'
-import CustomInput from '../../inputs/CustomInput.tsx'
+import CustomInput from '../../inputs/CustomInput/CustomInput.tsx'
 
 import styles from './LoginForm.module.scss'
 import { loginValidationSchema } from '@/lib/validation/validation.schema.ts'

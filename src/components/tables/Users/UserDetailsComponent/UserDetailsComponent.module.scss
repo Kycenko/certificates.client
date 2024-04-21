@@ -1,17 +1,17 @@
 .title {
-  @apply text-base text-gray-500;
+	@apply text-base text-gray-500;
 }
 .FormContainer {
-  @apply flex px-6 justify-center;
+	@apply flex px-6 justify-center;
 }
 .form {
-  @apply w-2/4;
+	@apply w-2/4;
 }
 
 .main {
-  @apply grid grid-cols-2 gap-10;
+	@apply grid grid-cols-2 gap-10;
 }
 
 .submitBtn {
-  @apply flex justify-center mt-6;
+	@apply flex justify-center mt-6;
 }

@@ -57,7 +57,7 @@ const GroupsTable = () => {
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.GROUPS}/${id}`)
 	}
-	window.history.pushState(null, '', `?filter=${filterValue}&sort=${sortOrder}`)
+	window.history.pushState(null, '', `?course=${filterValue}&sort=${sortOrder}`)
 
 	if (isLoading) return <CustomLoader />
 	return (

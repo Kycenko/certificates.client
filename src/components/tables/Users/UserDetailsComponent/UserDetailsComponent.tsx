@@ -1,16 +1,18 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
+import CustomCheckBox from '@/components/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
+
 import { TypeUserForm } from '@/types/user.types.ts'
 
 import Layout from '../../../Layout/Layout.tsx'
 import CustomButton from '../../../ui/buttons/CustomButton.tsx'
 import ErrorMessage from '../../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../../ui/fields/Heading/Heading.tsx'
-import CustomInput from '../../../ui/inputs/CustomInput.tsx'
+import CustomInput from '../../../ui/inputs/CustomInput/CustomInput.tsx'
 import CustomSelect from '../../../ui/selects/CustomSelect.tsx'
-
 import useUserInitialData from '../useUserInitialData.tsx'
+
 import styles from './UserDetailsComponent.module.scss'
 import { useGetGroups } from '@/queries/group.queries.ts'
 import { useGetUser, useUpdateUser } from '@/queries/user.queries.ts'
@@ -82,9 +84,8 @@ const UserDetailsComponent = () => {
 							<ErrorMessage error={errors.password} />
 						</div>
 
-						<CustomInput
-							className={'flex items-center'}
-							type='checkbox'
+						<CustomCheckBox
+							className='mt-7'
 							id={'isAdmin'}
 							label={'Администратор?'}
 							{...register('isAdmin')}

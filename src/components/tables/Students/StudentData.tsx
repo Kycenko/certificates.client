@@ -7,7 +7,8 @@ import { useForm } from 'react-hook-form'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
+import CustomCheckBox from '@/components/ui/inputs/CustomCheckBox/CustomCheckBox'
+import CustomInput from '@/components/ui/inputs/CustomInput/CustomInput'
 import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
 import { TypeStudentHistoryForm } from '@/types/student-history.types'
@@ -53,7 +54,7 @@ const StudentData: FC<StudentDataProps> = ({
 			...data,
 			groupId: Number(data.groupId)
 		}
-		console.log(newData)
+
 		const historyData = {
 			studentId: Number(id),
 			groupId: Number(data.groupId)
@@ -193,6 +194,13 @@ const StudentData: FC<StudentDataProps> = ({
 										</option>
 									))}
 								</CustomSelect>
+								<CustomCheckBox
+									className='mt-2'
+									id={'isExpelled'}
+									label={'Отчислен?'}
+									defaultChecked={isExpelled}
+									{...register('isExpelled')}
+								/>
 							</CustomModalForm>
 							<CustomModalForm
 								onSubmit={() => {

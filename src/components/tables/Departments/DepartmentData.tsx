@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput/CustomInput'
 
 import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
 

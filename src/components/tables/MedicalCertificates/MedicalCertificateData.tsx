@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput/CustomInput'
 import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
 import { TypeMedicalCertificateHistoryForm } from '@/types/medical-certificate-history.types.ts'

@@ -33,14 +33,15 @@ const UploadStudentsTable = () => {
 					<input
 						type='file'
 						required
-						accept='.xlsx, .csv'
+						accept='.xlsx, .csv, .xls'
 						onChange={handleFileUpload}
+						className='file-input file-input-bordered w-full max-w-xs'
 					/>
 				</div>
 
-				<div className='flex justify-center'>
+				<div className='flex justify-center '>
 					<button
-						className={`${isPending || !data?.length ? 'p-2 bg-emerald-300  text-white rounded-md mb-4' : 'p-2 bg-emerald-500 text-white rounded-md mb-4'}`}
+						className='btn btn-success text-white mb-4'
 						type='submit'
 						onClick={handleUploadToDatabase}
 						disabled={isPending || !data?.length}

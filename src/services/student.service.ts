@@ -22,7 +22,11 @@ export const StudentService = {
 	async create(data: TypeStudentForm) {
 		return instance.post<IStudent>(SERVICE_URL.STUDENTS, data)
 	},
-	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
+	async getAll(
+		groupName?: string,
+
+		sortOrder: 'asc' | 'desc' = 'asc'
+	) {
 		const url = groupName
 			? `${SERVICE_URL.STUDENTS}?group=${groupName}&sort=${sortOrder}`
 			: `${SERVICE_URL.STUDENTS}?sort=${sortOrder}`

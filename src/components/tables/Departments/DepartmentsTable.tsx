@@ -13,7 +13,7 @@ import { IDepartment, TypeDepartmentForm } from '@/types/department.types.ts'
 import CustomButton from '../../ui/buttons/CustomButton.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '../../ui/inputs/CustomInput.tsx'
+import CustomInput from '../../ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import { DepartmentHeads } from './department-heads.ts'
@@ -106,12 +106,7 @@ const DepartmentsTable = () => {
 								setSortOrder={setSortOrder}
 							/>
 						</div>
-						<CustomButton
-							className={styles.createBtn}
-							onClick={openModal}
-						>
-							Добавить отделение
-						</CustomButton>
+						<CustomButton onClick={openModal}>Добавить отделение</CustomButton>
 					</div>
 
 					<table className={styles.table}>

@@ -5,12 +5,12 @@ import { IBase } from '@/lib/base/base.interface'
 export interface IStudent extends IBase {
 	id: number
 	name: string
-	surname: string
+	surname?: string
 	birthDate: Date
 	secondName: string
-	groupId: number | undefined
-	group: IGroup
-	isExpelled: boolean
+	groupId?: number | undefined
+	group?: IGroup
+	isExpelled?: boolean
 	medicalCertificates: IMedicalCertificate[]
 }
 

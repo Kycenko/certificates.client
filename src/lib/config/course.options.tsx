@@ -1,6 +1,12 @@
 const CourseOptions = () => (
 	<>
 		<option
+			key={0}
+			value={''}
+		>
+			Все курсы
+		</option>
+		<option
 			key={1}
 			value={1}
 		>

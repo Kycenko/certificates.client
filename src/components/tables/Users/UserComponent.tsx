@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import UserData from '@/components/tables/Users/UserData.tsx'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import CustomCheckBox from '@/components/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
 
 import { IRegister } from '@/types/auth.types.ts'
 
@@ -10,7 +11,7 @@ import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '../../ui/inputs/CustomInput.tsx'
+import CustomInput from '../../ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import { PAGES_URL } from '@/lib/constants/enums.ts'
@@ -102,9 +103,8 @@ const UserComponent = () => {
 					})}
 				/>
 				<ErrorMessage error={errors.password} />
-				<CustomInput
-					className='mt-4 flex items-center'
-					type='checkbox'
+				<CustomCheckBox
+					className='mt-2'
 					id={'isAdmin'}
 					label={'Администратор?'}
 					{...register('isAdmin')}

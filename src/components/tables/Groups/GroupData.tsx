@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/components/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/components/ui/inputs/CustomInput.tsx'
+import CustomInput from '@/components/ui/inputs/CustomInput/CustomInput'
 import CustomSelect from '@/components/ui/selects/CustomSelect.tsx'
 
 import { IGroup, TypeGroupForm } from '@/types/group.types.ts'

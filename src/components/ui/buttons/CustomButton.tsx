@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import cn from 'classnames'
 import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 
 import styles from './CustomButton.module.scss'
@@ -28,7 +28,10 @@ const CustomButton = ({
 	return (
 		<div className={styles.container}>
 			<button
-				className={clsx(buttonStyles, className)}
+				className={cn(
+					buttonStyles,
+					className ? className : 'btn bg-primary text-white'
+				)}
 				{...rest}
 			>
 				{children}

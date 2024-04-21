@@ -1,11 +1,7 @@
 .container {
-	@apply relative inline-block;
+	@apply flex items-end;
 }
 
 .input {
-	@apply w-[350px] rounded-md border border-gray-300 px-4 py-2 focus:border-blue-300 focus:outline-none pr-[30px];
-}
-
-.icon {
-	@apply absolute right-[10px] top-[50%] -translate-y-[50%];
+	@apply w-[350px];
 }

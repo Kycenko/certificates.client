@@ -11,6 +11,7 @@ import HomePage from '@/pages/Home/HomePage.tsx'
 import LoginPage from '@/pages/Login/LoginPage.tsx'
 import MedicalCertificateHistoryPage from '@/pages/MedicalCertificates/MedicalCertificateHistoryPage.tsx'
 import MedicalCertificatesPage from '@/pages/MedicalCertificates/MedicalCertificatesPage.tsx'
+import NotFoundPage from '@/pages/NotFound/NotFoundPage.tsx'
 import PhysicalEducationPage from '@/pages/PhysicalEducations/PhysicalEducationsPage.tsx'
 import GetDepartmentReportPage from '@/pages/Reports/GetDepartmentReportPage.tsx'
 import GetGroupReportPage from '@/pages/Reports/GetGroupReportPage.tsx'
@@ -20,7 +21,6 @@ import StudentHistoryPage from '@/pages/Students/StudentHistoryPage.tsx'
 import StudentsPage from '@/pages/Students/StudentsPage.tsx'
 import UserDetailsPage from '@/pages/Users/UserDetailsPage.tsx'
 import UsersPage from '@/pages/Users/UsersPage.tsx'
-import NotFoundPage from "@/pages/NotFound/NotFoundPage.tsx";
 
 export const enum AppRoutes {
 	LOGIN = 'login',

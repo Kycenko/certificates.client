@@ -66,7 +66,7 @@ const StudentsTable = () => {
 	window.history.pushState(
 		null,
 		'',
-		`?search=${searchTerm}&filter=${filterValue}&sort=${sortOrder}`
+		`?search=${searchTerm}&group=${filterValue}&sort=${sortOrder}`
 	)
 
 	if (isLoading) return <CustomLoader />

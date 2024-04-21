@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tables/tablesHeads/DetailsTableHeads.tsx'
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
+import CustomCheckBox from '@/components/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
 
 import { TypeMedicalCertificateForm } from '@/types/medical-certificate.types.ts'
 
@@ -12,7 +13,7 @@ import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '../../ui/inputs/CustomInput.tsx'
+import CustomInput from '../../ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 import CustomSelect from '../../ui/selects/CustomSelect.tsx'
 
@@ -171,12 +172,15 @@ const StudentDetailsTable = () => {
 						<ErrorMessage error={errors.finishDate} />
 					</>
 				)}
-				<input
+				<CustomCheckBox
+					className='mt-1'
 					type='checkbox'
 					checked={isDurationSelected}
 					onChange={toggleDurationSelect}
+					label={'Использовать конечную дату'}
+					id={''}
 				/>
-				<label className={'ml-1'}>Использовать конечную дату?</label>
+
 				<CustomSelect
 					id='healthGroupId'
 					label='Выберите группу здоровья'

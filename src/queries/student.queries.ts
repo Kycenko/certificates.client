@@ -43,6 +43,7 @@ export const useCreateStudent = () => {
 
 export const useGetStudents = (
 	groupName?: string | undefined,
+
 	sortOrder: 'asc' | 'desc' = 'asc'
 ) => {
 	const {
@@ -54,6 +55,7 @@ export const useGetStudents = (
 		queryFn: async () => {
 			const response: AxiosResponse<IStudent[]> = await StudentService.getAll(
 				groupName,
+
 				sortOrder
 			)
 			return response.data

@@ -12,7 +12,7 @@ import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '../../ui/inputs/CustomInput.tsx'
+import CustomInput from '../../ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '../../ui/loader/CustomLoader.tsx'
 
 import GroupDetailsData from './GroupDetailsData.tsx'

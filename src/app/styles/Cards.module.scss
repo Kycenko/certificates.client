@@ -9,5 +9,5 @@
 	@apply flex space-x-2;
 }
 .iconBtn {
-	@apply rounded border px-1 py-1 text-black hover:bg-gray-200 bg-[#ffffff];
+	@apply rounded border px-1 py-1 text-black hover:bg-gray-200 hover:text-black bg-[#ffffff];
 }
