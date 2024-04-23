@@ -30,7 +30,8 @@ export class GroupService {
 					include: {
 						medicalCertificates: true
 					}
-				}
+				},
+				course: true
 			}
 		})
 		if (!groups || groups.length === 0)

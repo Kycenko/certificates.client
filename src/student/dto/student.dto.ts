@@ -11,7 +11,7 @@ import {
 export class StudentDto {
 	@IsString()
 	@IsNotEmpty({ message: 'Обязательное поле!' })
-	@MinLength(3, { message: 'Минимум 3 символов' })
+	@MinLength(3, { message: 'Минимум 3 символа' })
 	@MaxLength(30, { message: 'Максимум 30 символов' })
 	name: string
 	@IsString()

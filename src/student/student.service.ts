@@ -93,7 +93,10 @@ export class StudentService {
 		await this.getById(id)
 		return this.prisma.student.update({
 			where: { id: +id },
-			data: { ...dto, birthDate: formatISO(dto.birthDate) }
+			data: {
+				...dto,
+				birthDate: formatISO(dto.birthDate)
+			}
 		})
 	}
 

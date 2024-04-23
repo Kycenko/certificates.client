@@ -31,7 +31,8 @@ export class CourseService {
 					include: {
 						students: true
 					}
-				}
+				},
+				department: true
 			}
 		})
 		if (!courses || courses.length === 0)
