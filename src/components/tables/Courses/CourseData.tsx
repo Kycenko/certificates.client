@@ -1,5 +1,5 @@
 import { Eye, PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -12,7 +12,6 @@ import { ICourse, TypeCourseForm } from '@/types/course.types.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import CourseOptions from '@/lib/config/course.options'
 import useModal from '@/lib/hooks/useModal.ts'
-import { useGetDepartments } from '@/queries/department.queries.ts'
 
 interface CourseDataProps {
 	data: ICourse[] | undefined
@@ -21,50 +20,39 @@ interface CourseDataProps {
 	onInfo: (id: number | string) => void
 }
 
-const CourseData: FC<CourseDataProps> = ({
-	data,
-	onDelete,
-	onEdit,
-	onInfo
-}) => {
-	const { setDeleteId, deleteId, editId, setEditId } = useModal()
-	const { departments } = useGetDepartments()
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
+const CourseData: FC<CourseDataProps> = memo(
+	({ data, onDelete, onEdit, onInfo }) => {
+		const { setDeleteId, deleteId, editId, setEditId } = useModal()
 
-		reset
-	} = useForm<TypeCourseForm>()
+		const {
+			register,
+			handleSubmit,
+			formState: { errors },
 
-	const handleDelete = (id: number | string) => {
-		onDelete(id)
-		setDeleteId(null)
-	}
+			reset
+		} = useForm<TypeCourseForm>()
 
-	const onSubmit = (id: number | string, data: TypeCourseForm) => {
-		const newData = {
-			...data,
-			departmentId: Number(data.departmentId)
+		const handleDelete = (id: number | string) => {
+			onDelete(id)
+			setDeleteId(null)
 		}
-		onEdit(id, newData)
-		setEditId(null)
-		reset()
-	}
 
-	return (
-		<>
-			{!data || data.length === 0 ? (
-				<tr>
-					<td
-						colSpan={2}
-						className={styles.noData}
-					>
-						Данные не найдены
-					</td>
-				</tr>
-			) : (
-				data.map(({ id, number, departmentId, groups }) => (
+		const onSubmit = (id: number | string, data: TypeCourseForm) => {
+			const newData = {
+				...data,
+				departmentId: Number(data.departmentId)
+			}
+			onEdit(id, newData)
+			setEditId(null)
+			reset()
+		}
+
+		if (!data || data.length === 0)
+			return <div className={styles.noData}> Данные не найдены</div>
+
+		return (
+			<>
+				{data.map(({ id, number, groups, department }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}
@@ -73,11 +61,7 @@ const CourseData: FC<CourseDataProps> = ({
 							<span>{number}-й курс</span>
 						</td>
 						<td className={styles.cellPadding}>
-							<span>
-								{departments
-									?.filter(({ id }) => id === departmentId)
-									?.map(({ name }) => name)}
-							</span>
+							<span>{department?.name}</span>
 						</td>
 						<td className={styles.cellPadding}>{groups?.length}</td>
 
@@ -126,15 +110,15 @@ const CourseData: FC<CourseDataProps> = ({
 							<CustomSelect
 								id='departmentId'
 								label='Выберите отделение'
-								defaultValue={departmentId}
+								defaultValue={department.name}
 								{...register('departmentId')}
 							>
-								{departments?.map(({ id, name }) => (
+								{data?.map(({ department }) => (
 									<option
-										key={id}
-										value={id}
+										key={department.id}
+										value={department.name}
 									>
-										{name}
+										{department.name}
 									</option>
 								))}
 							</CustomSelect>
@@ -149,10 +133,10 @@ const CourseData: FC<CourseDataProps> = ({
 							{number}-й курс
 						</CustomModalForm>
 					</tr>
-				))
-			)}
-		</>
-	)
-}
+				))}
+			</>
+		)
+	}
+)
 
 export default CourseData

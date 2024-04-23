@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Filter from '@/components/filters/Filter/Filter.tsx'
@@ -19,15 +19,13 @@ import {
 	useGetCourses,
 	useUpdateCourse
 } from '@/queries/course.queries.ts'
-import { useGetDepartments } from '@/queries/department.queries.ts'
 
-const CoursesTable = () => {
+const CoursesTable = memo(() => {
 	const [filterValue, setFilterValue] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 	const navigate = useNavigate()
 
 	const { courses, isLoading, refetch } = useGetCourses(filterValue, sortOrder)
-	const { departments } = useGetDepartments()
 	const { closeModal } = useModal()
 
 	const { update } = useUpdateCourse()
@@ -72,7 +70,7 @@ const CoursesTable = () => {
 							>
 								Все отделения
 							</option>
-							{departments?.map(department => (
+							{courses?.map(({ department }) => (
 								<option
 									key={department.id}
 									value={department.name}
@@ -99,6 +97,6 @@ const CoursesTable = () => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default CoursesTable

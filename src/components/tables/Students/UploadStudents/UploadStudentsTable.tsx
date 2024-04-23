@@ -1,7 +1,8 @@
+import { memo } from 'react'
+
 import { UploadStudentsHeads } from '@/components/tables/Students/UploadStudents/upload-students-heads.ts'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads.tsx'
 
-import Layout from '../../../Layout/Layout.tsx'
 import Heading from '../../../ui/fields/Heading/Heading.tsx'
 
 import UploadStudentsData from './UploadStudentsData.tsx'
@@ -25,21 +26,21 @@ const UploadStudentsTable = () => {
 	}
 
 	return (
-		<Layout>
+		<>
 			<Heading title='Импорт данных' />
 
-			<div className='flex flex-col '>
+			<div className='flex flex-col'>
 				<div className='flex justify-center mb-4'>
 					<input
 						type='file'
 						required
 						accept='.xlsx, .csv, .xls'
 						onChange={handleFileUpload}
-						className='file-input file-input-bordered w-full max-w-xs'
+						className='file-input file-input-bordered w-full max-w-[321px]'
 					/>
 				</div>
 
-				<div className='flex justify-center '>
+				<div className='flex justify-center'>
 					<button
 						className='btn btn-success text-white mb-4'
 						type='submit'
@@ -53,16 +54,19 @@ const UploadStudentsTable = () => {
 
 			{data && (
 				<table className={styles.table}>
-					<thead className={'border-b-2 border-t-2 m-4'}>
-						<TableHeads data={UploadStudentsHeads} />
+					<thead className={styles.tHeads}>
+						<TableHeads
+							className={styles.dHead}
+							data={UploadStudentsHeads}
+						/>
 					</thead>
 					<tbody className='text-center'>
 						<UploadStudentsData data={data} />
 					</tbody>
 				</table>
 			)}
-		</Layout>
+		</>
 	)
 }
 
-export default UploadStudentsTable
+export default memo(UploadStudentsTable)

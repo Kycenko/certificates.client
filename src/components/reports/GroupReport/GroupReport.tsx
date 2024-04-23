@@ -1,6 +1,6 @@
+import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
-import Layout from '@/components/Layout/Layout'
 import { GroupReportHeads } from '@/components/reports/GroupReport/group-report-heads.ts'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
@@ -12,7 +12,7 @@ import styles from '@/app/styles/Tables.module.scss'
 import usePrint from '@/lib/hooks/usePrint'
 import { useGetGroupReport } from '@/queries/reports.queries'
 
-const GroupReport = () => {
+const GroupReport = memo(() => {
 	const { id } = useParams()
 	const { data } = useGetGroupReport(id)
 	const { printRef, handlePrint } = usePrint({
@@ -20,7 +20,7 @@ const GroupReport = () => {
 	})
 	const groupName = data?.map(({ name }) => <p>{name}</p>)
 	return (
-		<Layout>
+		<>
 			<ReportHeader onPrint={handlePrint} />
 			<ReportBody
 				printRef={printRef}
@@ -36,8 +36,8 @@ const GroupReport = () => {
 					</tbody>
 				</table>
 			</ReportBody>
-		</Layout>
+		</>
 	)
-}
+})
 
 export default GroupReport

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,7 +8,6 @@ import CustomCheckBox from '@/components/ui/inputs/CustomCheckBox/CustomCheckBox
 
 import { IRegister } from '@/types/auth.types.ts'
 
-import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -50,15 +50,10 @@ const UserComponent = () => {
 	const handleEdit = (id: number | string) => {
 		navigate(`${PAGES_URL.USERS}/${id}`)
 	}
-	if (isLoading)
-		return (
-			<Layout>
-				<CustomLoader />
-			</Layout>
-		)
+	if (isLoading) return <CustomLoader />
 
 	return (
-		<Layout>
+		<>
 			<Heading title='Список пользователей' />
 
 			<CustomButton
@@ -110,8 +105,8 @@ const UserComponent = () => {
 					{...register('isAdmin')}
 				/>
 			</CustomModalForm>
-		</Layout>
+		</>
 	)
 }
 
-export default UserComponent
+export default memo(UserComponent)

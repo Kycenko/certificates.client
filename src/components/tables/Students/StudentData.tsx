@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { Eye, History, PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -222,4 +222,4 @@ const StudentData: FC<StudentDataProps> = ({
 	)
 }
 
-export default StudentData
+export default memo(StudentData)

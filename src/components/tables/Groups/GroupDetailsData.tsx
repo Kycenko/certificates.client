@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { IGroup } from '@/types/group.types'
@@ -11,7 +11,7 @@ interface GroupDetailsDataProps {
 	data: IGroup | undefined
 }
 
-const GroupDetailsData: FC<GroupDetailsDataProps> = ({ data }) => {
+const GroupDetailsData: FC<GroupDetailsDataProps> = memo(({ data }) => {
 	const navigate = useNavigate()
 	return (
 		<>
@@ -37,6 +37,6 @@ const GroupDetailsData: FC<GroupDetailsDataProps> = ({ data }) => {
 			)}
 		</>
 	)
-}
+})
 
 export default GroupDetailsData

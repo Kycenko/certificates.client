@@ -1,12 +1,9 @@
-import Layout from '@/components/Layout/Layout'
 import DepartmentDetailsTable from '@/components/tables/Departments/DepartmentDetailsTable.tsx'
 
+import WithPageLayout from '@/app/hoc/WithPageLayout'
+
 const DepartmentDetailsPage = () => {
-	return (
-		<Layout>
-			<DepartmentDetailsTable />
-		</Layout>
-	)
+	return <DepartmentDetailsTable />
 }
 
-export default DepartmentDetailsPage
+export default WithPageLayout(DepartmentDetailsPage)

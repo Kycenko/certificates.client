@@ -1,12 +1,9 @@
-import Layout from '@/components/Layout/Layout'
 import StudentHistory from '@/components/tables/Students/StudentHistory/StudentHistory'
 
+import WithPageLayout from '@/app/hoc/WithPageLayout'
+
 const StudentHistoryPage = () => {
-	return (
-		<Layout>
-			<StudentHistory />
-		</Layout>
-	)
+	return <StudentHistory />
 }
 
-export default StudentHistoryPage
+export default WithPageLayout(StudentHistoryPage)

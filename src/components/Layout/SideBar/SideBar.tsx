@@ -9,6 +9,7 @@ import {
 	Users,
 	Zap
 } from 'lucide-react'
+import { memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import styles from './SideBar.module.scss'
@@ -16,7 +17,7 @@ import { PAGES_URL } from '@/lib/constants/enums'
 import { removeFromStorage } from '@/lib/helpers/auth.helper.ts'
 import useAuth from '@/lib/hooks/useAuth.ts'
 
-const Sidebar = () => {
+const Sidebar = memo(() => {
 	const navigate = useNavigate()
 	const { user } = useAuth()
 	const handleLogout = () => {
@@ -163,5 +164,5 @@ const Sidebar = () => {
 			</div>
 		</div>
 	)
-}
+})
 export default Sidebar

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { IGroupReport } from '@/types/reports.types'
 
@@ -9,7 +9,7 @@ interface GroupReportDataProps {
 	data: IGroupReport[] | undefined
 }
 
-const GroupReportData: FC<GroupReportDataProps> = ({ data }) => {
+const GroupReportData: FC<GroupReportDataProps> = memo(({ data }) => {
 	return (
 		<>
 			{data?.map(({ id, students, course }) =>
@@ -35,6 +35,6 @@ const GroupReportData: FC<GroupReportDataProps> = ({ data }) => {
 			)}
 		</>
 	)
-}
+})
 
 export default GroupReportData

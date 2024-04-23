@@ -1,5 +1,5 @@
 import { PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 import CustomModalForm from '@/components/ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -60,4 +60,4 @@ const UserData: FC<UserDataProps> = ({ data, onEdit, onDelete }) => {
 	)
 }
 
-export default UserData
+export default memo(UserData)

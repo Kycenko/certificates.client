@@ -1,4 +1,4 @@
-import { ReactNode, SelectHTMLAttributes, forwardRef } from 'react'
+import { ReactNode, SelectHTMLAttributes, forwardRef, memo } from 'react'
 
 import styles from './CustomSelect.module.scss'
 
@@ -9,21 +9,23 @@ interface CustomSelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 	className?: string
 }
 
-const CustomSelect = forwardRef<HTMLSelectElement, CustomSelectProps>(
-	({ id, label, children, className, ...props }, ref) => {
-		return (
-			<div className={styles.container}>
-				<label className={styles.label}>{label}</label>
-				<select
-					id={id}
-					ref={ref}
-					className={className ? className : styles.select}
-					{...props}
-				>
-					{children}
-				</select>
-			</div>
-		)
-	}
+const CustomSelect = memo(
+	forwardRef<HTMLSelectElement, CustomSelectProps>(
+		({ id, label, children, className, ...props }, ref) => {
+			return (
+				<div className={styles.container}>
+					<label className={styles.label}>{label}</label>
+					<select
+						id={id}
+						ref={ref}
+						className={className ? className : styles.select}
+						{...props}
+					>
+						{children}
+					</select>
+				</div>
+			)
+		}
+	)
 )
 export default CustomSelect

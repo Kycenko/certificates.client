@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Filter from '@/components/filters/Filter/Filter.tsx'
@@ -123,4 +123,4 @@ const StudentsTable = () => {
 	)
 }
 
-export default StudentsTable
+export default memo(StudentsTable)

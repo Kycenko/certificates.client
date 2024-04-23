@@ -1,8 +1,8 @@
+import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { DepartmentReportHeads } from '@/components/reports/DepartmentReport/department-report-heads.ts'
 
-import Layout from '../../Layout/Layout'
 import TableHeads from '../../tables/tablesHeads/TableHeads'
 import ReportBody from '../ReportBody'
 import ReportHeader from '../ReportHeader'
@@ -12,7 +12,7 @@ import styles from '@/app/styles/Tables.module.scss'
 import usePrint from '@/lib/hooks/usePrint'
 import { useGetDepartmentReport } from '@/queries/reports.queries.ts'
 
-const DepartmentReport = () => {
+const DepartmentReport = memo(() => {
 	const { id } = useParams()
 
 	const { data } = useGetDepartmentReport(id)
@@ -22,9 +22,8 @@ const DepartmentReport = () => {
 	})
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
 	return (
-		<Layout>
+		<>
 			<ReportHeader onPrint={handlePrint} />
-
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по медицинским показателем обучающихся отделения:'
@@ -39,8 +38,8 @@ const DepartmentReport = () => {
 					</tbody>
 				</table>
 			</ReportBody>
-		</Layout>
+		</>
 	)
-}
+})
 
 export default DepartmentReport

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { IStudentHistory } from '@/types/student-history.types'
 
@@ -26,4 +26,4 @@ const StudentHistoryData: FC<StudentHistoryDataProps> = ({ data }) => {
 	)
 }
 
-export default StudentHistoryData
+export default memo(StudentHistoryData)

@@ -1,11 +1,9 @@
 import DepartmentReport from '@/components/reports/DepartmentReport/DepartmentReport'
 
+import WithPageLayout from '@/app/hoc/WithPageLayout'
+
 const GetDepartmentReportPage = () => {
-	return (
-		<>
-			<DepartmentReport />
-		</>
-	)
+	return <DepartmentReport />
 }
 
-export default GetDepartmentReportPage
+export default WithPageLayout(GetDepartmentReportPage)

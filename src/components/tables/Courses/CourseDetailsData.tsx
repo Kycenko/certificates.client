@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ICourse } from '@/types/course.types'
@@ -10,7 +10,7 @@ interface CourseDetailsDataProps {
 	data: ICourse | undefined
 }
 
-const CourseDetailsData: FC<CourseDetailsDataProps> = ({ data }) => {
+const CourseDetailsData: FC<CourseDetailsDataProps> = memo(({ data }) => {
 	const navigate = useNavigate()
 	return (
 		<>
@@ -29,6 +29,6 @@ const CourseDetailsData: FC<CourseDetailsDataProps> = ({ data }) => {
 			))}
 		</>
 	)
-}
+})
 
 export default CourseDetailsData

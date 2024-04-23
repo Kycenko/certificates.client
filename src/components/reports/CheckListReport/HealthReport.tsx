@@ -1,6 +1,6 @@
+import { memo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import Layout from '@/components/Layout/Layout'
 import TableHeads from '@/components/tables/tablesHeads/TableHeads'
 
 import ReportBody from '../ReportBody'
@@ -12,7 +12,7 @@ import styles from '@/app/styles/Tables.module.scss'
 import usePrint from '@/lib/hooks/usePrint'
 import { useGetHealthReport } from '@/queries/reports.queries'
 
-const HealthReport = () => {
+const HealthReport = memo(() => {
 	const [search] = useSearchParams()
 	const department = search.get('department')
 	const course = search.get('course')
@@ -24,7 +24,7 @@ const HealthReport = () => {
 	})
 
 	return (
-		<Layout>
+		<>
 			<ReportHeader onPrint={handlePrint} />
 			<ReportBody
 				printRef={printRef}
@@ -40,8 +40,8 @@ const HealthReport = () => {
 					</tbody>
 				</table>
 			</ReportBody>
-		</Layout>
+		</>
 	)
-}
+})
 
 export default HealthReport

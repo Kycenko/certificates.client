@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -29,7 +29,7 @@ import {
 	useUpdateDepartment
 } from '@/queries/department.queries.ts'
 
-const DepartmentsTable = () => {
+const DepartmentsTable = memo(() => {
 	const navigate = useNavigate()
 	const [searchTerm, setSearchTerm] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
@@ -106,7 +106,12 @@ const DepartmentsTable = () => {
 								setSortOrder={setSortOrder}
 							/>
 						</div>
-						<CustomButton onClick={openModal}>Добавить отделение</CustomButton>
+						<CustomButton
+							variant='create'
+							onClick={openModal}
+						>
+							Добавить отделение
+						</CustomButton>
 					</div>
 
 					<table className={styles.table}>
@@ -141,6 +146,6 @@ const DepartmentsTable = () => {
 			</CustomModalForm>
 		</>
 	)
-}
+})
 
 export default DepartmentsTable

@@ -1,4 +1,6 @@
-const ReportHeader = ({ onPrint }: { onPrint: () => void }) => {
+import { memo } from 'react'
+
+const ReportHeader = memo(({ onPrint }: { onPrint: () => void }) => {
 	return (
 		<div>
 			<div className={'justify-center'}>
@@ -19,6 +21,6 @@ const ReportHeader = ({ onPrint }: { onPrint: () => void }) => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default ReportHeader

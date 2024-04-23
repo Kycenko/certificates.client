@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -16,7 +16,7 @@ interface ModalProps {
 	onClose: () => void
 }
 
-const ModalGroupReport: FC<ModalProps> = ({ isOpen, onClose }) => {
+const ModalGroupReport: FC<ModalProps> = memo(({ isOpen, onClose }) => {
 	const navigate = useNavigate()
 	const { groups } = useGetGroups()
 	const { handleSubmit, register } = useForm<FormState>()
@@ -49,6 +49,6 @@ const ModalGroupReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 			</CustomSelect>
 		</CustomModalForm>
 	)
-}
+})
 
 export default ModalGroupReport

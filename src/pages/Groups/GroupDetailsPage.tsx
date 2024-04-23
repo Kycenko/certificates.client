@@ -1,12 +1,9 @@
-import Layout from '@/components/Layout/Layout'
 import GroupDetailsTable from '@/components/tables/Groups/GroupDetailsTable.tsx'
 
+import WithPageLayout from '@/app/hoc/WithPageLayout'
+
 const GroupDetailsPage = () => {
-	return (
-		<Layout>
-			<GroupDetailsTable />
-		</Layout>
-	)
+	return <GroupDetailsTable />
 }
 
-export default GroupDetailsPage
+export default WithPageLayout(GroupDetailsPage)

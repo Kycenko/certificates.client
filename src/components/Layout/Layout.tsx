@@ -1,11 +1,11 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren, memo } from 'react'
 
 import Header from '@/components/Layout/Header/Header.tsx'
 import Sidebar from '@/components/Layout/SideBar/SideBar'
 
 import styles from './Layout.module.scss'
 
-const Layout: FC<PropsWithChildren> = ({ children }) => {
+const Layout: FC<PropsWithChildren> = memo(({ children }) => {
 	return (
 		<div className={styles.sideBar}>
 			<Sidebar />
@@ -15,6 +15,6 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default Layout

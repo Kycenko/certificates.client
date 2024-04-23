@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { IDepartmentReport } from '@/types/reports.types'
 
@@ -8,7 +8,7 @@ import formatFullName from '@/lib/utils/formatFullName'
 interface DepartmentReportDataProps {
 	data: IDepartmentReport[] | undefined
 }
-const DepartmentReportData: FC<DepartmentReportDataProps> = ({ data }) => {
+const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
 	return (
 		<>
@@ -44,6 +44,6 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = ({ data }) => {
 			)}
 		</>
 	)
-}
+})
 
 export default DepartmentReportData

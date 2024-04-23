@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -5,7 +6,6 @@ import CustomCheckBox from '@/components/ui/inputs/CustomCheckBox/CustomCheckBox
 
 import { TypeUserForm } from '@/types/user.types.ts'
 
-import Layout from '../../../Layout/Layout.tsx'
 import CustomButton from '../../../ui/buttons/CustomButton.tsx'
 import ErrorMessage from '../../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../../ui/fields/Heading/Heading.tsx'
@@ -46,7 +46,7 @@ const UserDetailsComponent = () => {
 		await refetch()
 	}
 	return (
-		<Layout>
+		<>
 			<Heading title={'Описание пользователя'}>
 				<span className={styles.title}>{user?.login}</span>
 			</Heading>
@@ -110,6 +110,7 @@ const UserDetailsComponent = () => {
 					<div className={styles.submitBtn}>
 						<CustomButton
 							type={'submit'}
+							variant='create'
 							disabled={isPending}
 						>
 							Сохранить
@@ -117,8 +118,8 @@ const UserDetailsComponent = () => {
 					</div>
 				</form>
 			</div>
-		</Layout>
+		</>
 	)
 }
 
-export default UserDetailsComponent
+export default memo(UserDetailsComponent)

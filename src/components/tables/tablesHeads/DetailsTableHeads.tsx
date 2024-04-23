@@ -1,6 +1,8 @@
+import { memo } from 'react'
+
 import styles from '@/app/styles/DetailsTables.module.scss'
 
-const DetailsTableHeads = ({ data }: { data: string[] }) => {
+const DetailsTableHeads = memo(({ data }: { data: string[] }) => {
 	return (
 		<tr className={styles.tHeads}>
 			{data?.map(head => (
@@ -13,6 +15,6 @@ const DetailsTableHeads = ({ data }: { data: string[] }) => {
 			))}
 		</tr>
 	)
-}
+})
 
 export default DetailsTableHeads

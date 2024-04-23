@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import HealthGroupData from '@/components/tables/HealthGroups/HealthGroupData.tsx'
@@ -7,7 +7,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeHealthGroupForm } from '@/types/health-group.types.ts'
 
-import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -23,7 +22,7 @@ import {
 	useUpdateHealthGroup
 } from '@/queries/health-group.query.ts'
 
-const HealthGroupComponent = () => {
+const HealthGroupComponent = memo(() => {
 	const { healthGroups, refetch, isLoading } = useGetHealthGroups()
 	const { closeModal, isOpen, openModal } = useModal()
 	const {
@@ -60,14 +59,9 @@ const HealthGroupComponent = () => {
 		closeModal()
 		await refetch()
 	}
-	if (isLoading)
-		return (
-			<Layout>
-				<CustomLoader />
-			</Layout>
-		)
+	if (isLoading) return <CustomLoader />
 	return (
-		<Layout>
+		<>
 			<Heading title='Список групп здоровья' />
 			<CustomButton
 				variant='create'
@@ -95,8 +89,8 @@ const HealthGroupComponent = () => {
 				/>
 				<ErrorMessage error={errors.name} />
 			</CustomModalForm>
-		</Layout>
+		</>
 	)
-}
+})
 
 export default HealthGroupComponent

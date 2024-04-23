@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Filter from '@/components/filters/Filter/Filter.tsx'
@@ -23,7 +23,7 @@ import {
 	useUpdateGroup
 } from '@/queries/group.queries.ts'
 
-const GroupsTable = () => {
+const GroupsTable = memo(() => {
 	const navigate = useNavigate()
 	const [searchTerm, setSearchTerm] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
@@ -79,6 +79,7 @@ const GroupsTable = () => {
 							filterValue={filterValue}
 							setFilterValue={setFilterValue}
 						>
+							<option value={''}>Все курсы</option>
 							<CourseOptions />
 						</Filter>
 					</div>
@@ -99,6 +100,6 @@ const GroupsTable = () => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default GroupsTable

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -20,7 +21,7 @@ import useModal from '@/lib/hooks/useModal.ts'
 import { useCreateCourse } from '@/queries/course.queries.ts'
 import { useGetDepartment } from '@/queries/department.queries.ts'
 
-const DepartmentDetailsTable = () => {
+const DepartmentDetailsTable = memo(() => {
 	const { id } = useParams()
 
 	const { department, isLoading, refetch } = useGetDepartment(id)
@@ -82,6 +83,6 @@ const DepartmentDetailsTable = () => {
 			</CustomModalForm>
 		</>
 	)
-}
+})
 
 export default DepartmentDetailsTable

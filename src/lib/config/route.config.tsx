@@ -1,26 +1,26 @@
 import { RouteProps } from 'react-router-dom'
 
-import CourseDetailsPage from '@/pages/Courses/CourseDetailsPage.tsx'
-import CoursesPage from '@/pages/Courses/CoursesPage.tsx'
-import DepartmentDetailsPage from '@/pages/Departments/DepartmentDetailsPage.tsx'
-import DepartmentsPage from '@/pages/Departments/DepartmentsPage.tsx'
-import GroupDetailsPage from '@/pages/Groups/GroupDetailsPage.tsx'
-import GroupsPage from '@/pages/Groups/GroupsPage.tsx'
-import HealthGroupsPage from '@/pages/HealthGroups/HealthGroupsPage.tsx'
-import HomePage from '@/pages/Home/HomePage.tsx'
-import LoginPage from '@/pages/Login/LoginPage.tsx'
-import MedicalCertificateHistoryPage from '@/pages/MedicalCertificates/MedicalCertificateHistoryPage.tsx'
-import MedicalCertificatesPage from '@/pages/MedicalCertificates/MedicalCertificatesPage.tsx'
-import NotFoundPage from '@/pages/NotFound/NotFoundPage.tsx'
-import PhysicalEducationPage from '@/pages/PhysicalEducations/PhysicalEducationsPage.tsx'
-import GetDepartmentReportPage from '@/pages/Reports/GetDepartmentReportPage.tsx'
-import GetGroupReportPage from '@/pages/Reports/GetGroupReportPage.tsx'
-import GetHealthReportPage from '@/pages/Reports/GetHealthReportPage'
-import StudentDetailsPage from '@/pages/Students/StudentDetailsPage.tsx'
-import StudentHistoryPage from '@/pages/Students/StudentHistoryPage.tsx'
-import StudentsPage from '@/pages/Students/StudentsPage.tsx'
-import UserDetailsPage from '@/pages/Users/UserDetailsPage.tsx'
-import UsersPage from '@/pages/Users/UsersPage.tsx'
+import { CourseDetailsPageLazy } from '@/pages/Courses/CourseDetailsPage.lazy'
+import { CoursesPageLazy } from '@/pages/Courses/CoursesPage.lazy'
+import { DepartmentDetailsPageLazy } from '@/pages/Departments/DepartmentDetailsPageLazy'
+import { DepartmentsPageLazy } from '@/pages/Departments/DepartmentsPageLazy'
+import { GroupDetailsPageLazy } from '@/pages/Groups/GroupDetailsPageLazy'
+import { GroupsPageLazy } from '@/pages/Groups/GroupsPageLazy'
+import { HealthGroupsPageLazy } from '@/pages/HealthGroups/HealthGroupsPageLazy'
+import { HomePageLazy } from '@/pages/Home/HomePageLazy'
+import { LoginPageLazy } from '@/pages/Login/LoginPageLazy'
+import { MedicalCertificateHistoryPageLazy } from '@/pages/MedicalCertificates/MedicalCertificateHistoryPageLazy'
+import { MedicalCertificatesPageLazy } from '@/pages/MedicalCertificates/MedicalCertificatesPageLazy'
+import { NotFoundPageLazy } from '@/pages/NotFound/NotFoundPageLazy'
+import { PhysicalEducationsPageLazy } from '@/pages/PhysicalEducations/PhysicalEducationsPageLazy'
+import { GetDepartmentReportPageLazy } from '@/pages/Reports/GetDepartmentReportPageLazy'
+import { GetGroupReportPageLazy } from '@/pages/Reports/GetGroupReportPageLazy'
+import { GetHealthReportPageLazy } from '@/pages/Reports/GetHealthReportPageLazy'
+import { StudentDetailsPageLazy } from '@/pages/Students/StudentDetailsPageLazy'
+import { StudentHistoryPageLazy } from '@/pages/Students/StudentHistoryPageLazy'
+import { StudentsPageLazy } from '@/pages/Students/StudentsPageLazy'
+import { UserDetailsPageLazy } from '@/pages/Users/UserDetailsPageLazy'
+import { UsersPageLazy } from '@/pages/Users/UsersPageLazy'
 
 export const enum AppRoutes {
 	LOGIN = 'login',
@@ -75,88 +75,88 @@ export const RoutePath: Record<AppRoutes, string> = {
 export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.LOGIN]: {
 		path: RoutePath.login,
-		element: <LoginPage />
+		element: <LoginPageLazy />
 	},
 	[AppRoutes.HOME]: {
 		path: RoutePath.home,
-		element: <HomePage />
+		element: <HomePageLazy />
 	},
 	[AppRoutes.USERS]: {
 		path: RoutePath.users,
-		element: <UsersPage />
+		element: <UsersPageLazy />
 	},
 	[AppRoutes.USER_DETAILS]: {
 		path: RoutePath['user-details'],
-		element: <UserDetailsPage />
+		element: <UserDetailsPageLazy />
 	},
 	[AppRoutes.HEALTH_GROUPS]: {
 		path: RoutePath['health-groups'],
-		element: <HealthGroupsPage />
+		element: <HealthGroupsPageLazy />
 	},
 	[AppRoutes.PHYSICAL_EDUCATION]: {
 		path: RoutePath['physical-education'],
-		element: <PhysicalEducationPage />
+		element: <PhysicalEducationsPageLazy />
 	},
 	[AppRoutes.DEPARTMENTS]: {
 		path: RoutePath.departments,
-		element: <DepartmentsPage />
+		element: <DepartmentsPageLazy />
 	},
 	[AppRoutes.DEPARTMENT_DETAILS]: {
 		path: RoutePath['department-details'],
-		element: <DepartmentDetailsPage />
+		element: <DepartmentDetailsPageLazy />
 	},
 	[AppRoutes.COURSES]: {
 		path: RoutePath.courses,
-		element: <CoursesPage />
+		element: <CoursesPageLazy />
 	},
 	[AppRoutes.COURSE_DETAILS]: {
 		path: RoutePath['course-details'],
-		element: <CourseDetailsPage />
+		element: <CourseDetailsPageLazy />
 	},
 	[AppRoutes.GROUPS]: {
 		path: RoutePath.groups,
-		element: <GroupsPage />
+		element: <GroupsPageLazy />
 	},
 	[AppRoutes.GROUP_DETAILS]: {
 		path: RoutePath['group-details'],
-		element: <GroupDetailsPage />
+		element: <GroupDetailsPageLazy />
 	},
 	[AppRoutes.STUDENTS]: {
 		path: RoutePath.students,
-		element: <StudentsPage />
+		element: <StudentsPageLazy />
 	},
 
 	[AppRoutes.STUDENT_HISTORY]: {
 		path: RoutePath['student-history'],
-		element: <StudentHistoryPage />
+		element: <StudentHistoryPageLazy />
 	},
 
 	[AppRoutes.STUDENT_DETAILS]: {
 		path: RoutePath['student-details'],
-		element: <StudentDetailsPage />
+		element: <StudentDetailsPageLazy />
 	},
 	[AppRoutes.MEDICAL_CERTIFICATES]: {
 		path: RoutePath['medical-certificates'],
-		element: <MedicalCertificatesPage />
+		element: <MedicalCertificatesPageLazy />
 	},
 	[AppRoutes.MEDICAL_CERTIFICATE_HISTORY]: {
 		path: RoutePath['medical-certificate-history'],
-		element: <MedicalCertificateHistoryPage />
+		element: <MedicalCertificateHistoryPageLazy />
 	},
 	[AppRoutes.GET_DEPARTMENT_REPORT]: {
 		path: RoutePath['department-report'],
-		element: <GetDepartmentReportPage />
+		element: <GetDepartmentReportPageLazy />
 	},
 	[AppRoutes.GET_GROUP_REPORT]: {
 		path: RoutePath['group-report'],
-		element: <GetGroupReportPage />
+		element: <GetGroupReportPageLazy />
 	},
 	[AppRoutes.GET_HEALTH_REPORT]: {
 		path: RoutePath['check-list-report'],
-		element: <GetHealthReportPage />
+		element: <GetHealthReportPageLazy />
 	},
 	[AppRoutes.NOT_FOUND]: {
 		path: RoutePath['not-found'],
-		element: <NotFoundPage />
+		element: <NotFoundPageLazy />
 	}
 }

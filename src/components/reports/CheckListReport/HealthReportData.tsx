@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { IHealthReport } from '@/types/reports.types'
 
@@ -8,7 +8,7 @@ interface HealthReportData {
 	data: IHealthReport[] | undefined
 }
 
-const HealthReportData: FC<HealthReportData> = ({ data }) => {
+const HealthReportData: FC<HealthReportData> = memo(({ data }) => {
 	return (
 		<>
 			{data?.map(({ id, courses }) =>
@@ -34,6 +34,6 @@ const HealthReportData: FC<HealthReportData> = ({ data }) => {
 			)}
 		</>
 	)
-}
+})
 
 export default HealthReportData

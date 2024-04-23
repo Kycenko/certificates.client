@@ -1,5 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
+import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -8,7 +9,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeStudentForm } from '@/types/student.types.ts'
 
-import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -24,7 +24,7 @@ import { studentValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetGroup } from '@/queries/group.queries.ts'
 import { useCreateStudent } from '@/queries/student.queries.ts'
 
-const GroupDetailsTable = () => {
+const GroupDetailsTable = memo(() => {
 	const { id } = useParams()
 	const { user } = useAuth()
 	const { group, refetch, isLoading } = useGetGroup(id)
@@ -50,12 +50,7 @@ const GroupDetailsTable = () => {
 		reset()
 	}
 
-	if (isLoading)
-		return (
-			<Layout>
-				<CustomLoader />
-			</Layout>
-		)
+	if (isLoading) return <CustomLoader />
 
 	return (
 		<>
@@ -117,6 +112,6 @@ const GroupDetailsTable = () => {
 			</CustomModalForm>
 		</>
 	)
-}
+})
 
 export default GroupDetailsTable

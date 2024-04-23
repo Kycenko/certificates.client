@@ -1,19 +1,23 @@
-import { FC } from 'react'
+import { FC, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
+
+import CustomLoader from '@/components/ui/loader/CustomLoader'
 
 import { routeConfig } from '@/lib/config/route.config'
 
 const RouteProvider: FC = () => {
 	return (
-		<Routes>
-			{Object.values(routeConfig).map(({ element, path }) => (
-				<Route
-					key={path}
-					element={element}
-					path={path}
-				/>
-			))}
-		</Routes>
+		<Suspense fallback={<CustomLoader />}>
+			<Routes>
+				{Object.values(routeConfig).map(({ element, path }) => (
+					<Route
+						key={path}
+						element={element}
+						path={path}
+					/>
+				))}
+			</Routes>
+		</Suspense>
 	)
 }
 

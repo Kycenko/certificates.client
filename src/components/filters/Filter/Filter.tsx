@@ -1,4 +1,12 @@
-import { ChangeEvent, Dispatch, FC, ReactNode, SetStateAction } from 'react'
+import {
+	ChangeEvent,
+	Dispatch,
+	FC,
+	ReactNode,
+	SetStateAction,
+	memo,
+	useCallback
+} from 'react'
 
 import styles from './Filter.module.scss'
 
@@ -9,32 +17,31 @@ interface FilterProps {
 	children?: ReactNode
 }
 
-const Filter: FC<FilterProps> = ({
-	filterValue,
-	setFilterValue,
-	label,
-	children
-}) => {
-	const handleFilterChange = (e: ChangeEvent<HTMLSelectElement>) => {
-		setFilterValue(e.target.value)
+const Filter: FC<FilterProps> = memo(
+	({ filterValue, setFilterValue, label, children }) => {
+		const handleFilterChange = useCallback(
+			(e: ChangeEvent<HTMLSelectElement>) => {
+				setFilterValue(e.target.value)
+			},
+			[setFilterValue]
+		)
+		return (
+			<div className={styles.container}>
+				<label className='form-control w-full max-w-xs'>
+					<div className='label'>
+						<span className='label-text'>{label}</span>
+					</div>
+					<select
+						className='select select-bordered'
+						value={filterValue}
+						onChange={handleFilterChange}
+					>
+						{children}
+					</select>
+				</label>
+			</div>
+		)
 	}
-
-	return (
-		<div className={styles.container}>
-			<label className='form-control w-full max-w-xs'>
-				<div className='label'>
-					<span className='label-text'>{label}</span>
-				</div>
-				<select
-					className='select select-bordered'
-					value={filterValue}
-					onChange={handleFilterChange}
-				>
-					{children}
-				</select>
-			</label>
-		</div>
-	)
-}
+)
 
 export default Filter

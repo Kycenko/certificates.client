@@ -1,5 +1,5 @@
 import { addMonths } from 'date-fns'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -214,4 +214,4 @@ const StudentDetailsTable = () => {
 	)
 }
 
-export default StudentDetailsTable
+export default memo(StudentDetailsTable)

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import Heading from '@/components/ui/fields/Heading/Heading'
@@ -9,7 +10,7 @@ import MedicalCertificateHistoryData from './MedicalCertificateHistoryData'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetMedicalCertificateHistories } from '@/queries/medical-certificate-history.queries.ts'
 
-const MedicalCertificateHistory = () => {
+const MedicalCertificateHistory = memo(() => {
 	const { id } = useParams()
 	const { certificates } = useGetMedicalCertificateHistories(id)
 
@@ -18,7 +19,10 @@ const MedicalCertificateHistory = () => {
 			<Heading title={'История изменений медицинской справки'}></Heading>
 			<table className={styles.table}>
 				<thead className={styles.tHeads}>
-					<TableHeads data={CertificateHistoryHeads} />
+					<TableHeads
+						className={styles.dHead}
+						data={CertificateHistoryHeads}
+					/>
 				</thead>
 				<tbody>
 					<MedicalCertificateHistoryData data={certificates} />
@@ -26,6 +30,6 @@ const MedicalCertificateHistory = () => {
 			</table>
 		</div>
 	)
-}
+})
 
 export default MedicalCertificateHistory

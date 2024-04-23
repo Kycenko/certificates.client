@@ -1,5 +1,5 @@
 import { format, parse } from 'date-fns'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { IUploadStudent } from '@/types/student.types.ts'
 
@@ -28,4 +28,4 @@ const UploadStudentsData: FC<UploadStudentsDataProps> = ({ data }) => {
 	)
 }
 
-export default UploadStudentsData
+export default memo(UploadStudentsData)

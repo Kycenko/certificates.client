@@ -1,12 +1,9 @@
-import Layout from '@/components/Layout/Layout'
 import StudentDetailsTable from '@/components/tables/Students/StudentDetailsTable.tsx'
 
+import WithPageLayout from '@/app/hoc/WithPageLayout'
+
 const StudentDetailsPage = () => {
-	return (
-		<Layout>
-			<StudentDetailsTable />
-		</Layout>
-	)
+	return <StudentDetailsTable />
 }
 
-export default StudentDetailsPage
+export default WithPageLayout(StudentDetailsPage)

@@ -1,5 +1,6 @@
 import { IHealthGroup } from './health-group.types'
 import { IPhysicalEducation } from './physical-education.types'
+import { IStudent } from './student.types'
 import { IBase } from '@/lib/base/base.interface'
 
 export interface IMedicalCertificate extends IBase {
@@ -11,6 +12,7 @@ export interface IMedicalCertificate extends IBase {
 	physicalEducationId: number
 	healthGroup: IHealthGroup
 	physicalEducation: IPhysicalEducation
+	student: IStudent
 }
 
 export type TypeMedicalCertificateForm = Omit<IMedicalCertificate, 'id'>

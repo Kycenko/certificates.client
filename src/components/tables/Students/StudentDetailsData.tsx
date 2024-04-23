@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { IHealthGroup } from '@/types/health-group.types'
 import { IPhysicalEducation } from '@/types/physical-education.types'
@@ -58,4 +58,4 @@ const StudentDetailsData: FC<IStudentDetailsDataProps> = ({
 	)
 }
 
-export default StudentDetailsData
+export default memo(StudentDetailsData)

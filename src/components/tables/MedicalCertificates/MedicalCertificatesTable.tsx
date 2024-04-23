@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Filter from '@/components/filters/Filter/Filter.tsx'
@@ -21,7 +21,7 @@ import {
 	useUpdateMedicalCertificate
 } from '@/queries/medical-certificate.queries.ts'
 
-const MedicalCertificatesTable = () => {
+const MedicalCertificatesTable = memo(() => {
 	const navigate = useNavigate()
 	const [filterValue, setFilterValue] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
@@ -53,7 +53,7 @@ const MedicalCertificatesTable = () => {
 		navigate(`${PAGES_URL.MEDICAL_CERTIFICATE_HISTORY}/${id}`)
 	}
 
-	window.history.pushState(null, '', `?sort=${sortOrder}&filter=${filterValue}`)
+	window.history.pushState(null, '', `?sort=${sortOrder}&group=${filterValue}`)
 
 	if (isLoading) return <CustomLoader />
 	return (
@@ -98,6 +98,6 @@ const MedicalCertificatesTable = () => {
 			</div>
 		</div>
 	)
-}
+})
 
 export default MedicalCertificatesTable

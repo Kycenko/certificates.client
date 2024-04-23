@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import PhysicalEducationData from '@/components/tables/PhysicalEducations/PhysicalEducationData.tsx'
@@ -7,7 +7,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypePhysicalEducationForm } from '@/types/physical-education.types.ts'
 
-import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -23,7 +22,7 @@ import {
 	useUpdatePhysicalEducation
 } from '@/queries/physical-education.queries.ts'
 
-const PhysicalEducationComponent = () => {
+const PhysicalEducationComponent = memo(() => {
 	const { physicalEducations, refetch, isLoading } = useGetPhysicalEducations()
 
 	const { closeModal, isOpen, openModal } = useModal()
@@ -69,15 +68,10 @@ const PhysicalEducationComponent = () => {
 		await refetch()
 	}
 
-	if (isLoading)
-		return (
-			<Layout>
-				<CustomLoader />
-			</Layout>
-		)
+	if (isLoading) return <CustomLoader />
 
 	return (
-		<Layout>
+		<>
 			<Heading title='Список групп по физкультуре' />
 			<CustomButton
 				variant='create'
@@ -105,8 +99,8 @@ const PhysicalEducationComponent = () => {
 				/>
 				<ErrorMessage error={errors.name} />
 			</CustomModalForm>
-		</Layout>
+		</>
 	)
-}
+})
 
 export default PhysicalEducationComponent

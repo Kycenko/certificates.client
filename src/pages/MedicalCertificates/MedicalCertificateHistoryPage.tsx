@@ -1,11 +1,8 @@
-import Layout from '@/components/Layout/Layout.tsx'
 import MedicalCertificateHistory from '@/components/tables/MedicalCertificates/MedicalCertificateHistory/MedicalCertificateHistory'
 
+import WithPageLayout from '@/app/hoc/WithPageLayout'
+
 const MedicalCertificateHistoryPage = () => {
-	return (
-		<Layout>
-			<MedicalCertificateHistory />
-		</Layout>
-	)
+	return <MedicalCertificateHistory />
 }
-export default MedicalCertificateHistoryPage
+export default WithPageLayout(MedicalCertificateHistoryPage)

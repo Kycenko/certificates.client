@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, PencilLine, Trash2 } from 'lucide-react'
-import { FC, useEffect } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -21,54 +21,50 @@ interface DepartmentDataProps {
 	onInfo: (id: number | string) => void
 }
 
-const DepartmentData: FC<DepartmentDataProps> = ({
-	data,
-	onDelete,
-	onEdit,
-	onInfo
-}) => {
-	const { setDeleteId, deleteId, editId, setEditId } = useModal()
+const DepartmentData: FC<DepartmentDataProps> = memo(
+	({ data, onDelete, onEdit, onInfo }) => {
+		const { setDeleteId, deleteId, editId, setEditId } = useModal()
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		reset,
-		setFocus
-	} = useForm<TypeDepartmentForm>({
-		mode: 'onChange',
-		resolver: zodResolver(departmentValidationSchema)
-	})
-	useEffect(() => {
-		setFocus('name')
-	})
-	const handleDelete = (id: number | string) => {
-		onDelete(id)
-		setDeleteId(null)
-	}
-	const onSubmit = (id: number | string, data: TypeDepartmentForm) => {
-		onEdit(id, data)
-		setEditId(null)
-		reset()
-	}
+		const {
+			register,
+			handleSubmit,
+			formState: { errors },
+			reset,
+			setFocus
+		} = useForm<TypeDepartmentForm>({
+			mode: 'onChange',
+			resolver: zodResolver(departmentValidationSchema)
+		})
+		useEffect(() => {
+			setFocus('name')
+		})
+		const handleDelete = (id: number | string) => {
+			onDelete(id)
+			setDeleteId(null)
+		}
+		const onSubmit = (id: number | string, data: TypeDepartmentForm) => {
+			onEdit(id, data)
+			setEditId(null)
+			reset()
+		}
 
-	return (
-		<>
-			{!data || data.length === 0 ? (
-				<div className={styles.noData}>Данные не найдены</div>
-			) : (
-				data?.map(({ id, name }) => (
+		if (!data || data.length === 0)
+			return <span className={styles.noData}>Данные не найдены</span>
+
+		return (
+			<>
+				{data?.map(({ id, name }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}
 					>
 						<td className={styles.cellPadding}>
-							<div>
+							<span>
 								<span>{name}</span>
-							</div>
+							</span>
 						</td>
 						<td className={styles.editCellContainer}>
-							<div className={styles.adminEditCell}>
+							<span className={styles.adminEditCell}>
 								<CustomButton
 									onClick={() => setEditId(id)}
 									className={styles.iconBtn}
@@ -87,7 +83,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 								>
 									<Trash2 />
 								</CustomButton>
-							</div>
+							</span>
 						</td>
 						<CustomModalForm
 							onSubmit={handleSubmit(data => onSubmit(id, data))}
@@ -118,10 +114,10 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 							{name}
 						</CustomModalForm>
 					</tr>
-				))
-			)}
-		</>
-	)
-}
+				))}
+			</>
+		)
+	}
+)
 
 export default DepartmentData

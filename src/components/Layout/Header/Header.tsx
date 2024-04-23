@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import ModalDepartmentReport from '@/components/Layout/Header/report-modals/ModalDepartmentReport'
 import ModalGroupReport from '@/components/Layout/Header/report-modals/ModalGroupReport'
@@ -8,7 +8,7 @@ import Dropdown from './DropDown/DropDown'
 import styles from './Header.module.scss'
 import useAuth from '@/lib/hooks/useAuth.ts'
 
-const Header = () => {
+const Header = memo(() => {
 	const { user } = useAuth()
 	const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false)
 	const [isGroupModalOpen, setIsGroupModalOpen] = useState(false)
@@ -57,6 +57,6 @@ const Header = () => {
 			<span>{user?.login}</span>
 		</div>
 	)
-}
+})
 
 export default Header

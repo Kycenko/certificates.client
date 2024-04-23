@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import { History, PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 
 import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
@@ -20,10 +20,9 @@ import useModal from '@/lib/hooks/useModal.ts'
 import daysUntilTheEnd from '@/lib/utils/daysUntilTheEnd.ts'
 import getDaysUntilExpiry from '@/lib/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/lib/utils/getValidityPeriod.ts'
-import { useGetHealthGroups } from '@/queries/health-group.query.ts'
+import { useGetHealthGroups } from '@/queries/health-group.query'
 import { useCreateMedicalCertificateHistory } from '@/queries/medical-certificate-history.queries.ts'
-import { useGetPhysicalEducations } from '@/queries/physical-education.queries.ts'
-import { useGetStudents } from '@/queries/student.queries.ts'
+import { useGetPhysicalEducations } from '@/queries/physical-education.queries'
 
 interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined
@@ -41,7 +40,6 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
-	const { students } = useGetStudents()
 	const { create } = useCreateMedicalCertificateHistory()
 	const studentId = data?.find(id => id.id === editId)?.studentId
 
@@ -91,21 +89,16 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 						id,
 						startDate,
 						finishDate,
-						studentId,
 						healthGroupId,
-						physicalEducationId
+						physicalEducationId,
+						student
 					}) => (
 						<tr
 							className={styles.contentCell}
 							key={id}
 						>
 							<td className={styles.cellPadding}>
-								{students
-									?.filter(({ id }) => id === studentId)
-									.map(
-										({ name, surname, secondName }) =>
-											`${surname} ${name} ${secondName ? secondName : ''}`
-									)}
+								{`${student?.surname} ${student?.name} ${student?.secondName ? student?.secondName : ''}`}
 							</td>
 							<td className={styles.cellPadding}>
 								<span>{format(new Date(startDate), 'dd.MM.yyyy')}</span>
@@ -178,7 +171,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 									defaultValue={healthGroupId}
 									{...register('healthGroupId')}
 								>
-									{physicalEducations?.map(({ id, name }) => (
+									{healthGroups?.map(({ id, name }) => (
 										<option
 											value={id}
 											key={id}
@@ -194,7 +187,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 									defaultValue={physicalEducationId}
 									{...register('physicalEducationId')}
 								>
-									{healthGroups?.map(({ id, name }) => (
+									{physicalEducations?.map(({ id, name }) => (
 										<option
 											value={id}
 											key={id}
@@ -224,4 +217,4 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	)
 }
 
-export default MedicalCertificateData
+export default memo(MedicalCertificateData)

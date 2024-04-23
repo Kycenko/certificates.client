@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -8,7 +8,6 @@ import CustomButton from '@/components/ui/buttons/CustomButton.tsx'
 
 import { TypeGroupForm } from '@/types/group.types.ts'
 
-import Layout from '../../Layout/Layout.tsx'
 import ErrorMessage from '../../ui/fields/ErrorMessage.tsx'
 import Heading from '../../ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '../../ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -23,7 +22,7 @@ import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
 import { useGetCourse } from '@/queries/course.queries.ts'
 import { useCreateGroup } from '@/queries/group.queries.ts'
 
-const CourseDetailsTable = () => {
+const CourseDetailsTable = memo(() => {
 	const { id } = useParams()
 
 	const { course, isLoading, refetch } = useGetCourse(id)
@@ -51,12 +50,7 @@ const CourseDetailsTable = () => {
 		reset()
 	}
 
-	if (isLoading)
-		return (
-			<Layout>
-				<CustomLoader />
-			</Layout>
-		)
+	if (isLoading) return <CustomLoader />
 
 	return (
 		<>
@@ -96,6 +90,5 @@ const CourseDetailsTable = () => {
 			</CustomModalForm>
 		</>
 	)
-}
-
+})
 export default CourseDetailsTable

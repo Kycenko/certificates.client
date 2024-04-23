@@ -18,7 +18,6 @@ import { PAGES_URL } from '@/lib/constants/enums.ts'
 import useAuth from '@/lib/hooks/useAuth.ts'
 import useModal from '@/lib/hooks/useModal.ts'
 import { groupValidationSchema } from '@/lib/validation/validation.schema.ts'
-import { useGetCourses } from '@/queries/course.queries.ts'
 
 interface GroupDataProps {
 	data: IGroup[] | undefined
@@ -30,7 +29,7 @@ interface GroupDataProps {
 const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 	const navigate = useNavigate()
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
-	const { courses } = useGetCourses()
+
 	const { user } = useAuth()
 
 	const {
@@ -69,7 +68,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 			{!data || data.length === 0 ? (
 				<div className={styles.noData}>Данные не найдены</div>
 			) : (
-				data?.map(({ id, name, courseId, students }) => (
+				data?.map(({ id, name, students, course }) => (
 					<>
 						{user?.isAdmin ? (
 							<tr
@@ -80,9 +79,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 									<span>{name}</span>
 								</td>
 								<td className={styles.cellPadding}>
-									{courses
-										?.filter(({ id }) => id === courseId)
-										?.map(({ number }) => `${number}-й курс`)}
+									{`${course?.number}-й курс`}
 								</td>
 								<td className={styles.cellPadding}>{students?.length}</td>
 								<td className={styles.editCellContainer}>
@@ -118,9 +115,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 									<span>{name}</span>
 								</td>
 								<td className={styles.cellPadding}>
-									{courses
-										?.filter(({ id }) => id === courseId)
-										?.map(({ number }) => `${number}-й курс`)}
+									{`${course?.number}-й курс`}
 								</td>
 							</tr>
 						)}
@@ -148,7 +143,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 							<CustomSelect
 								id='courseId'
 								label='Выберите курс'
-								defaultValue={courseId}
+								defaultValue={course.number}
 								{...register('courseId')}
 							>
 								<CourseOptions />

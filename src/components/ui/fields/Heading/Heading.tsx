@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 
 import styles from './Heading.module.scss'
 
@@ -7,7 +7,7 @@ interface IHeading {
 	children?: ReactNode
 }
 
-const Heading = ({ title, children }: IHeading) => {
+const Heading = memo(({ title, children }: IHeading) => {
 	return (
 		<div>
 			<h1 className={styles.heading}>
@@ -18,6 +18,6 @@ const Heading = ({ title, children }: IHeading) => {
 			<div className={styles.underLine} />
 		</div>
 	)
-}
+})
 
 export default Heading
