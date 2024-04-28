@@ -1,5 +1,4 @@
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-
 import instance from '@/shared/api/api.instance.ts'
 import { SERVICE_URL } from '@/shared/constants/enums.ts'
 

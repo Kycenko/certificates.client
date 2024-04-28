@@ -1,10 +1,14 @@
-import Cookies from 'js-cookie'
-
-import { IAuthResponse, ILogin, IRegister } from '@/modules/auth/types/auth.types.ts'
-
+import {
+	saveToStorage,
+	saveTokensToStorage
+} from '@/modules/auth/helpers/auth.helper.ts'
+import {
+	IAuthResponse,
+	ILogin,
+	IRegister
+} from '@/modules/auth/types/auth.types.ts'
 import instance from '@/shared/api/api.instance.ts'
-import { BASE_URL, SERVICE_URL, TOKENS } from '@/shared/constants/enums.ts'
-import { saveToStorage } from '@/modules/auth/helpers/auth.helper.ts'
+import { SERVICE_URL } from '@/shared/constants/enums.ts'
 
 export const AuthService = {
 	async login(data: ILogin) {
@@ -26,12 +30,13 @@ export const AuthService = {
 	},
 
 	async getNewTokens() {
-		const refreshToken = Cookies.get(TOKENS.REFRESH_TOKEN)
 		const response = await instance.post<IAuthResponse>(
-			BASE_URL.BASE_URL + SERVICE_URL.AUTH_ACCESS_TOKEN,
-			{ refreshToken }
+			'/auth/login/access-token'
 		)
-		if (response.data.accessToken) saveToStorage(response.data)
-		return response.data
+
+		if (response.data.accessToken)
+			saveTokensToStorage(response.data.accessToken)
+
+		return response
 	}
 }

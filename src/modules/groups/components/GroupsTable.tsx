@@ -1,11 +1,8 @@
-import { memo, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import GroupsFilters from './GroupsFilters.tsx'
 import { GroupHeads } from './group-heads.ts'
-import styles from '@/app/styles/Tables.module.scss'
 import GroupData from '@/modules/groups/components/GroupData.tsx'
 import {
 	useDeleteGroup,
@@ -13,12 +10,14 @@ import {
 	useUpdateGroup
 } from '@/modules/groups/queries/group.queries.ts'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
+import styles from '@/shared/styles/Tables.module.scss'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
-const GroupsTable = memo(() => {
+const GroupsTable = () => {
 	const navigate = useNavigate()
 	const [searchTerm, setSearchTerm] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
@@ -86,6 +85,6 @@ const GroupsTable = memo(() => {
 			</div>
 		</div>
 	)
-})
+}
 
 export default GroupsTable

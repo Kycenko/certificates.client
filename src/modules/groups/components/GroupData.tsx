@@ -1,22 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Eye, PencilLine, Trash2 } from 'lucide-react'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import useAuth from '@/modules/auth/hooks/useAuth.ts'
+import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
+import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
+import ActionButtons from '@/shared/components/ActionButtons'
+import { PAGES_URL } from '@/shared/constants/enums.ts'
+import useModal from '@/shared/hooks/useModal.ts'
+import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-
-import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-
-import styles from '@/app/styles/Tables.module.scss'
-import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
-import { PAGES_URL } from '@/shared/constants/enums.ts'
-import useAuth from '@/modules/auth/hooks/useAuth.ts'
-import useModal from '@/shared/hooks/useModal.ts'
 import { groupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 interface GroupDataProps {
@@ -65,102 +62,86 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 
 	return (
 		<>
-			{!data || data.length === 0 ? (
-				<div className={styles.noData}>Данные не найдены</div>
-			) : (
-				data?.map(({ id, name, students, course }) => (
-					<>
-						{user?.isAdmin ? (
-							<tr
-								className={styles.contentCell}
-								key={id}
-							>
-								<td className={styles.cellPadding}>
-									<span>{name}</span>
-								</td>
-								<td className={styles.cellPadding}>
-									{`${course?.number}-й курс`}
-								</td>
-								<td className={styles.cellPadding}>{students?.length}</td>
-								<td className={styles.editCellContainer}>
-									<div className={styles.adminEditCell}>
-										<CustomButton
-											className={styles.iconBtn}
-											onClick={() => handleEdit(id)}
-										>
-											<PencilLine />
-										</CustomButton>
-										<CustomButton
-											className={styles.iconBtn}
-											onClick={() => onInfo(id)}
-										>
-											<Eye />
-										</CustomButton>
-										<CustomButton
-											className={styles.iconBtn}
-											onClick={() => setDeleteId(id)}
-										>
-											<Trash2 />
-										</CustomButton>
-									</div>
-								</td>
-							</tr>
-						) : (
-							<tr
-								key={id}
-								onClick={() => navigate(`${PAGES_URL.GROUPS}/${id}`)}
-								className={styles.userEditCell}
-							>
-								<td className={styles.cellPadding}>
-									<span>{name}</span>
-								</td>
-								<td className={styles.cellPadding}>
-									{`${course?.number}-й курс`}
-								</td>
-							</tr>
-						)}
-						<CustomModalForm
-							onSubmit={handleSubmit(data => {
-								const newData = {
-									...data,
-									courseId: Number(data.courseId)
-								}
-								onSubmit(id, newData)
-							})}
-							isOpen={editId === id}
-							onClose={() => setEditId(null)}
-							formTitle='Изменение'
-							buttonTitle='Изменить'
+			{data?.map(({ id, name, students, course }) => (
+				<>
+					{user?.isAdmin ? (
+						<tr
+							className={styles.contentCell}
+							key={id}
 						>
-							<CustomInput
-								id='name'
-								label='Название'
-								defaultValue={name}
-								placeholder={'Введите название'}
-								{...register('name')}
-							/>
-							<ErrorMessage error={errors.name} />
-							<CustomSelect
-								id='courseId'
-								label='Выберите курс'
-								defaultValue={course.number}
-								{...register('courseId')}
-							>
-								<CourseOptions />
-							</CustomSelect>
-						</CustomModalForm>
-						<CustomModalForm
-							onSubmit={() => handleDelete(id)}
-							buttonTitle={'Удалить'}
-							isOpen={deleteId === id}
-							onClose={() => setDeleteId(null)}
-							formTitle={'Удаление'}
+							<td className={styles.cellPadding}>
+								<span>{name}</span>
+							</td>
+							<td className={styles.cellPadding}>
+								{`${course?.number}-й курс`}
+							</td>
+							<td className={styles.cellPadding}>{students?.length}</td>
+							<td className={styles.editCellContainer}>
+								<div className={styles.adminEditCell}>
+									<ActionButtons
+										onEdit={handleEdit}
+										onDelete={() => setDeleteId(id)}
+										actionId={id}
+										onInfo={onInfo}
+									/>
+								</div>
+							</td>
+						</tr>
+					) : (
+						<tr
+							key={id}
+							onClick={() => navigate(`${PAGES_URL.GROUPS}/${id}`)}
+							className={styles.userEditCell}
 						>
-							{name}
-						</CustomModalForm>
-					</>
-				))
-			)}
+							<td className={styles.cellPadding}>
+								<span>{name}</span>
+							</td>
+							<td className={styles.cellPadding}>
+								{`${course?.number}-й курс`}
+							</td>
+						</tr>
+					)}
+					<CustomModalForm
+						onSubmit={handleSubmit(data => {
+							const newData = {
+								...data,
+								courseId: Number(data.courseId)
+							}
+							onSubmit(id, newData)
+						})}
+						isOpen={editId === id}
+						onClose={() => setEditId(null)}
+						formTitle='Изменение'
+						buttonTitle='Изменить'
+					>
+						<CustomInput
+							id='name'
+							label='Название'
+							defaultValue={name}
+							placeholder={'Введите название'}
+							{...register('name')}
+						/>
+						<ErrorMessage error={errors.name} />
+						<CustomSelect
+							id='courseId'
+							label='Выберите курс'
+							defaultValue={course.number}
+							{...register('courseId')}
+						>
+							<CourseOptions />
+						</CustomSelect>
+					</CustomModalForm>
+					<CustomModalForm
+						onSubmit={() => handleDelete(id)}
+						buttonTitle={'Удалить'}
+						isOpen={deleteId === id}
+						onClose={() => setDeleteId(null)}
+						formTitle={'Удаление'}
+					>
+						{name}
+					</CustomModalForm>
+				</>
+			))}
 		</>
 	)
 }

@@ -1,20 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { PencilLine, Trash2 } from 'lucide-react'
 import { FC, memo, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
-import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
-import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 
 import {
 	IPhysicalEducation,
 	TypePhysicalEducationForm
 } from '@/modules/physical-educations/types/physical-education.types.ts'
-
-import styles from '@/app/styles/Cards.module.scss'
+import ActionButtons from '@/shared/components/ActionButtons'
 import useModal from '@/shared/hooks/useModal.ts'
+import styles from '@/shared/styles/Cards.module.scss'
+import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import { physicalEducationValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 interface PhysicalEducationDataProps {
@@ -55,19 +52,11 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = memo(
 					>
 						<h2 className={styles.title}>{name}</h2>
 						<div className={styles.buttons}>
-							<CustomButton
-								className={styles.iconBtn}
-								onClick={() => setEditId(id)}
-							>
-								<PencilLine />
-							</CustomButton>
-
-							<CustomButton
-								className={styles.iconBtn}
-								onClick={() => setDeleteId(id)}
-							>
-								<Trash2 />
-							</CustomButton>
+							<ActionButtons
+								actionId={id}
+								onEdit={() => setEditId(id)}
+								onDelete={() => setDeleteId(id)}
+							/>
 						</div>
 						<CustomModalForm
 							onSubmit={() => onDelete(id)}

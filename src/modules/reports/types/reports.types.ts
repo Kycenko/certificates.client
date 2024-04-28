@@ -1,7 +1,8 @@
+import { IStudent } from '../../students/types/student.types.ts'
+
 import { ICourse } from '@/modules/courses/types/course.types.ts'
 import { IGroup } from '@/modules/groups/types/group.types.ts'
 import { IMedicalCertificate } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
-import { IStudent } from '../../students/types/student.types.ts'
 
 export interface IDepartmentReport {
 	id: number

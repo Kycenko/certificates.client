@@ -1,6 +1,6 @@
 import { ComponentType } from 'react'
 
-import Layout from '@/app/Layout/Layout.tsx'
+import Layout from '@/shared/components/Layout/Layout.tsx'
 
 const WithPageLayout = (WrappedComponent: ComponentType) => {
 	return (props: any) => (

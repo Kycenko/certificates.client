@@ -1,13 +1,13 @@
 import { format } from 'date-fns'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
+import styles from '@/shared/styles/Tables.module.scss'
 import { IStudentHistory } from '@/modules/students/types/student-history.types.ts'
-
-import styles from '@/app/styles/Tables.module.scss'
 
 interface StudentHistoryDataProps {
 	data: IStudentHistory[] | undefined
 }
+
 const StudentHistoryData: FC<StudentHistoryDataProps> = ({ data }) => {
 	return (
 		<>
@@ -26,4 +26,4 @@ const StudentHistoryData: FC<StudentHistoryDataProps> = ({ data }) => {
 	)
 }
 
-export default memo(StudentHistoryData)
+export default StudentHistoryData

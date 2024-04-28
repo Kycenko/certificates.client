@@ -4,25 +4,23 @@ import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import DetailsTableHeads from '@/components/tablesHeads/DetailsTableHeads.tsx'
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
 
+import GroupDetailsData from './GroupDetailsData.tsx'
+import { DetailsGroupHeads } from './group-heads.ts'
+import styles from '@/shared/styles/DetailsTables.module.scss'
+import useAuth from '@/modules/auth/hooks/useAuth.ts'
+import { useGetGroup } from '@/modules/groups/queries/group.queries.ts'
+import { useCreateStudent } from '@/modules/students/queries/student.queries.ts'
 import { TypeStudentForm } from '@/modules/students/types/student.types.ts'
-
+import useModal from '@/shared/hooks/useModal.ts'
+import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-
-import GroupDetailsData from './GroupDetailsData.tsx'
-import { DetailsGroupHeads } from './group-heads.ts'
-import styles from '@/app/styles/DetailsTables.module.scss'
-import useAuth from '@/modules/auth/hooks/useAuth.ts'
-import useModal from '@/shared/hooks/useModal.ts'
 import { studentValidationSchema } from '@/shared/validation/validation.schema.ts'
-import { useGetGroup } from '@/modules/groups/queries/group.queries.ts'
-import { useCreateStudent } from '@/modules/students/queries/student.queries.ts'
 
 const GroupDetailsTable = memo(() => {
 	const { id } = useParams()

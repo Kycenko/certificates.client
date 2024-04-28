@@ -1,11 +1,17 @@
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
-import { IHealthGroup, TypeHealthGroupForm } from '@/modules/health-groups/types/health-group.types.ts'
-
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
-import { createToast, deleteToast, editToast } from '@/shared/constants/toasts.ts'
 import { HealthGroupService } from '@/modules/health-groups/services/health-group.service.ts'
+import {
+	IHealthGroup,
+	TypeHealthGroupForm
+} from '@/modules/health-groups/types/health-group.types.ts'
+import { QUERY_KEYS } from '@/shared/constants/enums.ts'
+import {
+	createToast,
+	deleteToast,
+	editToast
+} from '@/shared/constants/toasts.ts'
 
 export function useCreateHealthGroup() {
 	const queryClient = new QueryClient()

@@ -1,13 +1,13 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
-import styles from '@/app/styles/Tables.module.scss'
+import styles from '@/shared/styles/Tables.module.scss'
 
 interface TableHeadsProps {
 	className?: string
 	data: string[]
 }
 
-const TableHeads: FC<TableHeadsProps> = memo(({ className, data }) => {
+const TableHeads: FC<TableHeadsProps> = ({ className, data }) => {
 	return (
 		<tr className={styles.heads}>
 			{data?.map(head => (
@@ -20,6 +20,6 @@ const TableHeads: FC<TableHeadsProps> = memo(({ className, data }) => {
 			))}
 		</tr>
 	)
-})
+}
 
 export default TableHeads

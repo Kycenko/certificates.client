@@ -31,7 +31,7 @@ const CustomButton = memo(
 				<button
 					className={cn(
 						buttonStyles,
-						className ? className : 'btn bg-primary text-white'
+						className ? className : 'btn bg-primary text-white px-6'
 					)}
 					{...rest}
 				>

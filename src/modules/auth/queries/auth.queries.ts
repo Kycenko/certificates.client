@@ -1,12 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
-import { ILogin, IRegister } from '@/modules/auth/types/auth.types.ts'
-
-import { SERVICE_URL } from '@/shared/constants/enums.ts'
-import { authToast, createToast } from '@/shared/constants/toasts.ts'
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
 import { AuthService } from '@/modules/auth/services/auth.service.ts'
+import { ILogin, IRegister } from '@/modules/auth/types/auth.types.ts'
+import { SERVICE_URL } from '@/shared/constants/enums.ts'
+import { authToast, createToast } from '@/shared/constants/toasts.ts'
 
 export const useLogin = () => {
 	const navigate = useNavigate()

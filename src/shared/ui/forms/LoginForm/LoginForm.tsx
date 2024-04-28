@@ -3,14 +3,12 @@ import { Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import styles from './LoginForm.module.scss'
+import { useLogin } from '@/modules/auth/queries/auth.queries.ts'
 import { ILogin } from '@/modules/auth/types/auth.types.ts'
-
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
-
-import styles from './LoginForm.module.scss'
 import { loginValidationSchema } from '@/shared/validation/validation.schema.ts'
-import { useLogin } from '@/modules/auth/queries/auth.queries.ts'
 
 const LoginForm = () => {
 	const {
@@ -66,7 +64,7 @@ const LoginForm = () => {
 						</button>
 					</div>
 					<ErrorMessage error={errors.password} />
-					{loginError && <p>{loginError}</p>}
+					{loginError && <p className={'text-red-500'}>{loginError}</p>}
 					<div className={styles.btnContainer}>
 						<button
 							className={styles.loginBtn}

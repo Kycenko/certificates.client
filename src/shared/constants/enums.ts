@@ -35,8 +35,8 @@ export const enum SERVICE_URL {
 }
 
 export const enum TOKENS {
-	ACCESS_TOKEN = 'access-token',
-	REFRESH_TOKEN = 'refresh-token'
+	ACCESS_TOKEN = 'accessToken',
+	REFRESH_TOKEN = 'refreshToken'
 }
 
 export const enum LOCAL_STORAGE_KEY {

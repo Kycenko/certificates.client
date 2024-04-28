@@ -1,10 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { Eye, History, PencilLine, Trash2 } from 'lucide-react'
 import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 
-import styles from '@/app/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 import { useCreateStudentHistory } from '@/modules/students/queries/student-history.queries.ts'
 import { TypeStudentHistoryForm } from '@/modules/students/types/student-history.types.ts'
@@ -12,8 +10,9 @@ import {
 	IStudent,
 	TypeStudentForm
 } from '@/modules/students/types/student.types.ts'
+import ActionButtons from '@/shared/components/ActionButtons'
 import useModal from '@/shared/hooks/useModal.ts'
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
@@ -107,44 +106,31 @@ const StudentData: FC<StudentDataProps> = ({
 								{medicalCertificates?.length}
 							</td>
 							<td className={styles.cellPadding}>
-								{isExpelled === true ? 'Да' : 'Нет'}
+								{isExpelled === true ? (
+									<div className='badge bg-red-300'>Да</div>
+								) : (
+									<div className='badge bg-green-300'>Нет</div>
+								)}
 							</td>
 
 							<td className={styles.editCellContainer}>
 								<div className={styles.adminEditCell}>
-									<CustomButton
-										className={styles.iconBtn}
-										onClick={() => onHistory(id)}
-									>
-										<History />
-									</CustomButton>
-									<CustomButton
-										className={styles.iconBtn}
-										onClick={() => {
-											setEditId(id)
-											reset()
-										}}
-									>
-										<PencilLine />
-									</CustomButton>
-									<CustomButton
-										className={styles.iconBtn}
-										onClick={() => onInfo(id)}
-									>
-										<Eye />
-									</CustomButton>
-									<CustomButton
-										className={styles.iconBtn}
-										onClick={() => setDeleteId(id)}
-									>
-										<Trash2 />
-									</CustomButton>
+									<ActionButtons
+										actionId={id}
+										onEdit={() => setEditId(id)}
+										onDelete={() => setDeleteId(id)}
+										onHistory={() => onHistory(id)}
+										onInfo={() => onInfo(id)}
+									/>
 								</div>
 							</td>
 							<CustomModalForm
 								onSubmit={handleSubmit(data => onSubmit(id, data))}
 								isOpen={editId === id}
-								onClose={() => setEditId(null)}
+								onClose={() => {
+									setEditId(null)
+									reset()
+								}}
 								formTitle='Изменение'
 								buttonTitle='Изменить'
 							>

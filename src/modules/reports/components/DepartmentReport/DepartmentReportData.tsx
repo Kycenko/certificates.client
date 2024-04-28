@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 import { FC, memo } from 'react'
 
 import { IDepartmentReport } from '@/modules/reports/types/reports.types.ts'
-
 import formatFullName from '@/shared/utils/formatFullName.ts'
 
 interface DepartmentReportDataProps {

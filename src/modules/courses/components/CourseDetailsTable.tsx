@@ -3,9 +3,9 @@ import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import DetailsTableHeads from '@/components/tablesHeads/DetailsTableHeads.tsx'
+import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
 
-import styles from '@/app/styles/DetailsTables.module.scss'
+import styles from '@/shared/styles/DetailsTables.module.scss'
 import CourseDetailsData from '@/modules/courses/components/CourseDetailsData.tsx'
 import { DetailsCourseHeads } from '@/modules/courses/components/course-heads.ts'
 import { useGetCourse } from '@/modules/courses/queries/course.queries.ts'

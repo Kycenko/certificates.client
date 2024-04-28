@@ -1,14 +1,11 @@
-import { LoaderIcon } from 'lucide-react'
-import { memo } from 'react'
-
 import styles from './CustomLoader.module.scss'
 
-const CustomLoader = memo(() => {
+const CustomLoader = () => {
 	return (
 		<div className={styles.container}>
-			<LoaderIcon className={styles.loader} />
+			<span className={styles.loader}></span>
 		</div>
 	)
-})
+}
 
 export default CustomLoader

@@ -1,14 +1,17 @@
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
+import { PhysicalEducationService } from '@/modules/physical-educations/services/physical-education.service.ts'
 import {
 	IPhysicalEducation,
 	TypePhysicalEducationForm
 } from '@/modules/physical-educations/types/physical-education.types.ts'
-
 import { QUERY_KEYS } from '@/shared/constants/enums.ts'
-import { createToast, deleteToast, editToast } from '@/shared/constants/toasts.ts'
-import { PhysicalEducationService } from '@/modules/physical-educations/services/physical-education.service.ts'
+import {
+	createToast,
+	deleteToast,
+	editToast
+} from '@/shared/constants/toasts.ts'
 
 export const useCreatePhysicalEducation = () => {
 	const queryClient = new QueryClient()

@@ -1,14 +1,13 @@
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
+import { MedicalCertificateHistoryService } from '@/modules/medical-certificates/services/medical-certificate-history.service.ts'
 import {
 	IMedicalCertificateHistory,
 	TypeMedicalCertificateHistoryForm
 } from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
-
 import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { deleteToast } from '@/shared/constants/toasts.ts'
-import { MedicalCertificateHistoryService } from '@/modules/medical-certificates/services/medical-certificate-history.service.ts'
 
 export const useCreateMedicalCertificateHistory = () => {
 	const queryClient = new QueryClient()

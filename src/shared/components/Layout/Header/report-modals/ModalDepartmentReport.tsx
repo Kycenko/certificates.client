@@ -2,10 +2,9 @@ import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { useGetDepartments } from '@/modules/departments/queries/department.queries.ts'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-
-import { useGetDepartments } from '@/modules/departments/queries/department.queries.ts'
 
 interface FormState {
 	departmentId: string | undefined

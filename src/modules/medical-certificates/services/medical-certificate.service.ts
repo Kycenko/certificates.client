@@ -2,7 +2,6 @@ import {
 	IMedicalCertificate,
 	TypeMedicalCertificateForm
 } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
-
 import instance from '@/shared/api/api.instance.ts'
 import { SERVICE_URL } from '@/shared/constants/enums.ts'
 

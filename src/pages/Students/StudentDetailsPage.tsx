@@ -1,6 +1,5 @@
+import WithPageLayout from '@/shared/hoc/WithPageLayout'
 import StudentDetailsTable from '@/modules/students/components/StudentDetailsTable.tsx'
-
-import WithPageLayout from '@/app/hoc/WithPageLayout'
 
 const StudentDetailsPage = () => {
 	return <StudentDetailsTable />

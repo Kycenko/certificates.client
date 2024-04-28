@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-import styles from '@/app/styles/DetailsTables.module.scss'
+import styles from '@/shared/styles/DetailsTables.module.scss'
 
 const DetailsTableHeads = memo(({ data }: { data: string[] }) => {
 	return (

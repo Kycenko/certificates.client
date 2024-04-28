@@ -2,16 +2,17 @@ import { Eye, PencilLine, Trash2 } from 'lucide-react'
 import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 
+import styles from '@/shared/styles/Tables.module.scss'
+import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
+import {
+	ICourse,
+	TypeCourseForm
+} from '@/modules/courses/types/course.types.ts'
+import useModal from '@/shared/hooks/useModal.ts'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-
-import { ICourse, TypeCourseForm } from '@/modules/courses/types/course.types.ts'
-
-import styles from '@/app/styles/Tables.module.scss'
-import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
-import useModal from '@/shared/hooks/useModal.ts'
 
 interface CourseDataProps {
 	data: ICourse[] | undefined
@@ -47,12 +48,9 @@ const CourseData: FC<CourseDataProps> = memo(
 			reset()
 		}
 
-		if (!data || data.length === 0)
-			return <div className={styles.noData}> Данные не найдены</div>
-
 		return (
 			<>
-				{data.map(({ id, number, groups, department }) => (
+				{data?.map(({ id, number, groups, department }) => (
 					<tr
 						className={styles.contentCell}
 						key={id}

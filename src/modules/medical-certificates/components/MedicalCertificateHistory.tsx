@@ -1,14 +1,13 @@
 import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
-import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
-
-import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
-import { CertificateHistoryHeads } from '@/modules/medical-certificates/components/certificates-heads.ts'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 
 import MedicalCertificateHistoryData from './MedicalCertificateHistoryData.tsx'
-import styles from '@/app/styles/Tables.module.scss'
+import styles from '@/shared/styles/Tables.module.scss'
+import { CertificateHistoryHeads } from '@/modules/medical-certificates/components/certificates-heads.ts'
 import { useGetMedicalCertificateHistories } from '@/modules/medical-certificates/queries/medical-certificate-history.queries.ts'
+import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 
 const MedicalCertificateHistory = memo(() => {
 	const { id } = useParams()

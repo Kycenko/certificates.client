@@ -3,26 +3,24 @@ import { History, PencilLine, Trash2 } from 'lucide-react'
 import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
-import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
-import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
-import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-
+import styles from '@/shared/styles/Tables.module.scss'
+import { useGetHealthGroups } from '@/modules/health-groups/queries/health-group.query.ts'
+import { useCreateMedicalCertificateHistory } from '@/modules/medical-certificates/queries/medical-certificate-history.queries.ts'
 import { TypeMedicalCertificateHistoryForm } from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
 import {
 	IMedicalCertificate,
 	TypeMedicalCertificateForm
 } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
-
-import styles from '@/app/styles/Tables.module.scss'
+import { useGetPhysicalEducations } from '@/modules/physical-educations/queries/physical-education.queries.ts'
 import useModal from '@/shared/hooks/useModal.ts'
+import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
+import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 import daysUntilTheEnd from '@/shared/utils/daysUntilTheEnd.ts'
 import getDaysUntilExpiry from '@/shared/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/shared/utils/getValidityPeriod.ts'
-import { useGetHealthGroups } from '@/modules/health-groups/queries/health-group.query.ts'
-import { useCreateMedicalCertificateHistory } from '@/modules/medical-certificates/queries/medical-certificate-history.queries.ts'
-import { useGetPhysicalEducations } from '@/modules/physical-educations/queries/physical-education.queries.ts'
 
 interface MedicalCertificateDataProps {
 	data: IMedicalCertificate[] | undefined

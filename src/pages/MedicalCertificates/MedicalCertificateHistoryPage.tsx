@@ -1,6 +1,5 @@
+import WithPageLayout from '@/shared/hoc/WithPageLayout'
 import MedicalCertificateHistory from '@/modules/medical-certificates/components/MedicalCertificateHistory.tsx'
-
-import WithPageLayout from '@/app/hoc/WithPageLayout'
 
 const MedicalCertificateHistoryPage = () => {
 	return <MedicalCertificateHistory />

@@ -1,11 +1,8 @@
 import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
-
 import StudentsFilters from './StudentsFilters.tsx'
 import { StudentHeads } from './student-heads.ts'
-import styles from '@/app/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 import StudentData from '@/modules/students/components/StudentData.tsx'
 import {
@@ -17,9 +14,11 @@ import {
 	IStudent,
 	TypeStudentForm
 } from '@/modules/students/types/student.types.ts'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
+import styles from '@/shared/styles/Tables.module.scss'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const StudentsTable = () => {

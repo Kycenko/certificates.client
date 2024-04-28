@@ -2,22 +2,21 @@ import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import UserData from '@/modules/users/components/UserData.tsx'
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
-import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
-
+import { useRegister } from '@/modules/auth/queries/auth.queries.ts'
 import { IRegister } from '@/modules/auth/types/auth.types.ts'
-
-import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
-import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
-import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
-import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-
+import UserData from '@/modules/users/components/UserData.tsx'
+import {
+	useDeleteUser,
+	useGetUsers
+} from '@/modules/users/queries/user.queries.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
-import { useRegister } from '@/modules/auth/queries/auth.queries.ts'
-import { useDeleteUser, useGetUsers } from '@/modules/users/queries/user.queries.ts'
+import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
+import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
+import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const UserComponent = () => {
 	const navigate = useNavigate()
@@ -53,16 +52,16 @@ const UserComponent = () => {
 	if (isLoading) return <CustomLoader />
 
 	return (
-		<>
-			<Heading title='Список пользователей' />
-
-			<CustomButton
-				variant='create'
-				onClick={openModal}
-			>
-				Добавить пользователя
-			</CustomButton>
-
+		<div className='w-full'>
+			<div className='flex justify-between p-2'>
+				<h1 className='mt-5 text-2xl font-bold'>Список пользователей</h1>
+				<CustomButton
+					variant='create'
+					onClick={openModal}
+				>
+					Добавить пользователя
+				</CustomButton>
+			</div>
 			<UserData
 				data={users}
 				onDelete={handleDelete}
@@ -105,7 +104,7 @@ const UserComponent = () => {
 					{...register('isAdmin')}
 				/>
 			</CustomModalForm>
-		</>
+		</div>
 	)
 }
 

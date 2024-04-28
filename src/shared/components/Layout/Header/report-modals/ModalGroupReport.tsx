@@ -2,10 +2,9 @@ import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-
-import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 
 interface FormState {
 	groupId: string | undefined

@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
-import Filter from '@/components/filters/Filter/Filter'
-import SortOrder from '@/components/filters/SortOrder/SortOrder'
+import Filter from '@/shared/components/filters/Filter/Filter'
+import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
 
 import { IDepartment } from '@/modules/departments/types/department.types'
 

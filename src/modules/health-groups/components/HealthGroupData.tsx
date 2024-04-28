@@ -3,18 +3,16 @@ import { PencilLine, Trash2 } from 'lucide-react'
 import { FC, memo, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
-import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
-import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
-
+import styles from '@/shared/styles/Cards.module.scss'
 import {
 	IHealthGroup,
 	TypeHealthGroupForm
 } from '@/modules/health-groups/types/health-group.types.ts'
-
-import styles from '@/app/styles/Cards.module.scss'
 import useModal from '@/shared/hooks/useModal.ts'
+import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import { healthGroupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 interface HealthGroupProps {

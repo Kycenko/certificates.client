@@ -16,11 +16,13 @@ const Dropdown: FC<PropsWithChildren> = memo(({ children }) => {
 	return (
 		<div
 			ref={dropdownRef}
-			className={styles.container}
+			// className={styles.container}
+			className='dropdown '
 		>
 			<button
 				type='button'
-				className={styles.button}
+				// className={styles.button}
+				className='btn m-1 bg-base-200'
 				onClick={toggleDropdown}
 			>
 				<span>Отчеты</span>
@@ -29,7 +31,13 @@ const Dropdown: FC<PropsWithChildren> = memo(({ children }) => {
 
 			{isOpen && (
 				<div className={styles.open}>
-					<ul onClick={closeDropdown}>{children}</ul>
+					<ul
+						tabIndex={0}
+						onClick={closeDropdown}
+						className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-80'
+					>
+						{children}
+					</ul>
 				</div>
 			)}
 		</div>

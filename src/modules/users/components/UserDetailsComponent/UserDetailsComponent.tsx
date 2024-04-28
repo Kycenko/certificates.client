@@ -2,20 +2,20 @@ import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
-
+import styles from './UserDetailsComponent.module.scss'
+import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
+import useUserInitialData from '@/modules/users/components/useUserInitialData.tsx'
+import {
+	useGetUser,
+	useUpdateUser
+} from '@/modules/users/queries/user.queries.ts'
 import { TypeUserForm } from '@/modules/users/types/user.types.ts'
-
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
+import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-import useUserInitialData from '@/modules/users/components/useUserInitialData.tsx'
-
-import styles from './UserDetailsComponent.module.scss'
-import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
-import { useGetUser, useUpdateUser } from '@/modules/users/queries/user.queries.ts'
 
 const UserDetailsComponent = () => {
 	const { id } = useParams()

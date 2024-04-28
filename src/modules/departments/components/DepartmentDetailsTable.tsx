@@ -2,24 +2,22 @@ import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import DetailsTableHeads from '@/components/tablesHeads/DetailsTableHeads.tsx'
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
 
+import Layout from '@/shared/components/Layout/Layout.tsx'
+import styles from '@/shared/styles/DetailsTables.module.scss'
+import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
+import { useCreateCourse } from '@/modules/courses/queries/course.queries.ts'
 import { TypeCourseForm } from '@/modules/courses/types/course.types.ts'
-
-import Layout from '@/app/Layout/Layout.tsx'
+import DepartmentDetailsData from '@/modules/departments/components/DepartmentDetailsData.tsx'
+import { DetailsDepartmentHeads } from '@/modules/departments/components/department-heads.ts'
+import { useGetDepartment } from '@/modules/departments/queries/department.queries.ts'
+import useModal from '@/shared/hooks/useModal.ts'
+import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-
-import DepartmentDetailsData from '@/modules/departments/components/DepartmentDetailsData.tsx'
-import { DetailsDepartmentHeads } from '@/modules/departments/components/department-heads.ts'
-import styles from '@/app/styles/DetailsTables.module.scss'
-import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
-import useModal from '@/shared/hooks/useModal.ts'
-import { useCreateCourse } from '@/modules/courses/queries/course.queries.ts'
-import { useGetDepartment } from '@/modules/departments/queries/department.queries.ts'
 
 const DepartmentDetailsTable = memo(() => {
 	const { id } = useParams()

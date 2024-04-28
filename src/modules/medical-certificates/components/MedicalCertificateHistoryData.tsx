@@ -1,9 +1,8 @@
 import { format } from 'date-fns'
 import { FC, memo } from 'react'
 
+import styles from '@/shared/styles/Tables.module.scss'
 import { IMedicalCertificateHistory } from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
-
-import styles from '@/app/styles/Tables.module.scss'
 
 interface MedicalCertificateHistoryDataProps {
 	data: IMedicalCertificateHistory[] | undefined

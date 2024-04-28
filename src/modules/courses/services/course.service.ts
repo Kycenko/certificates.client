@@ -1,5 +1,7 @@
-import { ICourse, TypeCourseForm } from '@/modules/courses/types/course.types.ts'
-
+import {
+	ICourse,
+	TypeCourseForm
+} from '@/modules/courses/types/course.types.ts'
 import instance from '@/shared/api/api.instance.ts'
 import { SERVICE_URL } from '@/shared/constants/enums.ts'
 

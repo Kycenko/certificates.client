@@ -3,10 +3,10 @@ import { memo, useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 
 import DepartmentsFilters from './DepartmentsFilters'
-import styles from '@/app/styles/Tables.module.scss'
+import styles from '@/shared/styles/Tables.module.scss'
 import DepartmentData from '@/modules/departments/components/DepartmentData.tsx'
 import { DepartmentHeads } from '@/modules/departments/components/department-heads.ts'
 import {

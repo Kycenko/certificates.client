@@ -1,7 +1,6 @@
+import WithPageLayout from '@/shared/hoc/WithPageLayout'
 import StudentsTable from '@/modules/students/components/StudentsTable.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading'
-
-import WithPageLayout from '@/app/hoc/WithPageLayout'
 
 const StudentsPage = () => {
 	return (

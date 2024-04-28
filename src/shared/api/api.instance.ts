@@ -1,9 +1,12 @@
 import axios from 'axios'
 
 import errorCatch from './api.error.ts'
-import { BASE_URL } from '@/shared/constants/enums.ts'
-import { getAccessToken, removeFromStorage } from '@/modules/auth/helpers/auth.helper.ts'
+import {
+	getAccessToken,
+	removeFromStorage
+} from '@/modules/auth/helpers/auth.helper.ts'
 import { AuthService } from '@/modules/auth/services/auth.service.ts'
+import { BASE_URL } from '@/shared/constants/enums.ts'
 
 export const instance = axios.create({
 	baseURL: BASE_URL.BASE_URL,
@@ -11,12 +14,15 @@ export const instance = axios.create({
 })
 instance.interceptors.request.use(async config => {
 	const accessToken = await getAccessToken()
-	if (config.headers && accessToken) {
+
+	if (config?.headers && accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`
 	}
 
 	return config
 })
+
+let retryCount = 0
 
 instance.interceptors.response.use(
 	config => config,
@@ -28,9 +34,11 @@ instance.interceptors.response.use(
 				errorCatch(error) === 'jwt expired ' ||
 				errorCatch(error) === 'jwt must be provided') &&
 			error.config &&
-			!error.config._isRetry
+			!error.config._isRetry &&
+			retryCount < 2
 		) {
 			originalRequest._isRetry = true
+			retryCount += 1
 
 			try {
 				await AuthService.getNewTokens()

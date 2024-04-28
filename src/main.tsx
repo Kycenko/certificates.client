@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './app/App'
 import AuthProvider from './app/providers/AuthProvider'
 import FiltersProvider from './app/providers/FiltersProvider'
-import '@/app/styles/index.scss'
+import '@/app/index.scss'
 
 const queryClient = new QueryClient({
 	defaultOptions: {

@@ -1,12 +1,11 @@
 import { memo, useState } from 'react'
 
-import ModalDepartmentReport from '@/app/Layout/Header/report-modals/ModalDepartmentReport.tsx'
-import ModalGroupReport from '@/app/Layout/Header/report-modals/ModalGroupReport.tsx'
-import ModalHealthReport from '@/app/Layout/Header/report-modals/ModalHealthReport.tsx'
-
-import Dropdown from '@/app/Layout/Header/DropDown/DropDown.tsx'
-import styles from '@/app/Layout/Header/Header.module.scss'
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
+import Dropdown from '@/shared/components/Layout/Header/DropDown/DropDown.tsx'
+import styles from '@/shared/components/Layout/Header/Header.module.scss'
+import ModalDepartmentReport from '@/shared/components/Layout/Header/report-modals/ModalDepartmentReport.tsx'
+import ModalGroupReport from '@/shared/components/Layout/Header/report-modals/ModalGroupReport.tsx'
+import ModalHealthReport from '@/shared/components/Layout/Header/report-modals/ModalHealthReport.tsx'
 
 const Header = memo(() => {
 	const { user } = useAuth()
@@ -52,11 +51,10 @@ const Header = memo(() => {
 				onClose={() => setIsHealthModalOpen(false)}
 			/>
 		</div>
-	) : (
-		<div className={styles.userContainer}>
-			<span>{user?.login}</span>
-		</div>
-	)
+	) : null
+	// <div className={styles.userContainer}>
+	// 	<span>{user?.login}</span>
+	// </div>
 })
 
 export default Header

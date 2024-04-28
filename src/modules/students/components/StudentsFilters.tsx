@@ -1,8 +1,8 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
-import Filter from '@/components/filters/Filter/Filter'
-import Search from '@/components/filters/Search/Search'
-import SortOrder from '@/components/filters/SortOrder/SortOrder'
+import Filter from '@/shared/components/filters/Filter/Filter'
+import Search from '@/shared/components/filters/Search/Search'
+import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
 
 import { IGroup } from '@/modules/groups/types/group.types'
 

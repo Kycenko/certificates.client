@@ -1,11 +1,11 @@
 import { memo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 
 import MedicalCertificatesFilters from './MedicalCertificatesFilters.tsx'
 import { CertificatesHeads } from './certificates-heads.ts'
-import styles from '@/app/styles/Tables.module.scss'
+import styles from '@/shared/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 import MedicalCertificateData from '@/modules/medical-certificates/components/MedicalCertificateData.tsx'
 import {

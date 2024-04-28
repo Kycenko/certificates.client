@@ -1,7 +1,6 @@
 import { FC, memo } from 'react'
 
 import { IHealthReport } from '@/modules/reports/types/reports.types.ts'
-
 import formatFullName from '@/shared/utils/formatFullName.ts'
 
 interface HealthReportData {

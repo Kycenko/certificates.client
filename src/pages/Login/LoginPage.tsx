@@ -1,6 +1,5 @@
-import LoginForm from '@/shared/ui/forms/LoginForm/LoginForm'
-
 import styles from './LoginPage.module.scss'
+import LoginForm from '@/shared/ui/forms/LoginForm/LoginForm'
 
 const LoginPage = () => {
 	return (

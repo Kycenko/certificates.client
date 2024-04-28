@@ -1,11 +1,11 @@
 import { memo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 
 import HealthReportData from './HealthReportData.tsx'
 import { HealthReportHeads } from './health-report-heads.ts'
-import styles from '@/app/styles/Tables.module.scss'
+import styles from '@/shared/styles/Tables.module.scss'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import ReportHeader from '@/modules/reports/components/ReportHeader.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'

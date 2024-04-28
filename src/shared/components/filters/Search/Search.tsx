@@ -6,6 +6,7 @@ import {
 	memo,
 	useCallback,
 	useEffect,
+	useRef,
 	useState
 } from 'react'
 
@@ -21,7 +22,7 @@ interface SearchProps {
 const Search: FC<SearchProps> = memo(
 	({ searchTerm, setSearchTerm, placeholder }) => {
 		const [inputValue, setInputValue] = useState(searchTerm)
-
+		const inputRef = useRef<HTMLInputElement>(null)
 		const handleSearchChange = useCallback(
 			(e: ChangeEvent<HTMLInputElement>) => {
 				setInputValue(e.target.value)
@@ -34,15 +35,32 @@ const Search: FC<SearchProps> = memo(
 			setSearchTerm(debouncedValue)
 		}, [debouncedValue, setSearchTerm])
 
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key.toLowerCase() === 'f') {
+				e.preventDefault()
+				inputRef.current?.focus()
+			}
+		}
+
+		useEffect(() => {
+			window.addEventListener('keydown', handleKeyDown)
+
+			return () => {
+				window.removeEventListener('keydown', handleKeyDown)
+			}
+		}, [handleKeyDown])
+
 		return (
 			<div className={styles.container}>
 				<label className='input input-bordered flex items-center gap-2'>
 					<input
+						ref={inputRef}
 						className={styles.input}
 						value={inputValue}
 						placeholder={placeholder ? placeholder : 'Поиск...'}
 						onChange={handleSearchChange}
 					/>
+					<kbd className='kbd'>F</kbd>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						viewBox='0 0 16 16'

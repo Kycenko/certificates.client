@@ -1,9 +1,8 @@
 import { FC, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import styles from '@/shared/styles/DetailsTables.module.scss'
 import { IDepartment } from '@/modules/departments/types/department.types.ts'
-
-import styles from '@/app/styles/DetailsTables.module.scss'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 
 interface DepartmentDetailsDataProps {

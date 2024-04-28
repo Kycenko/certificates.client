@@ -1,7 +1,7 @@
 .container {
-	@apply flex justify-end items-center;
+	@apply fixed inset-0 z-50 flex justify-center items-center  bg-opacity-50;
 }
 
 .loader {
-	@apply animate-spin h-8 w-8 text-black;
+	@apply loading loading-infinity loading-lg text-secondary;
 }

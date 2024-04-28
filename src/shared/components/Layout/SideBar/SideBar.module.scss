@@ -1,0 +1,11 @@
+.main {
+	@apply flex flex-col justify-between h-screen w-full fixed z-50 top-0 left-0 max-w-[270px]  rounded-lg border-r p-4 shadow-xl;
+}
+
+.link {
+	@apply flex items-center p-3 rounded-lg outline-none hover:bg-gray-200 w-full;
+}
+
+.padding {
+	@apply mr-1;
+}

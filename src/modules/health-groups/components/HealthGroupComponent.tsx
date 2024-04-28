@@ -3,24 +3,20 @@ import { memo, useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import HealthGroupData from '@/modules/health-groups/components/HealthGroupData.tsx'
-import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
-
-import { TypeHealthGroupForm } from '@/modules/health-groups/types/health-group.types.ts'
-
-import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
-import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
-import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
-import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-
-import useModal from '@/shared/hooks/useModal.ts'
-import { healthGroupValidationSchema } from '@/shared/validation/validation.schema.ts'
 import {
 	useCreateHealthGroup,
 	useDeleteHealthGroup,
 	useGetHealthGroups,
 	useUpdateHealthGroup
 } from '@/modules/health-groups/queries/health-group.query.ts'
+import { TypeHealthGroupForm } from '@/modules/health-groups/types/health-group.types.ts'
+import useModal from '@/shared/hooks/useModal.ts'
+import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
+import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
+import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
+import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
+import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
+import { healthGroupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 const HealthGroupComponent = memo(() => {
 	const { healthGroups, refetch, isLoading } = useGetHealthGroups()
@@ -61,14 +57,16 @@ const HealthGroupComponent = memo(() => {
 	}
 	if (isLoading) return <CustomLoader />
 	return (
-		<>
-			<Heading title='Список групп здоровья' />
-			<CustomButton
-				variant='create'
-				onClick={openModal}
-			>
-				Добавить группу здоровья
-			</CustomButton>
+		<div className='w-full'>
+			<div className='flex justify-between p-2'>
+				<h1 className='mt-5 text-2xl font-bold'>Список групп здоровья</h1>
+				<CustomButton
+					variant='create'
+					onClick={openModal}
+				>
+					Добавить группу здоровья
+				</CustomButton>
+			</div>
 			<HealthGroupData
 				data={healthGroups}
 				onDelete={handleDelete}
@@ -89,7 +87,7 @@ const HealthGroupComponent = memo(() => {
 				/>
 				<ErrorMessage error={errors.name} />
 			</CustomModalForm>
-		</>
+		</div>
 	)
 })
 

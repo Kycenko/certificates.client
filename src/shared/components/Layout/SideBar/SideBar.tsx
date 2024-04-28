@@ -13,9 +13,9 @@ import { memo } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import styles from './SideBar.module.scss'
-import { PAGES_URL } from '@/shared/constants/enums.ts'
 import { removeFromStorage } from '@/modules/auth/helpers/auth.helper.ts'
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
+import { PAGES_URL } from '@/shared/constants/enums.ts'
 
 const Sidebar = memo(() => {
 	const navigate = useNavigate()
@@ -27,7 +27,7 @@ const Sidebar = memo(() => {
 
 	return user?.isAdmin ? (
 		<div className={styles.main}>
-			<div className={styles.linksContainer}>
+			<div>
 				<Link
 					to={`${PAGES_URL.HOME}`}
 					className={styles.link}
@@ -38,7 +38,7 @@ const Sidebar = memo(() => {
 					/>
 					Главная
 				</Link>
-				<hr />
+
 				<Link
 					to={`${PAGES_URL.USERS}`}
 					className={styles.link}
@@ -69,7 +69,7 @@ const Sidebar = memo(() => {
 					/>
 					Группы здоровья
 				</Link>
-				<hr />
+
 				<Link
 					to={`${PAGES_URL.DEPARTMENTS}`}
 					className={styles.link}

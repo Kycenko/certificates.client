@@ -1,11 +1,14 @@
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
-import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
-import { createToast, deleteToast, editToast } from '@/shared/constants/toasts.ts'
 import { GroupService } from '@/modules/groups/services/group.service.ts'
+import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
+import { QUERY_KEYS } from '@/shared/constants/enums.ts'
+import {
+	createToast,
+	deleteToast,
+	editToast
+} from '@/shared/constants/toasts.ts'
 
 export const useCreateGroup = () => {
 	const queryClient = new QueryClient()
