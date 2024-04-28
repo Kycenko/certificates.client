@@ -1,4 +1,4 @@
-import GroupReport from '@/components/reports/GroupReport/GroupReport'
+import GroupReport from '@/modules/reports/components/GroupReport/GroupReport'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

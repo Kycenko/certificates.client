@@ -1,9 +1,9 @@
 import { FC, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import CustomLoader from '@/components/ui/loader/CustomLoader'
+import CustomLoader from '@/shared/ui/loader/CustomLoader'
 
-import { routeConfig } from '@/lib/config/route.config'
+import { routeConfig } from '@/shared/config/route.config'
 
 const RouteProvider: FC = () => {
 	return (

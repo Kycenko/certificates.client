@@ -1,5 +1,5 @@
-import CoursesTable from '@/components/tables/Courses/CoursesTable.tsx'
-import Heading from '@/components/ui/fields/Heading/Heading'
+import CoursesTable from '@/modules/courses/components/CoursesTable.tsx'
+import Heading from '@/shared/ui/fields/Heading/Heading'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout.tsx'
 

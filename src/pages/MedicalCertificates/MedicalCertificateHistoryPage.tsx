@@ -1,4 +1,4 @@
-import MedicalCertificateHistory from '@/components/tables/MedicalCertificates/MedicalCertificateHistory/MedicalCertificateHistory'
+import MedicalCertificateHistory from '@/modules/medical-certificates/components/MedicalCertificateHistory.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

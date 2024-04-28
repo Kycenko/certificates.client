@@ -1,5 +1,5 @@
-import GroupsTable from '@/components/tables/Groups/GroupsTable.tsx'
-import Heading from '@/components/ui/fields/Heading/Heading'
+import GroupsTable from '@/modules/groups/components/GroupsTable.tsx'
+import Heading from '@/shared/ui/fields/Heading/Heading'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

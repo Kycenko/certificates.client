@@ -1,4 +1,4 @@
-import CourseDetailsTable from '@/components/tables/Courses/CourseDetailsTable.tsx'
+import CourseDetailsTable from '@/modules/courses/components/CourseDetailsTable.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

@@ -1,4 +1,4 @@
-import DepartmentDetailsTable from '@/components/tables/Departments/DepartmentDetailsTable.tsx'
+import DepartmentDetailsTable from '@/modules/departments/components/DepartmentDetailsTable.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

@@ -9,11 +9,11 @@ import {
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { IUser } from '@/types/user.types'
+import { IUser } from '@/modules/users/types/user.types.ts'
 
-import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/lib/constants/enums'
-import { getAccessToken, removeFromStorage } from '@/lib/helpers/auth.helper.ts'
-import getLocalStorage from '@/lib/utils/getLocalStorage'
+import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/shared/constants/enums'
+import { getAccessToken, removeFromStorage } from '@/modules/auth/helpers/auth.helper.ts'
+import getLocalStorage from '@/shared/utils/getLocalStorage'
 
 interface IAuthContext {
 	user: IUser | null

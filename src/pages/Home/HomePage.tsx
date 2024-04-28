@@ -1,4 +1,4 @@
-import UploadStudentsTable from '@/components/tables/Students/UploadStudents/UploadStudentsTable'
+import UploadStudentsTable from '@/modules/students/components/UploadStudents/UploadStudentsTable'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

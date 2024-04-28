@@ -1,5 +1,5 @@
-import MedicalCertificatesTable from '@/components/tables/MedicalCertificates/MedicalCertificatesTable.tsx'
-import Heading from '@/components/ui/fields/Heading/Heading'
+import MedicalCertificatesTable from '@/modules/medical-certificates/components/MedicalCertificatesTable.tsx'
+import Heading from '@/shared/ui/fields/Heading/Heading'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

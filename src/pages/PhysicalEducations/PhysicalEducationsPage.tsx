@@ -1,4 +1,4 @@
-import PhysicalEducationComponent from '@/components/tables/PhysicalEducations/PhysicalEducationComponent.tsx'
+import PhysicalEducationComponent from '@/modules/physical-educations/components/PhysicalEducationComponent.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

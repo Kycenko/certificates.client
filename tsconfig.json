@@ -8,14 +8,11 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"],
-			"@/api": ["src/api/*"],
 			"@/app/*": ["src/app/*"],
 			"@/components/*": ["src/components/*"],
+			"@/modules/*": ["src/modules/*"],
 			"@/pages/*": ["src/pages/*"],
-			"@/queries/*": ["src/queries/*"],
-			"@/services/*": ["src/services/*"],
-			"@/types/*": ["src/types/*"],
-			"@/lib/*": ["src/lib/*"]
+			"@/shared/*": ["src/shared/*"]
 		},
 		/* Bundler mode */
 		"moduleResolution": "bundler",

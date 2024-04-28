@@ -1,4 +1,4 @@
-import StudentHistory from '@/components/tables/Students/StudentHistory/StudentHistory'
+import StudentHistory from '@/modules/students/components/StudentHistory/StudentHistory'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

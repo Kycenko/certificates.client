@@ -1,4 +1,4 @@
-import DepartmentReport from '@/components/reports/DepartmentReport/DepartmentReport'
+import DepartmentReport from '@/modules/reports/components/DepartmentReport/DepartmentReport'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

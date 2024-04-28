@@ -1,4 +1,4 @@
-import HealthGroupComponent from '@/components/tables/HealthGroups/HealthGroupComponent.tsx'
+import HealthGroupComponent from '@/modules/health-groups/components/HealthGroupComponent.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

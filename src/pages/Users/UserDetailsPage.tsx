@@ -1,4 +1,4 @@
-import UserDetailsComponent from '@/components/tables/Users/UserDetailsComponent/UserDetailsComponent.tsx'
+import UserDetailsComponent from '@/modules/users/components/UserDetailsComponent/UserDetailsComponent.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

@@ -1,5 +1,5 @@
-import DepartmentsTable from '@/components/tables/Departments/DepartmentsTable.tsx'
-import Heading from '@/components/ui/fields/Heading/Heading'
+import DepartmentsTable from '@/modules/departments/components/DepartmentsTable.tsx'
+import Heading from '@/shared/ui/fields/Heading/Heading'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

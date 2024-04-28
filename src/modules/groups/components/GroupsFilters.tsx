@@ -1,0 +1,49 @@
+import { Dispatch, FC, SetStateAction } from 'react'
+
+import Filter from '@/components/filters/Filter/Filter'
+import Search from '@/components/filters/Search/Search'
+import SortOrder from '@/components/filters/SortOrder/SortOrder'
+
+import CourseOptions from '@/modules/courses/helpers/course.options'
+
+interface GroupsFiltersProps {
+	searchTerm: string
+	setSearchTerm: Dispatch<SetStateAction<string>>
+	sortOrder: 'asc' | 'desc'
+	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
+	filterValue: string
+	setFilterValue: Dispatch<SetStateAction<string>>
+}
+
+const GroupsFilters: FC<GroupsFiltersProps> = ({
+	searchTerm,
+	setSearchTerm,
+	sortOrder,
+	setSortOrder,
+	filterValue,
+	setFilterValue
+}) => {
+	return (
+		<>
+			<Search
+				searchTerm={searchTerm}
+				setSearchTerm={setSearchTerm}
+				placeholder={'Поиск по названию группы...'}
+			/>
+			<SortOrder
+				sortOrder={sortOrder}
+				setSortOrder={setSortOrder}
+			/>
+			<Filter
+				label='Фильтрация по номеру курса:'
+				filterValue={filterValue}
+				setFilterValue={setFilterValue}
+			>
+				<option value={''}>Все курсы</option>
+				<CourseOptions />
+			</Filter>
+		</>
+	)
+}
+
+export default GroupsFilters

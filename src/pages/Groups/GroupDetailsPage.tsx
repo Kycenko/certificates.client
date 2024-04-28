@@ -1,4 +1,4 @@
-import GroupDetailsTable from '@/components/tables/Groups/GroupDetailsTable.tsx'
+import GroupDetailsTable from '@/modules/groups/components/GroupDetailsTable.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

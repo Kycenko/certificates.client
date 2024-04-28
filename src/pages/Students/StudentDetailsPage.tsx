@@ -1,4 +1,4 @@
-import StudentDetailsTable from '@/components/tables/Students/StudentDetailsTable.tsx'
+import StudentDetailsTable from '@/modules/students/components/StudentDetailsTable.tsx'
 
 import WithPageLayout from '@/app/hoc/WithPageLayout'
 

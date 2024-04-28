@@ -10,7 +10,7 @@ import {
 } from 'react'
 
 import styles from './Search.module.scss'
-import useDebounce from '@/lib/hooks/useDebounce.ts'
+import useDebounce from '@/shared/hooks/useDebounce.ts'
 
 interface SearchProps {
 	searchTerm: string
