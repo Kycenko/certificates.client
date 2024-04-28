@@ -39,9 +39,11 @@ export class StudentController {
 	@Auth()
 	async getAll(
 		@Query('group') group?: string,
-		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
+		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
+		@Query('page') page: number = 1,
+		@Query('pageSize') pageSize: number = 50
 	) {
-		return this.studentService.getAll(group, sortOrder)
+		return this.studentService.getAll(group, sortOrder, page, pageSize)
 	}
 
 	@Get(':id')

@@ -44,6 +44,9 @@ export class DepartmentService {
 			where: { id: +id },
 			include: {
 				courses: {
+					orderBy: {
+						number: 'asc'
+					},
 					where: {
 						departmentId: +id
 					},

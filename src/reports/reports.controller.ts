@@ -9,15 +9,24 @@ export class ReportsController {
 	//отчет по обучающимся отделения с указанием даты выдачи справки и сроком ее действия
 	@Auth('admin')
 	@Get('department-report/:departmentId')
-	async getDepartmentReport(@Param('departmentId') departmentId: number) {
-		return this.reportsService.getDepartmentReport(departmentId)
+	async getDepartmentReport(
+		@Param('departmentId') departmentId: number,
+		@Query('sort') sort: 'asc' | 'desc' = 'asc',
+		@Query('group') group?: string
+	) {
+		return this.reportsService.getDepartmentReport(departmentId, sort, group)
 	}
 
 	//отчет по группе с указанием даты выдачи справки и сроком ее действия
 	@Auth('admin')
 	@Get('group-report/:groupId')
-	async getGroupReport(@Param('groupId') groupId: number) {
-		return this.reportsService.getGroupReport(groupId)
+	async getGroupReport(
+		@Param('groupId') groupId: number,
+		@Query('sort') sort: 'asc' | 'desc' = 'asc',
+		@Query('hg') hg?: string,
+		@Query('pe') pe?: string
+	) {
+		return this.reportsService.getGroupReport(groupId, sort, hg, pe)
 	}
 
 	// отчёт по истекшим справкам

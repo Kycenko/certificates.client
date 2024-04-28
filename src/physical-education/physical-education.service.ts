@@ -13,7 +13,9 @@ export class PhysicalEducationService {
 	}
 
 	async getAll() {
-		const physicalEducations = await this.prisma.physicalEducation.findMany()
+		const physicalEducations = await this.prisma.physicalEducation.findMany({
+			orderBy: { name: 'asc' }
+		})
 		if (!physicalEducations || physicalEducations.length === 0)
 			throw new NotFoundException('Группы по здоровью не найдены!')
 		return physicalEducations

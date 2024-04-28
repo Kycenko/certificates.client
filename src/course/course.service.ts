@@ -45,6 +45,9 @@ export class CourseService {
 			where: { id: +id },
 			include: {
 				groups: {
+					orderBy: {
+						name: 'asc'
+					},
 					where: {
 						courseId: +id
 					},

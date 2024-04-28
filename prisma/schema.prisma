@@ -29,7 +29,7 @@ model Student {
   groupId             Int?                 @map("group_id")
   createdAt           DateTime             @default(now()) @map("created_at")
   updatedAt           DateTime             @updatedAt @map("updated_at")
-  isExpelled          Boolean              @default(false)
+  isExpelled          Boolean              @default(false) @map("is_expelled")
   medicalCertificates MedicalCertificate[]
   group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
   StudentHistory      StudentHistory[]

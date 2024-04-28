@@ -14,7 +14,9 @@ export class HealthGroupService {
 	}
 
 	async getAll() {
-		const healthGroups = await this.prisma.healthGroup.findMany()
+		const healthGroups = await this.prisma.healthGroup.findMany({
+			orderBy: { name: 'asc' }
+		})
 		if (!healthGroups || healthGroups.length === 0)
 			throw new NotFoundException('Группы здоровья не найдены!')
 		return healthGroups

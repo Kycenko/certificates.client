@@ -9,7 +9,11 @@ export class ReportsService {
 
 	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия определенного отделения
 
-	async getDepartmentReport(departmentId: number) {
+	async getDepartmentReport(
+		departmentId: number,
+		sort: 'asc' | 'desc' = 'asc',
+		group?: string
+	) {
 		const departmentReport = await this.prisma.department.findMany({
 			where: {
 				id: +departmentId
@@ -20,9 +24,15 @@ export class ReportsService {
 				courses: {
 					select: {
 						groups: {
+							where: {
+								name: group || undefined
+							},
 							select: {
 								name: true,
 								students: {
+									orderBy: {
+										surname: sort
+									},
 									select: {
 										name: true,
 										surname: true,
@@ -60,7 +70,12 @@ export class ReportsService {
 	}
 
 	//отчет по обучающимся с указанием даты выдачи справки и сроком ее действия определенной группы
-	async getGroupReport(groupId: number) {
+	async getGroupReport(
+		groupId: number,
+		sort: 'asc' | 'desc' = 'asc',
+		hg?: string,
+		pe?: string
+	) {
 		const groupReport = await this.prisma.group.findMany({
 			where: {
 				id: +groupId
@@ -73,11 +88,22 @@ export class ReportsService {
 					}
 				},
 				students: {
+					orderBy: {
+						surname: sort
+					},
 					select: {
 						surname: true,
 						name: true,
 						secondName: true,
 						medicalCertificates: {
+							where: {
+								healthGroup: {
+									name: hg || undefined
+								},
+								physicalEducation: {
+									name: pe || undefined
+								}
+							},
 							select: {
 								startDate: true,
 								finishDate: true,
@@ -92,9 +118,9 @@ export class ReportsService {
 									}
 								}
 							},
-							orderBy: {
-								startDate: 'desc'
-							},
+							// orderBy: {
+							// 	startDate: 'desc'
+							// },
 							take: 1
 						}
 					}

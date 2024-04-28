@@ -80,7 +80,7 @@ export class AuthService {
 
 		const isValid = await verify(user.password, dto.password)
 
-		if (!isValid)
+		if (!user || !isValid)
 			throw new UnauthorizedException(EXCEPTIONS.INVALID_PASSWORD_EXCEPTION)
 		return user
 	}

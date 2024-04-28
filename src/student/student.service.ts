@@ -1,7 +1,7 @@
 import { PrismaService } from '@config/prisma.service'
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { format, formatISO } from 'date-fns'
-
+import { formatISO } from 'date-fns'
+import { fromZonedTime } from 'date-fns-tz'
 import * as XLSX from 'xlsx'
 import { StudentDto } from './dto/student.dto'
 @Injectable()
@@ -28,15 +28,15 @@ export class StudentService {
 		}>
 
 		for (const item of data) {
+			const utcDate = fromZonedTime(item.birthDate, 'Europe/Moscow')
 			await this.prisma.student.create({
 				data: {
 					surname: item.surname,
 					name: item.name,
 					secondName: item.secondName || null,
-					birthDate: format(item.birthDate, 'dd.MM.yyyy HH:mm:ss.SSS ')
+					birthDate: formatISO(utcDate)
 				}
 			})
-			console.log(data)
 		}
 
 		return { success: true, message: 'Студенты добавлены', data: data }
@@ -48,7 +48,12 @@ export class StudentService {
 		})
 	}
 
-	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
+	async getAll(
+		groupName?: string,
+		sortOrder: 'asc' | 'desc' = 'asc',
+		page: number = 1,
+		pageSize: number = 50
+	) {
 		const whereCourse = groupName
 			? {
 					group: {
@@ -56,6 +61,8 @@ export class StudentService {
 					}
 				}
 			: {}
+
+		const skip = (page - 1) * pageSize
 
 		const students = await this.prisma.student.findMany({
 			orderBy: {
@@ -65,7 +72,9 @@ export class StudentService {
 			include: {
 				medicalCertificates: true,
 				group: true
-			}
+			},
+			skip: skip,
+			take: pageSize
 		})
 
 		if (!students || students.length === 0)
@@ -78,6 +87,9 @@ export class StudentService {
 			where: { id: +id },
 			include: {
 				medicalCertificates: {
+					orderBy: {
+						startDate: 'desc'
+					},
 					where: {
 						studentId: +id
 					}

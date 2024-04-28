@@ -9,6 +9,9 @@ export class UserService {
 
 	async getAll() {
 		const users = await this.prisma.user.findMany({
+			orderBy: {
+				login: 'asc'
+			},
 			include: {
 				group: true
 			}

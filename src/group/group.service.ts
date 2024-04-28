@@ -44,6 +44,9 @@ export class GroupService {
 			where: { id: +id },
 			include: {
 				students: {
+					orderBy: {
+						surname: 'asc'
+					},
 					where: {
 						groupId: +id
 					},
