@@ -3,19 +3,17 @@ import { memo, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
-
 import StudentDetailsData from './StudentDetailsData.tsx'
 import { DetailsStudentHeads } from './student-heads.ts'
-import Layout from '@/shared/components/Layout/Layout.tsx'
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
 import { useGetHealthGroups } from '@/modules/health-groups/queries/health-group.query.ts'
 import { useCreateMedicalCertificate } from '@/modules/medical-certificates/queries/medical-certificate.queries.ts'
 import { TypeMedicalCertificateForm } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/queries/physical-education.queries.ts'
 import { useGetStudent } from '@/modules/students/queries/student.queries.ts'
+import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
 import useModal from '@/shared/hooks/useModal.ts'
+import styles from '@/shared/styles/DetailsTables.module.scss'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
@@ -98,12 +96,7 @@ const StudentDetailsTable = () => {
 		reset()
 	}
 
-	if (isLoading)
-		return (
-			<Layout>
-				<CustomLoader />
-			</Layout>
-		)
+	if (isLoading) return <CustomLoader />
 	return (
 		<>
 			<Heading title={'Описание учащегося'}>
@@ -176,7 +169,6 @@ const StudentDetailsTable = () => {
 					checked={isDurationSelected}
 					onChange={toggleDurationSelect}
 					label={'Использовать конечную дату'}
-					id={''}
 				/>
 
 				<CustomSelect

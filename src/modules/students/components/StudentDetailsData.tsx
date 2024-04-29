@@ -1,11 +1,11 @@
 import { format } from 'date-fns'
 import { FC, memo } from 'react'
 
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import { IHealthGroup } from '@/modules/health-groups/types/health-group.types.ts'
 import { IPhysicalEducation } from '@/modules/physical-educations/types/physical-education.types.ts'
 import { IStudent } from '@/modules/students/types/student.types.ts'
-import daysUntilTheEnd from '@/shared/utils/daysUntilTheEnd.ts'
+import styles from '@/shared/styles/DetailsTables.module.scss'
+import daysUntilTheEnd from '@/shared/utils/daysUntilTheEnd.tsx'
 import getDaysUntilExpiry from '@/shared/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/shared/utils/getValidityPeriod.ts'
 
@@ -24,11 +24,11 @@ const StudentDetailsData: FC<IStudentDetailsDataProps> = ({
 			{data?.medicalCertificates?.map(
 				({ id, startDate, finishDate, healthGroupId, physicalEducationId }) => (
 					<tr
-						className={`
-								${styles.daysCell}
-								${daysUntilTheEnd(finishDate) === 'Да' ? styles.greenBg : styles.redBg}
-								${getDaysUntilExpiry(finishDate, startDate) < 30 ? styles.yellowBg : null}
-							`}
+						// className={`
+						// 		${styles.daysCell}
+						// 		${daysUntilTheEnd(finishDate) === 'Да' ? styles.greenBg : styles.redBg}
+						// 		${getDaysUntilExpiry(finishDate, startDate) < 30 ? styles.yellowBg : null}
+						// 	`}
 						key={id}
 					>
 						<td className={styles.cellPadding}>

@@ -1,12 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { memo, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
-
 import DepartmentsFilters from './DepartmentsFilters'
-import styles from '@/shared/styles/Tables.module.scss'
 import DepartmentData from '@/modules/departments/components/DepartmentData.tsx'
 import { DepartmentHeads } from '@/modules/departments/components/department-heads.ts'
 import {
@@ -19,9 +16,11 @@ import {
 	IDepartment,
 	TypeDepartmentForm
 } from '@/modules/departments/types/department.types.ts'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
+import styles from '@/shared/styles/Tables.module.scss'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -29,7 +28,7 @@ import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 import { departmentValidationSchema } from '@/shared/validation/validation.schema.ts'
 
-const DepartmentsTable = memo(() => {
+const DepartmentsTable = () => {
 	const navigate = useNavigate()
 	const [searchTerm, setSearchTerm] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
@@ -143,6 +142,6 @@ const DepartmentsTable = memo(() => {
 			</CustomModalForm>
 		</>
 	)
-})
+}
 
 export default DepartmentsTable

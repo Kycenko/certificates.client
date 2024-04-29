@@ -53,7 +53,7 @@ const StudentData: FC<StudentDataProps> = ({
 		const newData = {
 			...data,
 			groupId: Number(data.groupId),
-			isExpelled: data.isExpelled || false
+			isExpelled: Boolean(data.isExpelled)
 		}
 
 		const historyData = {
@@ -68,142 +68,138 @@ const StudentData: FC<StudentDataProps> = ({
 
 	return (
 		<>
-			{!data || data.length === 0 ? (
-				<div className={styles.noData}>Данные не найдены</div>
-			) : (
-				data?.map(
-					({
-						id,
-						name,
-						surname,
-						secondName,
-						birthDate,
-						groupId,
-						medicalCertificates,
-						isExpelled,
-						group
-					}) => (
-						<tr
-							className={styles.contentCell}
-							key={id}
-						>
-							<td className={styles.cellPadding}>
-								<span>{surname}</span>
-							</td>
-							<td className={styles.cellPadding}>
-								<span>{name}</span>
-							</td>
-							<td className={styles.cellPadding}>
-								<span>{secondName ? secondName : 'Не указано'}</span>
-							</td>
-							<td className={styles.cellPadding}>
-								<span>{format(new Date(birthDate), 'dd.MM.yyyy')}</span>
-							</td>
-							<td className={styles.cellPadding}>
-								{group?.name ? group?.name : 'Не указана'}
-							</td>
-							<td className={styles.cellPadding}>
-								{medicalCertificates?.length}
-							</td>
-							<td className={styles.cellPadding}>
-								{isExpelled === true ? (
-									<div className='badge bg-red-300'>Да</div>
-								) : (
-									<div className='badge bg-green-300'>Нет</div>
-								)}
-							</td>
+			{data?.map(
+				({
+					id,
+					name,
+					surname,
+					secondName,
+					birthDate,
+					groupId,
+					medicalCertificates,
+					isExpelled,
+					group
+				}) => (
+					<tr
+						className={styles.contentCell}
+						key={id}
+					>
+						<td className={styles.cellPadding}>
+							<span>{surname}</span>
+						</td>
+						<td className={styles.cellPadding}>
+							<span>{name}</span>
+						</td>
+						<td className={styles.cellPadding}>
+							<span>{secondName ? secondName : 'Не указано'}</span>
+						</td>
+						<td className={styles.cellPadding}>
+							<span>{format(new Date(birthDate), 'dd.MM.yyyy')}</span>
+						</td>
+						<td className={styles.cellPadding}>
+							{group?.name ? group?.name : 'Не указана'}
+						</td>
+						<td className={styles.cellPadding}>
+							{medicalCertificates?.length}
+						</td>
+						<td className={styles.cellPadding}>
+							{isExpelled === true ? (
+								<div className='badge bg-red-300'>Да</div>
+							) : (
+								<div className='badge bg-green-300'>Нет</div>
+							)}
+						</td>
 
-							<td className={styles.editCellContainer}>
-								<div className={styles.adminEditCell}>
-									<ActionButtons
-										actionId={id}
-										onEdit={() => setEditId(id)}
-										onDelete={() => setDeleteId(id)}
-										onHistory={() => onHistory(id)}
-										onInfo={() => onInfo(id)}
-									/>
-								</div>
-							</td>
-							<CustomModalForm
-								onSubmit={handleSubmit(data => onSubmit(id, data))}
-								isOpen={editId === id}
-								onClose={() => {
-									setEditId(null)
-									reset()
-								}}
-								formTitle='Изменение'
-								buttonTitle='Изменить'
+						<td className={styles.editCellContainer}>
+							<div className={styles.adminEditCell}>
+								<ActionButtons
+									actionId={id}
+									onEdit={() => setEditId(id)}
+									onDelete={() => setDeleteId(id)}
+									onHistory={() => onHistory(id)}
+									onInfo={() => onInfo(id)}
+								/>
+							</div>
+						</td>
+						<CustomModalForm
+							onSubmit={handleSubmit(data => onSubmit(id, data))}
+							isOpen={editId === id}
+							onClose={() => {
+								setEditId(null)
+								reset()
+							}}
+							formTitle='Изменение'
+							buttonTitle='Изменить'
+						>
+							<CustomInput
+								label={'Фамилия'}
+								id={'surname'}
+								defaultValue={surname}
+								placeholder={'Введите фамилию'}
+								{...register('surname')}
+							/>
+							<ErrorMessage error={errors.surname} />
+							<CustomInput
+								label={'Имя'}
+								id={'name'}
+								defaultValue={name}
+								placeholder={'Введите имя'}
+								{...register('name')}
+							/>
+							<ErrorMessage error={errors.name} />
+							<CustomInput
+								label={'Отчество'}
+								id={'secondName'}
+								defaultValue={secondName}
+								placeholder={'Введите отчество'}
+								{...register('secondName')}
+							/>
+							<ErrorMessage error={errors.secondName} />
+							<CustomInput
+								id='birthDate'
+								label='Выберите дату рождения'
+								type='date'
+								max={format(new Date(), 'yyyy-MM-dd')}
+								defaultValue={format(new Date(birthDate), 'yyyy-MM-dd')}
+								{...register('birthDate')}
+							/>
+							<ErrorMessage error={errors.birthDate} />
+							<CustomSelect
+								id='groupId'
+								label='Выберите группу'
+								defaultValue={groupId}
+								{...register('groupId')}
 							>
-								<CustomInput
-									label={'Фамилия'}
-									id={'surname'}
-									defaultValue={surname}
-									placeholder={'Введите фамилию'}
-									{...register('surname')}
-								/>
-								<ErrorMessage error={errors.surname} />
-								<CustomInput
-									label={'Имя'}
-									id={'name'}
-									defaultValue={name}
-									placeholder={'Введите имя'}
-									{...register('name')}
-								/>
-								<ErrorMessage error={errors.name} />
-								<CustomInput
-									label={'Отчество'}
-									id={'secondName'}
-									defaultValue={secondName}
-									placeholder={'Введите отчество'}
-									{...register('secondName')}
-								/>
-								<ErrorMessage error={errors.secondName} />
-								<CustomInput
-									id='birthDate'
-									label='Выберите дату рождения'
-									type='date'
-									max={format(new Date(), 'yyyy-MM-dd')}
-									defaultValue={format(new Date(birthDate), 'yyyy-MM-dd')}
-									{...register('birthDate')}
-								/>
-								<ErrorMessage error={errors.birthDate} />
-								<CustomSelect
-									id='groupId'
-									label='Выберите группу'
-									defaultValue={groupId}
-									{...register('groupId')}
-								>
-									{groups?.map(({ id, name }) => (
-										<option
-											key={id}
-											value={id}
-										>
-											{name}
-										</option>
-									))}
-								</CustomSelect>
-								<CustomCheckBox
-									className='mt-2'
-									id={'isExpelled'}
-									label={'Отчислен?'}
-									defaultChecked={isExpelled}
-									{...register('isExpelled')}
-								/>
-							</CustomModalForm>
-							<CustomModalForm
-								onSubmit={() => {
-									onDelete(id)
-									setDeleteId(null)
-								}}
-								buttonTitle={'Удалить'}
-								isOpen={deleteId === id}
-								onClose={() => setDeleteId(null)}
-								formTitle={'Удаление'}
-							>
-								{name}
-							</CustomModalForm>
-						</tr>
-					)
+								{groups?.map(({ id, name }) => (
+									<option
+										key={id}
+										value={id}
+									>
+										{name}
+									</option>
+								))}
+							</CustomSelect>
+							<CustomCheckBox
+								className='mt-2'
+								id={'isExpelled'}
+								label={'Отчислен?'}
+								defaultChecked={isExpelled}
+								{...register('isExpelled')}
+							/>
+						</CustomModalForm>
+						<CustomModalForm
+							onSubmit={() => {
+								onDelete(id)
+								setDeleteId(null)
+							}}
+							buttonTitle={'Удалить'}
+							isOpen={deleteId === id}
+							onClose={() => setDeleteId(null)}
+							formTitle={'Удаление'}
+						>
+							{name}
+						</CustomModalForm>
+					</tr>
 				)
 			)}
 		</>

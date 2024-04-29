@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { memo, useEffect } from 'react'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import PhysicalEducationData from '@/modules/physical-educations/components/PhysicalEducationData.tsx'
@@ -18,7 +18,7 @@ import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 import { physicalEducationValidationSchema } from '@/shared/validation/validation.schema.ts'
 
-const PhysicalEducationComponent = memo(() => {
+const PhysicalEducationComponent = () => {
 	const { physicalEducations, refetch, isLoading } = useGetPhysicalEducations()
 
 	const { closeModal, isOpen, openModal } = useModal()
@@ -103,6 +103,6 @@ const PhysicalEducationComponent = memo(() => {
 			</div>
 		</>
 	)
-})
+}
 
 export default PhysicalEducationComponent

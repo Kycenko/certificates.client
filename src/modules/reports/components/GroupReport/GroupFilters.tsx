@@ -33,7 +33,7 @@ const GroupFilters: FC<GroupFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label='Фильтрация по группе здоровья:'
+				label=''
 				filterValue={healthValue}
 				setFilterValue={setHealthValue}
 			>
@@ -48,7 +48,7 @@ const GroupFilters: FC<GroupFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-				label='Фильтрация по группе по физкультуре:'
+				label=''
 				filterValue={educationValue}
 				setFilterValue={setEducationValue}
 			>

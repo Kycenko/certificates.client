@@ -1,19 +1,20 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
-import { IDepartment } from '@/modules/departments/types/department.types'
+import { IHealthReport } from '../../types/reports.types'
+
 import Filter from '@/shared/components/filters/Filter/Filter'
 import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
 
-interface CoursesFiltersProps {
-	departments: IDepartment[] | undefined
+interface HealthReportFiltersProps {
+	data: IHealthReport[] | undefined
 	sortOrder: 'asc' | 'desc'
 	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
 	filterValue: string
 	setFilterValue: Dispatch<SetStateAction<string>>
 }
 
-const CoursesFilters: FC<CoursesFiltersProps> = ({
-	departments,
+const HealthReportFilters: FC<HealthReportFiltersProps> = ({
+	data,
 	sortOrder,
 	setSortOrder,
 	filterValue,
@@ -26,7 +27,7 @@ const CoursesFilters: FC<CoursesFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label='Фильтрация по отделению:'
+				label='Фильтрация по учебной группе:'
 				filterValue={filterValue}
 				setFilterValue={setFilterValue}
 			>
@@ -34,19 +35,22 @@ const CoursesFilters: FC<CoursesFiltersProps> = ({
 					key={0}
 					value={''}
 				>
-					Все отделения
+					Все группы
 				</option>
-				{departments?.map(({ name, id }) => (
-					<option
-						key={id}
-						value={name}
-					>
-						{name}
-					</option>
-				))}
+
+				{data?.map(({ groups }) =>
+					groups?.map(({ id, name }) => (
+						<option
+							key={id}
+							value={name}
+						>
+							{name}
+						</option>
+					))
+				)}
 			</Filter>
 		</>
 	)
 }
 
-export default CoursesFilters
+export default HealthReportFilters

@@ -1,10 +1,9 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
+import CourseOptions from '@/modules/courses/helpers/course.options'
 import Filter from '@/shared/components/filters/Filter/Filter'
 import Search from '@/shared/components/filters/Search/Search'
 import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
-
-import CourseOptions from '@/modules/courses/helpers/course.options'
 
 interface GroupsFiltersProps {
 	searchTerm: string

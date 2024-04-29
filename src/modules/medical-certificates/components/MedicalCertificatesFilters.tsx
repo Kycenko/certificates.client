@@ -1,9 +1,8 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
+import { IGroup } from '@/modules/groups/types/group.types'
 import Filter from '@/shared/components/filters/Filter/Filter'
 import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
-
-import { IGroup } from '@/modules/groups/types/group.types'
 
 interface MedicalCertificatesFiltersProps {
 	groups: IGroup[] | undefined

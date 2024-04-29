@@ -32,7 +32,13 @@ const CoursesTable = () => {
 	const { remove } = useDeleteCourse()
 
 	const handleEdit = async (id: number | string, data: TypeCourseForm) => {
-		await update({ id, data: { ...data, number: +data.number } })
+		await update({
+			id,
+			data: {
+				...data,
+				number: +data.number
+			}
+		})
 		closeModal()
 		await refetch()
 	}

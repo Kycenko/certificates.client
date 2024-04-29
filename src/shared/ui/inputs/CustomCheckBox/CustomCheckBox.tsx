@@ -2,7 +2,7 @@ import { InputHTMLAttributes, forwardRef, memo } from 'react'
 
 interface CustomCheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
 	label: string
-	id: string
+	id?: string
 	className?: string
 	type?: string
 }

@@ -1,16 +1,16 @@
 import { format } from 'date-fns'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import { IGroup } from '@/modules/groups/types/group.types.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
+import styles from '@/shared/styles/DetailsTables.module.scss'
 
 interface GroupDetailsDataProps {
 	data: IGroup | undefined
 }
 
-const GroupDetailsData: FC<GroupDetailsDataProps> = memo(({ data }) => {
+const GroupDetailsData: FC<GroupDetailsDataProps> = ({ data }) => {
 	const navigate = useNavigate()
 	return (
 		<>
@@ -36,6 +36,6 @@ const GroupDetailsData: FC<GroupDetailsDataProps> = memo(({ data }) => {
 			)}
 		</>
 	)
-})
+}
 
 export default GroupDetailsData

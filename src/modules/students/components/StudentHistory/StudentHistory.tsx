@@ -1,12 +1,11 @@
 import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
-
 import StudentHistoryData from './StudentHistoryData.tsx'
-import styles from '@/shared/styles/Tables.module.scss'
 import { StudentHistoryHeads } from '@/modules/students/components/student-heads.ts'
 import { useGetStudentHistories } from '@/modules/students/queries/student-history.queries.ts'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
+import styles from '@/shared/styles/Tables.module.scss'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 
 const StudentHistory = () => {

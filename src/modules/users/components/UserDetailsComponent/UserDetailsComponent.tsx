@@ -40,7 +40,7 @@ const UserDetailsComponent = () => {
 			data: {
 				...rest,
 				password: password || undefined,
-				groupId: Number(groupId) || undefined
+				groupId: Number(groupId) || null
 			}
 		})
 		await refetch()
@@ -57,7 +57,6 @@ const UserDetailsComponent = () => {
 				>
 					<div className={styles.main}>
 						<div>
-							{' '}
 							<CustomInput
 								label={'Логин'}
 								id={'login'}

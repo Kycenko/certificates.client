@@ -1,25 +1,22 @@
-import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
-
-import Layout from '@/shared/components/Layout/Layout.tsx'
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
 import { useCreateCourse } from '@/modules/courses/queries/course.queries.ts'
 import { TypeCourseForm } from '@/modules/courses/types/course.types.ts'
 import DepartmentDetailsData from '@/modules/departments/components/DepartmentDetailsData.tsx'
 import { DetailsDepartmentHeads } from '@/modules/departments/components/department-heads.ts'
 import { useGetDepartment } from '@/modules/departments/queries/department.queries.ts'
+import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
 import useModal from '@/shared/hooks/useModal.ts'
+import styles from '@/shared/styles/DetailsTables.module.scss'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 
-const DepartmentDetailsTable = memo(() => {
+const DepartmentDetailsTable = () => {
 	const { id } = useParams()
 
 	const { department, isLoading, refetch } = useGetDepartment(id)
@@ -39,12 +36,7 @@ const DepartmentDetailsTable = memo(() => {
 		await refetch()
 		reset()
 	}
-	if (isLoading)
-		return (
-			<Layout>
-				<CustomLoader />
-			</Layout>
-		)
+	if (isLoading) return <CustomLoader />
 	return (
 		<>
 			<Heading title={'Описание отделения'}>
@@ -81,6 +73,6 @@ const DepartmentDetailsTable = memo(() => {
 			</CustomModalForm>
 		</>
 	)
-})
+}
 
 export default DepartmentDetailsTable

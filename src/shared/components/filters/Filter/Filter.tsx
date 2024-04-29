@@ -29,7 +29,7 @@ const Filter: FC<FilterProps> = memo(
 			<div className={styles.container}>
 				<label className='form-control w-full max-w-xs'>
 					<div className='label'>
-						<span className='label-text'>{label}</span>
+						<span className=''>{label}</span>
 					</div>
 					<select
 						className='select select-bordered'

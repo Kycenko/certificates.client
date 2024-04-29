@@ -1,19 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
-
 import GroupDetailsData from './GroupDetailsData.tsx'
 import { DetailsGroupHeads } from './group-heads.ts'
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
 import { useGetGroup } from '@/modules/groups/queries/group.queries.ts'
 import { useCreateStudent } from '@/modules/students/queries/student.queries.ts'
 import { TypeStudentForm } from '@/modules/students/types/student.types.ts'
+import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
 import useModal from '@/shared/hooks/useModal.ts'
+import styles from '@/shared/styles/DetailsTables.module.scss'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
@@ -22,7 +20,7 @@ import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 import { studentValidationSchema } from '@/shared/validation/validation.schema.ts'
 
-const GroupDetailsTable = memo(() => {
+const GroupDetailsTable = () => {
 	const { id } = useParams()
 	const { user } = useAuth()
 	const { group, refetch, isLoading } = useGetGroup(id)
@@ -110,6 +108,6 @@ const GroupDetailsTable = memo(() => {
 			</CustomModalForm>
 		</>
 	)
-})
+}
 
 export default GroupDetailsTable

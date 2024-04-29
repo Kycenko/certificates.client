@@ -1,11 +1,8 @@
-import { memo, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 
 import MedicalCertificatesFilters from './MedicalCertificatesFilters.tsx'
 import { CertificatesHeads } from './certificates-heads.ts'
-import styles from '@/shared/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 import MedicalCertificateData from '@/modules/medical-certificates/components/MedicalCertificateData.tsx'
 import {
@@ -14,11 +11,13 @@ import {
 	useUpdateMedicalCertificate
 } from '@/modules/medical-certificates/queries/medical-certificate.queries.ts'
 import { TypeMedicalCertificateForm } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
+import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
+import styles from '@/shared/styles/Tables.module.scss'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
-const MedicalCertificatesTable = memo(() => {
+const MedicalCertificatesTable = () => {
 	const navigate = useNavigate()
 	const [filterValue, setFilterValue] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
@@ -27,6 +26,7 @@ const MedicalCertificatesTable = memo(() => {
 		sortOrder
 	)
 	const { groups } = useGetGroups()
+
 	const { closeModal } = useModal()
 
 	const { update } = useUpdateMedicalCertificate()
@@ -83,6 +83,6 @@ const MedicalCertificatesTable = memo(() => {
 			</div>
 		</div>
 	)
-})
+}
 
 export default MedicalCertificatesTable

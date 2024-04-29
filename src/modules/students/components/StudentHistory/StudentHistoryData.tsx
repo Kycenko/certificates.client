@@ -1,8 +1,8 @@
 import { format } from 'date-fns'
 import { FC } from 'react'
 
-import styles from '@/shared/styles/Tables.module.scss'
 import { IStudentHistory } from '@/modules/students/types/student-history.types.ts'
+import styles from '@/shared/styles/Tables.module.scss'
 
 interface StudentHistoryDataProps {
 	data: IStudentHistory[] | undefined

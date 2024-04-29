@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { memo, useEffect } from 'react'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import HealthGroupData from '@/modules/health-groups/components/HealthGroupData.tsx'
@@ -18,7 +18,7 @@ import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 import { healthGroupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
-const HealthGroupComponent = memo(() => {
+const HealthGroupComponent = () => {
 	const { healthGroups, refetch, isLoading } = useGetHealthGroups()
 	const { closeModal, isOpen, openModal } = useModal()
 	const {
@@ -89,6 +89,6 @@ const HealthGroupComponent = memo(() => {
 			</CustomModalForm>
 		</div>
 	)
-})
+}
 
 export default HealthGroupComponent

@@ -11,15 +11,19 @@ import {
 export const useGetDepartmentReport = (
 	departmentId: string | undefined,
 	sort: 'asc' | 'desc' = 'asc',
-	groupId: string | undefined
+	groupId?: string | undefined,
+	hg?: string | undefined,
+	pe?: string | undefined
 ) => {
 	const { data, isLoading } = useQuery<IDepartmentReport[]>({
-		queryKey: ['department-report', { departmentId, sort, groupId }],
+		queryKey: ['department-report', { departmentId, sort, groupId, hg, pe }],
 		queryFn: async () => {
 			const response: AxiosResponse = await ReportsService.getDepartmentReport(
 				departmentId,
 				sort,
-				groupId
+				groupId,
+				hg,
+				pe
 			)
 			return response.data
 		}
@@ -51,18 +55,20 @@ export const useGetGroupReport = (
 export const useGetHealthReport = (
 	departmentId: string | null,
 	courseId: string | null,
-	physicalEducationId: string | null
+	physicalEducationId: string | null,
+	group?: string | undefined
 ) => {
 	const { data, isLoading } = useQuery<IHealthReport[]>({
 		queryKey: [
 			'check-list-report',
-			{ departmentId, courseId, physicalEducationId }
+			{ departmentId, courseId, physicalEducationId, group }
 		],
 		queryFn: async () => {
 			const response: AxiosResponse = await ReportsService.getHealthReport(
 				departmentId,
 				courseId,
-				physicalEducationId
+				physicalEducationId,
+				group
 			)
 			return response.data
 		}

@@ -10,10 +10,12 @@ export const ReportsService = {
 	async getDepartmentReport(
 		departmentId: string | undefined,
 		sort: 'asc' | 'desc' = 'asc',
-		groupId: string | undefined
+		groupId?: string | undefined,
+		hg?: string | undefined,
+		pe?: string | undefined
 	) {
 		return instance.get<IDepartmentReport[]>(
-			`${SERVICE_URL.REPORTS}/department-report/${departmentId}?sort=${sort}&group=${groupId}`
+			`${SERVICE_URL.REPORTS}/department-report/${departmentId}?sort=${sort}&group=${groupId}&hg=${hg}&pe=${pe}`
 		)
 	},
 
@@ -31,10 +33,11 @@ export const ReportsService = {
 	async getHealthReport(
 		departmentId: string | null,
 		courseId: string | null,
-		physicalEducationId: string | null
+		physicalEducationId: string | null,
+		group?: string | undefined
 	) {
 		return instance.get<IHealthReport[]>(
-			`${SERVICE_URL.REPORTS}/check-list-report?department=${departmentId}&course=${courseId}&physical-education=${physicalEducationId}`
+			`${SERVICE_URL.REPORTS}/check-list-report?department=${departmentId}&course=${courseId}&pe=${physicalEducationId}&group=${group}`
 		)
 	}
 }

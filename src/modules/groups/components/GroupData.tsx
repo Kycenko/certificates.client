@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
-import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
+import CourseOptions from '@/modules/courses/helpers/course.options'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
 import ActionButtons from '@/shared/components/ActionButtons'
 import { PAGES_URL } from '@/shared/constants/enums.ts'

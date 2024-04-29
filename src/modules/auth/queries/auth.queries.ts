@@ -13,7 +13,7 @@ export const useLogin = () => {
 	const { mutateAsync } = useMutation({
 		mutationKey: ['login'],
 		mutationFn: (data: ILogin) => AuthService.login(data),
-		onSuccess: data => {
+		onSuccess: ({ data }) => {
 			if (data) {
 				setUser(data.user)
 				navigate(`${SERVICE_URL.HOME}`, { replace: true })

@@ -1,15 +1,15 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import { ICourse } from '@/modules/courses/types/course.types.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
+import styles from '@/shared/styles/DetailsTables.module.scss'
 
 interface CourseDetailsDataProps {
 	data: ICourse | undefined
 }
 
-const CourseDetailsData: FC<CourseDetailsDataProps> = memo(({ data }) => {
+const CourseDetailsData: FC<CourseDetailsDataProps> = ({ data }) => {
 	const navigate = useNavigate()
 	return (
 		<>
@@ -28,6 +28,6 @@ const CourseDetailsData: FC<CourseDetailsDataProps> = memo(({ data }) => {
 			))}
 		</>
 	)
-})
+}
 
 export default CourseDetailsData

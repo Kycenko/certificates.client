@@ -27,7 +27,7 @@ const ModalHealthReport: FC<ModalProps> = memo(({ isOpen, onClose }) => {
 
 	const onSubmit = (data: FormState) => {
 		navigate(
-			`/reports/check-list-report?department=${data.departmentId}&course=${data.courseId}&physical-education=${data.physicalEducationId}`
+			`/reports/check-list-report?department=${data.departmentId}&course=${data.courseId}&pe=${data.physicalEducationId}`
 		)
 		onClose()
 	}

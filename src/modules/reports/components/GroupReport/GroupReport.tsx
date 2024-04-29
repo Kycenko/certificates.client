@@ -7,7 +7,6 @@ import { useGetHealthGroups } from '@/modules/health-groups/queries/health-group
 import { useGetPhysicalEducations } from '@/modules/physical-educations/queries/physical-education.queries.ts'
 import { GroupReportHeads } from '@/modules/reports/components/GroupReport/group-report-heads.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
-import ReportHeader from '@/modules/reports/components/ReportHeader.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import { useGetGroupReport } from '@/modules/reports/queries/reports.queries.ts'
 import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
@@ -27,19 +26,27 @@ const GroupReport = memo(() => {
 	const groupName = data?.map(({ name }) => <p>{name}</p>)
 	return (
 		<>
-			<ReportHeader onPrint={handlePrint} />
-			<div className='flex justify-between items-end pl-2'>
-				<div className='flex gap-3 mb-10'>
-					<GroupFilters
-						healthGroups={healthGroups}
-						physicalEducations={physicalEducations}
-						sortOrder={sortOrder}
-						setSortOrder={setSortOrder}
-						healthValue={healthValue}
-						setHealthValue={setHealthValue}
-						educationValue={educationValue}
-						setEducationValue={setEducationValue}
-					/>
+			<div className='w-full'>
+				<div className='flex justify-between items-end p-10'>
+					<div className='flex items-end gap-3'>
+						<GroupFilters
+							healthGroups={healthGroups}
+							physicalEducations={physicalEducations}
+							sortOrder={sortOrder}
+							setSortOrder={setSortOrder}
+							healthValue={healthValue}
+							setHealthValue={setHealthValue}
+							educationValue={educationValue}
+							setEducationValue={setEducationValue}
+						/>
+					</div>
+					<button
+						className='btn btn-error text-white'
+						type='submit'
+						onClick={handlePrint}
+					>
+						Экспорт в PDF
+					</button>
 				</div>
 			</div>
 			<ReportBody

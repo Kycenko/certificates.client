@@ -36,7 +36,10 @@ const Search: FC<SearchProps> = memo(
 		}, [debouncedValue, setSearchTerm])
 
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key.toLowerCase() === 'f') {
+			if (
+				(e.altKey && e.key.toLowerCase() === 's') ||
+				(e.altKey && e.key.toLowerCase() === 'ы')
+			) {
 				e.preventDefault()
 				inputRef.current?.focus()
 			}
@@ -60,7 +63,7 @@ const Search: FC<SearchProps> = memo(
 						placeholder={placeholder ? placeholder : 'Поиск...'}
 						onChange={handleSearchChange}
 					/>
-					<kbd className='kbd'>F</kbd>
+					<kbd className='kbd'>Alt + S</kbd>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						viewBox='0 0 16 16'
