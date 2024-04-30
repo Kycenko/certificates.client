@@ -26,10 +26,10 @@ const SortOrder: FC<SortOrderProps> = memo(({ sortOrder, setSortOrder }) => {
 		<div className={styles.container}>
 			<label className='form-control w-full max-w-xs'>
 				<div className='label'>
-					<span>Выберите тип сортировки:</span>
+					{/* <span>Выберите тип сортировки:</span> */}
 				</div>
 				<select
-					className='select select-bordered '
+					className='select select-bordered'
 					value={sortOrder}
 					onChange={handleSortChange}
 				>

@@ -4,10 +4,10 @@ import { IMedicalCertificate } from '@/modules/medical-certificates/types/medica
 export interface IStudent {
 	id: number
 	name: string
-	surname?: string
+	surname: string
 	birthDate: Date
-	secondName: string
-	groupId?: number | undefined
+	secondName?: string
+	groupId?: number
 	group?: IGroup
 	isExpelled?: boolean
 	medicalCertificates: IMedicalCertificate[]
@@ -17,7 +17,7 @@ export interface IUploadStudent {
 	id: number
 	surname: string
 	name: string
-	secondName: string
+	secondName?: string
 	birthDate: Date
 }
 

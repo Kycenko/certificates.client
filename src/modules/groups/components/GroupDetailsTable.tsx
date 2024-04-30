@@ -39,7 +39,7 @@ const GroupDetailsTable = () => {
 	const { create } = useCreateStudent()
 
 	const handleCreate: SubmitHandler<TypeStudentForm> = async data => {
-		const newData = { ...data, groupId: group?.id }
+		const newData = { ...data, groupId: group?.id, secondName: data.secondName }
 		await create(newData)
 		closeModal()
 		await refetch()

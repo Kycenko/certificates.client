@@ -40,7 +40,7 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label='Фильтрация по учебной группе:'
+				label=''
 				filterValue={filterValue}
 				setFilterValue={setFilterValue}
 			>
@@ -65,7 +65,7 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 				)}
 			</Filter>
 			<Filter
-				label='Фильтрация по группе здоровья:'
+				label=''
 				filterValue={healthGroupValue}
 				setFilterValue={setHealthGroupValue}
 			>
@@ -86,7 +86,7 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-				label='Фильтрация по группе по физкультуре:'
+				label=''
 				filterValue={educationValue}
 				setFilterValue={setEducationValue}
 			>

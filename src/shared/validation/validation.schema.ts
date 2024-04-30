@@ -60,8 +60,10 @@ export const studentValidationSchema = z.object({
 		.string()
 		.min(3, { message: 'Минимум 3 символа' })
 		.max(30, { message: 'Максимум 30 символов' }),
+	secondName: z.string().optional(),
 	birthDate: z.string().optional(),
-	groupId: z.string().optional()
+	groupId: z.string().optional(),
+	isExpelled: z.boolean().optional()
 })
 
 export const medicalCertificateValidationSchema = z.object({

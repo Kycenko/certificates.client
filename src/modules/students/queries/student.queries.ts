@@ -1,9 +1,4 @@
-import {
-	QueryClient,
-	useInfiniteQuery,
-	useMutation,
-	useQuery
-} from '@tanstack/react-query'
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosResponse } from 'axios'
 
 import { StudentService } from '@/modules/students/services/student.service.ts'
@@ -69,33 +64,6 @@ export const useGetStudents = (
 		}
 	})
 	return { students, isLoading, refetch }
-}
-
-export const useGetInfiniteStudents = (
-	groupName?: string | undefined,
-
-	sortOrder: 'asc' | 'desc' = 'asc'
-) => {
-	const {
-		data: students,
-		isLoading,
-		isFetchingNextPage,
-		fetchNextPage,
-		hasNextPage
-	} = useInfiniteQuery({
-		queryKey: ['projects', { groupName, sortOrder }],
-		queryFn: async ({ pageParam }) => {
-			const response: AxiosResponse<IStudent[]> = await StudentService.getAll(
-				groupName,
-				sortOrder,
-				pageParam
-			)
-			return response.data
-		},
-		initialPageParam: 1,
-		getNextPageParam: (lastPage, allPages) => allPages.length + 1
-	})
-	return { students, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage }
 }
 
 export const useGetStudent = (id: string | undefined) => {

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
@@ -15,7 +15,7 @@ import useModal from '@/shared/hooks/useModal.ts'
 import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
-import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
+import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 import { studentValidationSchema } from '@/shared/validation/validation.schema.ts'
@@ -46,14 +46,14 @@ const StudentData: FC<StudentDataProps> = ({
 		reset
 	} = useForm<TypeStudentForm>({
 		mode: 'onChange',
+
 		resolver: zodResolver(studentValidationSchema)
 	})
 
 	const onSubmit = async (id: number | string, data: TypeStudentForm) => {
 		const newData = {
 			...data,
-			groupId: Number(data.groupId),
-			isExpelled: Boolean(data.isExpelled)
+			groupId: Number(data.groupId)
 		}
 
 		const historyData = {
@@ -114,7 +114,10 @@ const StudentData: FC<StudentDataProps> = ({
 							<div className={styles.adminEditCell}>
 								<ActionButtons
 									actionId={id}
-									onEdit={() => setEditId(id)}
+									onEdit={() => {
+										setEditId(id)
+										reset()
+									}}
 									onDelete={() => setDeleteId(id)}
 									onHistory={() => onHistory(id)}
 									onInfo={() => onInfo(id)}
@@ -180,7 +183,6 @@ const StudentData: FC<StudentDataProps> = ({
 								))}
 							</CustomSelect>
 							<CustomCheckBox
-								className='mt-2'
 								id={'isExpelled'}
 								label={'Отчислен?'}
 								defaultChecked={isExpelled}
@@ -206,4 +208,4 @@ const StudentData: FC<StudentDataProps> = ({
 	)
 }
 
-export default memo(StudentData)
+export default StudentData

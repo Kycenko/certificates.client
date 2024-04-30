@@ -11,11 +11,11 @@
 }
 
 .headerContainer {
-	@apply flex justify-between items-end pb-4;
+	@apply flex justify-between;
 }
 
 .header {
-	@apply flex gap-3;
+	@apply flex gap-3 items-end;
 }
 
 .createBtn {
