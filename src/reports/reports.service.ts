@@ -12,7 +12,9 @@ export class ReportsService {
 	async getDepartmentReport(
 		departmentId: number,
 		sort: 'asc' | 'desc' = 'asc',
-		group?: string
+		group?: string,
+		hg?: string | undefined,
+		pe?: string | undefined
 	) {
 		const departmentReport = await this.prisma.department.findMany({
 			where: {
@@ -30,6 +32,9 @@ export class ReportsService {
 							select: {
 								name: true,
 								students: {
+									where: {
+										isExpelled: false
+									},
 									orderBy: {
 										surname: sort
 									},
@@ -38,6 +43,14 @@ export class ReportsService {
 										surname: true,
 										secondName: true,
 										medicalCertificates: {
+											where: {
+												healthGroup: {
+													name: hg || undefined
+												},
+												physicalEducation: {
+													name: pe || undefined
+												}
+											},
 											select: {
 												startDate: true,
 												finishDate: true,
@@ -88,6 +101,9 @@ export class ReportsService {
 					}
 				},
 				students: {
+					where: {
+						isExpelled: false
+					},
 					orderBy: {
 						surname: sort
 					},
@@ -118,9 +134,6 @@ export class ReportsService {
 									}
 								}
 							},
-							// orderBy: {
-							// 	startDate: 'desc'
-							// },
 							take: 1
 						}
 					}
@@ -134,10 +147,32 @@ export class ReportsService {
 	async getExpiredCertificatesReport() {
 		return this.prisma.student.findMany({
 			where: {
+				isExpelled: false,
 				medicalCertificates: {
 					some: {
 						finishDate: {
 							lt: new Date()
+						}
+					}
+				}
+			},
+			select: {
+				surname: true,
+				name: true,
+				secondName: true,
+				birthDate: true,
+				group: {
+					select: {
+						name: true,
+						course: {
+							select: {
+								number: true,
+								department: {
+									select: {
+										name: true
+									}
+								}
+							}
 						}
 					}
 				}
@@ -170,7 +205,8 @@ export class ReportsService {
 	async getPhysicalGroupCheckListReport(
 		departmentId: number,
 		courseId: number,
-		physicalEducationId: number
+		physicalEducationId: number,
+		group?: string | undefined
 	) {
 		return this.prisma.department.findMany({
 			where: {
@@ -185,6 +221,9 @@ export class ReportsService {
 					select: {
 						number: true,
 						groups: {
+							where: {
+								name: group || undefined
+							},
 							select: {
 								name: true,
 								students: {

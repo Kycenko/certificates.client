@@ -31,8 +31,8 @@ model Student {
   updatedAt           DateTime             @updatedAt @map("updated_at")
   isExpelled          Boolean              @default(false) @map("is_expelled")
   medicalCertificates MedicalCertificate[]
-  group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
   StudentHistory      StudentHistory[]
+  group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@map("students")
 }
@@ -40,10 +40,10 @@ model Student {
 model StudentHistory {
   id        Int      @id @default(autoincrement())
   studentId Int      @map("student_id")
-  student   Student  @relation(fields: [studentId], references: [id])
   groupId   Int?     @map("group_id")
-  group     Group?   @relation(fields: [groupId], references: [id])
   createdAt DateTime @default(now()) @map("created_at")
+  group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
   @@map("student_histories")
 }
@@ -53,8 +53,8 @@ model HealthGroup {
   name                      String                      @unique
   createdAt                 DateTime                    @default(now()) @map("created_at")
   updatedAt                 DateTime                    @updatedAt @map("updated_at")
-  medicalCertificates       MedicalCertificate[]
   MedicalCertificateHistory MedicalCertificateHistory[]
+  medicalCertificates       MedicalCertificate[]
 
   @@map("health_groups")
 }
@@ -64,8 +64,8 @@ model PhysicalEducation {
   name                      String                      @unique
   createdAt                 DateTime                    @default(now()) @map("created_at")
   updatedAt                 DateTime                    @updatedAt @map("updated_at")
-  medicalCertificates       MedicalCertificate[]
   MedicalCertificateHistory MedicalCertificateHistory[]
+  medicalCertificates       MedicalCertificate[]
 
   @@map("physical_educations")
 }
@@ -90,13 +90,13 @@ model MedicalCertificate {
 model MedicalCertificateHistory {
   id                   Int                @id @default(autoincrement())
   medicalCertificateId Int                @map("medical_certificate_id")
-  startDate            DateTime?          @map("start_date")
+  createdAt            DateTime           @default(now()) @map("created_at")
   finishDate           DateTime?          @map("finish_date")
   healthGroupId        Int?               @map("health_group_id")
   physicalEducationId  Int?               @map("physical_education_id")
-  createdAt            DateTime           @default(now()) @map("created_at")
-  medicalCertificate   MedicalCertificate @relation(fields: [medicalCertificateId], references: [id])
+  startDate            DateTime?          @map("start_date")
   healthGroup          HealthGroup?       @relation(fields: [healthGroupId], references: [id])
+  medicalCertificate   MedicalCertificate @relation(fields: [medicalCertificateId], references: [id], onDelete: Cascade)
   physicalEducation    PhysicalEducation? @relation(fields: [physicalEducationId], references: [id], onDelete: Cascade)
 
   @@map("medical_certificate_histories")
@@ -109,9 +109,9 @@ model Group {
   createdAt      DateTime         @default(now()) @map("created_at")
   updatedAt      DateTime         @updatedAt @map("updated_at")
   course         Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  StudentHistory StudentHistory[]
   students       Student[]
   User           User[]
-  StudentHistory StudentHistory[]
 
   @@unique([name, courseId])
   @@map("groups")

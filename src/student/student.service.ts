@@ -1,7 +1,6 @@
 import { PrismaService } from '@config/prisma.service'
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { formatISO } from 'date-fns'
-import { fromZonedTime } from 'date-fns-tz'
 import * as XLSX from 'xlsx'
 import { StudentDto } from './dto/student.dto'
 @Injectable()
@@ -28,13 +27,13 @@ export class StudentService {
 		}>
 
 		for (const item of data) {
-			const utcDate = fromZonedTime(item.birthDate, 'Europe/Moscow')
+			item.birthDate.setHours(item.birthDate.getHours() + 3)
 			await this.prisma.student.create({
 				data: {
 					surname: item.surname,
 					name: item.name,
 					secondName: item.secondName || null,
-					birthDate: formatISO(utcDate)
+					birthDate: formatISO(item.birthDate)
 				}
 			})
 		}
@@ -48,12 +47,7 @@ export class StudentService {
 		})
 	}
 
-	async getAll(
-		groupName?: string,
-		sortOrder: 'asc' | 'desc' = 'asc',
-		page: number = 1,
-		pageSize: number = 50
-	) {
+	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
 		const whereCourse = groupName
 			? {
 					group: {
@@ -61,8 +55,6 @@ export class StudentService {
 					}
 				}
 			: {}
-
-		const skip = (page - 1) * pageSize
 
 		const students = await this.prisma.student.findMany({
 			orderBy: {
@@ -72,9 +64,7 @@ export class StudentService {
 			include: {
 				medicalCertificates: true,
 				group: true
-			},
-			skip: skip,
-			take: pageSize
+			}
 		})
 
 		if (!students || students.length === 0)

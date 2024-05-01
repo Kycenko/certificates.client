@@ -6,18 +6,26 @@ import { ReportsService } from './reports.service'
 export class ReportsController {
 	constructor(private readonly reportsService: ReportsService) {}
 
-	//отчет по обучающимся отделения с указанием даты выдачи справки и сроком ее действия
+	//отчет по отделению
 	@Auth('admin')
 	@Get('department-report/:departmentId')
 	async getDepartmentReport(
 		@Param('departmentId') departmentId: number,
 		@Query('sort') sort: 'asc' | 'desc' = 'asc',
-		@Query('group') group?: string
+		@Query('group') group?: string,
+		@Query('hg') hg?: string,
+		@Query('pe') pe?: string
 	) {
-		return this.reportsService.getDepartmentReport(departmentId, sort, group)
+		return this.reportsService.getDepartmentReport(
+			departmentId,
+			sort,
+			group,
+			hg,
+			pe
+		)
 	}
 
-	//отчет по группе с указанием даты выдачи справки и сроком ее действия
+	//отчет по группе
 	@Auth('admin')
 	@Get('group-report/:groupId')
 	async getGroupReport(
@@ -42,12 +50,14 @@ export class ReportsController {
 	async getPhysicalGroupCheckListReport(
 		@Query('department') departmentId: number,
 		@Query('course') courseId: number,
-		@Query('physical-education') physicalEducationId: number
+		@Query('pe') physicalEducationId: number,
+		@Query('group') group?: string | undefined
 	) {
 		return this.reportsService.getPhysicalGroupCheckListReport(
 			departmentId,
 			courseId,
-			physicalEducationId
+			physicalEducationId,
+			group
 		)
 	}
 }
