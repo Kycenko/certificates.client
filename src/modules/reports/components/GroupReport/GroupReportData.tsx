@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { FC, memo } from 'react'
 
 import { IGroupReport } from '@/modules/reports/types/reports.types.ts'
+import NoData from '@/shared/components/NoData'
 import formatFullName from '@/shared/utils/formatFullName.ts'
 
 interface GroupReportDataProps {
@@ -9,6 +10,7 @@ interface GroupReportDataProps {
 }
 
 const GroupReportData: FC<GroupReportDataProps> = memo(({ data }) => {
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(({ id, students, course }) =>

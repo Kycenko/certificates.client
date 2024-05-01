@@ -25,7 +25,7 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label='Фильтрация по группам:'
+				label=''
 				filterValue={filterValue}
 				setFilterValue={setFilterValue}
 			>

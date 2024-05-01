@@ -14,6 +14,7 @@ import { MedicalCertificatesPageLazy } from '@/pages/MedicalCertificates/Medical
 import { NotFoundPageLazy } from '@/pages/NotFound/NotFoundPageLazy.tsx'
 import { PhysicalEducationsPageLazy } from '@/pages/PhysicalEducations/PhysicalEducationsPageLazy.tsx'
 import { GetDepartmentReportPageLazy } from '@/pages/Reports/GetDepartmentReportPageLazy.tsx'
+import GetExpiredCertificatesReportPage from '@/pages/Reports/GetExpiredCertificatesReportPage'
 import { GetGroupReportPageLazy } from '@/pages/Reports/GetGroupReportPageLazy.tsx'
 import { GetHealthReportPageLazy } from '@/pages/Reports/GetHealthReportPageLazy.tsx'
 import { StudentDetailsPageLazy } from '@/pages/Students/StudentDetailsPageLazy.tsx'
@@ -43,7 +44,7 @@ export const enum AppRoutes {
 	GET_DEPARTMENT_REPORT = 'department-report',
 	GET_GROUP_REPORT = 'group-report',
 	GET_HEALTH_REPORT = 'check-list-report',
-
+	GET_EXPIRED_CERTIFICATES_REPORT = 'expired-certificates',
 	NOT_FOUND = 'not-found'
 }
 
@@ -61,7 +62,6 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.GROUPS]: '/groups',
 	[AppRoutes.GROUP_DETAILS]: '/groups/:id',
 	[AppRoutes.STUDENTS]: '/students',
-
 	[AppRoutes.STUDENT_HISTORY]: '/student-history/:id',
 	[AppRoutes.STUDENT_DETAILS]: '/students/:id',
 	[AppRoutes.MEDICAL_CERTIFICATES]: '/medical-certificates',
@@ -69,6 +69,8 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.GET_DEPARTMENT_REPORT]: '/reports/department-report/:id',
 	[AppRoutes.GET_GROUP_REPORT]: '/reports/group-report/:id',
 	[AppRoutes.GET_HEALTH_REPORT]: '/reports/check-list-report',
+	[AppRoutes.GET_EXPIRED_CERTIFICATES_REPORT]:
+		'/reports/expired-certificates-report',
 	[AppRoutes.NOT_FOUND]: '*'
 }
 
@@ -158,5 +160,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.NOT_FOUND]: {
 		path: RoutePath['not-found'],
 		element: <NotFoundPageLazy />
+	},
+	[AppRoutes.GET_EXPIRED_CERTIFICATES_REPORT]: {
+		path: RoutePath['expired-certificates'],
+		element: <GetExpiredCertificatesReportPage />
 	}
 }

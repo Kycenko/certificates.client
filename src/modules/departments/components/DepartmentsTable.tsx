@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -30,17 +30,11 @@ import { departmentValidationSchema } from '@/shared/validation/validation.schem
 
 const DepartmentsTable = () => {
 	const navigate = useNavigate()
-	const [searchTerm, setSearchTerm] = useState<string>('')
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 
 	const { departments, isLoading, refetch } = useGetDepartments()
 
-	const { sortedData } = useSortAndFilterData(
-		departments as IDepartment[],
-		searchTerm,
-		sortOrder,
-		'name'
-	)
+	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
+		useSortAndFilterData(departments as IDepartment[], 'name')
 
 	window.history.pushState(null, '', `?search=${searchTerm}&sort=${sortOrder}`)
 

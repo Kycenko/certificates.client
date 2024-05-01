@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 
 import { IMedicalCertificateHistory } from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
+import NoData from '@/shared/components/NoData'
 import styles from '@/shared/styles/Tables.module.scss'
 
 interface MedicalCertificateHistoryDataProps {
@@ -11,6 +12,7 @@ interface MedicalCertificateHistoryDataProps {
 const MedicalCertificateHistoryData: FC<MedicalCertificateHistoryDataProps> = ({
 	data
 }) => {
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(

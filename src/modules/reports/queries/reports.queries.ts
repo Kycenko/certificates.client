@@ -4,6 +4,7 @@ import { AxiosResponse } from 'axios'
 import { ReportsService } from '@/modules/reports/services/reports.service.ts'
 import {
 	IDepartmentReport,
+	IExpiredCertificatesReport,
 	IGroupReport,
 	IHealthReport
 } from '@/modules/reports/types/reports.types.ts'
@@ -70,6 +71,18 @@ export const useGetHealthReport = (
 				physicalEducationId,
 				group
 			)
+			return response.data
+		}
+	})
+	return { data, isLoading }
+}
+
+export const useGetExpiredCertificatesReport = () => {
+	const { data, isLoading } = useQuery<IExpiredCertificatesReport[]>({
+		queryKey: ['expired-certificates-report'],
+		queryFn: async () => {
+			const response: AxiosResponse =
+				await ReportsService.getExpiredCertificatesReport()
 			return response.data
 		}
 	})

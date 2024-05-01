@@ -15,7 +15,7 @@ const ReportBody: FC<ReportBodyProps> = memo(
 				</div>
 				<div className='justify-center flex flex-row py-4'>
 					{header}
-					<b className='ml-2'>{title}</b>
+					<b className='ml-2 font-bold'>{title}</b>
 				</div>
 				{children}
 			</div>

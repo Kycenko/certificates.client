@@ -7,6 +7,7 @@ import useAuth from '@/modules/auth/hooks/useAuth.ts'
 import CourseOptions from '@/modules/courses/helpers/course.options'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
 import ActionButtons from '@/shared/components/ActionButtons'
+import NoData from '@/shared/components/NoData'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import styles from '@/shared/styles/Tables.module.scss'
@@ -59,7 +60,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 		setEditId(null)
 		reset()
 	}
-
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(({ id, name, students, course }) => (

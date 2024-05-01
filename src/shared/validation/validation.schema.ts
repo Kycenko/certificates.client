@@ -65,8 +65,3 @@ export const studentValidationSchema = z.object({
 	groupId: z.string().optional(),
 	isExpelled: z.boolean().optional()
 })
-
-export const medicalCertificateValidationSchema = z.object({
-	startDate: z.string().datetime({ message: 'Обязательное поле' }),
-	finishDate: z.string().datetime({ message: 'Обязательное поле' })
-})

@@ -2,9 +2,9 @@ import { memo } from 'react'
 
 import UploadStudentsData from './UploadStudentsData.tsx'
 import { UploadStudentsHeads } from '@/modules/students/components/UploadStudents/upload-students-heads.ts'
+import useStudentsUpload from '@/modules/students/hooks/useStudentsUpload.ts'
 import { useUploadStudents } from '@/modules/students/queries/student.queries.ts'
 import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
-import useStudentsUpload from '@/shared/hooks/useStudentsUpload.ts'
 import styles from '@/shared/styles/Tables.module.scss'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 
@@ -12,7 +12,7 @@ const UploadStudentsTable = () => {
 	const { file, setFile, data, setData, handleFileUpload } = useStudentsUpload()
 	const { create, isPending } = useUploadStudents()
 
-	const handleUploadToDatabase = async () => {
+	const handleUpload = async () => {
 		if (!file) return
 
 		const formData = new FormData()
@@ -42,7 +42,7 @@ const UploadStudentsTable = () => {
 					<button
 						className='btn btn-success text-white mb-4'
 						type='submit'
-						onClick={handleUploadToDatabase}
+						onClick={handleUpload}
 						disabled={isPending || !data?.length}
 					>
 						ЗАГРУЗИТЬ
@@ -50,19 +50,17 @@ const UploadStudentsTable = () => {
 				</div>
 			</div>
 
-			{data && (
-				<table className={styles.table}>
-					<thead className={styles.tHeads}>
-						<TableHeads
-							className={styles.dHead}
-							data={UploadStudentsHeads}
-						/>
-					</thead>
-					<tbody className='text-center'>
-						<UploadStudentsData data={data} />
-					</tbody>
-				</table>
-			)}
+			<table className={styles.table}>
+				<thead className={styles.tHeads}>
+					<TableHeads
+						className={styles.dHead}
+						data={UploadStudentsHeads}
+					/>
+				</thead>
+				<tbody className='text-center'>
+					<UploadStudentsData data={data} />
+				</tbody>
+			</table>
 		</>
 	)
 }

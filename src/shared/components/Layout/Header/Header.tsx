@@ -1,5 +1,6 @@
 import { memo, useState } from 'react'
 
+import ModalExpiredCertificatesReport from './report-modals/ModalExpiredCertificatesReport'
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
 import Dropdown from '@/shared/components/Layout/Header/DropDown/DropDown.tsx'
 import styles from '@/shared/components/Layout/Header/Header.module.scss'
@@ -12,6 +13,7 @@ const Header = memo(() => {
 	const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false)
 	const [isGroupModalOpen, setIsGroupModalOpen] = useState(false)
 	const [isHealthModalOpen, setIsHealthModalOpen] = useState(false)
+	const [isExpiredModalOpen, setIsExpiredModalOpen] = useState(false)
 
 	return user?.isAdmin ? (
 		<div className={styles.adminContainer}>
@@ -36,6 +38,12 @@ const Header = memo(() => {
 					Листок здоровья по физкультуре
 				</li>
 				<li className={styles.liItem}>Отчет по группе здоровья</li>
+				<li
+					onClick={() => setIsExpiredModalOpen(true)}
+					className={styles.liItem}
+				>
+					Отчет по истёкшим справкам
+				</li>
 			</Dropdown>
 
 			<ModalDepartmentReport
@@ -49,6 +57,10 @@ const Header = memo(() => {
 			<ModalHealthReport
 				isOpen={isHealthModalOpen}
 				onClose={() => setIsHealthModalOpen(false)}
+			/>
+			<ModalExpiredCertificatesReport
+				isOpen={isExpiredModalOpen}
+				onClose={() => setIsExpiredModalOpen(false)}
 			/>
 		</div>
 	) : null

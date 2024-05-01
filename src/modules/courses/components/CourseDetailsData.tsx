@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ICourse } from '@/modules/courses/types/course.types.ts'
+import NoData from '@/shared/components/NoData'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import styles from '@/shared/styles/DetailsTables.module.scss'
 
@@ -11,6 +12,7 @@ interface CourseDetailsDataProps {
 
 const CourseDetailsData: FC<CourseDetailsDataProps> = ({ data }) => {
 	const navigate = useNavigate()
+	if (data?.groups.length === 0) return <NoData />
 	return (
 		<>
 			{data?.groups?.map(({ id, name, students }) => (

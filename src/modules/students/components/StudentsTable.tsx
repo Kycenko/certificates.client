@@ -26,13 +26,33 @@ const StudentsTable = () => {
 	const [searchTerm, setSearchTerm] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 	const [filterValue, setFilterValue] = useState<string>('')
+	const [selected, setSelected] = useState<{ [key: number | string]: boolean }>(
+		{}
+	)
 
-	const { students, isLoading, refetch } = useGetStudents(filterValue)
+	console.log(selected)
+	const toggleSelect = (id: number | string) => {
+		setSelected(prev => ({ ...prev, [id]: !prev[id] }))
+	}
+
+	const toggleSelectAll = (checked: boolean) => {
+		const newSelected = {} as { [key: number | string]: boolean }
+		if (checked) {
+			sortedData.forEach(student => {
+				newSelected[student.id] = true
+			})
+		}
+		setSelected(newSelected)
+	}
+
+	const { students, isLoading, refetch } = useGetStudents(
+		filterValue,
+		sortOrder
+	)
 
 	const { sortedData } = useSortAndFilterData(
 		students as IStudent[],
-		searchTerm,
-		sortOrder,
+
 		'surname'
 	)
 	const { groups } = useGetGroups()
@@ -87,10 +107,15 @@ const StudentsTable = () => {
 					</div>
 					<table className={styles.table}>
 						<thead className={styles.tHeads}>
-							<TableHeads data={StudentHeads} />
+							<TableHeads
+								data={StudentHeads}
+								onSelectAll={toggleSelectAll}
+							/>
 						</thead>
 						<tbody>
 							<StudentData
+								selected={selected}
+								onToggleSelect={toggleSelect}
 								data={sortedData}
 								onDelete={handleDelete}
 								onEdit={handleEdit}

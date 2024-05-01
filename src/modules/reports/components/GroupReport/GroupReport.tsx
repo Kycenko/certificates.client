@@ -11,19 +11,30 @@ import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import { useGetGroupReport } from '@/modules/reports/queries/reports.queries.ts'
 import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import styles from '@/shared/styles/Tables.module.scss'
+import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const GroupReport = memo(() => {
 	const { id } = useParams()
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 	const [healthValue, setHealthValue] = useState('')
 	const [educationValue, setEducationValue] = useState('')
-	const { data } = useGetGroupReport(id, sortOrder, healthValue, educationValue)
+	const { data, isLoading } = useGetGroupReport(
+		id,
+		sortOrder,
+		healthValue,
+		educationValue
+	)
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `group-report-${id}`
 	})
 	const groupName = data?.map(({ name }) => <p>{name}</p>)
+
+	if (isLoading) {
+		return <CustomLoader />
+	}
+
 	return (
 		<>
 			<div className='w-full'>

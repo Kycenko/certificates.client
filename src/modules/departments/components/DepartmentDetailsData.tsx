@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { IDepartment } from '@/modules/departments/types/department.types.ts'
+import NoData from '@/shared/components/NoData'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import styles from '@/shared/styles/DetailsTables.module.scss'
 
@@ -11,6 +12,7 @@ interface DepartmentDetailsDataProps {
 
 const DepartmentDetailsData: FC<DepartmentDetailsDataProps> = ({ data }) => {
 	const navigate = useNavigate()
+	if (data?.courses.length === 0) return <NoData />
 	return (
 		<>
 			{data?.courses?.map(({ id, number, groups }) => (

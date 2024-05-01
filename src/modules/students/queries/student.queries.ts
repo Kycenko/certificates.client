@@ -57,7 +57,6 @@ export const useGetStudents = (
 		queryFn: async () => {
 			const response: AxiosResponse<IStudent[]> = await StudentService.getAll(
 				groupName,
-
 				sortOrder
 			)
 			return response.data

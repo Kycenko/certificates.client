@@ -1,9 +1,9 @@
 const formatFullName = (
-	surname: string | undefined,
+	surname: string,
 	name: string,
-	secondName: string
+	secondName: string | undefined
 ) => {
-	if (!secondName) return `${surname} ${name[0].toUpperCase()}.`
+	if (!secondName) return `${surname} ${name[0].toUpperCase()}`
 	return `${surname} ${name[0].toUpperCase()}.${secondName[0].toUpperCase()}.`
 }
 

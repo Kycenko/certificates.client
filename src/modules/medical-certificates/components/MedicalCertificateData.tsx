@@ -11,6 +11,7 @@ import {
 } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/queries/physical-education.queries.ts'
 import ActionButtons from '@/shared/components/ActionButtons'
+import NoData from '@/shared/components/NoData'
 import useModal from '@/shared/hooks/useModal.ts'
 import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
@@ -75,7 +76,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		setEditId(null)
 		reset()
 	}
-
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(

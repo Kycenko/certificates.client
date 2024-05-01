@@ -37,6 +37,7 @@ const DepartmentDetailsTable = () => {
 		reset()
 	}
 	if (isLoading) return <CustomLoader />
+
 	return (
 		<>
 			<Heading title={'Описание отделения'}>

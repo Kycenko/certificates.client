@@ -36,7 +36,7 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label='Фильтрация по названию группы:'
+				label=''
 				filterValue={filterValue}
 				setFilterValue={setFilterValue}
 			>

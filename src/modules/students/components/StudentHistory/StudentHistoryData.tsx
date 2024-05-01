@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 
 import { IStudentHistory } from '@/modules/students/types/student-history.types.ts'
+import NoData from '@/shared/components/NoData'
 import styles from '@/shared/styles/Tables.module.scss'
 
 interface StudentHistoryDataProps {
@@ -9,6 +10,7 @@ interface StudentHistoryDataProps {
 }
 
 const StudentHistoryData: FC<StudentHistoryDataProps> = ({ data }) => {
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(({ id, group, createdAt }) => (

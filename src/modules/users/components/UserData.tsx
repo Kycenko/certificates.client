@@ -16,6 +16,7 @@ interface UserDataProps {
 const UserData: FC<UserDataProps> = ({ data, onEdit, onDelete }) => {
 	const { deleteId, setDeleteId } = useModal()
 	const { user } = useAuth()
+
 	return (
 		<div>
 			{data?.map(({ id, login }) =>

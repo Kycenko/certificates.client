@@ -7,6 +7,7 @@ import {
 	TypeHealthGroupForm
 } from '@/modules/health-groups/types/health-group.types.ts'
 import ActionButtons from '@/shared/components/ActionButtons'
+import NoData from '@/shared/components/NoData'
 import useModal from '@/shared/hooks/useModal.ts'
 import styles from '@/shared/styles/Cards.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
@@ -48,7 +49,7 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 		setEditId(null)
 		reset()
 	}
-
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<div>
 			{data?.map(({ id, name }) => (

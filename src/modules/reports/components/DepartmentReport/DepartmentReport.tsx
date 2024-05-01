@@ -11,6 +11,7 @@ import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import { useGetDepartmentReport } from '@/modules/reports/queries/reports.queries.ts'
 import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import styles from '@/shared/styles/Tables.module.scss'
+import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const DepartmentReport = () => {
 	const { id } = useParams()
@@ -18,7 +19,7 @@ const DepartmentReport = () => {
 	const [filterValue, setFilterValue] = useState('')
 	const [healthValue, setHealthValue] = useState('')
 	const [physicalValue, setPhysicalValue] = useState('')
-	const { data } = useGetDepartmentReport(
+	const { data, isLoading } = useGetDepartmentReport(
 		id,
 		sortOrder,
 		filterValue,
@@ -32,6 +33,10 @@ const DepartmentReport = () => {
 		documentTitle: `department-report-${id}`
 	})
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
+
+	if (isLoading) {
+		return <CustomLoader />
+	}
 	return (
 		<>
 			<div className='w-full'>

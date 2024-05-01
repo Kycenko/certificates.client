@@ -1,9 +1,9 @@
-const useSortAndFilterData = (
-	data: any[],
-	searchTerm: string,
-	sortOrder: 'asc' | 'desc',
-	sortField: string
-) => {
+import { useState } from 'react'
+
+const useSortAndFilterData = (data: any[], sortField: string) => {
+	const [searchTerm, setSearchTerm] = useState<string>('')
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+
 	const filteredData = data?.filter(item =>
 		item[sortField].toLowerCase().includes(searchTerm.toLowerCase())
 	)
@@ -13,7 +13,13 @@ const useSortAndFilterData = (
 			: b.name.localeCompare(a.name)
 	})
 
-	return { sortedData, searchTerm, sortOrder }
+	return {
+		sortedData,
+		searchTerm,
+		setSearchTerm,
+		sortOrder,
+		setSortOrder
+	}
 }
 
 export default useSortAndFilterData

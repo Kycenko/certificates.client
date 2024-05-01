@@ -1,5 +1,5 @@
 .container {
-	@apply w-full h-full overflow-y-scroll overflow-x-scroll;
+	@apply w-full h-full overflow-y-auto overflow-x-auto;
 }
 
 .table {
@@ -11,15 +11,11 @@
 }
 
 .headerContainer {
-	@apply flex justify-between;
+	@apply flex justify-between mb-4 p-2;
 }
 
 .header {
-	@apply flex gap-3 items-end;
-}
-
-.createBtn {
-	@apply border bg-[#5bc0de] hover:bg-[#46b8da] p-2 rounded text-white font-medium;
+	@apply flex gap-3;
 }
 
 .heads {
@@ -31,9 +27,6 @@
 }
 .dHead {
 	@apply text-center py-3 px-2 font-bold;
-}
-.noData {
-	@apply px-6 py-4 text-center justify-center  items-center;
 }
 
 .contentCell {
@@ -50,10 +43,6 @@
 
 .adminEditCell {
 	@apply flex items-center space-x-2;
-}
-
-.iconBtn {
-	@apply rounded border px-1 py-1 text-black hover:bg-gray-200 hover:text-black  bg-[#ffffff];
 }
 
 .userEditCell {

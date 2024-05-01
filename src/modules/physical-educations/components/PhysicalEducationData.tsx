@@ -7,6 +7,7 @@ import {
 	TypePhysicalEducationForm
 } from '@/modules/physical-educations/types/physical-education.types.ts'
 import ActionButtons from '@/shared/components/ActionButtons'
+import NoData from '@/shared/components/NoData'
 import useModal from '@/shared/hooks/useModal.ts'
 import styles from '@/shared/styles/Cards.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
@@ -46,6 +47,7 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 		setEditId(null)
 		reset()
 	}
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<div>
 			{data?.map(({ id, name }) => (

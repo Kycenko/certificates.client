@@ -9,10 +9,7 @@ interface CustomCheckBoxProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const CustomCheckBox = memo(
 	forwardRef<HTMLInputElement, CustomCheckBoxProps>(
-		(
-			{ id, label, className, placeholder, type, checked, onChange, ...props },
-			ref
-		) => {
+		({ id, label, className, placeholder, type, ...props }, ref) => {
 			return (
 				<div className={`form-control ${className}`}>
 					<label className={'label cursor-pointer'}>

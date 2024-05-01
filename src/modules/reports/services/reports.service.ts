@@ -1,7 +1,7 @@
 import {
 	IDepartmentReport,
-	IGroupReport,
-	IHealthReport
+	IExpiredCertificatesReport,
+	IGroupReport
 } from '@/modules/reports/types/reports.types.ts'
 import instance from '@/shared/api/api.instance.ts'
 import { SERVICE_URL } from '@/shared/constants/enums.ts'
@@ -36,8 +36,14 @@ export const ReportsService = {
 		physicalEducationId: string | null,
 		group?: string | undefined
 	) {
-		return instance.get<IHealthReport[]>(
+		return instance.get<IExpiredCertificatesReport[]>(
 			`${SERVICE_URL.REPORTS}/check-list-report?department=${departmentId}&course=${courseId}&pe=${physicalEducationId}&group=${group}`
+		)
+	},
+
+	async getExpiredCertificatesReport() {
+		return instance.get<IExpiredCertificatesReport[]>(
+			`${SERVICE_URL.REPORTS}/expired-certificates-report`
 		)
 	}
 }

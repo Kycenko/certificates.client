@@ -8,6 +8,7 @@ import {
 } from '@/modules/courses/types/course.types.ts'
 import { useGetDepartments } from '@/modules/departments/queries/department.queries'
 import ActionButtons from '@/shared/components/ActionButtons'
+import NoData from '@/shared/components/NoData'
 import useModal from '@/shared/hooks/useModal.ts'
 import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
@@ -33,7 +34,6 @@ const CourseData: FC<CourseDataProps> = ({
 		register,
 		handleSubmit,
 		formState: { errors },
-
 		reset
 	} = useForm<TypeCourseForm>()
 
@@ -51,7 +51,7 @@ const CourseData: FC<CourseDataProps> = ({
 		setEditId(null)
 		reset()
 	}
-
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(({ id, number, groups, department }) => (

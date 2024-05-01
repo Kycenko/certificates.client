@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { FC, memo } from 'react'
 
 import { IDepartmentReport } from '@/modules/reports/types/reports.types.ts'
+import NoData from '@/shared/components/NoData'
 import formatFullName from '@/shared/utils/formatFullName.ts'
 
 interface DepartmentReportDataProps {
@@ -9,6 +10,7 @@ interface DepartmentReportDataProps {
 }
 const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(({ id, courses }) =>

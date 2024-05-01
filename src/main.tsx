@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from './app/App'
 import AuthProvider from './app/providers/AuthProvider'
-import FiltersProvider from './app/providers/FiltersProvider'
 import '@/app/index.scss'
 
 const queryClient = new QueryClient({
@@ -22,9 +21,7 @@ createRoot(document.getElementById('root')!).render(
 	<QueryClientProvider client={queryClient}>
 		<BrowserRouter>
 			<AuthProvider>
-				<FiltersProvider>
-					<App />
-				</FiltersProvider>
+				<App />
 
 				<Toaster position='bottom-right' />
 			</AuthProvider>

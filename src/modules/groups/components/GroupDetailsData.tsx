@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { IGroup } from '@/modules/groups/types/group.types.ts'
+import NoData from '@/shared/components/NoData'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import styles from '@/shared/styles/DetailsTables.module.scss'
 
@@ -12,6 +13,7 @@ interface GroupDetailsDataProps {
 
 const GroupDetailsData: FC<GroupDetailsDataProps> = ({ data }) => {
 	const navigate = useNavigate()
+	if (data?.students.length === 0) return <NoData />
 	return (
 		<>
 			{data?.students?.map(

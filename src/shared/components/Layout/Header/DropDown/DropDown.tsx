@@ -16,12 +16,10 @@ const Dropdown: FC<PropsWithChildren> = memo(({ children }) => {
 	return (
 		<div
 			ref={dropdownRef}
-			// className={styles.container}
-			className='dropdown '
+			className='dropdown'
 		>
 			<button
 				type='button'
-				// className={styles.button}
 				className='btn m-1 bg-base-200'
 				onClick={toggleDropdown}
 			>

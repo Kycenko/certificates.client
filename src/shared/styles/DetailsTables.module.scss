@@ -20,20 +20,3 @@
 .cellPadding {
 	@apply p-2;
 }
-
-.greenBg {
-	@apply bg-green-200;
-}
-.redBg {
-	@apply bg-red-200;
-}
-.yellowBg {
-	@apply bg-yellow-300;
-}
-
-.daysCell {
-	@apply border text-center;
-}
-.createBtn {
-	@apply mb-4 rounded border font-medium bg-[#5bc0de] px-2 py-2 text-white hover:bg-[#46b8da];
-}

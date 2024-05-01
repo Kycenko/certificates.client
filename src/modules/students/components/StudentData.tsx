@@ -11,6 +11,7 @@ import {
 	TypeStudentForm
 } from '@/modules/students/types/student.types.ts'
 import ActionButtons from '@/shared/components/ActionButtons'
+import NoData from '@/shared/components/NoData'
 import useModal from '@/shared/hooks/useModal.ts'
 import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
@@ -26,6 +27,8 @@ interface StudentDataProps {
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
 	onHistory: (id: number | string) => void
+	selected: { [key: number | string]: boolean }
+	onToggleSelect: (id: number | string) => void
 }
 
 const StudentData: FC<StudentDataProps> = ({
@@ -33,7 +36,9 @@ const StudentData: FC<StudentDataProps> = ({
 	onDelete,
 	onEdit,
 	onInfo,
-	onHistory
+	onHistory,
+	selected,
+	onToggleSelect
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { groups } = useGetGroups()
@@ -65,7 +70,7 @@ const StudentData: FC<StudentDataProps> = ({
 		setEditId(null)
 		reset()
 	}
-
+	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
 			{data?.map(
@@ -84,6 +89,14 @@ const StudentData: FC<StudentDataProps> = ({
 						className={styles.contentCell}
 						key={id}
 					>
+						<td>
+							<input
+								type='checkbox'
+								className='checkbox'
+								checked={!!selected[id]}
+								onChange={() => onToggleSelect(id)}
+							/>
+						</td>
 						<td className={styles.cellPadding}>
 							<span>{surname}</span>
 						</td>

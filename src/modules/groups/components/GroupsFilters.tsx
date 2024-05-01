@@ -34,7 +34,7 @@ const GroupsFilters: FC<GroupsFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label='Фильтрация по номеру курса:'
+				label=''
 				filterValue={filterValue}
 				setFilterValue={setFilterValue}
 			>

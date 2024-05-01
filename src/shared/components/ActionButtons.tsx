@@ -1,7 +1,7 @@
 import { Eye, History, PencilLine, Trash2 } from 'lucide-react'
 import { FC } from 'react'
 
-import CustomButton from '../ui/buttons/CustomButton'
+import styles from './ActionButtons.module.scss'
 
 interface ActionButtonsProps {
 	onHistory?: (id: number | string) => void
@@ -21,35 +21,35 @@ const ActionButtons: FC<ActionButtonsProps> = ({
 	return (
 		<>
 			{!onHistory ? null : (
-				<CustomButton
-					// className={styles.iconBtn}
+				<button
+					className={styles.iconBtn}
 					onClick={() => onHistory(actionId)}
 				>
 					<History />
-				</CustomButton>
+				</button>
 			)}
 
-			<CustomButton
-				// className={styles.iconBtn}
+			<button
+				className={styles.iconBtn}
 				onClick={() => onEdit(actionId)}
 			>
 				<PencilLine />
-			</CustomButton>
+			</button>
 
 			{!onInfo ? null : (
-				<CustomButton
-					// className={styles.iconBtn}
+				<button
+					className={styles.iconBtn}
 					onClick={() => onInfo(actionId)}
 				>
 					<Eye />
-				</CustomButton>
+				</button>
 			)}
-			<CustomButton
-				// className={styles.iconBtn}
+			<button
+				className={styles.iconBtn}
 				onClick={() => onDelete(actionId)}
 			>
 				<Trash2 />
-			</CustomButton>
+			</button>
 		</>
 	)
 }

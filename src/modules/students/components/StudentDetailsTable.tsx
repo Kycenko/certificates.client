@@ -1,7 +1,8 @@
-import { addMonths } from 'date-fns'
-import { memo, useState } from 'react'
+import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+
+import { changeDuration } from '../helpers/changeDuration.ts'
 
 import StudentDetailsData from './StudentDetailsData.tsx'
 import { DetailsStudentHeads } from './student-heads.ts'
@@ -32,9 +33,7 @@ const StudentDetailsTable = () => {
 	const { isOpen, openModal, closeModal } = useModal()
 	const [isDurationSelected, setIsDurationSelected] = useState<boolean>(false)
 
-	const toggleDurationSelect = () => {
-		setIsDurationSelected(!isDurationSelected)
-	}
+	const toggleDurationSelect = () => setIsDurationSelected(!isDurationSelected)
 
 	const {
 		register,
@@ -43,7 +42,6 @@ const StudentDetailsTable = () => {
 		reset
 	} = useForm<TypeMedicalCertificateForm>({
 		mode: 'onChange'
-		//resolver: zodResolver(medicalCertificateValidationSchema)
 	})
 
 	const { create } = useCreateMedicalCertificate()
@@ -51,37 +49,11 @@ const StudentDetailsTable = () => {
 	const handleCreate: SubmitHandler<
 		TypeMedicalCertificateForm
 	> = async data => {
-		let proposedEndDate
-
-		if (isDurationSelected) {
-			const durationMonths = parseInt(data.finishDate.toString())
-			if (!isNaN(durationMonths)) {
-				proposedEndDate = addMonths(new Date(), durationMonths)
-			} else {
-				console.error('Invalid duration provided:', data.finishDate)
-				return
-			}
-		} else {
-			proposedEndDate = new Date(data.finishDate)
-		}
-
-		let lastCertificateEndDate
-		if (student?.medicalCertificates?.length) {
-			lastCertificateEndDate = new Date(
-				student.medicalCertificates[
-					student.medicalCertificates.length - 1
-				].finishDate
-			)
-		}
-
-		if (lastCertificateEndDate && proposedEndDate <= lastCertificateEndDate) {
-			alert(
-				'Дата окончания новой справки должна быть позже даты окончания предыдущей справки.'
-			)
+		const result = changeDuration({ data, student, isDurationSelected })
+		if (result.error) {
 			return
 		}
 
-		data.finishDate = proposedEndDate
 		const newDate = {
 			...data,
 			healthGroupId: Number(data.healthGroupId),
@@ -137,7 +109,9 @@ const StudentDetailsTable = () => {
 						<CustomSelect
 							id='finishDate'
 							label='Выберите продолжительность'
-							{...register('finishDate')}
+							{...register('finishDate', {
+								required: { value: true, message: 'Обязательное поле' }
+							})}
 						>
 							<option value='3'>3 месяца</option>
 							<option value='6'>6 месяцев</option>
@@ -151,20 +125,23 @@ const StudentDetailsTable = () => {
 							id='startDate'
 							label='Выберите дату начала'
 							type='date'
-							{...register('startDate')}
+							{...register('startDate', {
+								required: { value: true, message: 'Обязательное поле' }
+							})}
 						/>
 						<ErrorMessage error={errors.startDate} />
 						<CustomInput
 							id='finishDate'
 							label='Выберите дату окончания'
 							type='date'
-							{...register('finishDate')}
+							{...register('finishDate', {
+								required: { value: true, message: 'Обязательное поле' }
+							})}
 						/>
 						<ErrorMessage error={errors.finishDate} />
 					</>
 				)}
 				<CustomCheckBox
-					className='mt-1'
 					type='checkbox'
 					checked={isDurationSelected}
 					onChange={toggleDurationSelect}
@@ -204,4 +181,4 @@ const StudentDetailsTable = () => {
 	)
 }
 
-export default memo(StudentDetailsTable)
+export default StudentDetailsTable

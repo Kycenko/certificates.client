@@ -26,7 +26,7 @@ const CoursesFilters: FC<CoursesFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label='Фильтрация по отделению:'
+				label=''
 				filterValue={filterValue}
 				setFilterValue={setFilterValue}
 			>

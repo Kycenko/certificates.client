@@ -25,3 +25,12 @@ export interface IHealthReport {
 	students: IStudent[]
 	certificates: IMedicalCertificate[]
 }
+
+export interface IExpiredCertificatesReport {
+	id: number
+	secondName: string
+	surname: string
+	name: string
+	birthDate: Date
+	group: IGroup
+}

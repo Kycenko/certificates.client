@@ -19,18 +19,13 @@ import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const GroupsTable = () => {
 	const navigate = useNavigate()
-	const [searchTerm, setSearchTerm] = useState<string>('')
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+
 	const [filterValue, setFilterValue] = useState<string>('')
 
-	const { groups, isLoading, refetch } = useGetGroups(filterValue, sortOrder)
+	const { groups, isLoading, refetch } = useGetGroups(filterValue)
 
-	const { sortedData } = useSortAndFilterData(
-		groups as IGroup[],
-		searchTerm,
-		sortOrder,
-		'name'
-	)
+	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
+		useSortAndFilterData(groups as IGroup[], 'name')
 	const { closeModal } = useModal()
 
 	const { update } = useUpdateGroup()
