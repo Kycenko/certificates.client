@@ -25,6 +25,7 @@ export class ReportsService {
 				name: true,
 				courses: {
 					select: {
+						number: true,
 						groups: {
 							where: {
 								name: group || undefined

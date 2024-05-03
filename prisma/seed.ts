@@ -45,7 +45,7 @@ async function main() {
 			},
 			{
 				id: 2,
-				name: 'основная'
+				name: 'Основная'
 			},
 			{
 				id: 3,

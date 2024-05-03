@@ -31,6 +31,7 @@ export class MedicalCertificateController {
 	@Get()
 	@Auth('admin')
 	async getAll(
+		// @Query('course') course?: number,
 		@Query('group') groupName?: string,
 		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
 	) {
