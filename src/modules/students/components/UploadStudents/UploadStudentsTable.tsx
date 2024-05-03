@@ -26,7 +26,6 @@ const UploadStudentsTable = () => {
 	return (
 		<>
 			<Heading title='Импорт данных' />
-
 			<div className='flex flex-col'>
 				<div className='flex justify-center mb-4'>
 					<input
@@ -50,17 +49,19 @@ const UploadStudentsTable = () => {
 				</div>
 			</div>
 
-			<table className={styles.table}>
-				<thead className={styles.tHeads}>
-					<TableHeads
-						className={styles.dHead}
-						data={UploadStudentsHeads}
-					/>
-				</thead>
-				<tbody className='text-center'>
-					<UploadStudentsData data={data} />
-				</tbody>
-			</table>
+			{data && (
+				<table className={styles.table}>
+					<thead className={styles.tHeads}>
+						<TableHeads
+							className={styles.dHead}
+							data={UploadStudentsHeads}
+						/>
+					</thead>
+					<tbody className='text-center'>
+						<UploadStudentsData data={data} />
+					</tbody>
+				</table>
+			)}
 		</>
 	)
 }

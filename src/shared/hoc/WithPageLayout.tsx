@@ -1,9 +1,9 @@
-import { ComponentType } from 'react'
+import { ComponentType, PropsWithChildren } from 'react'
 
 import Layout from '@/shared/components/Layout/Layout.tsx'
 
-const WithPageLayout = (WrappedComponent: ComponentType) => {
-	return (props: any) => (
+const WithPageLayout = <P,>(WrappedComponent: ComponentType<P>) => {
+	return (props: PropsWithChildren<P>) => (
 		<Layout>
 			<WrappedComponent {...props} />
 		</Layout>

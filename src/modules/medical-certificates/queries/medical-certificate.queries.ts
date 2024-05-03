@@ -31,6 +31,7 @@ export const useCreateMedicalCertificate = () => {
 }
 
 export const useGetMedicalCertificates = (
+	// course?: string,
 	groupName?: string,
 	sortOrder: 'asc' | 'desc' = 'asc'
 ) => {

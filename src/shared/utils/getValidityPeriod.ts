@@ -6,9 +6,20 @@ const getValidityPeriod = (finishDate: Date, startDate: Date) => {
 	months -= start.getMonth()
 	months += finish.getMonth()
 
+	if (start.getTime() > finish.getTime()) return 'Срок истёк'
 	if (months < 0 || start.getTime() === finish.getTime()) return 'Срок истёк'
 
-	return `${months === 0 ? 'Текущий месяц' : `${months} месяц(а/ев)`}`
+	const getMonthWordEnding = (months: number) => {
+		if (months === 1 || months === 21) {
+			return 'месяц'
+		} else if ((months > 1 && months < 5) || (months > 21 && months < 25)) {
+			return 'месяца'
+		} else {
+			return 'месяцев'
+		}
+	}
+
+	return `${months === 0 ? 'Текущий месяц' : `${months} ${getMonthWordEnding(months)}`}`
 }
 
 export default getValidityPeriod

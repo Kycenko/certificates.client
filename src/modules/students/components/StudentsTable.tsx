@@ -23,41 +23,15 @@ import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const StudentsTable = () => {
 	const navigate = useNavigate()
-	const [searchTerm, setSearchTerm] = useState<string>('')
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+
 	const [filterValue, setFilterValue] = useState<string>('')
-	const [selected, setSelected] = useState<{ [key: number | string]: boolean }>(
-		{}
-	)
 
-	console.log(selected)
-	const toggleSelect = (id: number | string) => {
-		setSelected(prev => ({ ...prev, [id]: !prev[id] }))
-	}
+	const { students, isLoading, refetch } = useGetStudents(filterValue)
 
-	const toggleSelectAll = (checked: boolean) => {
-		const newSelected = {} as { [key: number | string]: boolean }
-		if (checked) {
-			sortedData.forEach(student => {
-				newSelected[student.id] = true
-			})
-		}
-		setSelected(newSelected)
-	}
-
-	const { students, isLoading, refetch } = useGetStudents(
-		filterValue,
-		sortOrder
-	)
-
-	const { sortedData } = useSortAndFilterData(
-		students as IStudent[],
-
-		'surname'
-	)
+	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
+		useSortAndFilterData(students as IStudent[], 'surname')
 	const { groups } = useGetGroups()
 	const { closeModal } = useModal()
-
 	const { update } = useUpdateStudent()
 	const { remove } = useDeleteStudent()
 
@@ -107,15 +81,10 @@ const StudentsTable = () => {
 					</div>
 					<table className={styles.table}>
 						<thead className={styles.tHeads}>
-							<TableHeads
-								data={StudentHeads}
-								onSelectAll={toggleSelectAll}
-							/>
+							<TableHeads data={StudentHeads} />
 						</thead>
 						<tbody>
 							<StudentData
-								selected={selected}
-								onToggleSelect={toggleSelect}
 								data={sortedData}
 								onDelete={handleDelete}
 								onEdit={handleEdit}

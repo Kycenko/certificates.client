@@ -14,7 +14,7 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
 	return (
 		<>
 			{data?.map(({ id, courses }) =>
-				courses?.flatMap(({ groups }) =>
+				courses?.flatMap(({ groups, number }) =>
 					groups.flatMap(({ students, name: groupName }) =>
 						students.flatMap(
 							({ name, surname, secondName, medicalCertificates }) =>
@@ -30,6 +30,7 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
 											<td className='p-2'>
 												{formatFullName(surname, name, secondName)}
 											</td>
+											<td>{number}-й курс</td>
 											<td>{groupName}</td>
 											<td>{departmentName}</td>
 											<td>{physicalEducation.name}</td>

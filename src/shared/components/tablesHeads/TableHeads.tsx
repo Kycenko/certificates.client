@@ -5,19 +5,21 @@ import styles from '@/shared/styles/Tables.module.scss'
 interface TableHeadsProps {
 	className?: string
 	data: string[]
-	onSelectAll: (checked: boolean) => void
+	// onSelectAll?: (checked: boolean) => void
 }
 
-const TableHeads: FC<TableHeadsProps> = ({ className, data, onSelectAll }) => {
+const TableHeads: FC<TableHeadsProps> = ({ className, data }) => {
 	return (
 		<tr className={styles.heads}>
-			<th className={className ? className : styles.head}>
-				<input
-					type='checkbox'
-					onChange={e => onSelectAll(e.target.checked)}
-					className='checkbox'
-				/>
-			</th>
+			{/* {onSelectAll && (
+				<th className={className ? className : styles.head}>
+					<input
+						className='checkbox'
+						type='checkbox'
+						onChange={e => onSelectAll(e.target.checked)}
+					/>
+				</th>
+			)} */}
 			{data?.map(head => (
 				<th
 					key={head}

@@ -25,7 +25,7 @@ const ModalExpiredCertificatesReport: FC<ModalProps> = memo(
 				onClose={onClose}
 				onSubmit={onSubmit}
 			>
-				Отчёт
+				Отчет по истёкшим медицинским справкам
 			</CustomModalForm>
 		)
 	}

@@ -9,7 +9,7 @@ interface CustomModalFormProps {
 	isOpen: boolean
 	formTitle: string
 	buttonTitle: string
-	children: ReactNode
+	children?: ReactNode
 	onClose: () => void
 }
 
@@ -61,10 +61,7 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = memo(
 										Закрыть
 									</button>
 									<button
-										//FIXME: deprecated className
-										className={
-											'bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded'
-										}
+										className='btn btn-success text-white font-bold uppercase px-6 py-3 rounded'
 										type='submit'
 										onClick={onSubmit}
 									>

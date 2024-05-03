@@ -8,15 +8,19 @@ interface MedicalCertificatesFiltersProps {
 	groups: IGroup[] | undefined
 	sortOrder: 'asc' | 'desc'
 	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
-	filterValue: string
-	setFilterValue: Dispatch<SetStateAction<string>>
+	// courseValue: string
+	// setCourseValue: Dispatch<SetStateAction<string>>
+	groupValue: string
+	setGroupValue: Dispatch<SetStateAction<string>>
 }
 const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 	groups,
 	sortOrder,
 	setSortOrder,
-	filterValue,
-	setFilterValue
+	// courseValue,
+	// setCourseValue,
+	groupValue,
+	setGroupValue
 }) => {
 	return (
 		<>
@@ -24,10 +28,18 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 				sortOrder={sortOrder}
 				setSortOrder={setSortOrder}
 			/>
+			{/* <Filter
+				label=''
+				filterValue={courseValue}
+				setFilterValue={setCourseValue}
+			>
+				<option value={''}>Все курсы</option>
+				<CourseOptions />
+			</Filter> */}
 			<Filter
 				label=''
-				filterValue={filterValue}
-				setFilterValue={setFilterValue}
+				filterValue={groupValue}
+				setFilterValue={setGroupValue}
 			>
 				<option value=''>Все группы</option>
 				{groups?.map(group => (
@@ -35,7 +47,7 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 						key={group.id}
 						value={group.name}
 					>
-						{group.name}
+						Группа {group.name}
 					</option>
 				))}
 			</Filter>

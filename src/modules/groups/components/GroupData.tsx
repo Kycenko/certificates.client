@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
-import CourseOptions from '@/modules/courses/helpers/course.options'
+import { useGetCourses } from '@/modules/courses/queries/course.queries'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
 import ActionButtons from '@/shared/components/ActionButtons'
 import NoData from '@/shared/components/NoData'
@@ -29,7 +29,7 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 
 	const { user } = useAuth()
-
+	const { courses } = useGetCourses()
 	const {
 		register,
 		handleSubmit,
@@ -129,7 +129,14 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 							defaultValue={course.number}
 							{...register('courseId')}
 						>
-							<CourseOptions />
+							{courses?.map(course => (
+								<option
+									key={course.id}
+									value={course.number}
+								>
+									{course.number}-й курс
+								</option>
+							))}
 						</CustomSelect>
 					</CustomModalForm>
 					<CustomModalForm

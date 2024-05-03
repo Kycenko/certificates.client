@@ -19,10 +19,12 @@ import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const MedicalCertificatesTable = () => {
 	const navigate = useNavigate()
-	const [filterValue, setFilterValue] = useState<string>('')
+	const [groupValue, setGroupValue] = useState<string>('')
+	// const [courseValue, setCourseValue] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 	const { certificates, isLoading, refetch } = useGetMedicalCertificates(
-		filterValue,
+		// courseValue,
+		groupValue,
 		sortOrder
 	)
 	const { groups } = useGetGroups()
@@ -50,7 +52,11 @@ const MedicalCertificatesTable = () => {
 		navigate(`${PAGES_URL.MEDICAL_CERTIFICATE_HISTORY}/${id}`)
 	}
 
-	window.history.pushState(null, '', `?sort=${sortOrder}&group=${filterValue}`)
+	const onInfo = (id: number | undefined) => {
+		navigate(`${PAGES_URL.STUDENTS}/${id}`)
+	}
+
+	window.history.pushState(null, '', `?sort=${sortOrder}&group=${groupValue}`)
 
 	if (isLoading) return <CustomLoader />
 	return (
@@ -62,8 +68,10 @@ const MedicalCertificatesTable = () => {
 							groups={groups}
 							sortOrder={sortOrder}
 							setSortOrder={setSortOrder}
-							filterValue={filterValue}
-							setFilterValue={setFilterValue}
+							// courseValue={courseValue}
+							// setCourseValue={setCourseValue}
+							groupValue={groupValue}
+							setGroupValue={setGroupValue}
 						/>
 					</div>
 				</div>
@@ -77,6 +85,7 @@ const MedicalCertificatesTable = () => {
 							onDelete={handleDelete}
 							onEdit={handleEdit}
 							onHistory={onHistory}
+							onInfo={onInfo}
 						/>
 					</tbody>
 				</table>

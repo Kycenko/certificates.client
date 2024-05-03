@@ -27,8 +27,6 @@ interface StudentDataProps {
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
 	onHistory: (id: number | string) => void
-	selected: { [key: number | string]: boolean }
-	onToggleSelect: (id: number | string) => void
 }
 
 const StudentData: FC<StudentDataProps> = ({
@@ -36,9 +34,7 @@ const StudentData: FC<StudentDataProps> = ({
 	onDelete,
 	onEdit,
 	onInfo,
-	onHistory,
-	selected,
-	onToggleSelect
+	onHistory
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { groups } = useGetGroups()
@@ -89,14 +85,6 @@ const StudentData: FC<StudentDataProps> = ({
 						className={styles.contentCell}
 						key={id}
 					>
-						<td>
-							<input
-								type='checkbox'
-								className='checkbox'
-								checked={!!selected[id]}
-								onChange={() => onToggleSelect(id)}
-							/>
-						</td>
 						<td className={styles.cellPadding}>
 							<span>{surname}</span>
 						</td>

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useGetHealthGroups } from '@/modules/health-groups/queries/health-group.query.ts'
@@ -27,13 +27,15 @@ interface MedicalCertificateDataProps {
 	onEdit: (id: number | string, data: TypeMedicalCertificateForm) => void
 	onDelete: (id: number | string) => void
 	onHistory: (id: number | string) => void
+	onInfo: (id: number | undefined) => void
 }
 
 const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	data,
 	onDelete,
 	onEdit,
-	onHistory
+	onHistory,
+	onInfo
 }) => {
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 	const { healthGroups } = useGetHealthGroups()
@@ -82,6 +84,8 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 			{data?.map(
 				({
 					id,
+					studentId,
+
 					startDate,
 					finishDate,
 					healthGroupId,
@@ -117,6 +121,7 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 									onHistory={onHistory}
 									onDelete={() => setDeleteId(id)}
 									onEdit={setEditId}
+									onInfo={() => onInfo(studentId)}
 									actionId={id}
 								/>
 							</div>
@@ -195,4 +200,4 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 	)
 }
 
-export default memo(MedicalCertificateData)
+export default MedicalCertificateData
