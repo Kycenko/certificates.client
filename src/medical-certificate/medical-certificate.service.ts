@@ -18,9 +18,10 @@ export class MedicalCertificateService {
 	}
 
 	async getAll(
-		// course?: number,
-		groupName?: string,
-		sortOrder: 'asc' | 'desc' = 'asc'
+		sortOrder: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: number,
+		group?: string
 	) {
 		const studentsIds = await this.prisma.student
 			.findMany({
@@ -30,10 +31,20 @@ export class MedicalCertificateService {
 				},
 				where: {
 					group: {
-						// course: {
-						// 	number: +course
-						// },
-						name: groupName
+						course: course
+							? {
+									number: +course,
+									department: {
+										name: department
+									}
+								}
+							: {
+									number: undefined,
+									department: {
+										name: department
+									}
+								},
+						name: group
 					}
 				}
 			})
@@ -47,10 +58,20 @@ export class MedicalCertificateService {
 					studentId: studentId,
 					student: {
 						group: {
-							// course: {
-							// 	number: +course
-							// },
-							name: groupName
+							course: course
+								? {
+										number: +course,
+										department: {
+											name: department
+										}
+									}
+								: {
+										number: undefined,
+										department: {
+											name: department
+										}
+									},
+							name: group
 						}
 					}
 				},

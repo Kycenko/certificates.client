@@ -28,10 +28,11 @@ export class GroupController {
 	@Get()
 	@Auth()
 	async getAll(
-		@Query('course') course?: number,
-		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
+		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
+		@Query('department') department?: string,
+		@Query('course') course?: number
 	) {
-		return this.groupService.getAll(course, sortOrder)
+		return this.groupService.getAll(sortOrder, department, course)
 	}
 
 	@Get(':id')

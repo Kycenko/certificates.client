@@ -31,11 +31,17 @@ export class MedicalCertificateController {
 	@Get()
 	@Auth('admin')
 	async getAll(
-		// @Query('course') course?: number,
-		@Query('group') groupName?: string,
-		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc'
+		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
+		@Query('department') department?: string,
+		@Query('course') course?: number,
+		@Query('group') group?: string
 	) {
-		return this.medicalCertificateService.getAll(groupName, sortOrder)
+		return this.medicalCertificateService.getAll(
+			sortOrder,
+			department,
+			course,
+			group
+		)
 	}
 
 	@Get(':id')

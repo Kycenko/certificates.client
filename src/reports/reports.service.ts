@@ -145,9 +145,33 @@ export class ReportsService {
 		return groupReport
 	}
 
-	async getExpiredCertificatesReport() {
+	async getExpiredCertificatesReport(
+		sort: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: number,
+		group?: string
+	) {
 		return this.prisma.student.findMany({
+			orderBy: {
+				surname: sort
+			},
 			where: {
+				group: {
+					name: group,
+					course: course
+						? {
+								number: +course,
+								department: {
+									name: department
+								}
+							}
+						: {
+								number: undefined,
+								department: {
+									name: department
+								}
+							}
+				},
 				isExpelled: false,
 				medicalCertificates: {
 					some: {

@@ -40,8 +40,18 @@ export class ReportsController {
 	// отчёт по истекшим справкам
 	@Auth('admin')
 	@Get('expired-certificates-report')
-	async getExpiredCertificatesReport() {
-		return this.reportsService.getExpiredCertificatesReport()
+	async getExpiredCertificatesReport(
+		@Query('sort') sort: 'asc' | 'desc' = 'asc',
+		@Query('department') department?: string,
+		@Query('course') course?: number,
+		@Query('group') group?: string
+	) {
+		return this.reportsService.getExpiredCertificatesReport(
+			sort,
+			department,
+			course,
+			group
+		)
 	}
 
 	//лист здоровья

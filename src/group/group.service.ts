@@ -12,19 +12,30 @@ export class GroupService {
 		})
 	}
 
-	async getAll(course?: number, sortOrder: 'asc' | 'desc' = 'asc') {
-		const whereCourse = course
-			? {
-					course: {
-						number: +course
-					}
-				}
-			: {}
+	async getAll(
+		sortOrder: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: number
+	) {
 		const groups = await this.prisma.group.findMany({
 			orderBy: {
 				name: sortOrder
 			},
-			where: whereCourse,
+			where: {
+				course: course
+					? {
+							number: +course,
+							department: {
+								name: department
+							}
+						}
+					: {
+							number: undefined,
+							department: {
+								name: department
+							}
+						}
+			},
 			include: {
 				students: {
 					include: {
