@@ -31,19 +31,28 @@ export const useCreateMedicalCertificate = () => {
 }
 
 export const useGetMedicalCertificates = (
-	// course?: string,
-	groupName?: string,
-	sortOrder: 'asc' | 'desc' = 'asc'
+	sortOrder: 'asc' | 'desc' = 'asc',
+	department?: string,
+	course?: string,
+	group?: string
 ) => {
 	const {
 		data: certificates,
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES, { groupName, sortOrder }],
+		queryKey: [
+			QUERY_KEYS.MEDICAL_CERTIFICATES,
+			{ sortOrder, department, course, group }
+		],
 		queryFn: async () => {
 			const response: AxiosResponse<IMedicalCertificate[]> =
-				await MedicalCertificateService.getAll(groupName, sortOrder)
+				await MedicalCertificateService.getAll(
+					sortOrder,
+					department,
+					course,
+					group
+				)
 			return response.data
 		}
 	})

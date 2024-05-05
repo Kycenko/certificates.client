@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import GroupsFilters from './GroupsFilters.tsx'
 import { GroupHeads } from './group-heads.ts'
+import { useGetDepartments } from '@/modules/departments/queries/department.queries.ts'
 import GroupData from '@/modules/groups/components/GroupData.tsx'
 import {
 	useDeleteGroup,
@@ -19,13 +20,21 @@ import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const GroupsTable = () => {
 	const navigate = useNavigate()
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+	const [departmentValue, setDepartmentValue] = useState<string>('')
+	const [courseValue, setCourseValue] = useState<string>('')
 
-	const [filterValue, setFilterValue] = useState<string>('')
+	const { departments } = useGetDepartments()
+	const { groups, isLoading, refetch } = useGetGroups(
+		sortOrder,
+		departmentValue,
+		courseValue
+	)
 
-	const { groups, isLoading, refetch } = useGetGroups(filterValue)
-
-	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
-		useSortAndFilterData(groups as IGroup[], 'name')
+	const { sortedData, searchTerm, setSearchTerm } = useSortAndFilterData(
+		groups as IGroup[],
+		'name'
+	)
 	const { closeModal } = useModal()
 
 	const { update } = useUpdateGroup()
@@ -46,7 +55,11 @@ const GroupsTable = () => {
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.GROUPS}/${id}`)
 	}
-	window.history.pushState(null, '', `?course=${filterValue}&sort=${sortOrder}`)
+	window.history.pushState(
+		null,
+		'',
+		`?sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&search=${searchTerm}`
+	)
 
 	if (isLoading) return <CustomLoader />
 	return (
@@ -55,12 +68,15 @@ const GroupsTable = () => {
 				<div className={styles.headerContainer}>
 					<div className={styles.header}>
 						<GroupsFilters
+							departments={departments}
 							searchTerm={searchTerm}
 							setSearchTerm={setSearchTerm}
 							sortOrder={sortOrder}
 							setSortOrder={setSortOrder}
-							filterValue={filterValue}
-							setFilterValue={setFilterValue}
+							departmentValue={departmentValue}
+							setDepartmentValue={setDepartmentValue}
+							courseValue={courseValue}
+							setCourseValue={setCourseValue}
 						/>
 					</div>
 				</div>

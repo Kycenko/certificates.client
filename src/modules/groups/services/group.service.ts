@@ -6,11 +6,16 @@ export const GroupService = {
 	async create(data: TypeGroupForm) {
 		return instance.post<IGroup>(SERVICE_URL.GROUPS, data)
 	},
-	async getAll(course?: string, sortOrder: 'asc' | 'desc' = 'asc') {
-		const url = course
-			? `${SERVICE_URL.GROUPS}?course=${course}&sort=${sortOrder}`
-			: `${SERVICE_URL.GROUPS}?sort=${sortOrder}`
-		return instance.get<IGroup[]>(url)
+	async getAll(
+		sortOrder: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: string
+	) {
+		const departmentParam = department ? `&department=${department}` : ''
+		const courseParam = course ? `&course=${course}` : ''
+		return instance.get<IGroup[]>(
+			`${SERVICE_URL.GROUPS}?sort=${sortOrder}${departmentParam}${courseParam}`
+		)
 	},
 
 	async getById(id: string | undefined) {

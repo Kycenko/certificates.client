@@ -1,26 +1,33 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
 import CourseOptions from '@/modules/courses/helpers/course.options'
+import { IDepartment } from '@/modules/departments/types/department.types'
 import Filter from '@/shared/components/filters/Filter/Filter'
 import Search from '@/shared/components/filters/Search/Search'
 import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
 
 interface GroupsFiltersProps {
+	departments: IDepartment[] | undefined
 	searchTerm: string
 	setSearchTerm: Dispatch<SetStateAction<string>>
 	sortOrder: 'asc' | 'desc'
 	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
-	filterValue: string
-	setFilterValue: Dispatch<SetStateAction<string>>
+	departmentValue: string
+	setDepartmentValue: Dispatch<SetStateAction<string>>
+	courseValue: string
+	setCourseValue: Dispatch<SetStateAction<string>>
 }
 
 const GroupsFilters: FC<GroupsFiltersProps> = ({
+	departments,
 	searchTerm,
 	setSearchTerm,
 	sortOrder,
 	setSortOrder,
-	filterValue,
-	setFilterValue
+	departmentValue,
+	setDepartmentValue,
+	courseValue,
+	setCourseValue
 }) => {
 	return (
 		<>
@@ -35,8 +42,23 @@ const GroupsFilters: FC<GroupsFiltersProps> = ({
 			/>
 			<Filter
 				label=''
-				filterValue={filterValue}
-				setFilterValue={setFilterValue}
+				filterValue={departmentValue}
+				setFilterValue={setDepartmentValue}
+			>
+				<option value={''}>Все отделения</option>
+				{departments?.map(({ id, name }) => (
+					<option
+						key={id}
+						value={name}
+					>
+						{name}
+					</option>
+				))}
+			</Filter>
+			<Filter
+				label=''
+				filterValue={courseValue}
+				setFilterValue={setCourseValue}
 			>
 				<option value={''}>Все курсы</option>
 				<CourseOptions />

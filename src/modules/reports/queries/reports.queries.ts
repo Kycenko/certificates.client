@@ -77,12 +77,25 @@ export const useGetHealthReport = (
 	return { data, isLoading }
 }
 
-export const useGetExpiredCertificatesReport = () => {
+export const useGetExpiredCertificatesReport = (
+	sortOrder: 'asc' | 'desc' = 'asc',
+	department?: string,
+	course?: string,
+	group?: string
+) => {
 	const { data, isLoading } = useQuery<IExpiredCertificatesReport[]>({
-		queryKey: ['expired-certificates-report'],
+		queryKey: [
+			'expired-certificates-report',
+			{ sortOrder, department, course, group }
+		],
 		queryFn: async () => {
 			const response: AxiosResponse =
-				await ReportsService.getExpiredCertificatesReport()
+				await ReportsService.getExpiredCertificatesReport(
+					sortOrder,
+					department,
+					course,
+					group
+				)
 			return response.data
 		}
 	})

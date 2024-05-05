@@ -41,9 +41,18 @@ export const ReportsService = {
 		)
 	},
 
-	async getExpiredCertificatesReport() {
+	async getExpiredCertificatesReport(
+		sortOrder: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: string,
+		group?: string
+	) {
+		const departmentParam = department ? `&department=${department}` : ''
+		const courseParam = course ? `&course=${course}` : ''
+		const groupParam = group ? `&group=${group}` : ''
+
 		return instance.get<IExpiredCertificatesReport[]>(
-			`${SERVICE_URL.REPORTS}/expired-certificates-report`
+			`${SERVICE_URL.REPORTS}/expired-certificates-report?sort=${sortOrder}${departmentParam}${courseParam}${groupParam}`
 		)
 	}
 }

@@ -13,14 +13,17 @@ export const MedicalCertificateService = {
 		)
 	},
 	async getAll(
-		// course?: string,
-		groupName?: string,
-		sortOrder: 'asc' | 'desc' = 'asc'
+		sortOrder: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: string,
+		group?: string
 	) {
-		const url = groupName
-			? `${SERVICE_URL.MEDICAL_CERTIFICATES}?group=${groupName}&sort=${sortOrder}`
-			: `${SERVICE_URL.MEDICAL_CERTIFICATES}?sort=${sortOrder}`
-		return instance.get<IMedicalCertificate[]>(url)
+		const departmentParam = department ? `&department=${department}` : ''
+		const courseParam = course ? `&course=${course}` : ''
+		const groupParam = group ? `&group=${group}` : ''
+		return instance.get<IMedicalCertificate[]>(
+			`${SERVICE_URL.MEDICAL_CERTIFICATES}/?sort=${sortOrder}${departmentParam}${courseParam}${groupParam}`
+		)
 	},
 
 	async getById(id: string | undefined) {

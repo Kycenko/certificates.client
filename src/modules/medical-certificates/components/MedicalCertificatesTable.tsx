@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import MedicalCertificatesFilters from './MedicalCertificatesFilters.tsx'
 import { CertificatesHeads } from './certificates-heads.ts'
+import { useGetDepartments } from '@/modules/departments/queries/department.queries.ts'
 import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 import MedicalCertificateData from '@/modules/medical-certificates/components/MedicalCertificateData.tsx'
 import {
@@ -19,14 +20,17 @@ import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const MedicalCertificatesTable = () => {
 	const navigate = useNavigate()
+	const [departmentValue, setDepartmentValue] = useState<string>('')
 	const [groupValue, setGroupValue] = useState<string>('')
-	// const [courseValue, setCourseValue] = useState<string>('')
+	const [courseValue, setCourseValue] = useState<string>('')
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
 	const { certificates, isLoading, refetch } = useGetMedicalCertificates(
-		// courseValue,
-		groupValue,
-		sortOrder
+		sortOrder,
+		departmentValue,
+		courseValue,
+		groupValue
 	)
+	const { departments } = useGetDepartments()
 	const { groups } = useGetGroups()
 
 	const { closeModal } = useModal()
@@ -65,11 +69,14 @@ const MedicalCertificatesTable = () => {
 				<div className={styles.headerContainer}>
 					<div className={styles.header}>
 						<MedicalCertificatesFilters
+							departments={departments}
 							groups={groups}
 							sortOrder={sortOrder}
 							setSortOrder={setSortOrder}
-							// courseValue={courseValue}
-							// setCourseValue={setCourseValue}
+							departmentValue={departmentValue}
+							setDepartmentValue={setDepartmentValue}
+							courseValue={courseValue}
+							setCourseValue={setCourseValue}
 							groupValue={groupValue}
 							setGroupValue={setGroupValue}
 						/>
