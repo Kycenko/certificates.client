@@ -103,12 +103,13 @@ model MedicalCertificateHistory {
 }
 
 model Group {
-  id             Int              @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   name           String
-  courseId       Int              @map("course_id")
+  courseId       Int?             @map("course_id")
   createdAt      DateTime         @default(now()) @map("created_at")
   updatedAt      DateTime         @updatedAt @map("updated_at")
-  course         Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course         Course?          @relation(fields: [courseId], references: [id], onDelete: Cascade)
   StudentHistory StudentHistory[]
   students       Student[]
   User           User[]
