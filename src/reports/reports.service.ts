@@ -227,10 +227,12 @@ export class ReportsService {
 	}
 
 	//лист здоровья
-	async getPhysicalGroupCheckListReport(
+
+	async getHealthGroupCheckListReportData(
 		departmentId: number,
-		courseId: number,
-		physicalEducationId: number,
+		course: number,
+		healthGroupId: number,
+		sort: 'asc' | 'desc' = 'asc',
 		group?: string | undefined
 	) {
 		return this.prisma.department.findMany({
@@ -241,7 +243,7 @@ export class ReportsService {
 				name: true,
 				courses: {
 					where: {
-						number: +courseId
+						number: +course
 					},
 					select: {
 						number: true,
@@ -252,6 +254,65 @@ export class ReportsService {
 							select: {
 								name: true,
 								students: {
+									orderBy: {
+										surname: sort
+									},
+									select: {
+										surname: true,
+										name: true,
+										secondName: true,
+										medicalCertificates: {
+											where: {
+												healthGroup: {
+													id: +healthGroupId
+												}
+											},
+											select: {
+												healthGroup: {
+													select: {
+														name: true
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		})
+	}
+	async getPhysicalGroupCheckListReport(
+		departmentId: number,
+		course: number,
+		physicalEducationId: number,
+		sort: 'asc' | 'desc' = 'asc',
+		group?: string | undefined
+	) {
+		return this.prisma.department.findMany({
+			where: {
+				id: +departmentId
+			},
+			select: {
+				name: true,
+				courses: {
+					where: {
+						number: +course
+					},
+					select: {
+						number: true,
+						groups: {
+							where: {
+								name: group || undefined
+							},
+							select: {
+								name: true,
+								students: {
+									orderBy: {
+										surname: sort
+									},
 									select: {
 										surname: true,
 										name: true,

@@ -54,19 +54,38 @@ export class ReportsController {
 		)
 	}
 
-	//лист здоровья
 	@Auth('admin')
-	@Get('check-list-report')
+	@Get('pe-check-list')
 	async getPhysicalGroupCheckListReport(
 		@Query('department') departmentId: number,
-		@Query('course') courseId: number,
+		@Query('course') course: number,
 		@Query('pe') physicalEducationId: number,
+		@Query('sort') sort: 'asc' | 'desc' = 'asc',
 		@Query('group') group?: string | undefined
 	) {
 		return this.reportsService.getPhysicalGroupCheckListReport(
 			departmentId,
-			courseId,
+			course,
 			physicalEducationId,
+			sort,
+			group
+		)
+	}
+
+	@Auth('admin')
+	@Get('hg-check-list')
+	async getHealthGroupCheckListReport(
+		@Query('department') departmentId: number,
+		@Query('course') course: number,
+		@Query('hg') healthGroupId: number,
+		@Query('sort') sort: 'asc' | 'desc' = 'asc',
+		@Query('group') group?: string | undefined
+	) {
+		return this.reportsService.getHealthGroupCheckListReportData(
+			departmentId,
+			course,
+			healthGroupId,
+			sort,
 			group
 		)
 	}

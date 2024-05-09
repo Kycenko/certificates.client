@@ -75,15 +75,26 @@ export class MedicalCertificateService {
 						}
 					}
 				},
-				include: {
+				select: {
+					startDate: true,
+					finishDate: true,
 					student: {
-						include: {
+						select: {
+							surname: true,
+							name: true,
+							secondName: true,
+							birthDate: true,
 							group: {
 								select: {
+									name: true,
 									course: {
 										select: {
 											number: true,
-											department: true
+											department: {
+												select: {
+													name: true
+												}
+											}
 										}
 									}
 								}

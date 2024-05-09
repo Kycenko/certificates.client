@@ -38,7 +38,7 @@ export class StudentService {
 			})
 		}
 
-		return { success: true, message: 'Студенты добавлены', data: data }
+		return { success: true, message: 'Обучающиеся добавлены', data: data }
 	}
 
 	async create(dto: StudentDto) {
@@ -47,28 +47,54 @@ export class StudentService {
 		})
 	}
 
-	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
-		const whereCourse = groupName
-			? {
-					group: {
-						name: groupName
-					}
-				}
-			: {}
-
+	async getAll(
+		sortOrder: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: number,
+		group?: string,
+		isExpelled?: boolean
+	) {
 		const students = await this.prisma.student.findMany({
 			orderBy: {
 				surname: sortOrder
 			},
-			where: whereCourse,
+			where: {
+				isExpelled: Boolean(isExpelled) || undefined,
+				OR: [
+					{
+						group: {
+							name: group || undefined,
+							course: {
+								number: course || undefined,
+								department: {
+									name: department || undefined
+								}
+							}
+						}
+					},
+					{
+						group: null
+					}
+				]
+			},
 			include: {
 				medicalCertificates: true,
-				group: true
+				group: {
+					select: {
+						name: true,
+						course: {
+							select: {
+								number: true,
+								department: true
+							}
+						}
+					}
+				}
 			}
 		})
 
 		if (!students || students.length === 0)
-			throw new NotFoundException('Студенты не найдены!')
+			throw new NotFoundException('Обучающиеся не найдены!')
 		return students
 	}
 
@@ -86,7 +112,7 @@ export class StudentService {
 				}
 			}
 		})
-		if (!student) throw new NotFoundException('Студент не найден!')
+		if (!student) throw new NotFoundException('Обучающийся не найден!')
 
 		return student
 	}

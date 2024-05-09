@@ -36,13 +36,20 @@ export class GroupService {
 							}
 						}
 			},
-			include: {
-				students: {
-					include: {
-						medicalCertificates: true
+			select: {
+				id: true,
+				name: true,
+				students: true,
+				course: {
+					select: {
+						number: true,
+						department: {
+							select: {
+								name: true
+							}
+						}
 					}
-				},
-				course: true
+				}
 			}
 		})
 		if (!groups || groups.length === 0)
