@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import StudentsFilters from './StudentsFilters.tsx'
 import { StudentHeads } from './student-heads.ts'
+import { useGetDepartments } from '@/modules/departments/queries/department.queries.ts'
 import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
 import StudentData from '@/modules/students/components/StudentData.tsx'
 import {
@@ -23,13 +24,24 @@ import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const StudentsTable = () => {
 	const navigate = useNavigate()
+	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+	const [departmentValue, setDepartmentValue] = useState('')
+	const [courseValue, setCourseValue] = useState('')
+	const [groupValue, setGroupValue] = useState('')
+	// const [isExpelled, setIsExpelled] = useState('')
 
-	const [filterValue, setFilterValue] = useState<string>('')
+	const { students, isLoading, refetch } = useGetStudents(
+		sortOrder,
+		departmentValue,
+		courseValue,
+		groupValue
+	)
 
-	const { students, isLoading, refetch } = useGetStudents(filterValue)
-
-	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
-		useSortAndFilterData(students as IStudent[], 'surname')
+	const { sortedData, searchTerm, setSearchTerm } = useSortAndFilterData(
+		students as IStudent[],
+		'surname'
+	)
+	const { departments } = useGetDepartments()
 	const { groups } = useGetGroups()
 	const { closeModal } = useModal()
 	const { update } = useUpdateStudent()
@@ -58,7 +70,7 @@ const StudentsTable = () => {
 	window.history.pushState(
 		null,
 		'',
-		`?search=${searchTerm}&group=${filterValue}&sort=${sortOrder}`
+		`?search=${searchTerm}&group=${groupValue}&sort=${sortOrder}`
 	)
 
 	if (isLoading) return <CustomLoader />
@@ -69,13 +81,18 @@ const StudentsTable = () => {
 					<div className={styles.headerContainer}>
 						<div className={styles.header}>
 							<StudentsFilters
+								departments={departments}
 								groups={groups}
 								searchTerm={searchTerm}
 								setSearchTerm={setSearchTerm}
 								sortOrder={sortOrder}
 								setSortOrder={setSortOrder}
-								filterValue={filterValue}
-								setFilterValue={setFilterValue}
+								departmentValue={departmentValue}
+								setDepartmentValue={setDepartmentValue}
+								courseValue={courseValue}
+								setCourseValue={setCourseValue}
+								groupValue={groupValue}
+								setGroupValue={setGroupValue}
 							/>
 						</div>
 					</div>

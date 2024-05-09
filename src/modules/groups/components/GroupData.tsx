@@ -74,6 +74,9 @@ const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
 								<span>{name}</span>
 							</td>
 							<td className={styles.cellPadding}>
+								{`${course?.department?.name || 'Не указано'} `}
+							</td>
+							<td className={styles.cellPadding}>
 								{`${course?.number}-й курс`}
 							</td>
 							<td className={styles.cellPadding}>{students?.length}</td>

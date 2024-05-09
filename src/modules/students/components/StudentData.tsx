@@ -86,19 +86,26 @@ const StudentData: FC<StudentDataProps> = ({
 						key={id}
 					>
 						<td className={styles.cellPadding}>
-							<span>{surname}</span>
+							<span>
+								{surname} {name} {secondName}
+							</span>
 						</td>
-						<td className={styles.cellPadding}>
-							<span>{name}</span>
-						</td>
-						<td className={styles.cellPadding}>
-							<span>{secondName ? secondName : 'Не указано'}</span>
-						</td>
+
 						<td className={styles.cellPadding}>
 							<span>{format(new Date(birthDate), 'dd.MM.yyyy')}</span>
 						</td>
 						<td className={styles.cellPadding}>
-							{group?.name ? group?.name : 'Не указана'}
+							{group?.course?.department?.name
+								? group?.course?.department?.name
+								: 'Не указано'}
+						</td>
+						<td className={styles.cellPadding}>
+							{group?.course?.number
+								? `${group?.course?.number}-й курс`
+								: 'Не указано'}
+						</td>
+						<td className={styles.cellPadding}>
+							{group?.name ? group?.name : 'Не указано'}
 						</td>
 						<td className={styles.cellPadding}>
 							{medicalCertificates?.length}

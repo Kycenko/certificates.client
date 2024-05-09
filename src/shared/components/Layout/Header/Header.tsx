@@ -1,19 +1,22 @@
 import { memo, useState } from 'react'
 
 import ModalExpiredCertificatesReport from './report-modals/ModalExpiredCertificatesReport'
+import ModalHealthGroupReport from './report-modals/ModalHealthGroupReport'
+import ModalPhysicalEducationReport from './report-modals/ModalPhysicalEducationReport'
 import useAuth from '@/modules/auth/hooks/useAuth.ts'
 import Dropdown from '@/shared/components/Layout/Header/DropDown/DropDown.tsx'
 import styles from '@/shared/components/Layout/Header/Header.module.scss'
 import ModalDepartmentReport from '@/shared/components/Layout/Header/report-modals/ModalDepartmentReport.tsx'
 import ModalGroupReport from '@/shared/components/Layout/Header/report-modals/ModalGroupReport.tsx'
-import ModalHealthReport from '@/shared/components/Layout/Header/report-modals/ModalHealthReport.tsx'
 
 const Header = memo(() => {
 	const { user } = useAuth()
 	const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false)
 	const [isGroupModalOpen, setIsGroupModalOpen] = useState(false)
-	const [isHealthModalOpen, setIsHealthModalOpen] = useState(false)
+	const [isPhysicalEducationModalOpen, setIsPhysicalEducationOpen] =
+		useState(false)
 	const [isExpiredModalOpen, setIsExpiredModalOpen] = useState(false)
+	const [isHealthGroupModalOpen, setIsHealthGroupModalOpen] = useState(false)
 
 	return user?.isAdmin ? (
 		<div className={styles.adminContainer}>
@@ -22,27 +25,32 @@ const Header = memo(() => {
 					onClick={() => setIsDepartmentModalOpen(true)}
 					className={styles.liItem}
 				>
-					Отчёт по отделению
+					Отчет по отделению
 				</li>
 				<li
 					onClick={() => setIsGroupModalOpen(true)}
 					className={styles.liItem}
 				>
-					Отчёт по группе
+					Отчет по группе
 				</li>
 
 				<li
-					onClick={() => setIsHealthModalOpen(true)}
+					onClick={() => setIsPhysicalEducationOpen(true)}
 					className={styles.liItem}
 				>
-					Листок здоровья по физкультуре
+					Отчет по группе по физкультуре
 				</li>
-				<li className={styles.liItem}>Отчет по группе здоровья</li>
+				<li
+					onClick={() => setIsHealthGroupModalOpen(true)}
+					className={styles.liItem}
+				>
+					Отчет по группе здоровья
+				</li>
 				<li
 					onClick={() => setIsExpiredModalOpen(true)}
 					className={styles.liItem}
 				>
-					Отчет по истёкшим справкам
+					Отчет по истекшим медицинским справкам
 				</li>
 			</Dropdown>
 
@@ -54,9 +62,13 @@ const Header = memo(() => {
 				isOpen={isGroupModalOpen}
 				onClose={() => setIsGroupModalOpen(false)}
 			/>
-			<ModalHealthReport
-				isOpen={isHealthModalOpen}
-				onClose={() => setIsHealthModalOpen(false)}
+			<ModalPhysicalEducationReport
+				isOpen={isPhysicalEducationModalOpen}
+				onClose={() => setIsPhysicalEducationOpen(false)}
+			/>
+			<ModalHealthGroupReport
+				isOpen={isHealthGroupModalOpen}
+				onClose={() => setIsHealthGroupModalOpen(false)}
 			/>
 			<ModalExpiredCertificatesReport
 				isOpen={isExpiredModalOpen}

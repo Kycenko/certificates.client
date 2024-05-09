@@ -6,7 +6,8 @@ import {
 	IDepartmentReport,
 	IExpiredCertificatesReport,
 	IGroupReport,
-	IHealthReport
+	IHealthGroupReport,
+	IPhysicalEducationReport
 } from '@/modules/reports/types/reports.types.ts'
 
 export const useGetDepartmentReport = (
@@ -53,24 +54,53 @@ export const useGetGroupReport = (
 	return { data, isLoading }
 }
 
-export const useGetHealthReport = (
+export const useGetHealthGroupReport = (
+	departmentId: string | null,
+	courseId: string | null,
+	healthGroupId: string | null,
+	sort: 'asc' | 'desc' = 'asc',
+	group?: string | undefined
+) => {
+	const { data, isLoading } = useQuery<IHealthGroupReport[]>({
+		queryKey: [
+			'hg-check-list',
+			{ departmentId, courseId, healthGroupId, sort, group }
+		],
+		queryFn: async () => {
+			const response: AxiosResponse = await ReportsService.getHealthGroupReport(
+				departmentId,
+				courseId,
+				healthGroupId,
+				sort,
+				group
+			)
+			return response.data
+		}
+	})
+	return { data, isLoading }
+}
+
+export const useGetPhysicalEducationReport = (
 	departmentId: string | null,
 	courseId: string | null,
 	physicalEducationId: string | null,
+	sort: 'asc' | 'desc' = 'asc',
 	group?: string | undefined
 ) => {
-	const { data, isLoading } = useQuery<IHealthReport[]>({
+	const { data, isLoading } = useQuery<IPhysicalEducationReport[]>({
 		queryKey: [
-			'check-list-report',
-			{ departmentId, courseId, physicalEducationId, group }
+			'pg-check-list',
+			{ departmentId, courseId, physicalEducationId, sort, group }
 		],
 		queryFn: async () => {
-			const response: AxiosResponse = await ReportsService.getHealthReport(
-				departmentId,
-				courseId,
-				physicalEducationId,
-				group
-			)
+			const response: AxiosResponse =
+				await ReportsService.getPhysicalEducationReport(
+					departmentId,
+					courseId,
+					physicalEducationId,
+					sort,
+					group
+				)
 			return response.data
 		}
 	})

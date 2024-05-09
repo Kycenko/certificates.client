@@ -1,5 +1,6 @@
-export const HealthReportHeads = [
+export const PhysicalEducationReportHeads = [
 	'ФИО',
+	'Курс',
 	'Учебная группа',
 	'Группа по физкультуре'
 ]

@@ -16,7 +16,8 @@ import { PhysicalEducationsPageLazy } from '@/pages/PhysicalEducations/PhysicalE
 import { GetDepartmentReportPageLazy } from '@/pages/Reports/GetDepartmentReportPageLazy.tsx'
 import GetExpiredCertificatesReportPage from '@/pages/Reports/GetExpiredCertificatesReportPage'
 import { GetGroupReportPageLazy } from '@/pages/Reports/GetGroupReportPageLazy.tsx'
-import { GetHealthReportPageLazy } from '@/pages/Reports/GetHealthReportPageLazy.tsx'
+import { GetHealthGroupReportPageLazy } from '@/pages/Reports/GetHealthGroupReportPageLazy'
+import { GetPhysicalEducationReportPageLazy } from '@/pages/Reports/GetPhysicalEducationReportPageLazy'
 import { StudentDetailsPageLazy } from '@/pages/Students/StudentDetailsPageLazy.tsx'
 import { StudentHistoryPageLazy } from '@/pages/Students/StudentHistoryPageLazy.tsx'
 import { StudentsPageLazy } from '@/pages/Students/StudentsPageLazy.tsx'
@@ -43,7 +44,8 @@ export const enum AppRoutes {
 	MEDICAL_CERTIFICATE_HISTORY = 'medical-certificate-history',
 	GET_DEPARTMENT_REPORT = 'department-report',
 	GET_GROUP_REPORT = 'group-report',
-	GET_HEALTH_REPORT = 'check-list-report',
+	GET_PHYSICAL_EDUCATION_REPORT = 'pe-check-list',
+	GET_HEALTH_GROUP_REPORT = 'hg-check-list',
 	GET_EXPIRED_CERTIFICATES_REPORT = 'expired-certificates',
 	NOT_FOUND = 'not-found'
 }
@@ -68,7 +70,8 @@ export const RoutePath: Record<AppRoutes, string> = {
 	[AppRoutes.MEDICAL_CERTIFICATE_HISTORY]: '/medical-certificate-history/:id',
 	[AppRoutes.GET_DEPARTMENT_REPORT]: '/reports/department-report/:id',
 	[AppRoutes.GET_GROUP_REPORT]: '/reports/group-report/:id',
-	[AppRoutes.GET_HEALTH_REPORT]: '/reports/check-list-report',
+	[AppRoutes.GET_PHYSICAL_EDUCATION_REPORT]: '/reports/pe-check-list',
+	[AppRoutes.GET_HEALTH_GROUP_REPORT]: '/reports/hg-check-list',
 	[AppRoutes.GET_EXPIRED_CERTIFICATES_REPORT]:
 		'/reports/expired-certificates-report',
 	[AppRoutes.NOT_FOUND]: '*'
@@ -153,9 +156,13 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 		path: RoutePath['group-report'],
 		element: <GetGroupReportPageLazy />
 	},
-	[AppRoutes.GET_HEALTH_REPORT]: {
-		path: RoutePath['check-list-report'],
-		element: <GetHealthReportPageLazy />
+	[AppRoutes.GET_PHYSICAL_EDUCATION_REPORT]: {
+		path: RoutePath['pe-check-list'],
+		element: <GetPhysicalEducationReportPageLazy />
+	},
+	[AppRoutes.GET_HEALTH_GROUP_REPORT]: {
+		path: RoutePath['hg-check-list'],
+		element: <GetHealthGroupReportPageLazy />
 	},
 	[AppRoutes.NOT_FOUND]: {
 		path: RoutePath['not-found'],

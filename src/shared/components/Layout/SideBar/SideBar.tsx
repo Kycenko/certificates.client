@@ -108,7 +108,7 @@ const Sidebar = memo(() => {
 						size={15}
 						className={styles.padding}
 					/>
-					Ученики
+					Обучающиеся
 				</Link>
 				<Link
 					to={`${PAGES_URL.MEDICAL_CERTIFICATES}`}

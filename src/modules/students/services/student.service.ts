@@ -21,12 +21,21 @@ export const StudentService = {
 	async create(data: TypeStudentForm) {
 		return instance.post<IStudent>(SERVICE_URL.STUDENTS, data)
 	},
-	async getAll(groupName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
-		const url = groupName
-			? `${SERVICE_URL.STUDENTS}?group=${groupName}&sort=${sortOrder}`
-			: `${SERVICE_URL.STUDENTS}?sort=${sortOrder}`
+	async getAll(
+		sortOrder: 'asc' | 'desc' = 'asc',
+		department?: string,
+		course?: string,
+		group?: string,
+		isExpelled?: string
+	) {
+		const departmentParam = department ? `&department=${department}` : ''
+		const courseParam = course ? `&course=${course}` : ''
+		const groupParam = group ? `&group=${group}` : ''
+		const isExpelledParam = isExpelled ? `&isExpelled=${isExpelled}` : ''
 
-		return instance.get<IStudent[]>(url)
+		return instance.get<IStudent[]>(
+			`${SERVICE_URL.STUDENTS}?sort=${sortOrder}${departmentParam}${courseParam}${groupParam}${isExpelledParam}`
+		)
 	},
 
 	async getById(id: string | undefined) {

@@ -45,19 +45,27 @@ export const useCreateStudent = () => {
 }
 
 export const useGetStudents = (
-	groupName?: string | undefined,
-	sortOrder: 'asc' | 'desc' = 'asc'
+	sortOrder: 'asc' | 'desc' = 'asc',
+	department?: string,
+	course?: string,
+	group?: string,
+	isExpelled?: string
 ) => {
 	const {
 		data: students,
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.STUDENTS, { groupName, sortOrder }],
+		queryKey: [
+			QUERY_KEYS.STUDENTS,
+			{ sortOrder, department, course, group, isExpelled }
+		],
 		queryFn: async () => {
 			const response: AxiosResponse<IStudent[]> = await StudentService.getAll(
-				groupName,
-				sortOrder
+				sortOrder,
+				department,
+				course,
+				group
 			)
 			return response.data
 		}

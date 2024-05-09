@@ -100,6 +100,15 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 							{`${student?.surname} ${student?.name} ${student?.secondName ? student?.secondName : ''}`}
 						</td>
 						<td className={styles.cellPadding}>
+							{student.group?.course?.department?.name || 'Не указано'}
+						</td>
+						<td className={styles.cellPadding}>
+							{student.group?.course?.number || 'Не указано'}
+						</td>
+						<td className={styles.cellPadding}>
+							{student.group?.name || 'Не указано'}
+						</td>
+						<td className={styles.cellPadding}>
 							<span>{format(new Date(startDate), 'dd.MM.yyyy')}</span>
 						</td>
 						<td className={styles.cellPadding}>

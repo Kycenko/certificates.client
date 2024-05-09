@@ -41,7 +41,7 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 				filterValue={departmentValue}
 				setFilterValue={setDepartmentValue}
 			>
-				<option value=''>Все группы</option>
+				<option value=''>Все отделения</option>
 				{departments?.map(({ id, name }) => (
 					<option
 						key={id}

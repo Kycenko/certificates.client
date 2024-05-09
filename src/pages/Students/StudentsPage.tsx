@@ -5,7 +5,7 @@ import Heading from '@/shared/ui/fields/Heading/Heading'
 const StudentsPage = () => {
 	return (
 		<>
-			<Heading title='Список учащихся' />
+			<Heading title='Список обучающихся' />
 			<StudentsTable />
 		</>
 	)

@@ -71,7 +71,7 @@ const StudentDetailsTable = () => {
 	if (isLoading) return <CustomLoader />
 	return (
 		<>
-			<Heading title={'Описание учащегося'}>
+			<Heading title={'Описание обучающегося'}>
 				<span className={styles.title}>
 					{student?.surname} {student?.name} {student?.secondName}
 				</span>

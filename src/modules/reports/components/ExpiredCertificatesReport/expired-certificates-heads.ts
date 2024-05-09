@@ -1,5 +1,5 @@
 export const ExpiredCertificatesHeads = [
-	'Студент',
+	'Обучающийся',
 	'Дата рождения',
 	'Отделение',
 	'Курс',

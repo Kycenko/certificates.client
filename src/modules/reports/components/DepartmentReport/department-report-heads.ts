@@ -1,5 +1,5 @@
 export const DepartmentReportHeads = [
-	'Студент',
+	'Обучающийся',
 	'Курс',
 	'Группа',
 	'Отделение',
