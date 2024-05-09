@@ -1,12 +1,12 @@
 import { memo } from 'react'
 
+import UploadStudentsData from './UploadStudentsData.tsx'
 import { UploadStudentsHeads } from '@/modules/students/components/UploadStudents/upload-students-heads.ts'
 import useStudentsUpload from '@/modules/students/hooks/useStudentsUpload.ts'
 import { useUploadStudents } from '@/modules/students/queries/student.queries.ts'
 import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import styles from '@/shared/styles/Tables.module.scss'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
-import UploadStudentsData from './UploadStudentsData.tsx'
 
 const UploadStudentsTable = () => {
 	const { file, setFile, data, setData, handleFileUpload } = useStudentsUpload()

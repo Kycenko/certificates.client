@@ -44,6 +44,7 @@ const LoginForm = () => {
 						<CustomInput
 							id={'name'}
 							label={'Логин:'}
+							placeholder='Введите логин...'
 							{...register('login')}
 						/>
 					</div>
@@ -52,6 +53,7 @@ const LoginForm = () => {
 						<CustomInput
 							id={'password'}
 							label={'Пароль:'}
+							placeholder='Введите пароль...'
 							type={showPassword ? 'text' : 'password'}
 							{...register('password')}
 						/>

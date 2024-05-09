@@ -56,7 +56,6 @@ const DepartmentReport = () => {
 							setHealthGroupValue={setHealthValue}
 						/>
 					</div>
-
 					<button
 						className='btn btn-error text-white'
 						type='submit'
@@ -66,7 +65,7 @@ const DepartmentReport = () => {
 					</button>
 				</div>
 			</div>
-
+			<div>{data?.length}</div>
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по медицинским показателем обучающихся отделения:'

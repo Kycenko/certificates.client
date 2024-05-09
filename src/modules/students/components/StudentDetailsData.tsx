@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
 import { IHealthGroup } from '@/modules/health-groups/types/health-group.types.ts'
 import { IPhysicalEducation } from '@/modules/physical-educations/types/physical-education.types.ts'
@@ -26,8 +26,8 @@ const StudentDetailsData: FC<IStudentDetailsDataProps> = ({
 			{data?.medicalCertificates?.map(
 				({ id, startDate, finishDate, healthGroupId, physicalEducationId }) => (
 					<tr
-						className='text-center'
 						key={id}
+						className={styles.cell}
 					>
 						<td className={styles.cellPadding}>
 							{format(new Date(startDate), 'dd.MM.yyyy')}
@@ -55,4 +55,4 @@ const StudentDetailsData: FC<IStudentDetailsDataProps> = ({
 	)
 }
 
-export default memo(StudentDetailsData)
+export default StudentDetailsData

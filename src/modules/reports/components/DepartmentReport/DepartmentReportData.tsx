@@ -4,6 +4,7 @@ import { FC, memo } from 'react'
 import { IDepartmentReport } from '@/modules/reports/types/reports.types.ts'
 import NoData from '@/shared/components/NoData'
 import formatFullName from '@/shared/utils/formatFullName.ts'
+import getDaysUntilExpiry from '@/shared/utils/getDaysUntilExpiry'
 
 interface DepartmentReportDataProps {
 	data: IDepartmentReport[] | undefined
@@ -37,6 +38,7 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
 											<td>{healthGroup.name}</td>
 											<td>{format(new Date(startDate), 'dd.MM.yyyy')}</td>
 											<td>{format(new Date(finishDate), 'dd.MM.yyyy')}</td>
+											<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
 										</tr>
 									)
 								)

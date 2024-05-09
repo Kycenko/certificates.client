@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { FC, memo } from 'react'
 
 import { IPhysicalEducationReport } from '@/modules/reports/types/reports.types.ts'
@@ -16,7 +17,13 @@ const PhysicalEducationReportData: FC<PhysicalEducationReportDataProps> = memo(
 					courses?.flatMap(({ groups, number }) =>
 						groups.flatMap(({ students, name: groupName }) =>
 							students.flatMap(
-								({ name, surname, secondName, medicalCertificates }) =>
+								({
+									name,
+									surname,
+									secondName,
+									birthDate,
+									medicalCertificates
+								}) =>
 									medicalCertificates?.map(({ physicalEducation }) => (
 										<tr
 											className='border'
@@ -25,6 +32,7 @@ const PhysicalEducationReportData: FC<PhysicalEducationReportDataProps> = memo(
 											<td className='p-2'>
 												{formatFullName(surname, name, secondName)}
 											</td>
+											<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
 											<td>{number}-й курс</td>
 											<td>{groupName}</td>
 											<td>{physicalEducation.name}</td>

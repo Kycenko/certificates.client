@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { FC } from 'react'
 
 import { IHealthGroupReport } from '../../types/reports.types'
@@ -16,20 +17,22 @@ const HealthGroupReportData: FC<HealthGroupReportDataProps> = ({ data }) => {
 			{data?.map(({ id, courses }) =>
 				courses?.map(({ groups, number }) =>
 					groups.map(({ students, name: groupName }) =>
-						students.map(({ name, surname, secondName, medicalCertificates }) =>
-							medicalCertificates.map(({ healthGroup }) => (
-								<tr
-									className='border'
-									key={`${id}-${name}-${surname}`}
-								>
-									<td className='p-2'>
-										{formatFullName(surname, name, secondName)}
-									</td>
-									<td>{number}-й курс</td>
-									<td>{groupName}</td>
-									<td>{healthGroup.name}</td>
-								</tr>
-							))
+						students.map(
+							({ name, surname, secondName, birthDate, medicalCertificates }) =>
+								medicalCertificates.map(({ healthGroup }) => (
+									<tr
+										className='border'
+										key={`${id}-${name}-${surname}`}
+									>
+										<td className='p-2'>
+											{formatFullName(surname, name, secondName)}
+										</td>
+										<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
+										<td>{number}-й курс</td>
+										<td>{groupName}</td>
+										<td>{healthGroup.name}</td>
+									</tr>
+								))
 						)
 					)
 				)
