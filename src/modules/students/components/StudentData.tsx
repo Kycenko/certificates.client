@@ -3,23 +3,24 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
-import { useCreateStudentHistory } from '@/modules/students/queries/student-history.queries.ts'
+import ActionButtons from '@/components/ActionButtons.tsx'
+import NoData from '@/components/NoData.tsx'
+
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
+import { useCreateStudentHistory } from '@/modules/students/api/student-history.queries.ts'
 import { TypeStudentHistoryForm } from '@/modules/students/types/student-history.types.ts'
 import {
 	IStudent,
 	TypeStudentForm
 } from '@/modules/students/types/student.types.ts'
-import ActionButtons from '@/shared/components/ActionButtons'
-import NoData from '@/shared/components/NoData'
+import { studentValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
-import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-import { studentValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 interface StudentDataProps {
 	data: IStudent[] | undefined

@@ -2,21 +2,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import PhysicalEducationData from '@/modules/physical-educations/components/PhysicalEducationData.tsx'
 import {
 	useCreatePhysicalEducation,
 	useDeletePhysicalEducation,
 	useGetPhysicalEducations,
 	useUpdatePhysicalEducation
-} from '@/modules/physical-educations/queries/physical-education.queries.ts'
+} from '@/modules/physical-educations/api/physical-education.queries.ts'
+import PhysicalEducationData from '@/modules/physical-educations/components/PhysicalEducationData.tsx'
 import { TypePhysicalEducationForm } from '@/modules/physical-educations/types/physical-education.types.ts'
+import { physicalEducationValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-import { physicalEducationValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 const PhysicalEducationComponent = () => {
 	const { physicalEducations, refetch, isLoading } = useGetPhysicalEducations()

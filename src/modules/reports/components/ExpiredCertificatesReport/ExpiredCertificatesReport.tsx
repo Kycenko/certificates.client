@@ -1,16 +1,17 @@
 import { useState } from 'react'
 
+import TableHeads from '@/components/tablesHeads/TableHeads'
+
+import { useGetExpiredCertificatesReport } from '../../api/reports.queries.ts'
 import usePrint from '../../hooks/usePrint'
-import { useGetExpiredCertificatesReport } from '../../queries/reports.queries'
 
 import ExpiredCertificatesData from './ExpiredCertificatesData'
 import ExpiredCertificatesFilters from './ExpiredCertificatesFilters'
 import { ExpiredCertificatesHeads } from './expired-certificates-heads'
-import { useGetDepartments } from '@/modules/departments/queries/department.queries'
-import { useGetGroups } from '@/modules/groups/queries/group.queries'
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
-import TableHeads from '@/shared/components/tablesHeads/TableHeads'
-import styles from '@/shared/styles/Tables.module.scss'
 import CustomLoader from '@/shared/ui/loader/CustomLoader'
 
 const ExpiredCertificatesReport = () => {

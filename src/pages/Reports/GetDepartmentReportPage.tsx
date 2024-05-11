@@ -1,5 +1,5 @@
+import WithPageLayout from '@/app/Layout/hoc/WithPageLayout'
 import DepartmentReport from '@/modules/reports/components/DepartmentReport/DepartmentReport'
-import WithPageLayout from '@/shared/hoc/WithPageLayout'
 
 const GetDepartmentReportPage = () => {
 	return <DepartmentReport />

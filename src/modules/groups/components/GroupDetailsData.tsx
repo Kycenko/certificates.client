@@ -2,10 +2,11 @@ import { format } from 'date-fns'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import NoData from '@/components/NoData.tsx'
+
+import styles from '@/app/styles/DetailsTables.module.scss'
 import { IGroup } from '@/modules/groups/types/group.types.ts'
-import NoData from '@/shared/components/NoData'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
-import styles from '@/shared/styles/DetailsTables.module.scss'
 
 interface GroupDetailsDataProps {
 	data: IGroup | undefined

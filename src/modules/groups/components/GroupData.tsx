@@ -3,19 +3,20 @@ import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import useAuth from '@/modules/auth/hooks/useAuth.ts'
-import { useGetCourses } from '@/modules/courses/queries/course.queries'
+import ActionButtons from '@/components/ActionButtons.tsx'
+import NoData from '@/components/NoData.tsx'
+
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetCourses } from '@/modules/courses/api/course.queries.ts'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-import ActionButtons from '@/shared/components/ActionButtons'
-import NoData from '@/shared/components/NoData'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
+import { groupValidationSchema } from '@/shared/helpers/validation.schema.ts'
+import useAuth from '@/shared/hooks/useAuth.ts'
 import useModal from '@/shared/hooks/useModal.ts'
-import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
-import { groupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 interface GroupDataProps {
 	data: IGroup[] | undefined

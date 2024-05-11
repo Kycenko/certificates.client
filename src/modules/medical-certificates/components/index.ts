@@ -1,0 +1,6 @@
+export * from './certificates-heads'
+export * from './MedicalCertificateData'
+export * from './MedicalCertificateHistory'
+export * from './MedicalCertificateHistoryData'
+export * from './MedicalCertificatesFilters'
+export * from './MedicalCertificatesTable'

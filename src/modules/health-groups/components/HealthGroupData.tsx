@@ -2,18 +2,19 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
+import ActionButtons from '@/components/ActionButtons.tsx'
+import NoData from '@/components/NoData.tsx'
+
+import styles from '@/app/styles/Cards.module.scss'
 import {
 	IHealthGroup,
 	TypeHealthGroupForm
 } from '@/modules/health-groups/types/health-group.types.ts'
-import ActionButtons from '@/shared/components/ActionButtons'
-import NoData from '@/shared/components/NoData'
+import { healthGroupValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
-import styles from '@/shared/styles/Cards.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
-import { healthGroupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 interface HealthGroupProps {
 	data: IHealthGroup[] | undefined

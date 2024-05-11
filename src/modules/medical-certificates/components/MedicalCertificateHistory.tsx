@@ -1,10 +1,11 @@
 import { useParams } from 'react-router-dom'
 
+import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
 import MedicalCertificateHistoryData from './MedicalCertificateHistoryData.tsx'
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetMedicalCertificateHistories } from '@/modules/medical-certificates/api/medical-certificate-history.queries.ts'
 import { CertificateHistoryHeads } from '@/modules/medical-certificates/components/certificates-heads.ts'
-import { useGetMedicalCertificateHistories } from '@/modules/medical-certificates/queries/medical-certificate-history.queries.ts'
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
-import styles from '@/shared/styles/Tables.module.scss'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 
 const MedicalCertificateHistory = () => {

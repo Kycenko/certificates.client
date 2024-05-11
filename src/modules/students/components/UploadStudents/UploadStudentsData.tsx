@@ -1,9 +1,10 @@
 import { FC } from 'react'
 
+import NoData from '@/components/NoData.tsx'
+
 import correctFormatDate from '../../helpers/correctFormatDate'
 
 import { IUploadStudent } from '@/modules/students/types/student.types.ts'
-import NoData from '@/shared/components/NoData'
 
 interface UploadStudentsDataProps {
 	data: IUploadStudent[] | undefined

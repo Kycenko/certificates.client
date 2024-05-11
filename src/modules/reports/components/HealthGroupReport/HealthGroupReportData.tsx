@@ -1,9 +1,10 @@
 import { format } from 'date-fns'
 import { FC } from 'react'
 
+import NoData from '@/components/NoData.tsx'
+
 import { IHealthGroupReport } from '../../types/reports.types'
 
-import NoData from '@/shared/components/NoData'
 import formatFullName from '@/shared/utils/formatFullName'
 
 interface HealthGroupReportDataProps {

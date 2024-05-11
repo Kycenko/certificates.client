@@ -1,11 +1,12 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
-import CourseOptions from '@/modules/courses/helpers/course.options'
+import Filter from '@/components/filters/Filter/Filter'
+import Search from '@/components/filters/Search/Search'
+import SortOrder from '@/components/filters/SortOrder/SortOrder'
+
 import { IDepartment } from '@/modules/departments/types/department.types'
 import { IGroup } from '@/modules/groups/types/group.types'
-import Filter from '@/shared/components/filters/Filter/Filter'
-import Search from '@/shared/components/filters/Search/Search'
-import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
+import CourseOptions from '@/shared/helpers/course.options.tsx'
 
 interface StudentsFiltersProps {
 	departments: IDepartment[] | undefined

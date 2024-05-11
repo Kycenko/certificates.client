@@ -1,16 +1,17 @@
 import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
-import CourseOptions from '@/modules/courses/helpers/course.options.tsx'
+import ActionButtons from '@/components/ActionButtons.tsx'
+import NoData from '@/components/NoData.tsx'
+
+import styles from '@/app/styles/Tables.module.scss'
 import {
 	ICourse,
 	TypeCourseForm
 } from '@/modules/courses/types/course.types.ts'
-import { useGetDepartments } from '@/modules/departments/queries/department.queries'
-import ActionButtons from '@/shared/components/ActionButtons'
-import NoData from '@/shared/components/NoData'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
+import CourseOptions from '@/shared/helpers/course.options.tsx'
 import useModal from '@/shared/hooks/useModal.ts'
-import styles from '@/shared/styles/Tables.module.scss'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'

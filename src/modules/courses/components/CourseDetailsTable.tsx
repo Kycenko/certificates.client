@@ -3,21 +3,22 @@ import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
+import DetailsTableHeads from '@/components/tablesHeads/DetailsTableHeads.tsx'
+
+import styles from '@/app/styles/DetailsTables.module.scss'
+import { useGetCourse } from '@/modules/courses/api/course.queries.ts'
 import CourseDetailsData from '@/modules/courses/components/CourseDetailsData.tsx'
 import { DetailsCourseHeads } from '@/modules/courses/components/course-heads.ts'
-import { useGetCourse } from '@/modules/courses/queries/course.queries.ts'
-import { useCreateGroup } from '@/modules/groups/queries/group.queries.ts'
+import { useCreateGroup } from '@/modules/groups/api/group.queries.ts'
 import { TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-import DetailsTableHeads from '@/shared/components/tablesHeads/DetailsTableHeads.tsx'
+import { groupValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-import { groupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 const CourseDetailsTable = () => {
 	const { id } = useParams()

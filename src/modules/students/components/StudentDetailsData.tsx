@@ -1,11 +1,12 @@
 import { format } from 'date-fns'
 import { FC } from 'react'
 
+import NoData from '@/components/NoData.tsx'
+
+import styles from '@/app/styles/DetailsTables.module.scss'
 import { IHealthGroup } from '@/modules/health-groups/types/health-group.types.ts'
 import { IPhysicalEducation } from '@/modules/physical-educations/types/physical-education.types.ts'
 import { IStudent } from '@/modules/students/types/student.types.ts'
-import NoData from '@/shared/components/NoData'
-import styles from '@/shared/styles/DetailsTables.module.scss'
 import daysUntilTheEnd from '@/shared/utils/daysUntilTheEnd.tsx'
 import getDaysUntilExpiry from '@/shared/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/shared/utils/getValidityPeriod.ts'

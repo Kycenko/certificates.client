@@ -2,21 +2,21 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import HealthGroupData from '@/modules/health-groups/components/HealthGroupData.tsx'
 import {
 	useCreateHealthGroup,
 	useDeleteHealthGroup,
 	useGetHealthGroups,
 	useUpdateHealthGroup
-} from '@/modules/health-groups/queries/health-group.query.ts'
+} from '@/modules/health-groups/api/health-group.query.ts'
+import HealthGroupData from '@/modules/health-groups/components/HealthGroupData.tsx'
 import { TypeHealthGroupForm } from '@/modules/health-groups/types/health-group.types.ts'
+import { healthGroupValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-import { healthGroupValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 const HealthGroupComponent = () => {
 	const { healthGroups, refetch, isLoading } = useGetHealthGroups()

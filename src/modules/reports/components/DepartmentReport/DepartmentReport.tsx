@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
 import DepartmentFilters from './DepartmentFilters.tsx'
 import DepartmentReportData from './DepartmentReportData.tsx'
-import { useGetHealthGroups } from '@/modules/health-groups/queries/health-group.query.ts'
-import { useGetPhysicalEducations } from '@/modules/physical-educations/queries/physical-education.queries.ts'
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
+import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
+import { useGetDepartmentReport } from '@/modules/reports/api/reports.queries.ts'
 import { DepartmentReportHeads } from '@/modules/reports/components/DepartmentReport/department-report-heads.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
-import { useGetDepartmentReport } from '@/modules/reports/queries/reports.queries.ts'
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
-import styles from '@/shared/styles/Tables.module.scss'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const DepartmentReport = () => {

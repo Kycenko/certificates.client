@@ -1,21 +1,22 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
 import MedicalCertificatesFilters from './MedicalCertificatesFilters.tsx'
 import { CertificatesHeads } from './certificates-heads.ts'
-import { useGetDepartments } from '@/modules/departments/queries/department.queries.ts'
-import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
-import MedicalCertificateData from '@/modules/medical-certificates/components/MedicalCertificateData.tsx'
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import {
 	useDeleteMedicalCertificate,
 	useGetMedicalCertificates,
 	useUpdateMedicalCertificate
-} from '@/modules/medical-certificates/queries/medical-certificate.queries.ts'
+} from '@/modules/medical-certificates/api/medical-certificate.queries.ts'
+import MedicalCertificateData from '@/modules/medical-certificates/components/MedicalCertificateData.tsx'
 import { TypeMedicalCertificateForm } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
-import styles from '@/shared/styles/Tables.module.scss'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const MedicalCertificatesTable = () => {

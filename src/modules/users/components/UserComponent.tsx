@@ -2,13 +2,10 @@ import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { useRegister } from '@/modules/auth/queries/auth.queries.ts'
+import { useRegister } from '@/modules/auth/api/auth.queries.ts'
 import { IRegister } from '@/modules/auth/types/auth.types.ts'
+import { useDeleteUser, useGetUsers } from '@/modules/users/api/user.queries.ts'
 import UserData from '@/modules/users/components/UserData.tsx'
-import {
-	useDeleteUser,
-	useGetUsers
-} from '@/modules/users/queries/user.queries.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'

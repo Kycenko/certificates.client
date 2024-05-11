@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 
-import Search from '@/shared/components/filters/Search/Search'
-import SortOrder from '@/shared/components/filters/SortOrder/SortOrder'
+import Search from '@/components/filters/Search/Search'
+import SortOrder from '@/components/filters/SortOrder/SortOrder'
 
 interface DepartmentsFiltersProps {
 	searchTerm: string

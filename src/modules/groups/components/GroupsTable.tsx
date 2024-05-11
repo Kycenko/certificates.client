@@ -1,21 +1,22 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
 import GroupsFilters from './GroupsFilters.tsx'
 import { GroupHeads } from './group-heads.ts'
-import { useGetDepartments } from '@/modules/departments/queries/department.queries.ts'
-import GroupData from '@/modules/groups/components/GroupData.tsx'
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import {
 	useDeleteGroup,
 	useGetGroups,
 	useUpdateGroup
-} from '@/modules/groups/queries/group.queries.ts'
+} from '@/modules/groups/api/group.queries.ts'
+import GroupData from '@/modules/groups/components/GroupData.tsx'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
-import styles from '@/shared/styles/Tables.module.scss'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const GroupsTable = () => {

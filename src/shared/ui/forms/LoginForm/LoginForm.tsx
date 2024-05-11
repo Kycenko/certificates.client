@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import styles from './LoginForm.module.scss'
-import { useLogin } from '@/modules/auth/queries/auth.queries.ts'
+import { useLogin } from '@/modules/auth/api/auth.queries.ts'
 import { ILogin } from '@/modules/auth/types/auth.types.ts'
+import { loginValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
-import { loginValidationSchema } from '@/shared/validation/validation.schema.ts'
 
 const LoginForm = () => {
 	const {

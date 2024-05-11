@@ -1,10 +1,11 @@
 import { FC, memo } from 'react'
 
-import useAuth from '@/modules/auth/hooks/useAuth.ts'
+import ActionButtons from '@/components/ActionButtons.tsx'
+
+import styles from '@/app/styles/Cards.module.scss'
 import { IUser } from '@/modules/users/types/user.types.ts'
-import ActionButtons from '@/shared/components/ActionButtons'
+import useAuth from '@/shared/hooks/useAuth.ts'
 import useModal from '@/shared/hooks/useModal.ts'
-import styles from '@/shared/styles/Cards.module.scss'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 
 interface UserDataProps {

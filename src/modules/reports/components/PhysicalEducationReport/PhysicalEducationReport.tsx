@@ -1,16 +1,17 @@
 import { memo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import { useGetPhysicalEducationReport } from '../../queries/reports.queries.ts'
+import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
+import { useGetPhysicalEducationReport } from '../../api/reports.queries.ts'
 
 import HealthReportData from './PhysicalEducationReportData.tsx'
 import PhysicalEducationReportFilters from './PhysicalEducationReportFilters.tsx'
 import { PhysicalEducationReportHeads } from './physical-education-report-heads.ts'
-import { useGetGroups } from '@/modules/groups/queries/group.queries.ts'
+import styles from '@/app/styles/Tables.module.scss'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
-import TableHeads from '@/shared/components/tablesHeads/TableHeads.tsx'
-import styles from '@/shared/styles/Tables.module.scss'
 
 const PhysicalEducationReport = memo(() => {
 	const [search] = useSearchParams()

@@ -1,12 +1,12 @@
 import axios from 'axios'
 
 import errorCatch from './api.error.ts'
+import { AuthService } from '@/modules/auth/api/auth.service.ts'
+import { BASE_URL } from '@/shared/constants/enums.ts'
 import {
 	getAccessToken,
 	removeFromStorage
-} from '@/modules/auth/helpers/auth.helper.ts'
-import { AuthService } from '@/modules/auth/services/auth.service.ts'
-import { BASE_URL } from '@/shared/constants/enums.ts'
+} from '@/shared/helpers/auth.helper.ts'
 
 export const instance = axios.create({
 	baseURL: BASE_URL.BASE_URL,
