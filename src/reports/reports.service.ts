@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common'
 
 import { PrismaService } from '@config/prisma.service'
-import { endOfDay, startOfDay } from 'date-fns'
 
 @Injectable()
 export class ReportsService {
@@ -205,27 +204,6 @@ export class ReportsService {
 		})
 	}
 
-	//отчеты за период времени/конкретную дату в разрезе различных показателей медицинских справок
-	async getReportsForPeriod(startDate: Date, endDate: Date) {
-		const startOfDayDate = startOfDay(startDate)
-		const endOfDayDate = endOfDay(endDate)
-
-		return this.prisma.student.findMany({
-			include: {
-				medicalCertificates: {
-					where: {
-						startDate: {
-							lte: endOfDayDate
-						},
-						finishDate: {
-							gte: startOfDayDate
-						}
-					}
-				}
-			}
-		})
-	}
-
 	//лист здоровья
 
 	async getHealthGroupCheckListReportData(
@@ -261,6 +239,7 @@ export class ReportsService {
 										surname: true,
 										name: true,
 										secondName: true,
+										birthDate: true,
 										medicalCertificates: {
 											where: {
 												healthGroup: {
@@ -317,6 +296,7 @@ export class ReportsService {
 										surname: true,
 										name: true,
 										secondName: true,
+										birthDate: true,
 										medicalCertificates: {
 											where: {
 												physicalEducation: {
