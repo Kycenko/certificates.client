@@ -5,7 +5,9 @@ import { MedicalCertificateHistoryDto } from './dto/medical-certificate-history.
 
 @Injectable()
 export class MedicalCertificateHistoryService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService) {
+	}
+
 	async create(dto: MedicalCertificateHistoryDto) {
 		return this.prisma.medicalCertificateHistory.create({
 			data: {

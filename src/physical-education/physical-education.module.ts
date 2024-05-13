@@ -7,4 +7,5 @@ import { PhysicalEducationService } from './physical-education.service'
 	controllers: [PhysicalEducationController],
 	providers: [PhysicalEducationService, PrismaService]
 })
-export class PhysicalEducationModule {}
+export class PhysicalEducationModule {
+}

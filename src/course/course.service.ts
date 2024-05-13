@@ -14,27 +14,45 @@ export class CourseService {
 	}
 
 	async getAll(departmentName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
-		const whereDepartment = departmentName
-			? {
-					department: {
-						name: departmentName
-					}
-				}
-			: {}
+		// const whereDepartment = departmentName
+		// 	? {
+		// 			department: {
+		// 				name: departmentName
+		// 			}
+		// 		}
+		// 	: {}
 		const courses = await this.prisma.course.findMany({
-			where: whereDepartment,
+			where: {
+				department: {
+					name: departmentName || undefined
+				}
+			},
 			orderBy: {
 				number: sortOrder
 			},
-			include: {
+			select: {
+				id: true,
+				number: true,
 				groups: {
-					include: {
-						students: true
+					select: {
+						students: {
+							select: {
+								surname: true,
+								name: true,
+								secondName: true,
+								birthDate: true
+							}
+						}
 					}
 				},
-				department: true
+				department: {
+					select: {
+						name: true
+					}
+				}
 			}
 		})
+
 		if (!courses || courses.length === 0)
 			throw new NotFoundException('Курсы не найдены!')
 		return courses

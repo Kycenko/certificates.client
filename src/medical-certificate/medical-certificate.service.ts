@@ -5,7 +5,8 @@ import { MedicalCertificateDto } from './dto/medical-certificate.dto'
 
 @Injectable()
 export class MedicalCertificateService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService) {
+	}
 
 	async create(dto: MedicalCertificateDto) {
 		return this.prisma.medicalCertificate.create({
@@ -33,17 +34,17 @@ export class MedicalCertificateService {
 					group: {
 						course: course
 							? {
-									number: +course,
-									department: {
-										name: department
-									}
+								number: +course,
+								department: {
+									name: department
 								}
+							}
 							: {
-									number: undefined,
-									department: {
-										name: department
-									}
-								},
+								number: undefined,
+								department: {
+									name: department
+								}
+							},
 						name: group
 					}
 				}
@@ -60,17 +61,17 @@ export class MedicalCertificateService {
 						group: {
 							course: course
 								? {
-										number: +course,
-										department: {
-											name: department
-										}
+									number: +course,
+									department: {
+										name: department
 									}
+								}
 								: {
-										number: undefined,
-										department: {
-											name: department
-										}
-									},
+									number: undefined,
+									department: {
+										name: department
+									}
+								},
 							name: group
 						}
 					}

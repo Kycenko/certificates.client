@@ -263,6 +263,7 @@ export class ReportsService {
 			}
 		})
 	}
+
 	async getPhysicalGroupCheckListReport(
 		departmentId: number,
 		course: number,

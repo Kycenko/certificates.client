@@ -7,4 +7,5 @@ import { MedicalCertificateHistoryService } from './medical-certificate-history.
 	controllers: [MedicalCertificateHistoryController],
 	providers: [MedicalCertificateHistoryService, PrismaService]
 })
-export class MedicalCertificateHistoryModule {}
+export class MedicalCertificateHistoryModule {
+}

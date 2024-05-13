@@ -3,6 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { formatISO } from 'date-fns'
 import * as XLSX from 'xlsx'
 import { StudentDto } from './dto/student.dto'
+
 @Injectable()
 export class StudentService {
 	constructor(private prisma: PrismaService) {}
@@ -52,30 +53,23 @@ export class StudentService {
 		department?: string,
 		course?: number,
 		group?: string,
-		isExpelled?: boolean
+		isExpelled?: string
 	) {
 		const students = await this.prisma.student.findMany({
 			orderBy: {
 				surname: sortOrder
 			},
 			where: {
-				isExpelled: Boolean(isExpelled) || undefined,
-				OR: [
-					{
-						group: {
-							name: group || undefined,
-							course: {
-								number: course || undefined,
-								department: {
-									name: department || undefined
-								}
-							}
+				isExpelled: isExpelled === 'true' || undefined,
+				group: {
+					name: group || undefined,
+					course: {
+						number: +course || undefined,
+						department: {
+							name: department || undefined
 						}
-					},
-					{
-						group: null
 					}
-				]
+				}
 			},
 			include: {
 				medicalCertificates: true,

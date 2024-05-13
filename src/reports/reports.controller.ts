@@ -4,7 +4,8 @@ import { ReportsService } from './reports.service'
 
 @Controller('reports')
 export class ReportsController {
-	constructor(private readonly reportsService: ReportsService) {}
+	constructor(private readonly reportsService: ReportsService) {
+	}
 
 	//отчет по отделению
 	@Auth('admin')

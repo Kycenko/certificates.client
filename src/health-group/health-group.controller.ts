@@ -1,21 +1,12 @@
 import { Auth } from '@auth/decorators/auth.decorator'
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Post,
-	Put,
-	UsePipes,
-	ValidationPipe
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common'
 import { HealthGroupDto } from './dto/health-group.dto'
 import { HealthGroupService } from './health-group.service'
 
 @Controller('health-groups')
 export class HealthGroupController {
-	constructor(private readonly healthGroupService: HealthGroupService) {}
+	constructor(private readonly healthGroupService: HealthGroupService) {
+	}
 
 	@Post()
 	@Auth('admin')

@@ -7,4 +7,5 @@ import { MedicalCertificateService } from './medical-certificate.service'
 	controllers: [MedicalCertificateController],
 	providers: [MedicalCertificateService, PrismaService]
 })
-export class MedicalCertificateModule {}
+export class MedicalCertificateModule {
+}

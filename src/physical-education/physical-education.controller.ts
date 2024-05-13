@@ -1,15 +1,5 @@
 import { Auth } from '@auth/decorators/auth.decorator'
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Post,
-	Put,
-	UsePipes,
-	ValidationPipe
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common'
 import { PhysicalEducationDto } from './dto/physical-education.dto'
 import { PhysicalEducationService } from './physical-education.service'
 
@@ -17,7 +7,8 @@ import { PhysicalEducationService } from './physical-education.service'
 export class PhysicalEducationController {
 	constructor(
 		private readonly physicalEducationService: PhysicalEducationService
-	) {}
+	) {
+	}
 
 	@Post()
 	@Auth('admin')

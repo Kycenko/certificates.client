@@ -4,7 +4,8 @@ import { StudentHistoryDto } from './dto/student-history.dto'
 
 @Injectable()
 export class StudentHistoryService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService) {
+	}
 
 	async create(dto: StudentHistoryDto) {
 		return this.prisma.studentHistory.create({

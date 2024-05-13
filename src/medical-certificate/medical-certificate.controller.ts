@@ -1,15 +1,4 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Patch,
-	Post,
-	Query,
-	UsePipes,
-	ValidationPipe
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common'
 import { MedicalCertificateService } from './medical-certificate.service'
 
 import { Auth } from '@auth/decorators/auth.decorator'
@@ -19,7 +8,8 @@ import { MedicalCertificateDto } from './dto/medical-certificate.dto'
 export class MedicalCertificateController {
 	constructor(
 		private readonly medicalCertificateService: MedicalCertificateService
-	) {}
+	) {
+	}
 
 	@Post()
 	@Auth('admin')

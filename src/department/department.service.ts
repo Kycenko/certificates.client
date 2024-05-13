@@ -4,7 +4,8 @@ import { DepartmentDto } from './dto/department.dto'
 
 @Injectable()
 export class DepartmentService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService) {
+	}
 
 	async create(dto: DepartmentDto) {
 		return this.prisma.department.create({
@@ -15,11 +16,11 @@ export class DepartmentService {
 	async getAll(departmentName?: string, sortOrder: 'asc' | 'desc' = 'asc') {
 		const whereDepartment = departmentName
 			? {
-					name: {
-						contains: departmentName,
-						mode: 'insensitive' as any
-					}
+				name: {
+					contains: departmentName,
+					mode: 'insensitive' as any
 				}
+			}
 			: {}
 		const departments = await this.prisma.department.findMany({
 			where: whereDepartment,

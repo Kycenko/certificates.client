@@ -7,4 +7,5 @@ import { StudentHistoryService } from './student-history.service'
 	controllers: [StudentHistoryController],
 	providers: [StudentHistoryService, PrismaService]
 })
-export class StudentHistoryModule {}
+export class StudentHistoryModule {
+}

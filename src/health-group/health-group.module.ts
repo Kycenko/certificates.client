@@ -7,4 +7,5 @@ import { HealthGroupService } from './health-group.service'
 	controllers: [HealthGroupController],
 	providers: [HealthGroupService, PrismaService]
 })
-export class HealthGroupModule {}
+export class HealthGroupModule {
+}

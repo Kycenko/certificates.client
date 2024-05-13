@@ -8,4 +8,5 @@ import { PrismaService } from '@config/prisma.service'
 	controllers: [DepartmentController],
 	providers: [DepartmentService, PrismaService]
 })
-export class DepartmentModule {}
+export class DepartmentModule {
+}

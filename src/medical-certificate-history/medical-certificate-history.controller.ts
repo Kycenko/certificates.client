@@ -1,14 +1,5 @@
 import { Auth } from '@auth/decorators/auth.decorator'
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Post,
-	UsePipes,
-	ValidationPipe
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common'
 import { MedicalCertificateHistoryDto } from './dto/medical-certificate-history.dto'
 import { MedicalCertificateHistoryService } from './medical-certificate-history.service'
 
@@ -16,14 +7,15 @@ import { MedicalCertificateHistoryService } from './medical-certificate-history.
 export class MedicalCertificateHistoryController {
 	constructor(
 		private readonly medicalCertificateHistoryService: MedicalCertificateHistoryService
-	) {}
+	) {
+	}
 
 	@Post()
 	@Auth('admin')
 	@UsePipes(new ValidationPipe())
 	async create(
 		@Body()
-		dto: MedicalCertificateHistoryDto
+			dto: MedicalCertificateHistoryDto
 	) {
 		return this.medicalCertificateHistoryService.create(dto)
 	}

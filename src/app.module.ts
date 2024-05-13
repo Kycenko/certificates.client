@@ -34,4 +34,5 @@ import { MedicalCertificateHistoryModule } from './medical-certificate-history/m
 	controllers: [],
 	providers: [PrismaService]
 })
-export class AppModule {}
+export class AppModule {
+}

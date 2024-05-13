@@ -1,15 +1,4 @@
-import {
-	Body,
-	Controller,
-	Delete,
-	Get,
-	Param,
-	Post,
-	Put,
-	Query,
-	UsePipes,
-	ValidationPipe
-} from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common'
 import { CourseService } from './course.service'
 
 import { Auth } from '@auth/decorators/auth.decorator'
@@ -17,7 +6,8 @@ import { CourseDto } from './dto/course.dto'
 
 @Controller('courses')
 export class CourseController {
-	constructor(private readonly courseService: CourseService) {}
+	constructor(private readonly courseService: CourseService) {
+	}
 
 	@Post()
 	@Auth('admin')

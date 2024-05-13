@@ -4,7 +4,8 @@ import { PhysicalEducationDto } from './dto/physical-education.dto'
 
 @Injectable()
 export class PhysicalEducationService {
-	constructor(private prisma: PrismaService) {}
+	constructor(private prisma: PrismaService) {
+	}
 
 	async create(dto: PhysicalEducationDto) {
 		return this.prisma.physicalEducation.create({

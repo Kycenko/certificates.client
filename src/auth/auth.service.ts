@@ -1,9 +1,4 @@
-import {
-	BadRequestException,
-	Injectable,
-	NotFoundException,
-	UnauthorizedException
-} from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 
 import { JwtService } from '@nestjs/jwt'
 
@@ -21,7 +16,8 @@ export class AuthService {
 	constructor(
 		private prisma: PrismaService,
 		private jwt: JwtService
-	) {}
+	) {
+	}
 
 	async login(dto: LoginDto) {
 		const { password, ...user } = await this.validateUser(dto)

@@ -7,4 +7,5 @@ import { ReportsService } from './reports.service'
 	controllers: [ReportsController],
 	providers: [ReportsService, PrismaService]
 })
-export class ReportsModule {}
+export class ReportsModule {
+}
