@@ -3,9 +3,10 @@ import { FC, ReactNode, RefObject, memo } from 'react'
 interface ReportBodyProps {
 	printRef: RefObject<HTMLDivElement>
 	header: string
-	title: any
+	title: JSX.Element[] | undefined
 	children: ReactNode
 }
+
 const ReportBody: FC<ReportBodyProps> = memo(
 	({ printRef, header, title, children }) => {
 		return (

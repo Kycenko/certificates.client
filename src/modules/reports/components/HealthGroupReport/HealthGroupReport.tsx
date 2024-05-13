@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads'
@@ -12,20 +11,20 @@ import { HealthGroupReportHeads } from './health-group-report-heads'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const HealthGroupReport = () => {
+	const { id } = useParams()
 	const [search] = useSearchParams()
 	const department = search.get('department')
 	const course = search.get('course')
 	const healthGroup = search.get('hg')
 
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [groupValue, setGroupValue] = useState('')
-
+	const { sortOrder, setSortOrder, groupValue, setGroupValue } =
+		useFilterStates()
 	const { groups } = useGetGroups()
 
-	const { id } = useParams()
 	const { data, isLoading } = useGetHealthGroupReport(
 		department,
 		course,
@@ -37,15 +36,13 @@ const HealthGroupReport = () => {
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `group-report-${id}`
 	})
-	if (isLoading) {
-		return <CustomLoader />
-	}
+	const departmentName = data?.map(({ name }) => <p>{name}</p>)
+
 	return (
 		<>
 			<div className='w-full'>
 				<div className='flex justify-between items-end p-10'>
 					<div className='flex items-end gap-3'>
-						{' '}
 						<HealthGroupReportFilters
 							groups={groups}
 							sortOrder={sortOrder}
@@ -66,7 +63,7 @@ const HealthGroupReport = () => {
 			<ReportBody
 				printRef={printRef}
 				header='Листок здоровья отделения:'
-				title={`${data?.map(({ name }) => name)}`}
+				title={departmentName}
 			>
 				<table className={styles.table}>
 					<thead className={'border-b-2 border-t-2'}>
@@ -76,7 +73,11 @@ const HealthGroupReport = () => {
 						/>
 					</thead>
 					<tbody className='text-center'>
-						<HealthGroupReportData data={data} />
+						{isLoading ? (
+							<CustomLoader />
+						) : (
+							<HealthGroupReportData data={data} />
+						)}
 					</tbody>
 				</table>
 			</ReportBody>

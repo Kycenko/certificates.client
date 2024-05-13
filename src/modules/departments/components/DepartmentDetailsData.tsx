@@ -16,7 +16,7 @@ const DepartmentDetailsData: FC<DepartmentDetailsDataProps> = ({ data }) => {
 	if (data?.courses.length === 0) return <NoData />
 	return (
 		<>
-			{data?.courses?.map(({ id, number, groups }) => (
+			{data?.courses.map(({ id, number, groups }) => (
 				<tr
 					onClick={() => navigate(`${PAGES_URL.COURSES}/${id}`)}
 					className={styles.cell}

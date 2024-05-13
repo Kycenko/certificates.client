@@ -1,30 +1,37 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
+import useMedicalCertificatesActions from '../hooks/useMedicalCertificatesActions.ts'
 
 import MedicalCertificatesFilters from './MedicalCertificatesFilters.tsx'
 import { CertificatesHeads } from './certificates-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
-import {
-	useDeleteMedicalCertificate,
-	useGetMedicalCertificates,
-	useUpdateMedicalCertificate
-} from '@/modules/medical-certificates/api/medical-certificate.queries.ts'
+import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
+import { useGetMedicalCertificates } from '@/modules/medical-certificates/api/medical-certificate.queries.ts'
 import MedicalCertificateData from '@/modules/medical-certificates/components/MedicalCertificateData.tsx'
-import { TypeMedicalCertificateForm } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
+import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
-import useModal from '@/shared/hooks/useModal.ts'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const MedicalCertificatesTable = () => {
 	const navigate = useNavigate()
-	const [departmentValue, setDepartmentValue] = useState<string>('')
-	const [groupValue, setGroupValue] = useState<string>('')
-	const [courseValue, setCourseValue] = useState<string>('')
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+
+	const {
+		departmentValue,
+		setDepartmentValue,
+		courseValue,
+		setCourseValue,
+		groupValue,
+		setGroupValue,
+		sortOrder,
+		setSortOrder
+	} = useFilterStates()
+
 	const { certificates, isLoading, refetch } = useGetMedicalCertificates(
 		sortOrder,
 		departmentValue,
@@ -33,26 +40,11 @@ const MedicalCertificatesTable = () => {
 	)
 	const { departments } = useGetDepartments()
 	const { groups } = useGetGroups()
+	const { healthGroups } = useGetHealthGroups()
+	const { physicalEducations } = useGetPhysicalEducations()
 
-	const { closeModal } = useModal()
+	const { handleDelete, handleEdit } = useMedicalCertificatesActions(refetch)
 
-	const { update } = useUpdateMedicalCertificate()
-	const { remove } = useDeleteMedicalCertificate()
-
-	const handleEdit = async (
-		id: number | string,
-		data: TypeMedicalCertificateForm
-	) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
-	}
-
-	const handleDelete = async (id: number | string) => {
-		await remove(id)
-		closeModal()
-		await refetch()
-	}
 	const onHistory = (id: number | string) => {
 		navigate(`${PAGES_URL.MEDICAL_CERTIFICATE_HISTORY}/${id}`)
 	}
@@ -61,9 +53,14 @@ const MedicalCertificatesTable = () => {
 		navigate(`${PAGES_URL.STUDENTS}/${id}`)
 	}
 
-	window.history.pushState(null, '', `?sort=${sortOrder}&group=${groupValue}`)
+	useEffect(() => {
+		window.history.pushState(
+			null,
+			'',
+			`?sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}`
+		)
+	}, [sortOrder, departmentValue, courseValue, groupValue])
 
-	if (isLoading) return <CustomLoader />
 	return (
 		<div className={styles.container}>
 			<div className={styles.tableContainer}>
@@ -88,13 +85,19 @@ const MedicalCertificatesTable = () => {
 						<TableHeads data={CertificatesHeads} />
 					</thead>
 					<tbody>
-						<MedicalCertificateData
-							data={certificates}
-							onDelete={handleDelete}
-							onEdit={handleEdit}
-							onHistory={onHistory}
-							onInfo={onInfo}
-						/>
+						{isLoading ? (
+							<CustomLoader />
+						) : (
+							<MedicalCertificateData
+								data={certificates}
+								healthGroups={healthGroups}
+								physicalEducations={physicalEducations}
+								onDelete={handleDelete}
+								onEdit={handleEdit}
+								onHistory={onHistory}
+								onInfo={onInfo}
+							/>
+						)}
 					</tbody>
 				</table>
 			</div>

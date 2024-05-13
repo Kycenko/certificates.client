@@ -1,6 +1,0 @@
-export * from './group-heads'
-export * from './GroupData'
-export * from './GroupDetailsData'
-export * from './GroupDetailsTable'
-export * from './GroupsFilters'
-export * from './GroupsTable'

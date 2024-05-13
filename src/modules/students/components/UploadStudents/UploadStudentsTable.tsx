@@ -18,6 +18,7 @@ const UploadStudentsTable = () => {
 
 		const formData = new FormData()
 		formData.append('file', file)
+
 		await create(formData as any)
 
 		setFile(null)

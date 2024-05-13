@@ -1,9 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FC, useEffect } from 'react'
+import { FC, useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
-import NoData from '@/components/NoData.tsx'
+import NoData from '@/components/NoData'
 
 import styles from '@/app/styles/Tables.module.scss'
 import {
@@ -42,70 +42,81 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 		resolver: zodResolver(departmentValidationSchema)
 	})
 	useEffect(() => {
-		setFocus('name')
-	})
-	const handleDelete = (id: number | string) => {
-		onDelete(id)
-		setDeleteId(null)
-	}
-	const onSubmit = (id: number | string, data: TypeDepartmentForm) => {
-		onEdit(id, data)
-		setEditId(null)
-		reset()
-	}
-	if (!data || data.length === 0) return <NoData />
+		if (editId !== null) setFocus('name')
+	}, [editId, setFocus])
+
+	const handleDelete = useCallback(
+		(id: number | string) => {
+			onDelete(id)
+			setDeleteId(null)
+		},
+		[onDelete, setDeleteId]
+	)
+	const onSubmit = useCallback(
+		(id: number | string, data: TypeDepartmentForm) => {
+			onEdit(id, data)
+			setEditId(null)
+			reset()
+		},
+		[onEdit, setEditId, reset]
+	)
+
 	return (
 		<>
-			{data?.map(({ id, name }) => (
-				<tr
-					className={styles.contentCell}
-					key={id}
-				>
-					<td className={styles.cellPadding}>
-						<span>
-							<span>{name}</span>
-						</span>
-					</td>
-					<td className={styles.editCellContainer}>
-						<span className={styles.adminEditCell}>
-							<ActionButtons
-								onEdit={() => setEditId(id)}
-								onDelete={() => setDeleteId(id)}
-								onInfo={() => onInfo(id)}
-								actionId={id}
+			{!data || data.length === 0 ? (
+				<NoData />
+			) : (
+				data?.map(({ id, name }) => (
+					<tr
+						className={styles.contentCell}
+						key={id}
+					>
+						<td className={styles.cellPadding}>
+							<span>
+								<span>{name}</span>
+							</span>
+						</td>
+						<td className={styles.editCellContainer}>
+							<span className={styles.adminEditCell}>
+								<ActionButtons
+									onEdit={() => setEditId(id)}
+									onDelete={() => setDeleteId(id)}
+									onInfo={() => onInfo(id)}
+									actionId={id}
+								/>
+							</span>
+						</td>
+						<CustomModalForm
+							onSubmit={handleSubmit(data => onSubmit(id, data))}
+							isOpen={editId === id}
+							onClose={() => {
+								setEditId(null)
+								reset()
+							}}
+							formTitle='Изменение'
+							buttonTitle='Изменить'
+						>
+							<CustomInput
+								id='name'
+								label='Название'
+								placeholder={'Введите название'}
+								defaultValue={name}
+								{...register('name')}
 							/>
-						</span>
-					</td>
-					<CustomModalForm
-						onSubmit={handleSubmit(data => onSubmit(id, data))}
-						isOpen={editId === id}
-						onClose={() => {
-							setEditId(null)
-							reset()
-						}}
-						formTitle='Изменение'
-						buttonTitle='Изменить'
-					>
-						<CustomInput
-							id='name'
-							label='Название'
-							placeholder={'Введите название'}
-							defaultValue={name}
-							{...register('name')}
-						/>
-						<ErrorMessage error={errors.name} />
-					</CustomModalForm>
-					<CustomModalForm
-						onSubmit={() => handleDelete(id)}
-						buttonTitle={'Удалить'}
-						isOpen={deleteId === id}
-						onClose={() => setDeleteId(null)}
-						formTitle={'Удаление'}
-					>
-						{name}
-					</CustomModalForm>
-				</tr>
-			))}
+							<ErrorMessage error={errors.name} />
+						</CustomModalForm>
+						<CustomModalForm
+							onSubmit={() => handleDelete(id)}
+							buttonTitle={'Удалить'}
+							isOpen={deleteId === id}
+							onClose={() => setDeleteId(null)}
+							formTitle={'Удаление'}
+						>
+							{name}
+						</CustomModalForm>
+					</tr>
+				))
+			)}
 		</>
 	)
 }

@@ -12,28 +12,37 @@ interface HealthGroupReportDataProps {
 }
 
 const HealthGroupReportData: FC<HealthGroupReportDataProps> = ({ data }) => {
-	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
-			{data?.map(({ id, courses }) =>
-				courses?.map(({ groups, number }) =>
-					groups.map(({ students, name: groupName }) =>
-						students.map(
-							({ name, surname, secondName, birthDate, medicalCertificates }) =>
-								medicalCertificates.map(({ healthGroup }) => (
-									<tr
-										className='border'
-										key={`${id}-${name}-${surname}`}
-									>
-										<td className='p-2'>
-											{formatFullName(surname, name, secondName)}
-										</td>
-										<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
-										<td>{number}-й курс</td>
-										<td>{groupName}</td>
-										<td>{healthGroup.name}</td>
-									</tr>
-								))
+			{!data || data.length === 0 ? (
+				<NoData />
+			) : (
+				data?.map(({ id, courses }) =>
+					courses?.map(({ groups, number }) =>
+						groups.map(({ students, name: groupName }) =>
+							students.map(
+								({
+									name,
+									surname,
+									secondName,
+									birthDate,
+									medicalCertificates
+								}) =>
+									medicalCertificates.map(({ healthGroup }) => (
+										<tr
+											className='border'
+											key={`${id}-${name}-${surname}`}
+										>
+											<td className='p-2'>
+												{formatFullName(surname, name, secondName)}
+											</td>
+											<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
+											<td>{number}-й курс</td>
+											<td>{groupName}</td>
+											<td>{healthGroup.name}</td>
+										</tr>
+									))
+							)
 						)
 					)
 				)

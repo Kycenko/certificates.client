@@ -7,10 +7,11 @@ import styles from '@/app/styles/Tables.module.scss'
 import { useGetMedicalCertificateHistories } from '@/modules/medical-certificates/api/medical-certificate-history.queries.ts'
 import { CertificateHistoryHeads } from '@/modules/medical-certificates/components/certificates-heads.ts'
 import Heading from '@/shared/ui/fields/Heading/Heading.tsx'
+import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const MedicalCertificateHistory = () => {
 	const { id } = useParams()
-	const { certificates } = useGetMedicalCertificateHistories(id)
+	const { certificates, isLoading } = useGetMedicalCertificateHistories(id)
 
 	return (
 		<div>
@@ -23,7 +24,11 @@ const MedicalCertificateHistory = () => {
 					/>
 				</thead>
 				<tbody>
-					<MedicalCertificateHistoryData data={certificates} />
+					{isLoading ? (
+						<CustomLoader />
+					) : (
+						<MedicalCertificateHistoryData data={certificates} />
+					)}
 				</tbody>
 			</table>
 		</div>

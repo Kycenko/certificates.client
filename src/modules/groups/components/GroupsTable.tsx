@@ -1,68 +1,62 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
+import useGroupActions from '../hooks/useGroupsActions.ts'
+
 import GroupsFilters from './GroupsFilters.tsx'
 import { GroupHeads } from './group-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
+import { useGetCourses } from '@/modules/courses/api/course.queries.ts'
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
-import {
-	useDeleteGroup,
-	useGetGroups,
-	useUpdateGroup
-} from '@/modules/groups/api/group.queries.ts'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import GroupData from '@/modules/groups/components/GroupData.tsx'
-import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
+import { IGroup } from '@/modules/groups/types/group.types.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
-import useModal from '@/shared/hooks/useModal.ts'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const GroupsTable = () => {
 	const navigate = useNavigate()
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [departmentValue, setDepartmentValue] = useState<string>('')
-	const [courseValue, setCourseValue] = useState<string>('')
+
+	const {
+		departmentValue,
+		setDepartmentValue,
+		courseValue,
+		setCourseValue,
+		sortOrder,
+		setSortOrder
+	} = useFilterStates()
 
 	const { departments } = useGetDepartments()
+	const { courses } = useGetCourses()
 	const { groups, isLoading, refetch } = useGetGroups(
 		sortOrder,
 		departmentValue,
 		courseValue
 	)
 
+	const { handleDelete, handleEdit } = useGroupActions(refetch)
+
 	const { sortedData, searchTerm, setSearchTerm } = useSortAndFilterData(
 		groups as IGroup[],
 		'name'
 	)
-	const { closeModal } = useModal()
-
-	const { update } = useUpdateGroup()
-	const { remove } = useDeleteGroup()
-
-	const handleEdit = async (id: number | string, data: TypeGroupForm) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
-	}
-
-	const handleDelete = async (id: number | string) => {
-		await remove(id)
-		closeModal()
-		await refetch()
-	}
 
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.GROUPS}/${id}`)
 	}
-	window.history.pushState(
-		null,
-		'',
-		`?sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&search=${searchTerm}`
-	)
 
-	if (isLoading) return <CustomLoader />
+	useEffect(() => {
+		window.history.pushState(
+			null,
+			'',
+			`?sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&search=${searchTerm}`
+		)
+	}, [sortOrder, departmentValue, courseValue, searchTerm])
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.tableContainer}>
@@ -86,12 +80,17 @@ const GroupsTable = () => {
 						<TableHeads data={GroupHeads} />
 					</thead>
 					<tbody>
-						<GroupData
-							data={sortedData}
-							onDelete={handleDelete}
-							onEdit={handleEdit}
-							onInfo={handleInfo}
-						/>
+						{isLoading ? (
+							<CustomLoader />
+						) : (
+							<GroupData
+								data={sortedData}
+								courses={courses}
+								onDelete={handleDelete}
+								onEdit={handleEdit}
+								onInfo={handleInfo}
+							/>
+						)}
 					</tbody>
 				</table>
 			</div>

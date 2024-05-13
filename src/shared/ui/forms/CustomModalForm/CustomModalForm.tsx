@@ -31,6 +31,11 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = memo(
 
 		const modalRef = useRef<HTMLDivElement>(null)
 		useClickOutside(modalRef, onClose)
+
+		const submitBtn = async (data: any) => {
+			onSubmit(data)
+			onClose()
+		}
 		return (
 			isOpen && (
 				<div className={isOpen ? styles.modalOpen : styles.modalClose}>
@@ -63,7 +68,7 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = memo(
 									<button
 										className='btn btn-success text-white font-bold uppercase px-6 py-3 rounded'
 										type='submit'
-										onClick={onSubmit}
+										onClick={submitBtn}
 									>
 										{buttonTitle}
 									</button>

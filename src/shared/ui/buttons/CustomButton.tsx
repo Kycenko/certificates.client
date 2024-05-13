@@ -5,7 +5,6 @@ import styles from './CustomButton.module.scss'
 
 type ButtonVariant = 'primary' | 'create'
 
-// Расширяем интерфейс кнопки, добавляя свойство variant
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: ButtonVariant
 }

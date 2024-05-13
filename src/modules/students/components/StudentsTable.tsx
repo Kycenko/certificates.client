@@ -1,64 +1,50 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
+import useStudentActions from '../hooks/useStudentActions.ts'
 
 import StudentsFilters from './StudentsFilters.tsx'
 import { StudentHeads } from './student-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
-import {
-	useDeleteStudent,
-	useGetStudents,
-	useUpdateStudent
-} from '@/modules/students/api/student.queries.ts'
+import { useGetStudents } from '@/modules/students/api/student.queries.ts'
 import StudentData from '@/modules/students/components/StudentData.tsx'
-import {
-	IStudent,
-	TypeStudentForm
-} from '@/modules/students/types/student.types.ts'
+import { IStudent } from '@/modules/students/types/student.types.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
-import useModal from '@/shared/hooks/useModal.ts'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const StudentsTable = () => {
 	const navigate = useNavigate()
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [departmentValue, setDepartmentValue] = useState('')
-	const [courseValue, setCourseValue] = useState('')
-	const [groupValue, setGroupValue] = useState('')
-	// const [isExpelled, setIsExpelled] = useState('')
+	const {
+		courseValue,
+		setCourseValue,
+		groupValue,
+		setGroupValue,
+		departmentValue,
+		setDepartmentValue,
+
+		isExpelledValue,
+		setIsExpelledValue
+	} = useFilterStates()
 
 	const { students, isLoading, refetch } = useGetStudents(
-		sortOrder,
 		departmentValue,
 		courseValue,
-		groupValue
+		groupValue,
+		isExpelledValue
 	)
 
-	const { sortedData, searchTerm, setSearchTerm } = useSortAndFilterData(
-		students as IStudent[],
-		'surname'
-	)
+	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
+		useSortAndFilterData(students as IStudent[], 'surname')
 	const { departments } = useGetDepartments()
 	const { groups } = useGetGroups()
-	const { closeModal } = useModal()
-	const { update } = useUpdateStudent()
-	const { remove } = useDeleteStudent()
 
-	const handleEdit = async (id: number | string, data: TypeStudentForm) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
-	}
-
-	const handleDelete = async (id: number | string) => {
-		await remove(id)
-		closeModal()
-		await refetch()
-	}
+	const { handleDelete, handleEdit } = useStudentActions(refetch)
 
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.STUDENTS}/${id}`)
@@ -68,13 +54,21 @@ const StudentsTable = () => {
 		navigate(`${PAGES_URL.STUDENT_HISTORY}/${studentId}`)
 	}
 
-	window.history.pushState(
-		null,
-		'',
-		`?search=${searchTerm}&group=${groupValue}&sort=${sortOrder}`
-	)
+	useEffect(() => {
+		window.history.pushState(
+			null,
+			'',
+			`?search=${searchTerm}&sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}&isExpelled=${isExpelledValue}`
+		)
+	}, [
+		sortOrder,
+		searchTerm,
+		departmentValue,
+		courseValue,
+		groupValue,
+		isExpelledValue
+	])
 
-	if (isLoading) return <CustomLoader />
 	return (
 		<>
 			<div className={styles.container}>
@@ -94,6 +88,8 @@ const StudentsTable = () => {
 								setCourseValue={setCourseValue}
 								groupValue={groupValue}
 								setGroupValue={setGroupValue}
+								isExpelledValue={isExpelledValue}
+								setIsExpelledValue={setIsExpelledValue}
 							/>
 						</div>
 					</div>
@@ -102,13 +98,18 @@ const StudentsTable = () => {
 							<TableHeads data={StudentHeads} />
 						</thead>
 						<tbody>
-							<StudentData
-								data={sortedData}
-								onDelete={handleDelete}
-								onEdit={handleEdit}
-								onInfo={handleInfo}
-								onHistory={handleHistory}
-							/>
+							{isLoading ? (
+								<CustomLoader />
+							) : (
+								<StudentData
+									data={sortedData}
+									groups={groups}
+									onDelete={handleDelete}
+									onEdit={handleEdit}
+									onInfo={handleInfo}
+									onHistory={handleHistory}
+								/>
+							)}
 						</tbody>
 					</table>
 				</div>

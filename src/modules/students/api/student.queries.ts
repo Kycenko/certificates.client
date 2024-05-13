@@ -4,8 +4,7 @@ import { AxiosResponse } from 'axios'
 import { StudentService } from '@/modules/students/api/student.service.ts'
 import {
 	IStudent,
-	TypeStudentForm,
-	TypeUploadStudentForm
+	TypeStudentForm
 } from '@/modules/students/types/student.types.ts'
 import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
@@ -13,7 +12,7 @@ import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 export const useUploadStudents = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({
-		mutationFn: async (data: TypeUploadStudentForm[]) => {
+		mutationFn: async (data: TypeStudentForm[]) => {
 			const response = await StudentService.upload(data)
 			return response.data
 		},
@@ -41,7 +40,6 @@ export const useCreateStudent = () => {
 }
 
 export const useGetStudents = (
-	sortOrder: 'asc' | 'desc' = 'asc',
 	department?: string,
 	course?: string,
 	group?: string,
@@ -52,16 +50,13 @@ export const useGetStudents = (
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [
-			QUERY_KEYS.STUDENTS,
-			{ sortOrder, department, course, group, isExpelled }
-		],
+		queryKey: [QUERY_KEYS.STUDENTS, { department, course, group, isExpelled }],
 		queryFn: async () => {
 			const response: AxiosResponse<IStudent[]> = await StudentService.getAll(
-				sortOrder,
 				department,
 				course,
-				group
+				group,
+				isExpelled
 			)
 			return response.data
 		}

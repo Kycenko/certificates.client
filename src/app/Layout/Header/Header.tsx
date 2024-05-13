@@ -1,12 +1,12 @@
 import { memo, useState } from 'react'
 
 import Dropdown from '@/app/Layout/Header/DropDown/DropDown.tsx'
+import ModalDepartmentReport from '@/app/Layout/Header/DropDown/report-modals/ModalDepartmentReport'
+import ModalExpiredCertificatesReport from '@/app/Layout/Header/DropDown/report-modals/ModalExpiredCertificatesReport'
+import ModalGroupReport from '@/app/Layout/Header/DropDown/report-modals/ModalGroupReport'
+import ModalHealthGroupReport from '@/app/Layout/Header/DropDown/report-modals/ModalHealthGroupReport'
+import ModalPhysicalEducationReport from '@/app/Layout/Header/DropDown/report-modals/ModalPhysicalEducationReport'
 import styles from '@/app/Layout/Header/Header.module.scss'
-import ModalDepartmentReport from '@/app/Layout/Header/report-modals/ModalDepartmentReport.tsx'
-import ModalExpiredCertificatesReport from '@/app/Layout/Header/report-modals/ModalExpiredCertificatesReport.tsx'
-import ModalGroupReport from '@/app/Layout/Header/report-modals/ModalGroupReport.tsx'
-import ModalHealthGroupReport from '@/app/Layout/Header/report-modals/ModalHealthGroupReport.tsx'
-import ModalPhysicalEducationReport from '@/app/Layout/Header/report-modals/ModalPhysicalEducationReport.tsx'
 import useAuth from '@/shared/hooks/useAuth.ts'
 
 const Header = memo(() => {

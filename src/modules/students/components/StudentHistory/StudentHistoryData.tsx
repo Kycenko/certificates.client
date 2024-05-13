@@ -11,20 +11,23 @@ interface StudentHistoryDataProps {
 }
 
 const StudentHistoryData: FC<StudentHistoryDataProps> = ({ data }) => {
-	if (!data || data.length === 0) return <NoData />
 	return (
 		<>
-			{data?.map(({ id, group, createdAt }) => (
-				<tr
-					className={styles.contentCell}
-					key={id}
-				>
-					<td className={'text-center'}>{group?.name}</td>
-					<td className={'text-center'}>
-						{format(new Date(createdAt), 'dd.MM.yyyy HH:mm:ss')}
-					</td>
-				</tr>
-			))}
+			{!data || data.length === 0 ? (
+				<NoData />
+			) : (
+				data?.map(({ id, group, createdAt }) => (
+					<tr
+						className={styles.contentCell}
+						key={id}
+					>
+						<td className={'text-center'}>{group?.name}</td>
+						<td className={'text-center'}>
+							{format(new Date(createdAt), 'dd.MM.yyyy HH:mm:ss')}
+						</td>
+					</tr>
+				))
+			)}
 		</>
 	)
 }

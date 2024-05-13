@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
@@ -12,18 +12,26 @@ import { useGetGroupReport } from '@/modules/reports/api/reports.queries.ts'
 import { GroupReportHeads } from '@/modules/reports/components/GroupReport/group-report-heads.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const GroupReport = memo(() => {
 	const { id } = useParams()
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [healthValue, setHealthValue] = useState('')
-	const [educationValue, setEducationValue] = useState('')
+
+	const {
+		sortOrder,
+		setSortOrder,
+		healthValue,
+		setHealthValue,
+		physicalValue,
+		setPhysicalValue
+	} = useFilterStates()
+
 	const { data, isLoading } = useGetGroupReport(
 		id,
 		sortOrder,
 		healthValue,
-		educationValue
+		physicalValue
 	)
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
@@ -31,10 +39,6 @@ const GroupReport = memo(() => {
 		documentTitle: `group-report-${id}`
 	})
 	const groupName = data?.map(({ name }) => <p>{name}</p>)
-
-	if (isLoading) {
-		return <CustomLoader />
-	}
 
 	return (
 		<>
@@ -48,8 +52,8 @@ const GroupReport = memo(() => {
 							setSortOrder={setSortOrder}
 							healthValue={healthValue}
 							setHealthValue={setHealthValue}
-							educationValue={educationValue}
-							setEducationValue={setEducationValue}
+							educationValue={physicalValue}
+							setEducationValue={setPhysicalValue}
 						/>
 					</div>
 					<button
@@ -74,7 +78,7 @@ const GroupReport = memo(() => {
 						/>
 					</thead>
 					<tbody className='text-center'>
-						<GroupReportData data={data} />
+						{isLoading ? <CustomLoader /> : <GroupReportData data={data} />}
 					</tbody>
 				</table>
 			</ReportBody>

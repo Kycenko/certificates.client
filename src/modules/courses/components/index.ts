@@ -1,6 +1,0 @@
-export * from './course-heads'
-export * from './CourseData'
-export * from './CourseDetailsData'
-export * from './CourseDetailsTable'
-export * from './CoursesFilters'
-export * from './CoursesTable'

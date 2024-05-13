@@ -1,13 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-import {
-	useCreateHealthGroup,
-	useDeleteHealthGroup,
-	useGetHealthGroups,
-	useUpdateHealthGroup
-} from '@/modules/health-groups/api/health-group.query.ts'
+import useHealthGroupActions from '../hooks/useHealthGroupActions'
+
+import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
 import HealthGroupData from '@/modules/health-groups/components/HealthGroupData.tsx'
 import { TypeHealthGroupForm } from '@/modules/health-groups/types/health-group.types.ts'
 import { healthGroupValidationSchema } from '@/shared/helpers/validation.schema.ts'
@@ -32,30 +29,15 @@ const HealthGroupComponent = () => {
 		resolver: zodResolver(healthGroupValidationSchema)
 	})
 	useEffect(() => {
-		setFocus('name')
-	})
-	const { create } = useCreateHealthGroup()
-	const { update } = useUpdateHealthGroup()
-	const { remove } = useDeleteHealthGroup()
-	const handleCreate: SubmitHandler<TypeHealthGroupForm> = async data => {
-		await create(data)
-		closeModal()
-		await refetch()
-		reset()
-	}
+		if (isOpen) setFocus('name')
+	}, [isOpen, setFocus])
 
-	const handleEdit = async (id: string | number, data: TypeHealthGroupForm) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
-	}
+	const { handleCreate, handleEdit, handleDelete } = useHealthGroupActions(
+		refetch,
+		reset,
+		closeModal
+	)
 
-	const handleDelete = async (id: string | number) => {
-		await remove(id)
-		closeModal()
-		await refetch()
-	}
-	if (isLoading) return <CustomLoader />
 	return (
 		<div className='w-full'>
 			<div className='flex justify-between p-2'>
@@ -67,11 +49,16 @@ const HealthGroupComponent = () => {
 					Добавить группу здоровья
 				</CustomButton>
 			</div>
-			<HealthGroupData
-				data={healthGroups}
-				onDelete={handleDelete}
-				onEdit={handleEdit}
-			/>
+			{isLoading ? (
+				<CustomLoader />
+			) : (
+				<HealthGroupData
+					data={healthGroups}
+					onDelete={handleDelete}
+					onEdit={handleEdit}
+				/>
+			)}
+
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
 				buttonTitle={'Добавить'}

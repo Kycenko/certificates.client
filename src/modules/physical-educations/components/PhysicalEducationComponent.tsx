@@ -1,13 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-import {
-	useCreatePhysicalEducation,
-	useDeletePhysicalEducation,
-	useGetPhysicalEducations,
-	useUpdatePhysicalEducation
-} from '@/modules/physical-educations/api/physical-education.queries.ts'
+import usePhysicalEducationActions from '../hooks/usePhysicalEducationActions'
+
+import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
 import PhysicalEducationData from '@/modules/physical-educations/components/PhysicalEducationData.tsx'
 import { TypePhysicalEducationForm } from '@/modules/physical-educations/types/physical-education.types.ts'
 import { physicalEducationValidationSchema } from '@/shared/helpers/validation.schema.ts'
@@ -35,36 +32,11 @@ const PhysicalEducationComponent = () => {
 	})
 
 	useEffect(() => {
-		setFocus('name')
-	})
+		if (isOpen) setFocus('name')
+	}, [isOpen, setFocus])
 
-	const { create } = useCreatePhysicalEducation()
-	const { update } = useUpdatePhysicalEducation()
-	const { remove } = useDeletePhysicalEducation()
-
-	const handleCreate: SubmitHandler<TypePhysicalEducationForm> = async data => {
-		await create(data)
-		closeModal()
-		await refetch()
-		reset()
-	}
-
-	const handleEdit = async (
-		id: number | string,
-		data: TypePhysicalEducationForm
-	) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
-	}
-
-	const handleDelete = async (id: number | string) => {
-		await remove(id)
-		closeModal()
-		await refetch()
-	}
-
-	if (isLoading) return <CustomLoader />
+	const { handleCreate, handleEdit, handleDelete } =
+		usePhysicalEducationActions(refetch, reset, closeModal)
 
 	return (
 		<>
@@ -80,11 +52,16 @@ const PhysicalEducationComponent = () => {
 						Добавить группу по физкультуре
 					</CustomButton>
 				</div>
-				<PhysicalEducationData
-					data={physicalEducations}
-					onDelete={handleDelete}
-					onEdit={handleEdit}
-				/>
+				{isLoading ? (
+					<CustomLoader />
+				) : (
+					<PhysicalEducationData
+						data={physicalEducations}
+						onDelete={handleDelete}
+						onEdit={handleEdit}
+					/>
+				)}
+
 				<CustomModalForm
 					onSubmit={handleSubmit(handleCreate)}
 					buttonTitle={'Добавить'}

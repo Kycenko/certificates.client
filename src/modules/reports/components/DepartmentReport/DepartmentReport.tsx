@@ -1,7 +1,8 @@
-import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
+
+import ReportStats from '../ReportStats.tsx'
 
 import DepartmentFilters from './DepartmentFilters.tsx'
 import DepartmentReportData from './DepartmentReportData.tsx'
@@ -12,18 +13,27 @@ import { useGetDepartmentReport } from '@/modules/reports/api/reports.queries.ts
 import { DepartmentReportHeads } from '@/modules/reports/components/DepartmentReport/department-report-heads.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const DepartmentReport = () => {
 	const { id } = useParams()
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [filterValue, setFilterValue] = useState('')
-	const [healthValue, setHealthValue] = useState('')
-	const [physicalValue, setPhysicalValue] = useState('')
+
+	const {
+		sortOrder,
+		setSortOrder,
+		departmentValue,
+		setDepartmentValue,
+		healthValue,
+		setHealthValue,
+		physicalValue,
+		setPhysicalValue
+	} = useFilterStates()
+
 	const { data, isLoading } = useGetDepartmentReport(
 		id,
 		sortOrder,
-		filterValue,
+		departmentValue,
 		healthValue,
 		physicalValue
 	)
@@ -35,13 +45,10 @@ const DepartmentReport = () => {
 	})
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
 
-	if (isLoading) {
-		return <CustomLoader />
-	}
 	return (
 		<>
 			<div className='w-full'>
-				<div className='flex justify-between items-end p-10'>
+				<div className='flex justify-between items-end p-5'>
 					<div className='flex items-end gap-3'>
 						<DepartmentFilters
 							data={data}
@@ -49,8 +56,8 @@ const DepartmentReport = () => {
 							physicalEducations={physicalEducations}
 							sortOrder={sortOrder}
 							setSortOrder={setSortOrder}
-							filterValue={filterValue}
-							setFilterValue={setFilterValue}
+							departmentValue={departmentValue}
+							setDepartmentValue={setDepartmentValue}
 							educationValue={physicalValue}
 							setEducationValue={setPhysicalValue}
 							healthGroupValue={healthValue}
@@ -58,7 +65,7 @@ const DepartmentReport = () => {
 						/>
 					</div>
 					<button
-						className='btn btn-error text-white'
+						className='btn btn-error text-white '
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -66,7 +73,9 @@ const DepartmentReport = () => {
 					</button>
 				</div>
 			</div>
-			<div>{data?.length}</div>
+
+			<ReportStats data={data} />
+
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по медицинским показателем обучающихся отделения:'
@@ -80,7 +89,11 @@ const DepartmentReport = () => {
 						/>
 					</thead>
 					<tbody className='text-center'>
-						<DepartmentReportData data={data} />
+						{isLoading ? (
+							<CustomLoader />
+						) : (
+							<DepartmentReportData data={data} />
+						)}
 					</tbody>
 				</table>
 			</ReportBody>

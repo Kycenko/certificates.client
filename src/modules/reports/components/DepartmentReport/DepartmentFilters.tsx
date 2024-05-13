@@ -14,21 +14,22 @@ interface DepartmentFiltersProps {
 	physicalEducations: IPhysicalEducation[] | undefined
 	sortOrder: 'asc' | 'desc'
 	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
-	filterValue: string
-	setFilterValue: Dispatch<SetStateAction<string>>
+	departmentValue: string
+	setDepartmentValue: Dispatch<SetStateAction<string>>
 	healthGroupValue: string
 	setHealthGroupValue: Dispatch<SetStateAction<string>>
 	educationValue: string
 	setEducationValue: Dispatch<SetStateAction<string>>
 }
+
 const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 	data,
 	healthGroups,
 	physicalEducations,
 	sortOrder,
 	setSortOrder,
-	filterValue,
-	setFilterValue,
+	departmentValue,
+	setDepartmentValue,
 	healthGroupValue,
 	setHealthGroupValue,
 	educationValue,
@@ -42,8 +43,8 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 			/>
 			<Filter
 				label=''
-				filterValue={filterValue}
-				setFilterValue={setFilterValue}
+				filterValue={departmentValue}
+				setFilterValue={setDepartmentValue}
 			>
 				<option
 					key={0}

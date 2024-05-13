@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
@@ -42,6 +41,7 @@ const UserDetailsComponent = () => {
 		})
 		await refetch()
 	}
+
 	return (
 		<>
 			<Heading title={'Описание пользователя'}>
@@ -118,4 +118,4 @@ const UserDetailsComponent = () => {
 	)
 }
 
-export default memo(UserDetailsComponent)
+export default UserDetailsComponent

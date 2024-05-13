@@ -1,18 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
+import useDepartmentActions from '../hooks/useDepartmentActions'
+
 import DepartmentsFilters from './DepartmentsFilters'
 import styles from '@/app/styles/Tables.module.scss'
-import {
-	useCreateDepartment,
-	useDeleteDepartment,
-	useGetDepartments,
-	useUpdateDepartment
-} from '@/modules/departments/api/department.queries.ts'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import DepartmentData from '@/modules/departments/components/DepartmentData.tsx'
 import { DepartmentHeads } from '@/modules/departments/components/department-heads.ts'
 import {
@@ -37,7 +34,13 @@ const DepartmentsTable = () => {
 	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
 		useSortAndFilterData(departments as IDepartment[], 'name')
 
-	window.history.pushState(null, '', `?search=${searchTerm}&sort=${sortOrder}`)
+	useEffect(() => {
+		window.history.pushState(
+			null,
+			'',
+			`?search=${searchTerm}&sort=${sortOrder}`
+		)
+	}, [sortOrder, searchTerm])
 
 	const { isOpen, openModal, closeModal } = useModal()
 
@@ -54,30 +57,12 @@ const DepartmentsTable = () => {
 
 	useEffect(() => {
 		setFocus('name')
-	})
+	}, [isOpen, setFocus])
 
-	const { create } = useCreateDepartment()
-	const { update } = useUpdateDepartment()
-	const { remove } = useDeleteDepartment()
-
-	const handleCreate: SubmitHandler<TypeDepartmentForm> = async data => {
-		await create(data)
-		closeModal()
-		await refetch()
-		reset()
-	}
-
-	const handleEdit = async (id: number | string, data: TypeDepartmentForm) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
-	}
-
-	const handleDelete = async (id: number | string) => {
-		await remove(id)
-		closeModal()
-		await refetch()
-	}
+	const { handleCreate, handleEdit, handleDelete } = useDepartmentActions(
+		refetch,
+		reset
+	)
 
 	const handleInfo = (id: number | string) => {
 		navigate(`${PAGES_URL.DEPARTMENTS}/${id}`)
@@ -110,12 +95,16 @@ const DepartmentsTable = () => {
 							<TableHeads data={DepartmentHeads} />
 						</thead>
 						<tbody>
-							<DepartmentData
-								data={sortedData}
-								onDelete={handleDelete}
-								onEdit={handleEdit}
-								onInfo={handleInfo}
-							/>
+							{isLoading ? (
+								<CustomLoader />
+							) : (
+								<DepartmentData
+									data={sortedData}
+									onDelete={handleDelete}
+									onEdit={handleEdit}
+									onInfo={handleInfo}
+								/>
+							)}
 						</tbody>
 					</table>
 				</div>

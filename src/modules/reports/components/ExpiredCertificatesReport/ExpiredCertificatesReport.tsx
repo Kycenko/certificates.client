@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import TableHeads from '@/components/tablesHeads/TableHeads'
 
 import { useGetExpiredCertificatesReport } from '../../api/reports.queries.ts'
@@ -12,13 +10,20 @@ import styles from '@/app/styles/Tables.module.scss'
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader'
 
 const ExpiredCertificatesReport = () => {
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [departmentValue, setDepartmentValue] = useState('')
-	const [courseValue, setCourseValue] = useState('')
-	const [groupValue, setGroupValue] = useState('')
+	const {
+		sortOrder,
+		setSortOrder,
+		departmentValue,
+		setDepartmentValue,
+		courseValue,
+		setCourseValue,
+		groupValue,
+		setGroupValue
+	} = useFilterStates()
 
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: ``
@@ -32,9 +37,6 @@ const ExpiredCertificatesReport = () => {
 	)
 	const { departments } = useGetDepartments()
 	const { groups } = useGetGroups()
-	console.log(data)
-
-	if (isLoading) return <CustomLoader />
 
 	return (
 		<>
@@ -76,7 +78,11 @@ const ExpiredCertificatesReport = () => {
 						/>
 					</thead>
 					<tbody className='text-center'>
-						<ExpiredCertificatesData data={data} />
+						{isLoading ? (
+							<CustomLoader />
+						) : (
+							<ExpiredCertificatesData data={data} />
+						)}
 					</tbody>
 				</table>
 			</ReportBody>

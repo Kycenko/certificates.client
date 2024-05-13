@@ -37,8 +37,8 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 	})
 
 	useEffect(() => {
-		setFocus('name')
-	})
+		if (editId !== null) setFocus('name')
+	}, [editId, setFocus])
 
 	const handleDelete = (id: number | string) => {
 		onDelete(id)

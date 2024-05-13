@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { useGetDepartments } from '@/modules/departments/api'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 

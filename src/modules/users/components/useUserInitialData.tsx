@@ -18,7 +18,7 @@ const useUserInitialData = (
 				groupId: user.groupId
 			})
 		}
-	}, [isSuccess])
+	}, [isSuccess, reset, user])
 }
 
 export default useUserInitialData

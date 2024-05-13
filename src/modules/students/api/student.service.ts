@@ -22,7 +22,6 @@ export const StudentService = {
 		return instance.post<IStudent>(SERVICE_URL.STUDENTS, data)
 	},
 	async getAll(
-		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: string,
 		group?: string,
@@ -34,7 +33,7 @@ export const StudentService = {
 		const isExpelledParam = isExpelled ? `&isExpelled=${isExpelled}` : ''
 
 		return instance.get<IStudent[]>(
-			`${SERVICE_URL.STUDENTS}?sort=${sortOrder}${departmentParam}${courseParam}${groupParam}${isExpelledParam}`
+			`${SERVICE_URL.STUDENTS}?${departmentParam}${courseParam}${groupParam}${isExpelledParam}`
 		)
 	},
 

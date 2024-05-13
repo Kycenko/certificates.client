@@ -21,6 +21,8 @@ interface StudentsFiltersProps {
 	setCourseValue: Dispatch<SetStateAction<string>>
 	groupValue: string
 	setGroupValue: Dispatch<SetStateAction<string>>
+	isExpelledValue: string
+	setIsExpelledValue: Dispatch<SetStateAction<string>>
 }
 
 const StudentsFilters: FC<StudentsFiltersProps> = ({
@@ -35,7 +37,9 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 	courseValue,
 	setCourseValue,
 	groupValue,
-	setGroupValue
+	setGroupValue,
+	isExpelledValue,
+	setIsExpelledValue
 }) => {
 	return (
 		<>
@@ -88,6 +92,14 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 						Группа {name}
 					</option>
 				))}
+			</Filter>
+			<Filter
+				label=''
+				filterValue={isExpelledValue}
+				setFilterValue={setIsExpelledValue}
+			>
+				<option value='false'>Не отчислены</option>
+				<option value='true'>Отчислены</option>
 			</Filter>
 		</>
 	)

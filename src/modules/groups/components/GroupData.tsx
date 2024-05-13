@@ -7,7 +7,7 @@ import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetCourses } from '@/modules/courses/api/course.queries.ts'
+import { ICourse } from '@/modules/courses/types'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
 import { groupValidationSchema } from '@/shared/helpers/validation.schema.ts'
@@ -20,17 +20,24 @@ import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 
 interface GroupDataProps {
 	data: IGroup[] | undefined
+	courses: ICourse[] | undefined
 	onEdit: (id: number | string, data: TypeGroupForm) => void
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
 }
 
-const GroupData: FC<GroupDataProps> = ({ data, onDelete, onEdit, onInfo }) => {
+const GroupData: FC<GroupDataProps> = ({
+	data,
+	courses,
+	onDelete,
+	onEdit,
+	onInfo
+}) => {
 	const navigate = useNavigate()
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 
 	const { user } = useAuth()
-	const { courses } = useGetCourses()
+
 	const {
 		register,
 		handleSubmit,

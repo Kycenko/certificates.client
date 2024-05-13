@@ -15,7 +15,7 @@ const Heading = memo(({ title, children }: IHeading) => {
 				{children}
 			</h1>
 
-			<div className={styles.underLine} />
+			<hr className={styles.underLine} />
 		</div>
 	)
 })

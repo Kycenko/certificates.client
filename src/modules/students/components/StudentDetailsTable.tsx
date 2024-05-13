@@ -69,7 +69,6 @@ const StudentDetailsTable = () => {
 		reset()
 	}
 
-	if (isLoading) return <CustomLoader />
 	return (
 		<>
 			<Heading title={'Описание обучающегося'}>
@@ -91,11 +90,15 @@ const StudentDetailsTable = () => {
 					<DetailsTableHeads data={DetailsStudentHeads} />
 				</thead>
 				<tbody>
-					<StudentDetailsData
-						data={student}
-						healthGroups={healthGroups}
-						physicalEducations={physicalEducations}
-					/>
+					{isLoading ? (
+						<CustomLoader />
+					) : (
+						<StudentDetailsData
+							data={student}
+							healthGroups={healthGroups}
+							physicalEducations={physicalEducations}
+						/>
+					)}
 				</tbody>
 			</table>
 			<CustomModalForm

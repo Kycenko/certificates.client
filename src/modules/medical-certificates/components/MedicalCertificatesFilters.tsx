@@ -19,6 +19,7 @@ interface MedicalCertificatesFiltersProps {
 	groupValue: string
 	setGroupValue: Dispatch<SetStateAction<string>>
 }
+
 const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 	departments,
 	groups,

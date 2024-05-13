@@ -1,17 +1,19 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import { useGetPhysicalEducationReport } from '../../api/reports.queries.ts'
 
-import HealthReportData from './PhysicalEducationReportData.tsx'
-import PhysicalEducationReportFilters from './PhysicalEducationReportFilters.tsx'
-import { PhysicalEducationReportHeads } from './physical-education-report-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
+import useFilterStates from '@/shared/hooks/useFilterStates.ts'
+import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
+import PhysicalEducationReportData from './PhysicalEducationReportData.tsx'
+import PhysicalEducationReportFilters from './PhysicalEducationReportFilters.tsx'
+import { PhysicalEducationReportHeads } from './physical-education-report-heads.ts'
 
 const PhysicalEducationReport = memo(() => {
 	const [search] = useSearchParams()
@@ -19,10 +21,10 @@ const PhysicalEducationReport = memo(() => {
 	const course = search.get('course')
 	const physicalEducation = search.get('pe')
 
-	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
-	const [groupValue, setGroupValue] = useState('')
+	const { sortOrder, setSortOrder, groupValue, setGroupValue } =
+		useFilterStates()
 
-	const { data } = useGetPhysicalEducationReport(
+	const { data, isLoading } = useGetPhysicalEducationReport(
 		department,
 		course,
 		physicalEducation,
@@ -34,7 +36,7 @@ const PhysicalEducationReport = memo(() => {
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `health-report-${department}`
 	})
-
+	const departmentName = data?.map(({ name }) => <p>{name}</p>)
 	return (
 		<>
 			<div className='w-full'>
@@ -61,7 +63,7 @@ const PhysicalEducationReport = memo(() => {
 			<ReportBody
 				printRef={printRef}
 				header='Листок здоровья отделения:'
-				title={`${data?.map(({ name }) => name)}`}
+				title={departmentName}
 			>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>
@@ -71,7 +73,11 @@ const PhysicalEducationReport = memo(() => {
 						/>
 					</thead>
 					<tbody className='text-center'>
-						<HealthReportData data={data} />
+						{isLoading ? (
+							<CustomLoader />
+						) : (
+							<PhysicalEducationReportData data={data} />
+						)}
 					</tbody>
 				</table>
 			</ReportBody>

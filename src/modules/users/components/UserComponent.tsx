@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -31,15 +30,12 @@ const UserComponent = () => {
 
 	const handleRegister = async (data: IRegister) => {
 		await registerQuery.mutateAsync({ ...data })
-		closeModal()
-		reset()
 		await refetch()
+		reset()
 	}
 
 	const handleDelete = async (id: string | number) => {
 		await deleteQuery.mutateAsync(id)
-		closeModal()
-
 		await refetch()
 	}
 
@@ -105,4 +101,4 @@ const UserComponent = () => {
 	)
 }
 
-export default memo(UserComponent)
+export default UserComponent

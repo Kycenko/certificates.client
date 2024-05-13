@@ -1,5 +1,5 @@
 import { Eye, History, PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import styles from './ActionButtons.module.scss'
 
@@ -54,4 +54,4 @@ const ActionButtons: FC<ActionButtonsProps> = ({
 	)
 }
 
-export default ActionButtons
+export default memo(ActionButtons)

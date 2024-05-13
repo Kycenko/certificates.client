@@ -10,7 +10,6 @@ interface PhysicalEducationReportDataProps {
 
 const PhysicalEducationReportData: FC<PhysicalEducationReportDataProps> = memo(
 	({ data }) => {
-		console.log(data)
 		return (
 			<>
 				{data?.map(({ id, courses }) =>

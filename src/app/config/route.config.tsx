@@ -1,30 +1,28 @@
 import { RouteProps } from 'react-router-dom'
 
-import {
-	CourseDetailsPageLazy,
-	CoursesPageLazy,
-	DepartmentDetailsPageLazy,
-	DepartmentsPageLazy,
-	GetDepartmentReportPageLazy,
-	GetExpiredCertificatesReportPageLazy,
-	GetGroupReportPageLazy,
-	GetHealthGroupReportPageLazy,
-	GetPhysicalEducationReportPageLazy,
-	GroupDetailsPageLazy,
-	GroupsPageLazy,
-	HealthGroupsPageLazy,
-	HomePageLazy,
-	LoginPageLazy,
-	MedicalCertificateHistoryPageLazy,
-	MedicalCertificatesPageLazy,
-	NotFoundPageLazy,
-	PhysicalEducationsPageLazy,
-	StudentDetailsPageLazy,
-	StudentHistoryPageLazy,
-	StudentsPageLazy,
-	UserDetailsPageLazy,
-	UsersPageLazy
-} from '@/pages'
+import { CourseDetailsPageLazy } from '@/pages/Courses/CourseDetailsPage.lazy.tsx'
+import { CoursesPageLazy } from '@/pages/Courses/CoursesPage.lazy.tsx'
+import { DepartmentDetailsPageLazy } from '@/pages/Departments/DepartmentDetailsPageLazy.tsx'
+import { DepartmentsPageLazy } from '@/pages/Departments/DepartmentsPageLazy.tsx'
+import { GroupDetailsPageLazy } from '@/pages/Groups/GroupDetailsPageLazy.tsx'
+import { GroupsPageLazy } from '@/pages/Groups/GroupsPageLazy.tsx'
+import { HealthGroupsPageLazy } from '@/pages/HealthGroups/HealthGroupsPageLazy.tsx'
+import { HomePageLazy } from '@/pages/Home/HomePageLazy.tsx'
+import { LoginPageLazy } from '@/pages/Login/LoginPageLazy.tsx'
+import { MedicalCertificateHistoryPageLazy } from '@/pages/MedicalCertificates/MedicalCertificateHistoryPageLazy.tsx'
+import { MedicalCertificatesPageLazy } from '@/pages/MedicalCertificates/MedicalCertificatesPageLazy.tsx'
+import { NotFoundPageLazy } from '@/pages/NotFound/NotFoundPageLazy.tsx'
+import { PhysicalEducationsPageLazy } from '@/pages/PhysicalEducations/PhysicalEducationsPageLazy.tsx'
+import { GetDepartmentReportPageLazy } from '@/pages/Reports/GetDepartmentReportPageLazy.tsx'
+import { GetExpiredCertificatesReportPageLazy } from '@/pages/Reports/GetExpiredCertificatesReportPageLazy.tsx'
+import { GetGroupReportPageLazy } from '@/pages/Reports/GetGroupReportPageLazy.tsx'
+import { GetHealthGroupReportPageLazy } from '@/pages/Reports/GetHealthGroupReportPageLazy.tsx'
+import { GetPhysicalEducationReportPageLazy } from '@/pages/Reports/GetPhysicalEducationReportPageLazy.tsx'
+import { StudentDetailsPageLazy } from '@/pages/Students/StudentDetailsPageLazy.tsx'
+import { StudentHistoryPageLazy } from '@/pages/Students/StudentHistoryPageLazy.tsx'
+import { StudentsPageLazy } from '@/pages/Students/StudentsPageLazy.tsx'
+import { UserDetailsPageLazy } from '@/pages/Users/UserDetailsPageLazy.tsx'
+import { UsersPageLazy } from '@/pages/Users/UsersPageLazy.tsx'
 
 export const enum AppRoutes {
 	LOGIN = 'login',

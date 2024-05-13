@@ -16,40 +16,50 @@ interface IStudentDetailsDataProps {
 	healthGroups: IHealthGroup[] | undefined
 	physicalEducations: IPhysicalEducation[] | undefined
 }
+
 const StudentDetailsData: FC<IStudentDetailsDataProps> = ({
 	data,
 	healthGroups,
 	physicalEducations
 }) => {
-	if (data?.medicalCertificates.length === 0) return <NoData />
 	return (
 		<>
-			{data?.medicalCertificates?.map(
-				({ id, startDate, finishDate, healthGroupId, physicalEducationId }) => (
-					<tr
-						key={id}
-						className={styles.cell}
-					>
-						<td className={styles.cellPadding}>
-							{format(new Date(startDate), 'dd.MM.yyyy')}
-						</td>
-						<td className={styles.cellPadding}>
-							{format(new Date(finishDate), 'dd.MM.yyyy')}
-						</td>
-						<td>{getValidityPeriod(finishDate, startDate)} </td>
-						<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
-						<td>
-							{healthGroups
-								?.filter(({ id }) => id === healthGroupId)
-								?.map(({ name }) => name)}
-						</td>
-						<td>
-							{physicalEducations
-								?.filter(({ id }) => id === physicalEducationId)
-								?.map(({ name }) => name)}
-						</td>
-						<td>{daysUntilTheEnd(finishDate)}</td>
-					</tr>
+			{data?.medicalCertificates.length === 0 ? (
+				<NoData />
+			) : (
+				data?.medicalCertificates?.map(
+					({
+						id,
+						startDate,
+						finishDate,
+						healthGroupId,
+						physicalEducationId
+					}) => (
+						<tr
+							key={id}
+							className={styles.cell}
+						>
+							<td className={styles.cellPadding}>
+								{format(new Date(startDate), 'dd.MM.yyyy')}
+							</td>
+							<td className={styles.cellPadding}>
+								{format(new Date(finishDate), 'dd.MM.yyyy')}
+							</td>
+							<td>{getValidityPeriod(finishDate, startDate)} </td>
+							<td>{getDaysUntilExpiry(finishDate, startDate)}</td>
+							<td>
+								{healthGroups
+									?.filter(({ id }) => id === healthGroupId)
+									?.map(({ name }) => name)}
+							</td>
+							<td>
+								{physicalEducations
+									?.filter(({ id }) => id === physicalEducationId)
+									?.map(({ name }) => name)}
+							</td>
+							<td>{daysUntilTheEnd(finishDate)}</td>
+						</tr>
+					)
 				)
 			)}
 		</>

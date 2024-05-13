@@ -36,9 +36,10 @@ const CourseDetailsTable = () => {
 		mode: 'onChange',
 		resolver: zodResolver(groupValidationSchema)
 	})
+
 	useEffect(() => {
 		setFocus('name')
-	}, [setFocus])
+	}, [isOpen, setFocus])
 
 	const handleCreate: SubmitHandler<TypeGroupForm> = async data => {
 		const newData = { ...data, courseId: course?.id }

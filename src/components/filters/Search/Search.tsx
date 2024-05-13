@@ -35,15 +35,18 @@ const Search: FC<SearchProps> = memo(
 			setSearchTerm(debouncedValue)
 		}, [debouncedValue, setSearchTerm])
 
-		const handleKeyDown = (e: KeyboardEvent) => {
-			if (
-				(e.altKey && e.key.toLowerCase() === 's') ||
-				(e.altKey && e.key.toLowerCase() === 'ы')
-			) {
-				e.preventDefault()
-				inputRef.current?.focus()
-			}
-		}
+		const handleKeyDown = useCallback(
+			(e: KeyboardEvent) => {
+				if (
+					(e.altKey && e.key.toLowerCase() === 's') ||
+					(e.altKey && e.key.toLowerCase() === 'ы')
+				) {
+					e.preventDefault()
+					inputRef.current?.focus()
+				}
+			},
+			[inputRef]
+		)
 
 		useEffect(() => {
 			window.addEventListener('keydown', handleKeyDown)
