@@ -40,8 +40,8 @@ const PhysicalEducationData: FC<PhysicalEducationDataProps> = ({
 	})
 
 	useEffect(() => {
-		setFocus('name')
-	})
+		if (editId !== null) setFocus('name')
+	}, [editId, setFocus])
 
 	const onSubmit = (id: number | string, data: TypePhysicalEducationForm) => {
 		onEdit(id, data)

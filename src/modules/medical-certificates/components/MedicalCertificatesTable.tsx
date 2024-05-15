@@ -63,23 +63,23 @@ const MedicalCertificatesTable = () => {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.tableContainer}>
-				<div className={styles.headerContainer}>
-					<div className={styles.header}>
-						<MedicalCertificatesFilters
-							departments={departments}
-							groups={groups}
-							sortOrder={sortOrder}
-							setSortOrder={setSortOrder}
-							departmentValue={departmentValue}
-							setDepartmentValue={setDepartmentValue}
-							courseValue={courseValue}
-							setCourseValue={setCourseValue}
-							groupValue={groupValue}
-							setGroupValue={setGroupValue}
-						/>
-					</div>
+			<div className={styles.headerContainer}>
+				<div className={styles.header}>
+					<MedicalCertificatesFilters
+						departments={departments}
+						groups={groups}
+						sortOrder={sortOrder}
+						setSortOrder={setSortOrder}
+						departmentValue={departmentValue}
+						setDepartmentValue={setDepartmentValue}
+						courseValue={courseValue}
+						setCourseValue={setCourseValue}
+						groupValue={groupValue}
+						setGroupValue={setGroupValue}
+					/>
 				</div>
+			</div>
+			<div className={styles.tableContainer}>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>
 						<TableHeads data={CertificatesHeads} />

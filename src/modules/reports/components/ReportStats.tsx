@@ -9,20 +9,20 @@ const ReportStats: FC<ReportStatsProps> = ({ data }) => {
 
 	const studentsWithCertificates =
 		data?.flatMap(department =>
-			department.courses.flatMap(course =>
-				course.groups.flatMap(group =>
+			department.courses.flatMap((course: any) =>
+				course.groups.flatMap((group: any) =>
 					group.students.filter(
-						student => student.medicalCertificates.length > 0
+						(student: any) => student.medicalCertificates.length > 0
 					)
 				)
 			)
 		) ?? []
 
-	const totalStudentsWithCertificates = studentsWithCertificates.length
+	const totalStudents = studentsWithCertificates.length
 
 	const { isValid, isNotValid } = studentsWithCertificates.reduce(
 		(counts, student) => {
-			student.medicalCertificates.forEach(certificate => {
+			student.medicalCertificates.forEach((certificate: any) => {
 				const finishDate = new Date(certificate.finishDate)
 				finishDate < currentDate ? counts.isNotValid++ : counts.isValid++
 			})
@@ -34,10 +34,7 @@ const ReportStats: FC<ReportStatsProps> = ({ data }) => {
 	return (
 		<div className='flex flex-col items-start'>
 			<div className='ml-5'>
-				<p>
-					Всего выбрано обучающихся с медицинскими справками:
-					{totalStudentsWithCertificates}
-				</p>
+				<p>Всего выбрано обучающихся: {totalStudents}</p>
 				<p>Обучающиеся с действительной справкой: {isValid}</p>
 				<p>Обучающиеся с недействительной справкой: {isNotValid}</p>
 			</div>

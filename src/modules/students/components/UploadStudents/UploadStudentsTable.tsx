@@ -59,7 +59,7 @@ const UploadStudentsTable = () => {
 							data={UploadStudentsHeads}
 						/>
 					</thead>
-					<tbody className='text-center'>
+					<tbody className='text-center  '>
 						<UploadStudentsData data={data} />
 					</tbody>
 				</table>

@@ -72,24 +72,23 @@ const DepartmentsTable = () => {
 	return (
 		<>
 			<div className={styles.container}>
-				<div className={styles.tableContainer}>
-					<div className={styles.headerContainer}>
-						<div className={styles.header}>
-							<DepartmentsFilters
-								searchTerm={searchTerm}
-								setSearchTerm={setSearchTerm}
-								sortOrder={sortOrder}
-								setSortOrder={setSortOrder}
-							/>
-						</div>
-						<CustomButton
-							variant='create'
-							onClick={openModal}
-						>
-							Добавить отделение
-						</CustomButton>
+				<div className={styles.headerContainer}>
+					<div className={styles.header}>
+						<DepartmentsFilters
+							searchTerm={searchTerm}
+							setSearchTerm={setSearchTerm}
+							sortOrder={sortOrder}
+							setSortOrder={setSortOrder}
+						/>
 					</div>
-
+					<CustomButton
+						variant='create'
+						onClick={openModal}
+					>
+						Добавить отделение
+					</CustomButton>
+				</div>
+				<div className={styles.tableContainer}>
 					<table className={styles.table}>
 						<thead className={styles.tHeads}>
 							<TableHeads data={DepartmentHeads} />

@@ -40,7 +40,7 @@ const PhysicalEducationComponent = () => {
 
 	return (
 		<>
-			<div className='w-full'>
+			<div className=''>
 				<div className='flex justify-between p-2'>
 					<h1 className='mt-5 text-2xl font-bold'>
 						Список групп по физкультуре

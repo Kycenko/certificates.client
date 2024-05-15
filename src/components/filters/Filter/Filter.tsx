@@ -32,7 +32,7 @@ const Filter: FC<FilterProps> = memo(
 						<span className=''>{label}</span>
 					</div>
 					<select
-						className='select select-bordered'
+						className='select select-bordered '
 						value={filterValue}
 						onChange={handleFilterChange}
 					>

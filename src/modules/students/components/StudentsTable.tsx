@@ -72,27 +72,27 @@ const StudentsTable = () => {
 	return (
 		<>
 			<div className={styles.container}>
-				<div className={styles.tableContainer}>
-					<div className={styles.headerContainer}>
-						<div className={styles.header}>
-							<StudentsFilters
-								departments={departments}
-								groups={groups}
-								searchTerm={searchTerm}
-								setSearchTerm={setSearchTerm}
-								sortOrder={sortOrder}
-								setSortOrder={setSortOrder}
-								departmentValue={departmentValue}
-								setDepartmentValue={setDepartmentValue}
-								courseValue={courseValue}
-								setCourseValue={setCourseValue}
-								groupValue={groupValue}
-								setGroupValue={setGroupValue}
-								isExpelledValue={isExpelledValue}
-								setIsExpelledValue={setIsExpelledValue}
-							/>
-						</div>
+				<div className={styles.headerContainer}>
+					<div className={styles.header}>
+						<StudentsFilters
+							departments={departments}
+							groups={groups}
+							searchTerm={searchTerm}
+							setSearchTerm={setSearchTerm}
+							sortOrder={sortOrder}
+							setSortOrder={setSortOrder}
+							departmentValue={departmentValue}
+							setDepartmentValue={setDepartmentValue}
+							courseValue={courseValue}
+							setCourseValue={setCourseValue}
+							groupValue={groupValue}
+							setGroupValue={setGroupValue}
+							isExpelledValue={isExpelledValue}
+							setIsExpelledValue={setIsExpelledValue}
+						/>
 					</div>
+				</div>
+				<div className={styles.tableContainer}>
 					<table className={styles.table}>
 						<thead className={styles.tHeads}>
 							<TableHeads data={StudentHeads} />

@@ -1,11 +1,21 @@
 .sideBar {
-	@apply flex h-full ml-[270px];
+	@apply flex min-h-screen;
+	padding-left: 270px;
+
+	@media (max-width: 768px) {
+		@apply flex-col;
+		padding-left: 0;
+	}
 }
 
 .header {
-	@apply w-full pt-2 flex-1;
+	@apply w-full pt-2 flex flex-col;
+
+	@media (max-width: 768px) {
+		@apply pt-0;
+	}
 }
 
 .main {
-	@apply flex-1;
+	@apply flex-grow;
 }

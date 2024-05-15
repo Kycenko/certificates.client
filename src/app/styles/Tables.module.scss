@@ -1,13 +1,5 @@
 .container {
-	@apply w-full h-full overflow-y-auto overflow-x-auto;
-}
-
-.table {
-	@apply w-full rounded-lg shadow-lg;
-}
-
-.tHeads {
-	@apply shadow-md text-xs uppercase bg-gray-50;
+	@apply overflow-hidden;
 }
 
 .headerContainer {
@@ -16,6 +8,23 @@
 
 .header {
 	@apply flex gap-3;
+
+	@media (max-width: 800px) {
+		@apply flex-col;
+		gap: 1rem;
+	}
+}
+
+.tableContainer {
+	@apply max-h-[660px]  overflow-y-auto overflow-x-auto;
+}
+
+.table {
+	@apply w-full rounded-lg shadow-lg;
+}
+
+.tHeads {
+	@apply shadow-md text-xs uppercase bg-gray-50;
 }
 
 .heads {
@@ -48,4 +57,24 @@
 
 .userEditCell {
 	@apply py-4 px-2 hover:bg-gray-200 cursor-pointer;
+}
+
+@media (max-width: 1024px) {
+	.tHeads,
+	.heads,
+	.head,
+	.dHead,
+	.contentCell {
+		@apply text-[12px];
+	}
+}
+
+@media (max-width: 640px) {
+	.tHeads,
+	.heads,
+	.head,
+	.dHead,
+	.contentCell {
+		@apply text-[10px];
+	}
 }

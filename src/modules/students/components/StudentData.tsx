@@ -7,7 +7,7 @@ import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { IGroup } from '@/modules/groups/types'
+import { IGroup } from '@/modules/groups/types/group.types'
 import { useCreateStudentHistory } from '@/modules/students/api/student-history.queries.ts'
 import { TypeStudentHistoryForm } from '@/modules/students/types/student-history.types.ts'
 import {

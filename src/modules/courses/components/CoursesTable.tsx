@@ -52,24 +52,26 @@ const CoursesTable = () => {
 					/>
 				</div>
 			</div>
-			<table className={styles.table}>
-				<thead className={styles.tHeads}>
-					<TableHeads data={CourseHeads} />
-				</thead>
-				<tbody>
-					{isLoading ? (
-						<CustomLoader />
-					) : (
-						<CourseData
-							data={courses}
-							departments={departments}
-							onDelete={handleDelete}
-							onEdit={handleEdit}
-							onInfo={handleInfo}
-						/>
-					)}
-				</tbody>
-			</table>
+			<div className={styles.tableContainer}>
+				<table className={styles.table}>
+					<thead className={styles.tHeads}>
+						<TableHeads data={CourseHeads} />
+					</thead>
+					<tbody>
+						{isLoading ? (
+							<CustomLoader />
+						) : (
+							<CourseData
+								data={courses}
+								departments={departments}
+								onDelete={handleDelete}
+								onEdit={handleEdit}
+								onInfo={handleInfo}
+							/>
+						)}
+					</tbody>
+				</table>
+			</div>
 		</div>
 	)
 }

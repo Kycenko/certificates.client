@@ -59,22 +59,22 @@ const GroupsTable = () => {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.tableContainer}>
-				<div className={styles.headerContainer}>
-					<div className={styles.header}>
-						<GroupsFilters
-							departments={departments}
-							searchTerm={searchTerm}
-							setSearchTerm={setSearchTerm}
-							sortOrder={sortOrder}
-							setSortOrder={setSortOrder}
-							departmentValue={departmentValue}
-							setDepartmentValue={setDepartmentValue}
-							courseValue={courseValue}
-							setCourseValue={setCourseValue}
-						/>
-					</div>
+			<div className={styles.headerContainer}>
+				<div className={styles.header}>
+					<GroupsFilters
+						departments={departments}
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+						sortOrder={sortOrder}
+						setSortOrder={setSortOrder}
+						departmentValue={departmentValue}
+						setDepartmentValue={setDepartmentValue}
+						courseValue={courseValue}
+						setCourseValue={setCourseValue}
+					/>
 				</div>
+			</div>
+			<div className={styles.tableContainer}>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>
 						<TableHeads data={GroupHeads} />

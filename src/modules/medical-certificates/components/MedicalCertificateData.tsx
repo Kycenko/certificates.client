@@ -20,6 +20,7 @@ import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.t
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 import daysUntilTheEnd from '@/shared/utils/daysUntilTheEnd.tsx'
+import formatFullName from '@/shared/utils/formatFullName'
 import getDaysUntilExpiry from '@/shared/utils/getDaysUntilExpiry.ts'
 import getValidityPeriod from '@/shared/utils/getValidityPeriod.ts'
 
@@ -106,7 +107,11 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 							key={id}
 						>
 							<td className={styles.cellPadding}>
-								{`${student?.surname} ${student?.name} ${student?.secondName ? student?.secondName : ''}`}
+								{formatFullName(
+									student.surname,
+									student.name,
+									student.secondName
+								)}
 							</td>
 							<td className={styles.cellPadding}>
 								{student.group?.course?.department?.name || 'Не указано'}
