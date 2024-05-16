@@ -4,8 +4,7 @@ import { GroupDto } from './dto/group.dto'
 
 @Injectable()
 export class GroupService {
-	constructor(private prisma: PrismaService) {
-	}
+	constructor(private prisma: PrismaService) {}
 
 	async create(dto: GroupDto) {
 		return this.prisma.group.create({
@@ -25,17 +24,17 @@ export class GroupService {
 			where: {
 				course: course
 					? {
-						number: +course,
-						department: {
-							name: department
+							number: +course,
+							department: {
+								name: department
+							}
 						}
-					}
 					: {
-						number: undefined,
-						department: {
-							name: department
+							number: undefined,
+							department: {
+								name: department
+							}
 						}
-					}
 			},
 			select: {
 				id: true,

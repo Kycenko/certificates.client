@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
+import {
+	BadRequestException,
+	Injectable,
+	NotFoundException,
+	UnauthorizedException
+} from '@nestjs/common'
 
 import { JwtService } from '@nestjs/jwt'
 
@@ -16,8 +21,7 @@ export class AuthService {
 	constructor(
 		private prisma: PrismaService,
 		private jwt: JwtService
-	) {
-	}
+	) {}
 
 	async login(dto: LoginDto) {
 		const { password, ...user } = await this.validateUser(dto)
@@ -84,8 +88,12 @@ export class AuthService {
 	private async issueTokens(id: number) {
 		const data = { id: id }
 
-		const accessToken = await this.jwt.signAsync(data, { expiresIn: '1h' })
-		const refreshToken = await this.jwt.signAsync(data, { expiresIn: '7d' })
+		const accessToken = await this.jwt.signAsync(data, {
+			expiresIn: process.env.ACCESS_TOKEN_VALIDITY
+		})
+		const refreshToken = await this.jwt.signAsync(data, {
+			expiresIn: process.env.REFRESH_TOKEN_VALIDITY
+		})
 
 		return { accessToken, refreshToken }
 	}

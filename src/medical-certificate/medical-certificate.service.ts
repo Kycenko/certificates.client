@@ -18,14 +18,36 @@ export class MedicalCertificateService {
 	}
 
 	async getAll(
+		pageNum: number = 1,
+		pageSize: number = 100,
 		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: number,
 		group?: string
 	) {
+		const skipCount = (pageNum - 1) * pageSize
+
+		const totalRecords = await this.prisma.medicalCertificate.count({
+			where: {
+				student: {
+					group: {
+						name: group || undefined,
+						course: {
+							number: course || undefined,
+							department: {
+								name: department || undefined
+							}
+						}
+					}
+				}
+			}
+		})
+
 		const studentsIds = await this.prisma.student
 			.findMany({
 				orderBy: { surname: sortOrder },
+				skip: skipCount,
+				take: +pageSize,
 				select: {
 					id: true
 				},
@@ -114,7 +136,13 @@ export class MedicalCertificateService {
 		if (latestCertificates.length === 0)
 			throw new NotFoundException('Медицинские справки не найдены!')
 
-		return latestCertificates
+		return {
+			data: latestCertificates,
+			totalRecords,
+			pageNum,
+			pageSize,
+			totalPages: Math.ceil(totalRecords / pageSize)
+		}
 	}
 
 	async getById(id: number) {

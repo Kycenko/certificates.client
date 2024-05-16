@@ -19,8 +19,7 @@ import { StudentService } from './student.service'
 
 @Controller('students')
 export class StudentController {
-	constructor(private readonly studentService: StudentService) {
-	}
+	constructor(private readonly studentService: StudentService) {}
 
 	@Post('import')
 	@Auth('admin')
@@ -39,6 +38,8 @@ export class StudentController {
 	@Get()
 	@Auth()
 	async getAll(
+		@Query('page') page: number = 1,
+		@Query('limit') limit: number = 100,
 		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
 		@Query('department') department?: string,
 		@Query('course') course?: number,
@@ -46,6 +47,8 @@ export class StudentController {
 		@Query('isExpelled') isExpelled?: string
 	) {
 		return this.studentService.getAll(
+			page,
+			limit,
 			sortOrder,
 			department,
 			course,

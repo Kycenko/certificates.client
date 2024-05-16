@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Patch,
+	Post,
+	Query,
+	UsePipes,
+	ValidationPipe
+} from '@nestjs/common'
 import { MedicalCertificateService } from './medical-certificate.service'
 
 import { Auth } from '@auth/decorators/auth.decorator'
@@ -8,8 +19,7 @@ import { MedicalCertificateDto } from './dto/medical-certificate.dto'
 export class MedicalCertificateController {
 	constructor(
 		private readonly medicalCertificateService: MedicalCertificateService
-	) {
-	}
+	) {}
 
 	@Post()
 	@Auth('admin')
@@ -21,12 +31,16 @@ export class MedicalCertificateController {
 	@Get()
 	@Auth('admin')
 	async getAll(
+		@Query('page') page: number = 1,
+		@Query('limit') limit: number = 100,
 		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
 		@Query('department') department?: string,
 		@Query('course') course?: number,
 		@Query('group') group?: string
 	) {
 		return this.medicalCertificateService.getAll(
+			page,
+			limit,
 			sortOrder,
 			department,
 			course,

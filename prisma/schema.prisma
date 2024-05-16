@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -15,8 +16,9 @@ model User {
   groupId   Int?     @map("group_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group     Group?   @relation(fields: [groupId], references: [id], onDelete: SetNull)
 
+  @@index([login])
   @@map("users")
 }
 
@@ -32,8 +34,9 @@ model Student {
   isExpelled          Boolean              @default(false) @map("is_expelled")
   medicalCertificates MedicalCertificate[]
   StudentHistory      StudentHistory[]
-  group               Group?               @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  group               Group?               @relation(fields: [groupId], references: [id], onDelete: SetNull)
 
+  @@index([surname])
   @@map("students")
 }
 
@@ -56,6 +59,7 @@ model HealthGroup {
   MedicalCertificateHistory MedicalCertificateHistory[]
   medicalCertificates       MedicalCertificate[]
 
+  @@index([name])
   @@map("health_groups")
 }
 
@@ -67,6 +71,7 @@ model PhysicalEducation {
   MedicalCertificateHistory MedicalCertificateHistory[]
   medicalCertificates       MedicalCertificate[]
 
+  @@index([name])
   @@map("physical_educations")
 }
 
@@ -115,6 +120,7 @@ model Group {
   User           User[]
 
   @@unique([name, courseId])
+  @@index([name])
   @@map("groups")
 }
 
@@ -125,6 +131,7 @@ model Department {
   updatedAt DateTime @updatedAt @map("updated_at")
   courses   Course[]
 
+  @@index([name])
   @@map("departments")
 }
 
@@ -138,5 +145,6 @@ model Course {
   groups       Group[]
 
   @@unique([number, departmentId])
+  @@index([number])
   @@map("courses")
 }

@@ -49,12 +49,31 @@ export class StudentService {
 	}
 
 	async getAll(
+		pageNum: number = 1,
+		pageSize: number = 10,
 		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: number,
 		group?: string,
 		isExpelled?: string
 	) {
+		const skipCount = (pageNum - 1) * pageSize
+
+		const totalRecords = await this.prisma.student.count({
+			where: {
+				isExpelled: isExpelled === 'true' || undefined,
+				group: {
+					name: group || undefined,
+					course: {
+						number: +course || undefined,
+						department: {
+							name: department || undefined
+						}
+					}
+				}
+			}
+		})
+
 		const students = await this.prisma.student.findMany({
 			orderBy: {
 				surname: sortOrder
@@ -71,6 +90,8 @@ export class StudentService {
 					}
 				}
 			},
+			skip: skipCount,
+			take: +pageSize,
 			include: {
 				medicalCertificates: true,
 				group: {
@@ -89,7 +110,13 @@ export class StudentService {
 
 		if (!students || students.length === 0)
 			throw new NotFoundException('Обучающиеся не найдены!')
-		return students
+		return {
+			data: students,
+			totalRecords,
+			pageNum,
+			pageSize,
+			totalPages: Math.ceil(totalRecords / pageSize)
+		}
 	}
 
 	async getById(id: number) {
