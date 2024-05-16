@@ -21,20 +21,30 @@ export const StudentService = {
 	async create(data: TypeStudentForm) {
 		return instance.post<IStudent>(SERVICE_URL.STUDENTS, data)
 	},
+
 	async getAll(
+		page: number = 1,
+		limit: number = 100,
 		department?: string,
 		course?: string,
 		group?: string,
 		isExpelled?: string
 	) {
-		const departmentParam = department ? `&department=${department}` : ''
-		const courseParam = course ? `&course=${course}` : ''
-		const groupParam = group ? `&group=${group}` : ''
-		const isExpelledParam = isExpelled ? `&isExpelled=${isExpelled}` : ''
+		const queryParams = new URLSearchParams({
+			...(department && { department }),
+			...(course && { course }),
+			...(group && { group }),
+			...(isExpelled && { isExpelled }),
+			page: page.toString(),
+			limit: limit.toString()
+		}).toString()
 
-		return instance.get<IStudent[]>(
-			`${SERVICE_URL.STUDENTS}?${departmentParam}${courseParam}${groupParam}${isExpelledParam}`
-		)
+		return instance.get<{
+			data: IStudent[]
+			totalRecords: number
+			totalPages: number
+			currentPage: number
+		}>(`${SERVICE_URL.STUDENTS}?${queryParams}`)
 	},
 
 	async getById(id: string | undefined) {

@@ -13,6 +13,8 @@ export const MedicalCertificateService = {
 		)
 	},
 	async getAll(
+		page: number = 1,
+		limit: number = 100,
 		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: string,
@@ -22,7 +24,7 @@ export const MedicalCertificateService = {
 		const courseParam = course ? `&course=${course}` : ''
 		const groupParam = group ? `&group=${group}` : ''
 		return instance.get<IMedicalCertificate[]>(
-			`${SERVICE_URL.MEDICAL_CERTIFICATES}/?sort=${sortOrder}${departmentParam}${courseParam}${groupParam}`
+			`${SERVICE_URL.MEDICAL_CERTIFICATES}/?page=${page}&limit=${limit}&sort=${sortOrder}${departmentParam}${courseParam}${groupParam}`
 		)
 	},
 

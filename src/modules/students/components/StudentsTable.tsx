@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import Pagination from '@/components/Pagination/Pagination.tsx'
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import useStudentActions from '../hooks/useStudentActions.ts'
@@ -19,6 +20,7 @@ import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const StudentsTable = () => {
+	const [currentPage, setCurrentPage] = useState(1)
 	const navigate = useNavigate()
 	const {
 		courseValue,
@@ -27,12 +29,13 @@ const StudentsTable = () => {
 		setGroupValue,
 		departmentValue,
 		setDepartmentValue,
-
 		isExpelledValue,
 		setIsExpelledValue
 	} = useFilterStates()
 
-	const { students, isLoading, refetch } = useGetStudents(
+	const { students, isLoading, refetch, totalPages } = useGetStudents(
+		currentPage,
+		10,
 		departmentValue,
 		courseValue,
 		groupValue,
@@ -58,7 +61,7 @@ const StudentsTable = () => {
 		window.history.pushState(
 			null,
 			'',
-			`?search=${searchTerm}&sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}&isExpelled=${isExpelledValue}`
+			`?page=${currentPage}&search=${searchTerm}&sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}&isExpelled=${isExpelledValue}`
 		)
 	}, [
 		sortOrder,
@@ -66,9 +69,13 @@ const StudentsTable = () => {
 		departmentValue,
 		courseValue,
 		groupValue,
-		isExpelledValue
+		isExpelledValue,
+		currentPage
 	])
 
+	const onChangePage = (page: number) => {
+		setCurrentPage(page)
+	}
 	return (
 		<>
 			<div className={styles.container}>
@@ -112,6 +119,11 @@ const StudentsTable = () => {
 							)}
 						</tbody>
 					</table>
+					<Pagination
+						currentPage={currentPage}
+						onChangePage={onChangePage}
+						totalPages={totalPages}
+					/>
 				</div>
 			</div>
 		</>

@@ -40,19 +40,26 @@ export const useCreateStudent = () => {
 }
 
 export const useGetStudents = (
+	page: number,
+	limit: number,
 	department?: string,
 	course?: string,
 	group?: string,
 	isExpelled?: string
 ) => {
-	const {
-		data: students,
-		isLoading,
-		refetch
-	} = useQuery({
-		queryKey: [QUERY_KEYS.STUDENTS, { department, course, group, isExpelled }],
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: [
+			QUERY_KEYS.STUDENTS,
+			{ page, limit, department, course, group, isExpelled }
+		],
 		queryFn: async () => {
-			const response: AxiosResponse<IStudent[]> = await StudentService.getAll(
+			const response: AxiosResponse<{
+				data: IStudent[]
+				totalPages: number
+				totalRecords: number
+			}> = await StudentService.getAll(
+				page,
+				limit,
 				department,
 				course,
 				group,
@@ -61,7 +68,18 @@ export const useGetStudents = (
 			return response.data
 		}
 	})
-	return { students, isLoading, refetch }
+
+	const students = data?.data || []
+	const totalPages = data?.totalPages || 0
+	const totalRecords = data?.totalRecords || 0
+
+	return {
+		students,
+		totalPages,
+		totalRecords,
+		isLoading,
+		refetch
+	}
 }
 
 export const useGetStudent = (id: string | undefined) => {

@@ -55,24 +55,24 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = memo(
 								<FormProvider {...methods}>
 									<form onSubmit={handleSubmit(onSubmit)}>
 										<div className={styles.content}>{children}</div>
+										<div className={styles.footer}>
+											<button
+												className={styles.closeBtn}
+												onClick={onClose}
+												type={'button'}
+											>
+												Закрыть
+											</button>
+											<button
+												className='btn btn-success text-white font-bold uppercase px-6 py-3 rounded'
+												type='submit'
+												onClick={submitBtn}
+											>
+												{buttonTitle}
+											</button>
+										</div>
 									</form>
 								</FormProvider>
-								<div className={styles.footer}>
-									<button
-										className={styles.closeBtn}
-										onClick={onClose}
-										type={'button'}
-									>
-										Закрыть
-									</button>
-									<button
-										className='btn btn-success text-white font-bold uppercase px-6 py-3 rounded'
-										type='submit'
-										onClick={submitBtn}
-									>
-										{buttonTitle}
-									</button>
-								</div>
 							</div>
 						</div>
 					</div>

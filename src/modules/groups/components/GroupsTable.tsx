@@ -8,7 +8,6 @@ import useGroupActions from '../hooks/useGroupsActions.ts'
 import GroupsFilters from './GroupsFilters.tsx'
 import { GroupHeads } from './group-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetCourses } from '@/modules/courses/api/course.queries.ts'
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import GroupData from '@/modules/groups/components/GroupData.tsx'
@@ -31,7 +30,7 @@ const GroupsTable = () => {
 	} = useFilterStates()
 
 	const { departments } = useGetDepartments()
-	const { courses } = useGetCourses()
+	// const { courses } = useGetCourses()
 	const { groups, isLoading, refetch } = useGetGroups(
 		sortOrder,
 		departmentValue,
@@ -85,7 +84,7 @@ const GroupsTable = () => {
 						) : (
 							<GroupData
 								data={sortedData}
-								courses={courses}
+								// courses={courses}
 								onDelete={handleDelete}
 								onEdit={handleEdit}
 								onInfo={handleInfo}

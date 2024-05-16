@@ -11,7 +11,16 @@ import {
 import useModal from '@/shared/hooks/useModal'
 
 const useMedicalCertificatesActions = (
-	refetch: () => Promise<QueryObserverResult<IMedicalCertificate[], Error>>
+	refetch: () => Promise<
+		QueryObserverResult<
+			{
+				data: IMedicalCertificate[]
+				totalPages: number
+				totalRecords: number
+			},
+			Error
+		>
+	>
 ) => {
 	const { closeModal } = useModal()
 

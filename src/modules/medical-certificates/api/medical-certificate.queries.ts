@@ -27,33 +27,42 @@ export const useCreateMedicalCertificate = () => {
 }
 
 export const useGetMedicalCertificates = (
+	page: number,
+	limit: number,
 	sortOrder: 'asc' | 'desc' = 'asc',
 	department?: string,
 	course?: string,
 	group?: string
 ) => {
-	const {
-		data: certificates,
-		isLoading,
-		refetch
-	} = useQuery({
+	const { data, isLoading, refetch } = useQuery({
 		queryKey: [
 			QUERY_KEYS.MEDICAL_CERTIFICATES,
-			{ sortOrder, department, course, group }
+			{ page, limit, sortOrder, department, course, group }
 		],
 		queryFn: async () => {
-			const response: AxiosResponse<IMedicalCertificate[]> =
-				await MedicalCertificateService.getAll(
-					sortOrder,
-					department,
-					course,
-					group
-				)
+			const response: AxiosResponse<{
+				data: IMedicalCertificate[]
+				totalPages: number
+				totalRecords: number
+			}> = await MedicalCertificateService.getAll(
+				page,
+				limit,
+				sortOrder,
+				department,
+				course,
+				group
+			)
 			return response.data
 		}
 	})
+	const certificates = data?.data || []
+	const totalPages = data?.totalPages || 0
+	const totalRecords = data?.totalRecords || 0
+
 	return {
 		certificates,
+		totalPages,
+		totalRecords,
 		isLoading,
 		refetch
 	}

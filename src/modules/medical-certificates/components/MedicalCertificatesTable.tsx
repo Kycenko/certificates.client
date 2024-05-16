@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import Pagination from '@/components/Pagination/Pagination.tsx'
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import useMedicalCertificatesActions from '../hooks/useMedicalCertificatesActions.ts'
@@ -20,7 +21,7 @@ import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const MedicalCertificatesTable = () => {
 	const navigate = useNavigate()
-
+	const [currentPage, setCurrentPage] = useState(1)
 	const {
 		departmentValue,
 		setDepartmentValue,
@@ -32,12 +33,16 @@ const MedicalCertificatesTable = () => {
 		setSortOrder
 	} = useFilterStates()
 
-	const { certificates, isLoading, refetch } = useGetMedicalCertificates(
-		sortOrder,
-		departmentValue,
-		courseValue,
-		groupValue
-	)
+	const { certificates, isLoading, refetch, totalPages } =
+		useGetMedicalCertificates(
+			currentPage,
+			10,
+			sortOrder,
+			departmentValue,
+			courseValue,
+			groupValue
+		)
+
 	const { departments } = useGetDepartments()
 	const { groups } = useGetGroups()
 	const { healthGroups } = useGetHealthGroups()
@@ -52,14 +57,16 @@ const MedicalCertificatesTable = () => {
 	const onInfo = (id: number | undefined) => {
 		navigate(`${PAGES_URL.STUDENTS}/${id}`)
 	}
-
+	const onChangePage = (page: number) => {
+		setCurrentPage(page)
+	}
 	useEffect(() => {
 		window.history.pushState(
 			null,
 			'',
-			`?sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}`
+			`?page=${currentPage}&sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}`
 		)
-	}, [sortOrder, departmentValue, courseValue, groupValue])
+	}, [sortOrder, departmentValue, courseValue, groupValue, currentPage])
 
 	return (
 		<div className={styles.container}>
@@ -100,6 +107,11 @@ const MedicalCertificatesTable = () => {
 						)}
 					</tbody>
 				</table>
+				<Pagination
+					currentPage={currentPage}
+					onChangePage={onChangePage}
+					totalPages={totalPages}
+				/>
 			</div>
 		</div>
 	)
