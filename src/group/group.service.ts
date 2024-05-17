@@ -39,9 +39,33 @@ export class GroupService {
 			select: {
 				id: true,
 				name: true,
-				students: true,
+				students: {
+					select: {
+						surname: true,
+						secondName: true,
+						name: true,
+						birthDate: true,
+						group: {
+							select: {
+								name: true,
+								course: {
+									select: {
+										departmentId: true,
+										number: true,
+										department: {
+											select: {
+												name: true
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
 				course: {
 					select: {
+						departmentId: true,
 						number: true,
 						department: {
 							select: {
@@ -83,7 +107,7 @@ export class GroupService {
 		await this.getById(id)
 		return this.prisma.group.update({
 			where: { id: +id },
-			data: dto
+			data: { ...dto, courseId: +dto.courseId }
 		})
 	}
 

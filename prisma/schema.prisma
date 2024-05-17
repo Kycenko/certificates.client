@@ -9,14 +9,12 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  login     String   @unique
-  password  String
-  isAdmin   Boolean  @default(false) @map("is_admin")
-  groupId   Int?     @map("group_id")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  group     Group?   @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  id       Int     @id @default(autoincrement())
+  login    String  @unique
+  password String
+  isAdmin  Boolean @default(false) @map("is_admin")
+  groupId  Int?    @map("group_id")
+  group    Group?  @relation(fields: [groupId], references: [id], onDelete: SetNull)
 
   @@index([login])
   @@map("users")
@@ -29,8 +27,6 @@ model Student {
   secondName          String?              @map("second_name")
   birthDate           DateTime             @map("birth_date")
   groupId             Int?                 @map("group_id")
-  createdAt           DateTime             @default(now()) @map("created_at")
-  updatedAt           DateTime             @updatedAt @map("updated_at")
   isExpelled          Boolean              @default(false) @map("is_expelled")
   medicalCertificates MedicalCertificate[]
   StudentHistory      StudentHistory[]
@@ -54,8 +50,6 @@ model StudentHistory {
 model HealthGroup {
   id                        Int                         @id @default(autoincrement())
   name                      String                      @unique
-  createdAt                 DateTime                    @default(now()) @map("created_at")
-  updatedAt                 DateTime                    @updatedAt @map("updated_at")
   MedicalCertificateHistory MedicalCertificateHistory[]
   medicalCertificates       MedicalCertificate[]
 
@@ -64,10 +58,9 @@ model HealthGroup {
 }
 
 model PhysicalEducation {
-  id                        Int                         @id @default(autoincrement())
-  name                      String                      @unique
-  createdAt                 DateTime                    @default(now()) @map("created_at")
-  updatedAt                 DateTime                    @updatedAt @map("updated_at")
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
   MedicalCertificateHistory MedicalCertificateHistory[]
   medicalCertificates       MedicalCertificate[]
 
@@ -82,8 +75,6 @@ model MedicalCertificate {
   studentId                 Int                         @map("student_id")
   healthGroupId             Int                         @map("health_group_id")
   physicalEducationId       Int                         @map("physical_education_id")
-  createdAt                 DateTime                    @default(now()) @map("created_at")
-  updatedAt                 DateTime                    @updatedAt @map("updated_at")
   MedicalCertificateHistory MedicalCertificateHistory[]
   healthGroup               HealthGroup                 @relation(fields: [healthGroupId], references: [id], onDelete: Cascade)
   physicalEducation         PhysicalEducation           @relation(fields: [physicalEducationId], references: [id], onDelete: Cascade)
@@ -112,8 +103,6 @@ model Group {
 
   name           String
   courseId       Int?             @map("course_id")
-  createdAt      DateTime         @default(now()) @map("created_at")
-  updatedAt      DateTime         @updatedAt @map("updated_at")
   course         Course?          @relation(fields: [courseId], references: [id], onDelete: Cascade)
   StudentHistory StudentHistory[]
   students       Student[]
@@ -125,11 +114,9 @@ model Group {
 }
 
 model Department {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  courses   Course[]
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  courses Course[]
 
   @@index([name])
   @@map("departments")
@@ -139,8 +126,6 @@ model Course {
   id           Int        @id @default(autoincrement())
   number       Int
   departmentId Int        @map("department_id")
-  createdAt    DateTime   @default(now()) @map("created_at")
-  updatedAt    DateTime   @updatedAt @map("updated_at")
   department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
   groups       Group[]
 

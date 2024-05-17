@@ -24,6 +24,7 @@ export class CourseService {
 				number: sortOrder
 			},
 			select: {
+				departmentId: true,
 				id: true,
 				number: true,
 				groups: {

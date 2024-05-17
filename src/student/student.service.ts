@@ -59,37 +59,33 @@ export class StudentService {
 	) {
 		const skipCount = (pageNum - 1) * pageSize
 
-		const totalRecords = await this.prisma.student.count({
-			where: {
-				isExpelled: isExpelled === 'true' || undefined,
-				group: {
-					name: group || undefined,
-					course: {
-						number: +course || undefined,
-						department: {
-							name: department || undefined
+		const whereCondition = {
+			OR: [
+				{
+					isExpelled: isExpelled === 'true',
+					group: {
+						name: group || undefined,
+						course: {
+							number: +course || undefined,
+							department: {
+								name: department || undefined
+							}
 						}
 					}
-				}
-			}
+				},
+				{ isExpelled: isExpelled === 'true' || undefined, groupId: null }
+			]
+		}
+
+		const totalRecords = await this.prisma.student.count({
+			where: whereCondition
 		})
 
 		const students = await this.prisma.student.findMany({
 			orderBy: {
 				surname: sortOrder
 			},
-			where: {
-				isExpelled: isExpelled === 'true' || undefined,
-				group: {
-					name: group || undefined,
-					course: {
-						number: +course || undefined,
-						department: {
-							name: department || undefined
-						}
-					}
-				}
-			},
+			where: whereCondition,
 			skip: skipCount,
 			take: +pageSize,
 			include: {
