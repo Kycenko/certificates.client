@@ -24,11 +24,11 @@
 }
 
 .tHeads {
-	@apply shadow-md text-xs uppercase bg-gray-50;
+	@apply shadow-md text-sm uppercase bg-gray-50;
 }
 
 .heads {
-	@apply uppercase leading-normal text-gray-800 border-b;
+	@apply uppercase text-gray-800 border-b;
 }
 
 .head {

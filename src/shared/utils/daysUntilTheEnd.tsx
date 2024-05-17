@@ -10,7 +10,7 @@ const daysUntilTheEnd = (date: Date) => {
 			{currentDate.toDateString() === finishDate.toDateString() ? (
 				<div className='badge bg-red-300'>Нет</div>
 			) : diffDays > 0 ? (
-				diffDays < 30 ? (
+				diffDays <= 30 ? (
 					<div className='badge bg-yellow-300'>Да</div>
 				) : (
 					<div className='badge bg-green-300'>Да</div>

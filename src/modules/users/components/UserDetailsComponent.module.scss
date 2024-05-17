@@ -3,17 +3,17 @@
 }
 
 .FormContainer {
-	@apply flex px-6 justify-center;
+	@apply flex flex-col md:flex-row px-4 md:px-6 justify-center;
 }
 
 .form {
-	@apply w-2/4;
+	@apply w-full md:w-2/4;
 }
 
 .main {
-	@apply grid grid-cols-2 gap-10;
+	@apply grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10;
 }
 
 .submitBtn {
-	@apply flex justify-center mt-6;
+	@apply flex justify-center mt-4 md:mt-6;
 }

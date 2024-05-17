@@ -40,7 +40,7 @@ const PhysicalEducationReport = memo(() => {
 	return (
 		<>
 			<div className='w-full'>
-				<div className='flex justify-between items-end p-10'>
+				<div className='flex justify-between items-end p-5'>
 					<div className='flex items-end gap-3'>
 						<PhysicalEducationReportFilters
 							groups={groups}

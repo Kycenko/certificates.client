@@ -2,11 +2,11 @@ import { useParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
-import ReportStats from '../ReportStats.tsx'
-
 import DepartmentFilters from './DepartmentFilters.tsx'
 import DepartmentReportData from './DepartmentReportData.tsx'
+import DepartmentReportStats from './DepartmentReportStats.tsx'
 import styles from '@/app/styles/Tables.module.scss'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
 import { useGetDepartmentReport } from '@/modules/reports/api/reports.queries.ts'
@@ -22,8 +22,8 @@ const DepartmentReport = () => {
 	const {
 		sortOrder,
 		setSortOrder,
-		departmentValue,
-		setDepartmentValue,
+		groupValue,
+		setGroupValue,
 		healthValue,
 		setHealthValue,
 		physicalValue,
@@ -33,12 +33,13 @@ const DepartmentReport = () => {
 	const { data, isLoading } = useGetDepartmentReport(
 		id,
 		sortOrder,
-		departmentValue,
+		groupValue,
 		healthValue,
 		physicalValue
 	)
 	const { physicalEducations } = useGetPhysicalEducations()
 	const { healthGroups } = useGetHealthGroups()
+	const { groups } = useGetGroups()
 
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `department-report-${id}`
@@ -54,10 +55,11 @@ const DepartmentReport = () => {
 							data={data}
 							healthGroups={healthGroups}
 							physicalEducations={physicalEducations}
+							groups={groups}
 							sortOrder={sortOrder}
 							setSortOrder={setSortOrder}
-							departmentValue={departmentValue}
-							setDepartmentValue={setDepartmentValue}
+							groupValue={groupValue}
+							setGroupValue={setGroupValue}
 							educationValue={physicalValue}
 							setEducationValue={setPhysicalValue}
 							healthGroupValue={healthValue}
@@ -74,7 +76,7 @@ const DepartmentReport = () => {
 				</div>
 			</div>
 
-			<ReportStats data={data} />
+			<DepartmentReportStats data={data} />
 
 			<ReportBody
 				printRef={printRef}

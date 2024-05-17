@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,18 +7,21 @@ import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
+import { ICourse } from '@/modules/courses/types/course.types'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
+import CourseOptions from '@/shared/helpers/course.options'
 import { groupValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
+import CustomSelect from '@/shared/ui/selects/CustomSelect'
 
 interface GroupDataProps {
 	data: IGroup[] | undefined
-	// courses: ICourse[] | undefined
+	courses: ICourse[] | undefined
 	onEdit: (id: number | string, data: TypeGroupForm) => void
 	onDelete: (id: number | string) => void
 	onInfo: (id: number | string) => void
@@ -26,7 +29,7 @@ interface GroupDataProps {
 
 const GroupData: FC<GroupDataProps> = ({
 	data,
-	// courses,
+	courses,
 	onDelete,
 	onEdit,
 	onInfo
@@ -51,11 +54,27 @@ const GroupData: FC<GroupDataProps> = ({
 		setFocus('name')
 	})
 
+	const [selectedDepartmentId, setSelectedDepartmentId] = useState<
+		number | undefined
+	>(undefined)
+
+	useEffect(() => {
+		if (data) {
+			const group = data.find(group => group.id === editId)
+			if (group) {
+				setSelectedDepartmentId(group.course.departmentId)
+			}
+		}
+	}, [editId, data])
+
+	const filteredCourses = courses?.filter(
+		course => course.departmentId === selectedDepartmentId
+	)
+
 	const handleEdit = (id: number | string) => {
 		setEditId(id)
 		reset()
 	}
-
 	const handleDelete = (id: number | string) => {
 		onDelete(id)
 		setDeleteId(null)
@@ -67,6 +86,7 @@ const GroupData: FC<GroupDataProps> = ({
 		reset()
 	}
 	if (!data || data.length === 0) return <NoData />
+
 	return (
 		<>
 			{data?.map(({ id, name, students, course }) => (
@@ -82,9 +102,7 @@ const GroupData: FC<GroupDataProps> = ({
 							<td className={styles.cellPadding}>
 								{`${course?.department?.name || 'Не указано'} `}
 							</td>
-							<td className={styles.cellPadding}>
-								{`${course?.number}-й курс`}
-							</td>
+							<td className={styles.cellPadding}>{`${course?.number}`}</td>
 							<td className={styles.cellPadding}>{students?.length}</td>
 							<td className={styles.editCellContainer}>
 								<div className={styles.adminEditCell}>
@@ -132,21 +150,23 @@ const GroupData: FC<GroupDataProps> = ({
 							{...register('name')}
 						/>
 						<ErrorMessage error={errors.name} />
-						{/* <CustomSelect
+						<CustomSelect
 							id='courseId'
 							label='Выберите курс'
-							defaultValue={course.id}
+							defaultValue={course.number}
 							{...register('courseId')}
 						>
-							{courses?.map(course => (
+							{/* {filteredCourses?.map(filteredCourse => (
 								<option
-									key={course.id}
-									value={course.number}
+									key={filteredCourse.id}
+									value={filteredCourse.number}
 								>
-									{course.number}-й курс
+									{filteredCourse.number}-й курс
 								</option>
-							))}
-						</CustomSelect> */}
+							
+							))} */}
+							<CourseOptions />
+						</CustomSelect>
 					</CustomModalForm>
 					<CustomModalForm
 						onSubmit={() => handleDelete(id)}

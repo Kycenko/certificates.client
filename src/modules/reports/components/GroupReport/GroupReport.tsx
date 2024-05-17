@@ -5,6 +5,7 @@ import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import GroupFilters from './GroupFilters.tsx'
 import GroupReportData from './GroupReportData.tsx'
+import GroupReportStats from './GroupReportStats.tsx'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
@@ -43,7 +44,7 @@ const GroupReport = memo(() => {
 	return (
 		<>
 			<div className='w-full'>
-				<div className='flex justify-between items-end p-10'>
+				<div className='flex justify-between items-end p-5'>
 					<div className='flex items-end gap-3'>
 						<GroupFilters
 							healthGroups={healthGroups}
@@ -65,6 +66,9 @@ const GroupReport = memo(() => {
 					</button>
 				</div>
 			</div>
+
+			<GroupReportStats data={data} />
+
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по медицинским показателем обучающихся группы:'

@@ -36,7 +36,7 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
 												<td className='p-2'>
 													{formatFullName(surname, name, secondName)}
 												</td>
-												<td>{number}-й курс</td>
+												<td>{number}</td>
 												<td>{groupName}</td>
 												<td>{departmentName}</td>
 												<td>{physicalEducation.name}</td>

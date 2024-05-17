@@ -106,7 +106,7 @@ const StudentData: FC<StudentDataProps> = ({
 							</td>
 							<td className={styles.cellPadding}>
 								{group?.course?.number
-									? `${group?.course?.number}-й курс`
+									? `${group?.course?.number}`
 									: 'Не указано'}
 							</td>
 							<td className={styles.cellPadding}>

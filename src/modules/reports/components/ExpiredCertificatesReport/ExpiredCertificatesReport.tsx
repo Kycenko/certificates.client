@@ -41,7 +41,7 @@ const ExpiredCertificatesReport = () => {
 	return (
 		<>
 			<div className='w-full'>
-				<div className='flex justify-between items-end p-10'>
+				<div className='flex justify-between items-end p-5'>
 					<div className='flex items-end gap-3'>
 						<ExpiredCertificatesFilters
 							departments={departments}
@@ -68,7 +68,6 @@ const ExpiredCertificatesReport = () => {
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по истёкшим медицинским справкам'
-				title={''}
 			>
 				<table className={styles.table}>
 					<thead className={'border-b-2 border-t-2'}>

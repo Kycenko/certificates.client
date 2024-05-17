@@ -73,7 +73,7 @@ const CourseData: FC<CourseDataProps> = ({
 						key={id}
 					>
 						<td className={styles.cellPadding}>
-							<span>{number}-й курс</span>
+							<span>{number}</span>
 						</td>
 						<td className={styles.cellPadding}>
 							<span>{department?.name}</span>

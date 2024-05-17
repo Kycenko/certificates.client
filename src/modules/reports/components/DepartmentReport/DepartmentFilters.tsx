@@ -5,6 +5,7 @@ import SortOrder from '@/components/filters/SortOrder/SortOrder'
 
 import { IDepartmentReport } from '../../types/reports.types'
 
+import { IGroup } from '@/modules/groups/types/group.types'
 import { IHealthGroup } from '@/modules/health-groups/types/health-group.types'
 import { IPhysicalEducation } from '@/modules/physical-educations/types/physical-education.types'
 
@@ -12,10 +13,11 @@ interface DepartmentFiltersProps {
 	data: IDepartmentReport[] | undefined
 	healthGroups: IHealthGroup[] | undefined
 	physicalEducations: IPhysicalEducation[] | undefined
+	groups: IGroup[] | undefined
 	sortOrder: 'asc' | 'desc'
 	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
-	departmentValue: string
-	setDepartmentValue: Dispatch<SetStateAction<string>>
+	groupValue: string
+	setGroupValue: Dispatch<SetStateAction<string>>
 	healthGroupValue: string
 	setHealthGroupValue: Dispatch<SetStateAction<string>>
 	educationValue: string
@@ -23,13 +25,13 @@ interface DepartmentFiltersProps {
 }
 
 const DepartmentFilters: FC<DepartmentFiltersProps> = ({
-	data,
 	healthGroups,
 	physicalEducations,
+	groups,
 	sortOrder,
 	setSortOrder,
-	departmentValue,
-	setDepartmentValue,
+	groupValue,
+	setGroupValue,
 	healthGroupValue,
 	setHealthGroupValue,
 	educationValue,
@@ -43,8 +45,8 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 			/>
 			<Filter
 				label=''
-				filterValue={departmentValue}
-				setFilterValue={setDepartmentValue}
+				filterValue={groupValue}
+				setFilterValue={setGroupValue}
 			>
 				<option
 					key={0}
@@ -53,18 +55,14 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 					Все группы
 				</option>
 
-				{data?.map(({ courses }) =>
-					courses?.map(({ groups }) =>
-						groups?.map(({ id, name }) => (
-							<option
-								key={id}
-								value={name}
-							>
-								{name}
-							</option>
-						))
-					)
-				)}
+				{groups?.map(({ id, name }) => (
+					<option
+						key={id}
+						value={name}
+					>
+						{name}
+					</option>
+				))}
 			</Filter>
 			<Filter
 				label=''

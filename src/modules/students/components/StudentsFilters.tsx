@@ -89,7 +89,7 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 						key={id}
 						value={name}
 					>
-						Группа {name}
+						{name}
 					</option>
 				))}
 			</Filter>

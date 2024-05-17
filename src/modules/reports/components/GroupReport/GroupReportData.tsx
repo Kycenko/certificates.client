@@ -27,7 +27,7 @@ const GroupReportData: FC<GroupReportDataProps> = memo(({ data }) => {
 									<td className='p-2'>
 										{formatFullName(surname, name, secondName)}
 									</td>
-									<td className='p-2'>{course.number}-й курс</td>
+									<td className='p-2'>{course.number}</td>
 									<td>{physicalEducation.name}</td>
 									<td>{healthGroup.name}</td>
 									<td>{format(new Date(startDate), 'dd.MM.yyyy')}</td>

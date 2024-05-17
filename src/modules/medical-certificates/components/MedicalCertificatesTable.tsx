@@ -33,7 +33,7 @@ const MedicalCertificatesTable = () => {
 		setSortOrder
 	} = useFilterStates()
 
-	const { certificates, isLoading, refetch, totalPages } =
+	const { certificates, isLoading, refetch, totalPages, totalRecords } =
 		useGetMedicalCertificates(
 			currentPage,
 			10,
@@ -111,7 +111,9 @@ const MedicalCertificatesTable = () => {
 					currentPage={currentPage}
 					onChangePage={onChangePage}
 					totalPages={totalPages}
-				/>
+				>
+					Всего медицинских справок: {totalRecords}
+				</Pagination>
 			</div>
 		</div>
 	)

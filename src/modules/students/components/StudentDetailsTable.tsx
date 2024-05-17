@@ -82,7 +82,7 @@ const StudentDetailsTable = () => {
 					variant='create'
 					onClick={openModal}
 				>
-					Добавить справку
+					Добавить медицинскую справку
 				</CustomButton>
 			) : null}
 			<table className={styles.table}>

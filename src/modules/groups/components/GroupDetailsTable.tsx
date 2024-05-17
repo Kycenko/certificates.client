@@ -59,7 +59,7 @@ const GroupDetailsTable = () => {
 					variant='create'
 					onClick={openModal}
 				>
-					Добавить ученика
+					Добавить обучающегося
 				</CustomButton>
 			) : null}
 			<table className={styles.table}>

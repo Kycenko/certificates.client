@@ -37,7 +37,7 @@ const HealthGroupReportData: FC<HealthGroupReportDataProps> = ({ data }) => {
 												{formatFullName(surname, name, secondName)}
 											</td>
 											<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
-											<td>{number}-й курс</td>
+											<td>{number}</td>
 											<td>{groupName}</td>
 											<td>{healthGroup.name}</td>
 										</tr>

@@ -1,20 +1,18 @@
 import { FC } from 'react'
 
-interface ReportStatsProps {
-	data: any[] | undefined
+import { IGroupReport } from '../../types/reports.types'
+
+interface GroupReportStatsProps {
+	data: IGroupReport[] | undefined
 }
 
-const ReportStats: FC<ReportStatsProps> = ({ data }) => {
+const GroupReportStats: FC<GroupReportStatsProps> = ({ data }) => {
 	const currentDate = new Date()
 
 	const studentsWithCertificates =
-		data?.flatMap(department =>
-			department.courses.flatMap((course: any) =>
-				course.groups.flatMap((group: any) =>
-					group.students.filter(
-						(student: any) => student.medicalCertificates.length > 0
-					)
-				)
+		data?.flatMap(({ students }) =>
+			students.filter(
+				({ medicalCertificates }) => medicalCertificates.length > 0
 			)
 		) ?? []
 
@@ -22,7 +20,7 @@ const ReportStats: FC<ReportStatsProps> = ({ data }) => {
 
 	const { isValid, isNotValid } = studentsWithCertificates.reduce(
 		(counts, student) => {
-			student.medicalCertificates.forEach((certificate: any) => {
+			student.medicalCertificates.forEach(certificate => {
 				const finishDate = new Date(certificate.finishDate)
 				finishDate < currentDate ? counts.isNotValid++ : counts.isValid++
 			})
@@ -43,4 +41,4 @@ const ReportStats: FC<ReportStatsProps> = ({ data }) => {
 	)
 }
 
-export default ReportStats
+export default GroupReportStats

@@ -41,8 +41,8 @@ const PhysicalEducationComponent = () => {
 	return (
 		<>
 			<div className=''>
-				<div className='flex justify-between p-2'>
-					<h1 className='mt-5 text-2xl font-bold'>
+				<div className='flex justify-between p-4'>
+					<h1 className='text-xl md:text-2xl font-bold text-gray-800'>
 						Список групп по физкультуре
 					</h1>
 					<CustomButton

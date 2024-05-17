@@ -40,8 +40,10 @@ const HealthGroupComponent = () => {
 
 	return (
 		<div className='w-full'>
-			<div className='flex justify-between p-2'>
-				<h1 className='mt-5 text-2xl font-bold'>Список групп здоровья</h1>
+			<div className='flex justify-between p-4'>
+				<h1 className='text-xl md:text-2xl font-bold text-gray-800'>
+					Список групп здоровья
+				</h1>
 				<CustomButton
 					variant='create'
 					onClick={openModal}

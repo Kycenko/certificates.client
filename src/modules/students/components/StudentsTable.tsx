@@ -33,14 +33,15 @@ const StudentsTable = () => {
 		setIsExpelledValue
 	} = useFilterStates()
 
-	const { students, isLoading, refetch, totalPages } = useGetStudents(
-		currentPage,
-		10,
-		departmentValue,
-		courseValue,
-		groupValue,
-		isExpelledValue
-	)
+	const { students, isLoading, refetch, totalPages, totalRecords } =
+		useGetStudents(
+			currentPage,
+			10,
+			departmentValue,
+			courseValue,
+			groupValue,
+			isExpelledValue
+		)
 
 	const { sortedData, searchTerm, setSearchTerm, sortOrder, setSortOrder } =
 		useSortAndFilterData(students as IStudent[], 'surname')
@@ -119,11 +120,14 @@ const StudentsTable = () => {
 							)}
 						</tbody>
 					</table>
+
 					<Pagination
 						currentPage={currentPage}
 						onChangePage={onChangePage}
 						totalPages={totalPages}
-					/>
+					>
+						Всего обучающихся: {totalRecords}
+					</Pagination>
 				</div>
 			</div>
 		</>

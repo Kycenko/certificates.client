@@ -28,7 +28,7 @@ const CourseDetailsData: FC<CourseDetailsDataProps> = ({ data }) => {
 						<td className={styles.cellPadding}>
 							{students ? students.length : 0}
 						</td>
-						<td>{data.number}-й Курс</td>
+						<td>{data.number}</td>
 					</tr>
 				))
 			)}

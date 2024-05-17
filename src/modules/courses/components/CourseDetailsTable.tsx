@@ -54,7 +54,7 @@ const CourseDetailsTable = () => {
 	return (
 		<>
 			<Heading title='Описание курса'>
-				<span className={styles.title}>{course?.number}-й Курс</span>
+				<span className={styles.title}>{course?.number}-й курс</span>
 			</Heading>
 			<CustomButton
 				variant='create'

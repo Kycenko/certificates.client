@@ -29,9 +29,7 @@ const ExpiredCertificatesData: FC<ExpiredCertificatesDataProps> = ({
 						<td className='p-2'>
 							{group?.course?.department?.name || 'Не указано'}
 						</td>
-						<td className='p-2'>
-							{group?.course?.number || 'Не указано'}-й курс
-						</td>
+						<td className='p-2'>{group?.course?.number || 'Не указано'}</td>
 						<td className='p-2'>{group?.name || 'Не указано'} </td>
 					</tr>
 				))
