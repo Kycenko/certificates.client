@@ -1,4 +1,12 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, MinLength } from 'class-validator'
+import {
+	IsBoolean,
+	IsNotEmpty,
+	IsNumber,
+	IsOptional,
+	IsString,
+	MaxLength,
+	MinLength
+} from 'class-validator'
 
 export class StudentDto {
 	@IsString()
@@ -14,7 +22,7 @@ export class StudentDto {
 	@IsString()
 	@IsOptional()
 	secondName: string
-	@IsString()
+
 	@IsString()
 	@IsNotEmpty({ message: 'Обязательное поле!' })
 	birthDate: Date

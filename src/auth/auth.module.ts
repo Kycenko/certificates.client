@@ -1,11 +1,11 @@
+import { AuthController } from '@auth/auth.controller'
+import { AuthService } from '@auth/auth.service'
+import { JwtStrategy } from '@auth/strategies/jwt.strategy'
+import { getJwtConfig } from '@config/jwt.config'
+import { PrismaService } from '@config/prisma.service'
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { JwtModule } from '@nestjs/jwt'
-import { AuthService } from '@auth/auth.service'
-import { AuthController } from '@auth/auth.controller'
-import { PrismaService } from '@config/prisma.service'
-import { JwtStrategy } from '@auth/strategies/jwt.strategy'
-import { getJwtConfig } from '@config/jwt.config'
 
 @Module({
 	controllers: [AuthController],
@@ -19,5 +19,4 @@ import { getJwtConfig } from '@config/jwt.config'
 		})
 	]
 })
-export class AuthModule {
-}
+export class AuthModule {}
