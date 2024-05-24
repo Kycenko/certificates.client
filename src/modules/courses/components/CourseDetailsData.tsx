@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import NoData from '@/components/NoData.tsx'
@@ -36,4 +36,4 @@ const CourseDetailsData: FC<CourseDetailsDataProps> = ({ data }) => {
 	)
 }
 
-export default memo(CourseDetailsData)
+export default CourseDetailsData

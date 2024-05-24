@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ interface ModalProps {
 	onClose: () => void
 }
 
-const ModalDepartmentReport: FC<ModalProps> = memo(({ isOpen, onClose }) => {
+const ModalDepartmentReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 	const navigate = useNavigate()
 	const { departments } = useGetDepartments()
 	const { handleSubmit, register } = useForm<FormState>()
@@ -47,6 +47,6 @@ const ModalDepartmentReport: FC<ModalProps> = memo(({ isOpen, onClose }) => {
 			</CustomSelect>
 		</CustomModalForm>
 	)
-})
+}
 
 export default ModalDepartmentReport

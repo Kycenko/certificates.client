@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
 
@@ -51,4 +51,4 @@ const UserData: FC<UserDataProps> = ({ data, onEdit, onDelete }) => {
 	)
 }
 
-export default memo(UserData)
+export default UserData

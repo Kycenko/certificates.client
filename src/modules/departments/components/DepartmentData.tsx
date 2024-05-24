@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { FC, useCallback, useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
@@ -45,21 +45,16 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 		if (editId !== null) setFocus('name')
 	}, [editId, setFocus])
 
-	const handleDelete = useCallback(
-		(id: number | string) => {
-			onDelete(id)
-			setDeleteId(null)
-		},
-		[onDelete, setDeleteId]
-	)
-	const onSubmit = useCallback(
-		(id: number | string, data: TypeDepartmentForm) => {
-			onEdit(id, data)
-			setEditId(null)
-			reset()
-		},
-		[onEdit, setEditId, reset]
-	)
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
+	}
+
+	const onSubmit = (id: number | string, data: TypeDepartmentForm) => {
+		onEdit(id, data)
+		setEditId(null)
+		reset()
+	}
 
 	return (
 		<>

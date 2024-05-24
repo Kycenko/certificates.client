@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { useState } from 'react'
 
 import Dropdown from '@/app/Layout/Header/DropDown/DropDown.tsx'
 import ModalDepartmentReport from '@/app/Layout/Header/DropDown/report-modals/ModalDepartmentReport'
@@ -9,7 +9,7 @@ import ModalPhysicalEducationReport from '@/app/Layout/Header/DropDown/report-mo
 import styles from '@/app/Layout/Header/Header.module.scss'
 import useAuth from '@/shared/hooks/useAuth.ts'
 
-const Header = memo(() => {
+const Header = () => {
 	const { user } = useAuth()
 	const [isDepartmentModalOpen, setIsDepartmentModalOpen] = useState(false)
 	const [isGroupModalOpen, setIsGroupModalOpen] = useState(false)
@@ -79,6 +79,6 @@ const Header = memo(() => {
 	// <div className={styles.userContainer}>
 	// 	<span>{user?.login}</span>
 	// </div>
-})
+}
 
 export default Header

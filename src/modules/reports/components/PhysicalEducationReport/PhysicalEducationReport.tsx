@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
@@ -15,7 +14,7 @@ import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
-const PhysicalEducationReport = memo(() => {
+const PhysicalEducationReport = () => {
 	const [search] = useSearchParams()
 	const department = search.get('department')
 	const course = search.get('course')
@@ -83,6 +82,6 @@ const PhysicalEducationReport = memo(() => {
 			</ReportBody>
 		</>
 	)
-})
+}
 
 export default PhysicalEducationReport

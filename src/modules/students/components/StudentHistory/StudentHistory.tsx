@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
@@ -41,4 +40,4 @@ const StudentHistory = () => {
 	)
 }
 
-export default memo(StudentHistory)
+export default StudentHistory

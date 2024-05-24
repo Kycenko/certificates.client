@@ -13,12 +13,17 @@ export const changeDuration = ({
 	student: IStudent | undefined
 	isDurationSelected: boolean
 }) => {
-	let proposedEndDate
+	if (!student || !data.startDate) {
+		return { error: 'Студент или дата начала не определена!' }
+	}
 
+	const startDate = new Date(data.startDate)
+
+	let proposedEndDate
 	if (isDurationSelected) {
 		const durationMonths = parseInt(data.finishDate.toString())
 		if (!isNaN(durationMonths)) {
-			proposedEndDate = addMonths(new Date(), durationMonths)
+			proposedEndDate = addMonths(startDate, durationMonths)
 		} else {
 			return { error: 'Указана неверная продолжительность!' }
 		}
@@ -27,7 +32,7 @@ export const changeDuration = ({
 	}
 
 	let lastCertificateEndDate
-	if (student?.medicalCertificates?.length) {
+	if (student.medicalCertificates && student.medicalCertificates.length) {
 		lastCertificateEndDate = new Date(
 			student.medicalCertificates[
 				student.medicalCertificates.length - 1
@@ -35,6 +40,15 @@ export const changeDuration = ({
 		)
 	}
 
+	// Добавляем проверку на дату начала новой справки
+	if (lastCertificateEndDate && startDate <= lastCertificateEndDate) {
+		alert(
+			'Дата начала новой справки должна быть позже даты окончания предыдущей справки.'
+		)
+		return { error: 'Invalid start date' }
+	}
+
+	// Проверка даты окончания остается прежней
 	if (lastCertificateEndDate && proposedEndDate <= lastCertificateEndDate) {
 		alert(
 			'Дата окончания новой справки должна быть позже даты окончания предыдущей справки.'
@@ -42,6 +56,7 @@ export const changeDuration = ({
 		return { error: 'Invalid end date' }
 	}
 
+	// Если все проверки пройдены успешно, возвращаем обновленные данные
 	data.finishDate = proposedEndDate
 	return { data }
 }

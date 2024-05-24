@@ -1,11 +1,4 @@
-import {
-	ChangeEvent,
-	Dispatch,
-	FC,
-	SetStateAction,
-	memo,
-	useCallback
-} from 'react'
+import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react'
 
 import styles from './SortOrder.module.scss'
 
@@ -14,13 +7,10 @@ interface SortOrderProps {
 	setSortOrder: Dispatch<SetStateAction<'asc' | 'desc'>>
 }
 
-const SortOrder: FC<SortOrderProps> = memo(({ sortOrder, setSortOrder }) => {
-	const handleSortChange = useCallback(
-		(e: ChangeEvent<HTMLSelectElement>) => {
-			setSortOrder(e.target.value as 'asc' | 'desc')
-		},
-		[setSortOrder]
-	)
+const SortOrder: FC<SortOrderProps> = ({ sortOrder, setSortOrder }) => {
+	const handleSortChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		setSortOrder(e.target.value as 'asc' | 'desc')
+	}
 
 	return (
 		<div className={styles.container}>
@@ -36,6 +26,6 @@ const SortOrder: FC<SortOrderProps> = memo(({ sortOrder, setSortOrder }) => {
 			</label>
 		</div>
 	)
-})
+}
 
 export default SortOrder

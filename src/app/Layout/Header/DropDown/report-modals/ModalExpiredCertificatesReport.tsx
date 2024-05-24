@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
@@ -8,7 +8,7 @@ interface ModalProps {
 	onClose: () => void
 }
 
-const ModalExpiredCertificatesReport: FC<ModalProps> = memo(
+const ModalExpiredCertificatesReport: FC<ModalProps> = (
 	({ isOpen, onClose }) => {
 		const navigate = useNavigate()
 

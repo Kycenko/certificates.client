@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC, useCallback } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
@@ -56,13 +56,10 @@ const MedicalCertificateData: FC<MedicalCertificateDataProps> = ({
 		reset
 	} = useForm<TypeMedicalCertificateForm>()
 
-	const handleDelete = useCallback(
-		(id: number | string) => {
-			onDelete(id)
-			setDeleteId(null)
-		},
-		[onDelete, setDeleteId]
-	)
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
+	}
 
 	const handleEdit = async (
 		id: number | string,

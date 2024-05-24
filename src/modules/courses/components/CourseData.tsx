@@ -1,4 +1,4 @@
-import { FC, memo, useCallback } from 'react'
+import { FC } from 'react'
 import { useForm } from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
@@ -40,26 +40,20 @@ const CourseData: FC<CourseDataProps> = ({
 		reset
 	} = useForm<TypeCourseForm>()
 
-	const handleDelete = useCallback(
-		(id: number | string) => {
-			onDelete(id)
-			setDeleteId(null)
-		},
-		[onDelete, setDeleteId]
-	)
+	const handleDelete = (id: number | string) => {
+		onDelete(id)
+		setDeleteId(null)
+	}
 
-	const onSubmit = useCallback(
-		(id: number | string, data: TypeCourseForm) => {
-			const newData = {
-				...data,
-				departmentId: Number(data.departmentId)
-			}
-			onEdit(id, newData)
-			setEditId(null)
-			reset()
-		},
-		[onEdit, setEditId, reset]
-	)
+	const onSubmit = (id: number | string, data: TypeCourseForm) => {
+		const newData = {
+			...data,
+			departmentId: Number(data.departmentId)
+		}
+		onEdit(id, newData)
+		setEditId(null)
+		reset()
+	}
 
 	if (!data || data.length === 0) return <NoData />
 	return (
@@ -142,4 +136,4 @@ const CourseData: FC<CourseDataProps> = ({
 	)
 }
 
-export default memo(CourseData)
+export default CourseData

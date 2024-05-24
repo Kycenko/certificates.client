@@ -60,10 +60,11 @@ const StudentDetailsTable = () => {
 			healthGroupId: Number(data.healthGroupId),
 			physicalEducationId: Number(data.physicalEducationId),
 			studentId: student?.id,
-			startDate: new Date()
+			startDate: new Date(data.startDate)
 		}
 
 		await create(newDate)
+
 		closeModal()
 		await refetch()
 		reset()

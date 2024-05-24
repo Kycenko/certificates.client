@@ -1,17 +1,17 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 const useModal = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 	const [editId, setEditId] = useState<number | string | null>(null)
 	const [deleteId, setDeleteId] = useState<number | string | null>(null)
 
-	const openModal = useCallback(() => {
+	const openModal = () => {
 		setIsOpen(true)
-	}, [])
+	}
 
-	const closeModal = useCallback(() => {
+	const closeModal = () => {
 		setIsOpen(false)
-	}, [])
+	}
 
 	return {
 		isOpen,

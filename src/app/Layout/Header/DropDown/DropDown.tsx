@@ -1,10 +1,10 @@
 import { ChevronDown } from 'lucide-react'
-import { FC, PropsWithChildren, memo, useRef, useState } from 'react'
+import { FC, PropsWithChildren, useRef, useState } from 'react'
 
 import styles from './DropDown.module.scss'
 import useClickOutside from '@/shared/hooks/useClickOutside.ts'
 
-const Dropdown: FC<PropsWithChildren> = memo(({ children }) => {
+const Dropdown: FC<PropsWithChildren> = ({ children }) => {
 	const [isOpen, setIsOpen] = useState(false)
 	const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -40,5 +40,5 @@ const Dropdown: FC<PropsWithChildren> = memo(({ children }) => {
 			)}
 		</div>
 	)
-})
+}
 export default Dropdown

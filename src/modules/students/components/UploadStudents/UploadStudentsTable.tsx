@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import UploadStudentsData from './UploadStudentsData.tsx'
@@ -68,4 +66,4 @@ const UploadStudentsTable = () => {
 	)
 }
 
-export default memo(UploadStudentsTable)
+export default UploadStudentsTable

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
 import NoData from '@/components/NoData.tsx'
 
@@ -10,7 +10,7 @@ interface GroupReportDataProps {
 	data: IGroupReport[] | undefined
 }
 
-const GroupReportData: FC<GroupReportDataProps> = memo(({ data }) => {
+const GroupReportData: FC<GroupReportDataProps> = ({ data }) => {
 	return (
 		<>
 			{!data || data.length === 0 ? (
@@ -40,6 +40,6 @@ const GroupReportData: FC<GroupReportDataProps> = memo(({ data }) => {
 			)}
 		</>
 	)
-})
+}
 
 export default GroupReportData

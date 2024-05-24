@@ -16,6 +16,7 @@ export const useLogin = () => {
 		onSuccess: ({ data }) => {
 			if (data) {
 				setUser(data.user)
+				console.log(data)
 				navigate(`${SERVICE_URL.HOME}`, { replace: true })
 				authToast()
 			}

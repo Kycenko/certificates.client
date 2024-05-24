@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
 import NoData from '@/components/NoData.tsx'
 
@@ -11,7 +11,7 @@ interface DepartmentReportDataProps {
 	data: IDepartmentReport[] | undefined
 }
 
-const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
+const DepartmentReportData: FC<DepartmentReportDataProps> = ({ data }) => {
 	const departmentName = data?.map(({ name }) => <p>{name}</p>)
 
 	return (
@@ -54,6 +54,6 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = memo(({ data }) => {
 			)}
 		</>
 	)
-})
+}
 
 export default DepartmentReportData

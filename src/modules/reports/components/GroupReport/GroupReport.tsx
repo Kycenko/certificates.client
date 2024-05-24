@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
@@ -16,7 +15,7 @@ import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
-const GroupReport = memo(() => {
+const GroupReport = () => {
 	const { id } = useParams()
 
 	const {
@@ -88,6 +87,6 @@ const GroupReport = memo(() => {
 			</ReportBody>
 		</>
 	)
-})
+}
 
 export default GroupReport
