@@ -1,15 +1,15 @@
-import { useParams, useSearchParams } from 'react-router-dom'
+import {useParams, useSearchParams} from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads'
 
-import { useGetHealthGroupReport } from '../../api/reports.queries.ts'
+import {useGetHealthGroupReport} from '../../api/reports.queries.ts'
 import usePrint from '../../hooks/usePrint'
 
 import HealthGroupReportData from './HealthGroupReportData'
 import HealthGroupReportFilters from './HealthGroupReportFilters'
-import { HealthGroupReportHeads } from './health-group-report-heads'
+import {HealthGroupReportHeads} from './health-group-report-heads'
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
+import {useGetGroups} from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'

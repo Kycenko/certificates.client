@@ -1,5 +1,5 @@
-import { IDepartment } from '../../departments/types/department.types.ts'
-import { IGroup } from '../../groups/types/group.types.ts'
+import {IDepartment} from '../../departments/types/department.types.ts'
+import {IGroup} from '../../groups/types/group.types.ts'
 
 export interface ICourse {
 	id: number

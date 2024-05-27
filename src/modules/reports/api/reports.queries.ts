@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
-import { AxiosResponse } from 'axios'
+import {useQuery} from '@tanstack/react-query'
+import {AxiosResponse} from 'axios'
 
-import { ReportsService } from '@/modules/reports/api/reports.service.ts'
+import {ReportsService} from '@/modules/reports/api/reports.service.ts'
 import {
-	IDepartmentReport,
-	IExpiredCertificatesReport,
-	IGroupReport,
-	IHealthGroupReport,
-	IPhysicalEducationReport
+    IDepartmentReport,
+    IExpiredCertificatesReport,
+    IGroupReport,
+    IHealthGroupReport,
+    IPhysicalEducationReport
 } from '@/modules/reports/types/reports.types.ts'
 
 export const useGetDepartmentReport = (

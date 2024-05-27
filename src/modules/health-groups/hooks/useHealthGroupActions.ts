@@ -1,15 +1,12 @@
-import { QueryObserverResult } from '@tanstack/react-query'
-import { SubmitHandler, UseFormReset } from 'react-hook-form'
+import {QueryObserverResult} from '@tanstack/react-query'
+import {SubmitHandler, UseFormReset} from 'react-hook-form'
 
 import {
-	useCreateHealthGroup,
-	useDeleteHealthGroup,
-	useUpdateHealthGroup
+    useCreateHealthGroup,
+    useDeleteHealthGroup,
+    useUpdateHealthGroup
 } from '@/modules/health-groups/api/health-group.query.ts'
-import {
-	IHealthGroup,
-	TypeHealthGroupForm
-} from '@/modules/health-groups/types/health-group.types.ts'
+import {IHealthGroup, TypeHealthGroupForm} from '@/modules/health-groups/types/health-group.types.ts'
 
 const useHealthGroupActions = (
 	refetch: () => Promise<QueryObserverResult<IHealthGroup[], Error>>,

@@ -1,20 +1,9 @@
-import {
-	Dispatch,
-	FC,
-	PropsWithChildren,
-	SetStateAction,
-	createContext,
-	useEffect,
-	useState
-} from 'react'
-import { useNavigate } from 'react-router-dom'
+import {createContext, Dispatch, FC, PropsWithChildren, SetStateAction, useEffect, useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
-import { IUser } from '@/modules/users/types/user.types.ts'
-import { LOCAL_STORAGE_KEY, PAGES_URL } from '@/shared/constants/enums'
-import {
-	getAccessToken,
-	removeFromStorage
-} from '@/shared/helpers/auth.helper.ts'
+import {IUser} from '@/modules/users/types/user.types.ts'
+import {LOCAL_STORAGE_KEY, PAGES_URL} from '@/shared/constants/enums'
+import {getAccessToken, removeFromStorage} from '@/shared/helpers/auth.helper.ts'
 import getLocalStorage from '@/shared/utils/getLocalStorage'
 
 interface IAuthContext {

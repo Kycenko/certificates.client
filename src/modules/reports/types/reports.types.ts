@@ -1,7 +1,7 @@
-import { IStudent } from '../../students/types/student.types.ts'
+import {IStudent} from '../../students/types/student.types.ts'
 
-import { ICourse } from '@/modules/courses/types/course.types.ts'
-import { IGroup } from '@/modules/groups/types/group.types.ts'
+import {ICourse} from '@/modules/courses/types/course.types.ts'
+import {IGroup} from '@/modules/groups/types/group.types.ts'
 
 export interface IDepartmentReport {
 	id: number

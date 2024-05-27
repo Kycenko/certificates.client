@@ -1,14 +1,14 @@
-import { useSearchParams } from 'react-router-dom'
+import {useSearchParams} from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
-import { useGetPhysicalEducationReport } from '../../api/reports.queries.ts'
+import {useGetPhysicalEducationReport} from '../../api/reports.queries.ts'
 
 import PhysicalEducationReportData from './PhysicalEducationReportData.tsx'
 import PhysicalEducationReportFilters from './PhysicalEducationReportFilters.tsx'
-import { PhysicalEducationReportHeads } from './physical-education-report-heads.ts'
+import {PhysicalEducationReportHeads} from './physical-education-report-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
+import {useGetGroups} from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'

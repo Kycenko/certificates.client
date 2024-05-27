@@ -1,7 +1,7 @@
-import { IPhysicalEducation } from '../../physical-educations/types/physical-education.types.ts'
-import { IStudent } from '../../students/types/student.types.ts'
+import {IPhysicalEducation} from '../../physical-educations/types/physical-education.types.ts'
+import {IStudent} from '../../students/types/student.types.ts'
 
-import { IHealthGroup } from '@/modules/health-groups/types/health-group.types.ts'
+import {IHealthGroup} from '@/modules/health-groups/types/health-group.types.ts'
 
 export interface IMedicalCertificate {
 	id: number

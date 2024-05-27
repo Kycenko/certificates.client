@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import {FC, ReactNode} from 'react'
 import ReactPaginate from 'react-paginate'
 
 import styles from './Pagination.module.scss'

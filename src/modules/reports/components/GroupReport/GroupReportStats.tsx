@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import {FC} from 'react'
 
-import { IGroupReport } from '../../types/reports.types'
+import {IGroupReport} from '../../types/reports.types'
 
 interface GroupReportStatsProps {
 	data: IGroupReport[] | undefined

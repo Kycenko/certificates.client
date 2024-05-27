@@ -1,16 +1,16 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {useEffect} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { useGetCourses } from '@/modules/courses/api/course.queries.ts'
+import {useGetCourses} from '@/modules/courses/api/course.queries.ts'
 import CourseData from '@/modules/courses/components/CourseData.tsx'
 import CoursesFilters from '@/modules/courses/components/CoursesFilters.tsx'
-import { CourseHeads } from '@/modules/courses/components/course-heads.ts'
+import {CourseHeads} from '@/modules/courses/components/course-heads.ts'
 import useCourseActions from '@/modules/courses/hooks/useCourseActions.ts'
-import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
-import { PAGES_URL } from '@/shared/constants/enums.ts'
+import {useGetDepartments} from '@/modules/departments/api/department.queries.ts'
+import {PAGES_URL} from '@/shared/constants/enums.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 

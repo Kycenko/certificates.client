@@ -1,5 +1,5 @@
 import styles from './LoginPage.module.scss'
-import LoginForm from '@/shared/ui/forms/LoginForm/LoginForm'
+import LoginForm from '@/modules/auth/components/LoginForm/LoginForm'
 
 const LoginPage = () => {
 	return (

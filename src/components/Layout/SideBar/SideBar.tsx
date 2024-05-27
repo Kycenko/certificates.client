@@ -1,9 +1,9 @@
-import { CircleUserRound, LogOut } from 'lucide-react'
-import { Link, useNavigate } from 'react-router-dom'
+import {CircleUserRound, LogOut} from 'lucide-react'
+import {Link, useNavigate} from 'react-router-dom'
 
 import styles from './SideBar.module.scss'
-import { PAGES_URL } from '@/shared/constants/enums.ts'
-import { removeFromStorage } from '@/shared/helpers/auth.helper.ts'
+import {PAGES_URL} from '@/shared/constants/enums.ts'
+import {removeFromStorage} from '@/shared/helpers/auth.helper.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 
 const Sidebar = () => {
@@ -135,14 +135,7 @@ const Sidebar = () => {
 		</div>
 	) : (
 		<div className={styles.main}>
-			<div className={styles.linksContainer}>
-				<Link
-					to={`${PAGES_URL.GROUPS}`}
-					className={styles.link}
-				>
-					Группы
-				</Link>
-			</div>
+			<div className={styles.linksContainer}></div>
 			<div>
 				<button
 					onClick={handleLogout}

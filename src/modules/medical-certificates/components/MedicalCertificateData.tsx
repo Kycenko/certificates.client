@@ -1,19 +1,23 @@
-import { format } from 'date-fns'
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import {format} from 'date-fns'
+import {FC} from 'react'
+import {useForm} from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { IHealthGroup } from '@/modules/health-groups/types/health-group.types'
-import { useCreateMedicalCertificateHistory } from '@/modules/medical-certificates/api/medical-certificate-history.queries.ts'
-import { TypeMedicalCertificateHistoryForm } from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
+import {IHealthGroup} from '@/modules/health-groups/types/health-group.types'
 import {
-	IMedicalCertificate,
-	TypeMedicalCertificateForm
+    useCreateMedicalCertificateHistory
+} from '@/modules/medical-certificates/api/medical-certificate-history.queries.ts'
+import {
+    TypeMedicalCertificateHistoryForm
+} from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
+import {
+    IMedicalCertificate,
+    TypeMedicalCertificateForm
 } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
-import { IPhysicalEducation } from '@/modules/physical-educations/types/physical-education.types'
+import {IPhysicalEducation} from '@/modules/physical-educations/types/physical-education.types'
 import useModal from '@/shared/hooks/useModal.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'

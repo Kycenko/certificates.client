@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import {useState} from 'react'
 
-import Dropdown from '@/app/Layout/Header/DropDown/DropDown.tsx'
-import ModalDepartmentReport from '@/app/Layout/Header/DropDown/report-modals/ModalDepartmentReport'
-import ModalExpiredCertificatesReport from '@/app/Layout/Header/DropDown/report-modals/ModalExpiredCertificatesReport'
-import ModalGroupReport from '@/app/Layout/Header/DropDown/report-modals/ModalGroupReport'
-import ModalHealthGroupReport from '@/app/Layout/Header/DropDown/report-modals/ModalHealthGroupReport'
-import ModalPhysicalEducationReport from '@/app/Layout/Header/DropDown/report-modals/ModalPhysicalEducationReport'
-import styles from '@/app/Layout/Header/Header.module.scss'
+import Dropdown from '@/components/Layout/Header/DropDown/DropDown.tsx'
+import ModalDepartmentReport from '@/components/Layout/Header/DropDown/report-modals/ModalDepartmentReport'
+import ModalExpiredCertificatesReport from '@/components/Layout/Header/DropDown/report-modals/ModalExpiredCertificatesReport'
+import ModalGroupReport from '@/components/Layout/Header/DropDown/report-modals/ModalGroupReport'
+import ModalHealthGroupReport from '@/components/Layout/Header/DropDown/report-modals/ModalHealthGroupReport'
+import ModalPhysicalEducationReport from '@/components/Layout/Header/DropDown/report-modals/ModalPhysicalEducationReport'
+import styles from '@/components/Layout/Header/Header.module.scss'
 import useAuth from '@/shared/hooks/useAuth.ts'
 
 const Header = () => {

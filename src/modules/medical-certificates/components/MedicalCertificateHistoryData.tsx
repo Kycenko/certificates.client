@@ -1,10 +1,10 @@
-import { format } from 'date-fns'
-import { FC } from 'react'
+import {format} from 'date-fns'
+import {FC} from 'react'
 
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
-import { IMedicalCertificateHistory } from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
+import {IMedicalCertificateHistory} from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
 
 interface MedicalCertificateHistoryDataProps {
 	data: IMedicalCertificateHistory[] | undefined

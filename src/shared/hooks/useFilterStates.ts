@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 
 const useFilterStates = (
 	initialSortOrder = 'asc' as 'asc' | 'desc',

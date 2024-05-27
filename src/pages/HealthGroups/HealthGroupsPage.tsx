@@ -1,4 +1,4 @@
-import WithPageLayout from '@/app/Layout/hoc/WithPageLayout'
+import WithPageLayout from '@/components/Layout/hoc/WithPageLayout'
 import HealthGroupComponent from '@/modules/health-groups/components/HealthGroupComponent.tsx'
 
 const HealthGroupsPage = () => {

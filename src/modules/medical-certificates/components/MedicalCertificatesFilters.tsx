@@ -1,10 +1,10 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import {Dispatch, FC, SetStateAction} from 'react'
 
 import Filter from '@/components/filters/Filter/Filter'
 import SortOrder from '@/components/filters/SortOrder/SortOrder'
 
-import { IDepartment } from '@/modules/departments/types/department.types'
-import { IGroup } from '@/modules/groups/types/group.types'
+import {IDepartment} from '@/modules/departments/types/department.types'
+import {IGroup} from '@/modules/groups/types/group.types'
 import CourseOptions from '@/shared/helpers/course.options.tsx'
 
 interface MedicalCertificatesFiltersProps {

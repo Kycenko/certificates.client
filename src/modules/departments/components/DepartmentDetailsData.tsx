@@ -1,11 +1,11 @@
-import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
+import {FC} from 'react'
+import {useNavigate} from 'react-router-dom'
 
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
-import { IDepartment } from '@/modules/departments/types/department.types.ts'
-import { PAGES_URL } from '@/shared/constants/enums.ts'
+import {IDepartment} from '@/modules/departments/types/department.types.ts'
+import {PAGES_URL} from '@/shared/constants/enums.ts'
 
 interface DepartmentDetailsDataProps {
 	data: IDepartment | undefined

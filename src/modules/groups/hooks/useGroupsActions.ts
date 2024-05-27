@@ -1,10 +1,7 @@
-import { QueryObserverResult } from '@tanstack/react-query'
+import {QueryObserverResult} from '@tanstack/react-query'
 
-import {
-	useDeleteGroup,
-	useUpdateGroup
-} from '@/modules/groups/api/group.queries.ts'
-import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
+import {useDeleteGroup, useUpdateGroup} from '@/modules/groups/api/group.queries.ts'
+import {IGroup, TypeGroupForm} from '@/modules/groups/types/group.types.ts'
 import useModal from '@/shared/hooks/useModal'
 
 const useGroupActions = (

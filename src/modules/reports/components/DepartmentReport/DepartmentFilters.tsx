@@ -1,13 +1,13 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import {Dispatch, FC, SetStateAction} from 'react'
 
 import Filter from '@/components/filters/Filter/Filter'
 import SortOrder from '@/components/filters/SortOrder/SortOrder'
 
-import { IDepartmentReport } from '../../types/reports.types'
+import {IDepartmentReport} from '../../types/reports.types'
 
-import { IGroup } from '@/modules/groups/types/group.types'
-import { IHealthGroup } from '@/modules/health-groups/types/health-group.types'
-import { IPhysicalEducation } from '@/modules/physical-educations/types/physical-education.types'
+import {IGroup} from '@/modules/groups/types/group.types'
+import {IHealthGroup} from '@/modules/health-groups/types/health-group.types'
+import {IPhysicalEducation} from '@/modules/physical-educations/types/physical-education.types'
 
 interface DepartmentFiltersProps {
 	data: IDepartmentReport[] | undefined

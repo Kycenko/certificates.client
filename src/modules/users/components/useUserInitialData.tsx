@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
-import { UseFormReset } from 'react-hook-form'
+import {useEffect} from 'react'
+import {UseFormReset} from 'react-hook-form'
 
-import { useGetUser } from '@/modules/users/api/user.queries.ts'
-import { TypeUserForm } from '@/modules/users/types/user.types.ts'
+import {useGetUser} from '@/modules/users/api/user.queries.ts'
+import {TypeUserForm} from '@/modules/users/types/user.types.ts'
 
 const useUserInitialData = (
 	id: string | undefined,

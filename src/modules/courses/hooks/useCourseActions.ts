@@ -1,13 +1,7 @@
-import { QueryObserverResult } from '@tanstack/react-query'
+import {QueryObserverResult} from '@tanstack/react-query'
 
-import {
-	useDeleteCourse,
-	useUpdateCourse
-} from '@/modules/courses/api/course.queries.ts'
-import {
-	ICourse,
-	TypeCourseForm
-} from '@/modules/courses/types/course.types.ts'
+import {useDeleteCourse, useUpdateCourse} from '@/modules/courses/api/course.queries.ts'
+import {ICourse, TypeCourseForm} from '@/modules/courses/types/course.types.ts'
 
 const useCourseActions = (
 	refetch: () => Promise<QueryObserverResult<ICourse[], Error>>

@@ -1,14 +1,14 @@
-import { QueryObserverResult } from '@tanstack/react-query'
-import { SubmitHandler, UseFormReset } from 'react-hook-form'
+import {QueryObserverResult} from '@tanstack/react-query'
+import {SubmitHandler, UseFormReset} from 'react-hook-form'
 
 import {
-	useCreatePhysicalEducation,
-	useDeletePhysicalEducation,
-	useUpdatePhysicalEducation
+    useCreatePhysicalEducation,
+    useDeletePhysicalEducation,
+    useUpdatePhysicalEducation
 } from '@/modules/physical-educations/api/physical-education.queries.ts'
 import {
-	IPhysicalEducation,
-	TypePhysicalEducationForm
+    IPhysicalEducation,
+    TypePhysicalEducationForm
 } from '@/modules/physical-educations/types/physical-education.types.ts'
 
 const usePhysicalEducationActions = (

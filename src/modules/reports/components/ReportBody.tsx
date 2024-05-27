@@ -1,4 +1,4 @@
-import { FC, ReactNode, RefObject } from 'react'
+import {FC, ReactNode, RefObject} from 'react'
 
 interface ReportBodyProps {
 	printRef: RefObject<HTMLDivElement>

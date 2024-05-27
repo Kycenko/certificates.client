@@ -1,4 +1,4 @@
-import WithPageLayout from '@/app/Layout/hoc/WithPageLayout'
+import WithPageLayout from '@/components/Layout/hoc/WithPageLayout'
 import GroupReport from '@/modules/reports/components/GroupReport/GroupReport'
 
 const GetGroupReportPage = () => {

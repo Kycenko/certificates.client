@@ -1,4 +1,4 @@
-import WithPageLayout from '@/app/Layout/hoc/WithPageLayout'
+import WithPageLayout from '@/components/Layout/hoc/WithPageLayout'
 import GroupDetailsTable from '@/modules/groups/components/GroupDetailsTable.tsx'
 
 const GroupDetailsPage = () => {

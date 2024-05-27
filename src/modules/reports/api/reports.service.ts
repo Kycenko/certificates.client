@@ -1,11 +1,11 @@
 import {
-	IDepartmentReport,
-	IExpiredCertificatesReport,
-	IGroupReport,
-	IHealthGroupReport
+    IDepartmentReport,
+    IExpiredCertificatesReport,
+    IGroupReport,
+    IHealthGroupReport
 } from '@/modules/reports/types/reports.types.ts'
 import instance from '@/shared/api/api.instance.ts'
-import { SERVICE_URL } from '@/shared/constants/enums.ts'
+import {SERVICE_URL} from '@/shared/constants/enums.ts'
 
 export const ReportsService = {
 	async getDepartmentReport(

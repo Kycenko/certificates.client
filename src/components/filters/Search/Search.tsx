@@ -1,12 +1,4 @@
-import {
-	ChangeEvent,
-	Dispatch,
-	FC,
-	SetStateAction,
-	useEffect,
-	useRef,
-	useState
-} from 'react'
+import {ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react'
 
 import styles from './Search.module.scss'
 import useDebounce from '@/shared/hooks/useDebounce.ts'

@@ -1,7 +1,7 @@
-import { ChevronDown } from 'lucide-react'
-import { FC, PropsWithChildren, useRef, useState } from 'react'
+import {ChevronDown} from 'lucide-react'
+import {FC, PropsWithChildren, useRef, useState} from 'react'
 
-import styles from './DropDown.module.scss'
+import styles from '@/components/Layout/Header/DropDown/DropDown.module.scss'
 import useClickOutside from '@/shared/hooks/useClickOutside.ts'
 
 const Dropdown: FC<PropsWithChildren> = ({ children }) => {

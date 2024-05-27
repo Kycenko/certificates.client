@@ -1,8 +1,8 @@
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import {FC} from 'react'
+import {useForm} from 'react-hook-form'
+import {useNavigate} from 'react-router-dom'
 
-import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
+import {useGetGroups} from '@/modules/groups/api/group.queries.ts'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 

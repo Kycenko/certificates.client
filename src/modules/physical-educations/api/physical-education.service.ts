@@ -1,9 +1,9 @@
 import {
-	IPhysicalEducation,
-	TypePhysicalEducationForm
+    IPhysicalEducation,
+    TypePhysicalEducationForm
 } from '@/modules/physical-educations/types/physical-education.types.ts'
 import instance from '@/shared/api/api.instance.ts'
-import { SERVICE_URL } from '@/shared/constants/enums.ts'
+import {SERVICE_URL} from '@/shared/constants/enums.ts'
 
 export const PhysicalEducationService = {
 	async create(data: TypePhysicalEducationForm) {

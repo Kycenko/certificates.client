@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import {Dispatch, FC, SetStateAction} from 'react'
 
 import Search from '@/components/filters/Search/Search'
 import SortOrder from '@/components/filters/SortOrder/SortOrder'

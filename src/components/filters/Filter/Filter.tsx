@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FC, ReactNode, SetStateAction } from 'react'
+import {ChangeEvent, Dispatch, FC, ReactNode, SetStateAction} from 'react'
 
 import styles from './Filter.module.scss'
 

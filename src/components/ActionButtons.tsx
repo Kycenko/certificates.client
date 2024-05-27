@@ -1,5 +1,5 @@
-import { Eye, History, PencilLine, Trash2 } from 'lucide-react'
-import { FC } from 'react'
+import {Eye, History, PencilLine, Trash2} from 'lucide-react'
+import {FC} from 'react'
 
 import styles from './ActionButtons.module.scss'
 

@@ -1,9 +1,9 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import {Dispatch, FC, SetStateAction} from 'react'
 
 import Filter from '@/components/filters/Filter/Filter'
 import SortOrder from '@/components/filters/SortOrder/SortOrder'
 
-import { IDepartment } from '@/modules/departments/types/department.types'
+import {IDepartment} from '@/modules/departments/types/department.types'
 
 interface CoursesFiltersProps {
 	departments: IDepartment[] | undefined

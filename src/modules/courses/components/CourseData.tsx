@@ -1,15 +1,12 @@
-import { FC } from 'react'
-import { useForm } from 'react-hook-form'
+import {FC} from 'react'
+import {useForm} from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
-import {
-	ICourse,
-	TypeCourseForm
-} from '@/modules/courses/types/course.types.ts'
-import { IDepartment } from '@/modules/departments/types/department.types.ts'
+import {ICourse, TypeCourseForm} from '@/modules/courses/types/course.types.ts'
+import {IDepartment} from '@/modules/departments/types/department.types.ts'
 import CourseOptions from '@/shared/helpers/course.options.tsx'
 import useModal from '@/shared/hooks/useModal.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'

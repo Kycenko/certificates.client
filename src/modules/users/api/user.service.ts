@@ -1,6 +1,6 @@
-import { IUser, TypeUserForm } from '@/modules/users/types/user.types.ts'
+import {IUser, TypeUserForm} from '@/modules/users/types/user.types.ts'
 import instance from '@/shared/api/api.instance.ts'
-import { SERVICE_URL } from '@/shared/constants/enums.ts'
+import {SERVICE_URL} from '@/shared/constants/enums.ts'
 
 export const UserService = {
 	async getAll() {

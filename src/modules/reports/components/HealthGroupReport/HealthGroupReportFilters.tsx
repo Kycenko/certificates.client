@@ -1,9 +1,9 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import {Dispatch, FC, SetStateAction} from 'react'
 
 import Filter from '@/components/filters/Filter/Filter'
 import SortOrder from '@/components/filters/SortOrder/SortOrder'
 
-import { IGroup } from '@/modules/groups/types/group.types'
+import {IGroup} from '@/modules/groups/types/group.types'
 
 interface HealthGroupReportFiltersProps {
 	groups: IGroup[] | undefined
