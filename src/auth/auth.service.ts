@@ -103,7 +103,8 @@ export class AuthService {
 			id: user.id,
 			login: user.login,
 			password: user.password,
-			isAdmin: user.isAdmin
+			isAdmin: user.isAdmin,
+			groupId: user.groupId
 		}
 	}
 }

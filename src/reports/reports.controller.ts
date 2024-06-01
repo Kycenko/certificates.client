@@ -4,8 +4,7 @@ import { ReportsService } from './reports.service'
 
 @Controller('reports')
 export class ReportsController {
-	constructor(private readonly reportsService: ReportsService) {
-	}
+	constructor(private readonly reportsService: ReportsService) {}
 
 	//отчет по отделению
 	@Auth('admin')
@@ -58,16 +57,16 @@ export class ReportsController {
 	@Auth('admin')
 	@Get('pe-check-list')
 	async getPhysicalGroupCheckListReport(
-		@Query('department') departmentId: number,
+		@Query('department') department: string,
 		@Query('course') course: number,
-		@Query('pe') physicalEducationId: number,
+		@Query('pe') physicalEducation: string,
 		@Query('sort') sort: 'asc' | 'desc' = 'asc',
 		@Query('group') group?: string | undefined
 	) {
 		return this.reportsService.getPhysicalGroupCheckListReport(
-			departmentId,
+			department,
 			course,
-			physicalEducationId,
+			physicalEducation,
 			sort,
 			group
 		)
@@ -76,16 +75,16 @@ export class ReportsController {
 	@Auth('admin')
 	@Get('hg-check-list')
 	async getHealthGroupCheckListReport(
-		@Query('department') departmentId: number,
+		@Query('department') department: string,
 		@Query('course') course: number,
-		@Query('hg') healthGroupId: number,
+		@Query('hg') healthGroup: string,
 		@Query('sort') sort: 'asc' | 'desc' = 'asc',
 		@Query('group') group?: string | undefined
 	) {
 		return this.reportsService.getHealthGroupCheckListReportData(
-			departmentId,
+			department,
 			course,
-			healthGroupId,
+			healthGroup,
 			sort,
 			group
 		)

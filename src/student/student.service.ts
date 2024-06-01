@@ -50,7 +50,7 @@ export class StudentService {
 
 	async getAll(
 		pageNum: number = 1,
-		pageSize: number = 10,
+		pageSize: number,
 		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: number,

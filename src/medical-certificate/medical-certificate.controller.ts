@@ -32,7 +32,7 @@ export class MedicalCertificateController {
 	@Auth('admin')
 	async getAll(
 		@Query('page') page: number = 1,
-		@Query('limit') limit: number = 100,
+		@Query('limit') limit: number,
 		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
 		@Query('department') department?: string,
 		@Query('course') course?: number,

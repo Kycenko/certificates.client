@@ -19,7 +19,7 @@ export class MedicalCertificateService {
 
 	async getAll(
 		pageNum: number = 1,
-		pageSize: number = 100,
+		pageSize: number,
 		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: number,

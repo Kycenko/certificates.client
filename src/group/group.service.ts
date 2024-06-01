@@ -93,7 +93,11 @@ export class GroupService {
 						groupId: +id
 					},
 					include: {
-						medicalCertificates: true
+						medicalCertificates: {
+							orderBy: {
+								startDate: 'desc'
+							}
+						}
 					}
 				}
 			}

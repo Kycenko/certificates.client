@@ -1,12 +1,22 @@
 import { Auth } from '@auth/decorators/auth.decorator'
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common'
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Post,
+	Put,
+	Query,
+	UsePipes,
+	ValidationPipe
+} from '@nestjs/common'
 import { GroupDto } from './dto/group.dto'
 import { GroupService } from './group.service'
 
 @Controller('groups')
 export class GroupController {
-	constructor(private readonly groupService: GroupService) {
-	}
+	constructor(private readonly groupService: GroupService) {}
 
 	@Post()
 	@Auth()
@@ -16,7 +26,7 @@ export class GroupController {
 	}
 
 	@Get()
-	@Auth()
+	@Auth('admin')
 	async getAll(
 		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
 		@Query('department') department?: string,
