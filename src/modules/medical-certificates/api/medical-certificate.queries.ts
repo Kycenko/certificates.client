@@ -1,13 +1,13 @@
-import {QueryClient, useMutation, useQuery} from '@tanstack/react-query'
-import {AxiosResponse} from 'axios'
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import { AxiosResponse } from 'axios'
 
-import {MedicalCertificateService} from '@/modules/medical-certificates/api/medical-certificate.service.ts'
+import { MedicalCertificateService } from '@/modules/medical-certificates/api/medical-certificate.service.ts'
 import {
-    IMedicalCertificate,
-    TypeMedicalCertificateForm
+	IMedicalCertificate,
+	TypeMedicalCertificateForm
 } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
-import {QUERY_KEYS} from '@/shared/constants/enums.ts'
-import {createToast, deleteToast, editToast} from '@/shared/helpers/toasts.ts'
+import { QUERY_KEYS } from '@/shared/constants/enums.ts'
+import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 
 export const useCreateMedicalCertificate = () => {
 	const queryClient = new QueryClient()

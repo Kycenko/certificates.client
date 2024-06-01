@@ -1,8 +1,8 @@
-import {useMutation} from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
-import {AuthService} from '@/modules/auth/api/auth.service.ts'
-import {ILogin, IRegister} from '@/modules/auth/types/auth.types.ts'
-import {authToast, createToast} from '@/shared/helpers/toasts.ts'
+import { AuthService } from '@/modules/auth/api/auth.service.ts'
+import { ILogin, IRegister } from '@/modules/auth/types/auth.types.ts'
+import { authToast, createToast } from '@/shared/helpers/toasts.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 
 export const useLogin = () => {

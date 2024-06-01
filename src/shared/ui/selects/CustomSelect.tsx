@@ -1,4 +1,4 @@
-import {forwardRef, ReactNode, SelectHTMLAttributes} from 'react'
+import { ReactNode, SelectHTMLAttributes, forwardRef } from 'react'
 
 import styles from './CustomSelect.module.scss'
 

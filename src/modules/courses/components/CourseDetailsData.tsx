@@ -1,11 +1,11 @@
-import {FC} from 'react'
-import {useNavigate} from 'react-router-dom'
+import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
-import {ICourse} from '@/modules/courses/types/course.types.ts'
-import {PAGES_URL} from '@/shared/constants/enums.ts'
+import { ICourse } from '@/modules/courses/types/course.types.ts'
+import { PAGES_URL } from '@/shared/constants/enums.ts'
 
 interface CourseDetailsDataProps {
 	data: ICourse | undefined

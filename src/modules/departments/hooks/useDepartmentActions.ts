@@ -1,12 +1,15 @@
-import {QueryObserverResult} from '@tanstack/react-query'
-import {SubmitHandler, UseFormReset} from 'react-hook-form'
+import { QueryObserverResult } from '@tanstack/react-query'
+import { SubmitHandler, UseFormReset } from 'react-hook-form'
 
 import {
-    useCreateDepartment,
-    useDeleteDepartment,
-    useUpdateDepartment
+	useCreateDepartment,
+	useDeleteDepartment,
+	useUpdateDepartment
 } from '@/modules/departments/api/department.queries.ts'
-import {IDepartment, TypeDepartmentForm} from '@/modules/departments/types/department.types.ts'
+import {
+	IDepartment,
+	TypeDepartmentForm
+} from '@/modules/departments/types/department.types.ts'
 
 const useDepartmentActions = (
 	refetch: () => Promise<QueryObserverResult<IDepartment[], Error>>,

@@ -1,4 +1,4 @@
-import {ICourse} from '@/modules/courses/types/course.types.ts'
+import { ICourse } from '@/modules/courses/types/course.types.ts'
 
 export interface IDepartment {
 	id: number

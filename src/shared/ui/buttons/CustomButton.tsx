@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import {ButtonHTMLAttributes, PropsWithChildren} from 'react'
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 
 import styles from './CustomButton.module.scss'
 

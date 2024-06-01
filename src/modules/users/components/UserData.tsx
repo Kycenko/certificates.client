@@ -1,9 +1,9 @@
-import {FC} from 'react'
+import { FC } from 'react'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
 
 import styles from '@/app/styles/Cards.module.scss'
-import {IUser} from '@/modules/users/types/user.types.ts'
+import { IUser } from '@/modules/users/types/user.types.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'

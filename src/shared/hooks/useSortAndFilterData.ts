@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 const useSortAndFilterData = (data: any[], sortField: string) => {
 	const [searchTerm, setSearchTerm] = useState<string>('')

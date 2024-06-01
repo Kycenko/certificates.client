@@ -1,7 +1,7 @@
-import {zodResolver} from '@hookform/resolvers/zod'
-import {useEffect} from 'react'
-import {useForm} from 'react-hook-form'
-import {useNavigate} from 'react-router-dom'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
@@ -9,12 +9,15 @@ import useDepartmentActions from '../hooks/useDepartmentActions'
 
 import DepartmentsFilters from './DepartmentsFilters'
 import styles from '@/app/styles/Tables.module.scss'
-import {useGetDepartments} from '@/modules/departments/api/department.queries.ts'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import DepartmentData from '@/modules/departments/components/DepartmentData.tsx'
-import {DepartmentHeads} from '@/modules/departments/components/department-heads.ts'
-import {IDepartment, TypeDepartmentForm} from '@/modules/departments/types/department.types.ts'
-import {PAGES_URL} from '@/shared/constants/enums.ts'
-import {departmentValidationSchema} from '@/shared/helpers/validation.schema.ts'
+import { DepartmentHeads } from '@/modules/departments/components/department-heads.ts'
+import {
+	IDepartment,
+	TypeDepartmentForm
+} from '@/modules/departments/types/department.types.ts'
+import { PAGES_URL } from '@/shared/constants/enums.ts'
+import { departmentValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'

@@ -1,6 +1,6 @@
-import {X} from 'lucide-react'
-import {FC, ReactNode, useRef} from 'react'
-import {FormProvider, SubmitHandler, useForm} from 'react-hook-form'
+import { X } from 'lucide-react'
+import { FC, ReactNode, useRef } from 'react'
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import styles from './CustomModalForm.module.scss'
 import useClickOutside from '@/shared/hooks/useClickOutside.ts'

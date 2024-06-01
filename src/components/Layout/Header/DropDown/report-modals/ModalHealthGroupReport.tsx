@@ -1,9 +1,9 @@
-import {FC} from 'react'
-import {useForm} from 'react-hook-form'
-import {useNavigate} from 'react-router-dom'
+import { FC } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-import {useGetDepartments} from '@/modules/departments/api/department.queries.ts'
-import {useGetHealthGroups} from '@/modules/health-groups/api/health-group.query.ts'
+import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
+import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
 import CourseOptions from '@/shared/helpers/course.options.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
@@ -50,7 +50,7 @@ const ModalHealthGroupReport: FC<ModalHealthGroupReportProps> = ({
 				{departments?.map(({ id, name }) => (
 					<option
 						key={id}
-						value={id}
+						value={name}
 					>
 						{name}
 					</option>
@@ -72,7 +72,7 @@ const ModalHealthGroupReport: FC<ModalHealthGroupReportProps> = ({
 				{healthGroups?.map(({ id, name }) => (
 					<option
 						key={id}
-						value={id}
+						value={name}
 					>
 						{name}
 					</option>

@@ -1,4 +1,4 @@
-import {ChangeEvent, Dispatch, FC, SetStateAction} from 'react'
+import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react'
 
 import styles from './SortOrder.module.scss'
 

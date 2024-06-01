@@ -1,4 +1,5 @@
 import WithPageLayout from '@/components/Layout/hoc/WithPageLayout'
+
 import StudentsTable from '@/modules/students/components/StudentsTable.tsx'
 import Heading from '@/shared/ui/fields/Heading/Heading'
 

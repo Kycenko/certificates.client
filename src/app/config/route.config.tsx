@@ -1,28 +1,28 @@
-import {RouteProps} from 'react-router-dom'
+import { RouteProps } from 'react-router-dom'
 
-import {CourseDetailsPageLazy} from '@/pages/Courses/CourseDetailsPage.lazy.tsx'
-import {CoursesPageLazy} from '@/pages/Courses/CoursesPage.lazy.tsx'
-import {DepartmentDetailsPageLazy} from '@/pages/Departments/DepartmentDetailsPageLazy.tsx'
-import {DepartmentsPageLazy} from '@/pages/Departments/DepartmentsPageLazy.tsx'
-import {GroupDetailsPageLazy} from '@/pages/Groups/GroupDetailsPageLazy.tsx'
-import {GroupsPageLazy} from '@/pages/Groups/GroupsPageLazy.tsx'
-import {HealthGroupsPageLazy} from '@/pages/HealthGroups/HealthGroupsPageLazy.tsx'
-import {HomePageLazy} from '@/pages/Home/HomePageLazy.tsx'
-import {LoginPageLazy} from '@/pages/Login/LoginPageLazy.tsx'
-import {MedicalCertificateHistoryPageLazy} from '@/pages/MedicalCertificates/MedicalCertificateHistoryPageLazy.tsx'
-import {MedicalCertificatesPageLazy} from '@/pages/MedicalCertificates/MedicalCertificatesPageLazy.tsx'
-import {NotFoundPageLazy} from '@/pages/NotFound/NotFoundPageLazy.tsx'
-import {PhysicalEducationsPageLazy} from '@/pages/PhysicalEducations/PhysicalEducationsPageLazy.tsx'
-import {GetDepartmentReportPageLazy} from '@/pages/Reports/GetDepartmentReportPageLazy.tsx'
-import {GetExpiredCertificatesReportPageLazy} from '@/pages/Reports/GetExpiredCertificatesReportPageLazy.tsx'
-import {GetGroupReportPageLazy} from '@/pages/Reports/GetGroupReportPageLazy.tsx'
-import {GetHealthGroupReportPageLazy} from '@/pages/Reports/GetHealthGroupReportPageLazy.tsx'
-import {GetPhysicalEducationReportPageLazy} from '@/pages/Reports/GetPhysicalEducationReportPageLazy.tsx'
-import {StudentDetailsPageLazy} from '@/pages/Students/StudentDetailsPageLazy.tsx'
-import {StudentHistoryPageLazy} from '@/pages/Students/StudentHistoryPageLazy.tsx'
-import {StudentsPageLazy} from '@/pages/Students/StudentsPageLazy.tsx'
-import {UserDetailsPageLazy} from '@/pages/Users/UserDetailsPageLazy.tsx'
-import {UsersPageLazy} from '@/pages/Users/UsersPageLazy.tsx'
+import { CourseDetailsPageLazy } from '@/pages/Courses/CourseDetailsPage.lazy.tsx'
+import { CoursesPageLazy } from '@/pages/Courses/CoursesPage.lazy.tsx'
+import { DepartmentDetailsPageLazy } from '@/pages/Departments/DepartmentDetailsPageLazy.tsx'
+import { DepartmentsPageLazy } from '@/pages/Departments/DepartmentsPageLazy.tsx'
+import { GroupDetailsPageLazy } from '@/pages/Groups/GroupDetailsPageLazy.tsx'
+import { GroupsPageLazy } from '@/pages/Groups/GroupsPageLazy.tsx'
+import { HealthGroupsPageLazy } from '@/pages/HealthGroups/HealthGroupsPageLazy.tsx'
+import { HomePageLazy } from '@/pages/Home/HomePageLazy.tsx'
+import { LoginPageLazy } from '@/pages/Login/LoginPageLazy.tsx'
+import { MedicalCertificateHistoryPageLazy } from '@/pages/MedicalCertificates/MedicalCertificateHistoryPageLazy.tsx'
+import { MedicalCertificatesPageLazy } from '@/pages/MedicalCertificates/MedicalCertificatesPageLazy.tsx'
+import { NotFoundPageLazy } from '@/pages/NotFound/NotFoundPageLazy.tsx'
+import { PhysicalEducationsPageLazy } from '@/pages/PhysicalEducations/PhysicalEducationsPageLazy.tsx'
+import { GetDepartmentReportPageLazy } from '@/pages/Reports/GetDepartmentReportPageLazy.tsx'
+import { GetExpiredCertificatesReportPageLazy } from '@/pages/Reports/GetExpiredCertificatesReportPageLazy.tsx'
+import { GetGroupReportPageLazy } from '@/pages/Reports/GetGroupReportPageLazy.tsx'
+import { GetHealthGroupReportPageLazy } from '@/pages/Reports/GetHealthGroupReportPageLazy.tsx'
+import { GetPhysicalEducationReportPageLazy } from '@/pages/Reports/GetPhysicalEducationReportPageLazy.tsx'
+import { StudentDetailsPageLazy } from '@/pages/Students/StudentDetailsPageLazy.tsx'
+import { StudentHistoryPageLazy } from '@/pages/Students/StudentHistoryPageLazy.tsx'
+import { StudentsPageLazy } from '@/pages/Students/StudentsPageLazy.tsx'
+import { UserDetailsPageLazy } from '@/pages/Users/UserDetailsPageLazy.tsx'
+import { UsersPageLazy } from '@/pages/Users/UsersPageLazy.tsx'
 
 export const enum AppRoutes {
 	LOGIN = 'login',
@@ -76,6 +76,78 @@ export const RoutePath: Record<AppRoutes, string> = {
 		'/reports/expired-certificates-report',
 	[AppRoutes.NOT_FOUND]: '*'
 }
+
+// export const routeConfig = [{
+// 	path: '/login',
+// 	element: <LoginPageLazy />
+// },
+// {
+// 	path: '/',
+// 	element: <HomePageLazy />
+// },{
+// 	path: '/users',
+// 	element: <UsersPageLazy />
+// },{
+// 	path: '/users/:id',
+// 	element: <UserDetailsPageLazy />
+// },{
+// 	path: '/health-groups',
+// 	element: <LoginPageLazy />
+// },{
+// 	path: '/physical-educations',
+// 	element: <LoginPageLazy />
+// },{
+// 	path: '/departments',
+// 	element: <LoginPageLazy />
+// },{
+// 	path: '/departments/:id',
+// 	element: <LoginPageLazy />
+// },{
+// 	path: '/courses',
+// 	element: <CoursesPageLazy />
+// },{
+// 	path: '/courses/:id',
+// 	element: <CourseDetailsPageLazy />
+// },{
+// 	path: '/groups',
+// 	element: <GroupsPageLazy />
+// },{
+// 	path: '/groups/:id',
+// 	element: <GroupDetailsPageLazy />
+// },{
+// 	path: '/students',
+// 	element: <StudentsPageLazy />
+// },{
+// 	path: '/student-history/:id',
+// 	element: <StudentHistoryPageLazy />
+// },{
+// 	path: '/students/:id',
+// 	element: <StudentDetailsPageLazy />
+// },{
+// 	path: '/medical-certificates',
+// 	element: <MedicalCertificateHistoryPageLazy />
+// },{
+// 	path: '/medical-certificate-history/:id',
+// 	element: <MedicalCertificateHistoryPageLazy />
+// },{
+// 	path: '/reports/department-report/:id',
+// 	element: <GetDepartmentReportPageLazy />
+// },{
+// 	path: '/reports/group-report/:id',
+// 	element: <GetGroupReportPageLazy />
+// },{
+// 	path: '/reports/pe-check-list',
+// 	element: <GetPhysicalEducationReportPageLazy />
+// },{
+// 	path: '/reports/hg-check-list',
+// 	element: <GetHealthGroupReportPageLazy />
+// },{
+// 	path: '/reports/expired-certificates-report',
+// 	element: <GetExpiredCertificatesReportPageLazy />
+// },{
+// 	path: '/*',
+// 	element: <NotFoundPageLazy />
+// }]
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
 	[AppRoutes.LOGIN]: {

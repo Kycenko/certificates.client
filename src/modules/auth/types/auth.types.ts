@@ -1,4 +1,4 @@
-import {IUser} from '@/modules/users/types/user.types.ts'
+import { IUser } from '@/modules/users/types/user.types.ts'
 
 export interface ILogin {
 	login: string

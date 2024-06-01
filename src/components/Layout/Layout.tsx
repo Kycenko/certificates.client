@@ -1,9 +1,8 @@
-import {FC, PropsWithChildren} from 'react'
+import { FC, PropsWithChildren } from 'react'
 
-
+import Header from '@/components/Layout/Header/Header.tsx'
 import styles from '@/components/Layout/Layout.module.scss'
 import Sidebar from '@/components/Layout/SideBar/SideBar.tsx'
-import Header from "@/components/Layout/Header/Header.tsx";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
 	return (

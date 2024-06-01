@@ -1,17 +1,9 @@
 import path from 'path'
-import {defineConfig} from 'vite'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
-	plugins: [
-		// react({
-		// 	babel: {
-		// 		plugins: [['babel-plugin-react-compiler']]
-		// 	}
-		// })
-	],
-	// server: {
-	// 	open: true
-	// },
+	plugins: [],
+
 	resolve: {
 		alias: {
 			'@/': path.resolve(__dirname, './src'),

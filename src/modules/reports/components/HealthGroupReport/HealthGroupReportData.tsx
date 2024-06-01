@@ -1,9 +1,9 @@
-import {format} from 'date-fns'
-import {FC} from 'react'
+import { format } from 'date-fns'
+import { FC } from 'react'
 
 import NoData from '@/components/NoData.tsx'
 
-import {IHealthGroupReport} from '../../types/reports.types'
+import { IHealthGroupReport } from '../../types/reports.types'
 
 import formatFullName from '@/shared/utils/formatFullName'
 
@@ -39,7 +39,7 @@ const HealthGroupReportData: FC<HealthGroupReportDataProps> = ({ data }) => {
 											<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
 											<td>{number}</td>
 											<td>{groupName}</td>
-											<td>{healthGroup.name}</td>
+											{/* <td>{healthGroup.name}</td> */}
 										</tr>
 									))
 							)

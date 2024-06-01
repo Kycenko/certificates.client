@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
 import Dropdown from '@/components/Layout/Header/DropDown/DropDown.tsx'
 import ModalDepartmentReport from '@/components/Layout/Header/DropDown/report-modals/ModalDepartmentReport'
@@ -7,6 +7,7 @@ import ModalGroupReport from '@/components/Layout/Header/DropDown/report-modals/
 import ModalHealthGroupReport from '@/components/Layout/Header/DropDown/report-modals/ModalHealthGroupReport'
 import ModalPhysicalEducationReport from '@/components/Layout/Header/DropDown/report-modals/ModalPhysicalEducationReport'
 import styles from '@/components/Layout/Header/Header.module.scss'
+
 import useAuth from '@/shared/hooks/useAuth.ts'
 
 const Header = () => {

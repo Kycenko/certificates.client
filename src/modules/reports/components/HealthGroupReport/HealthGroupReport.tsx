@@ -1,15 +1,15 @@
-import {useParams, useSearchParams} from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads'
 
-import {useGetHealthGroupReport} from '../../api/reports.queries.ts'
+import { useGetHealthGroupReport } from '../../api/reports.queries.ts'
 import usePrint from '../../hooks/usePrint'
 
 import HealthGroupReportData from './HealthGroupReportData'
 import HealthGroupReportFilters from './HealthGroupReportFilters'
-import {HealthGroupReportHeads} from './health-group-report-heads'
+import { HealthGroupReportHeads } from './health-group-report-heads'
 import styles from '@/app/styles/Tables.module.scss'
-import {useGetGroups} from '@/modules/groups/api/group.queries.ts'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
@@ -36,7 +36,6 @@ const HealthGroupReport = () => {
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `group-report-${id}`
 	})
-	const departmentName = data?.map(({ name }) => <p>{name}</p>)
 
 	return (
 		<>
@@ -62,8 +61,19 @@ const HealthGroupReport = () => {
 			</div>
 			<ReportBody
 				printRef={printRef}
-				header='Листок здоровья отделения:'
-				title={departmentName}
+				header={
+					<>
+						<div className='flex flex-col text-center'>
+							<p>
+								Листок по группе здоровья: <b>{healthGroup}</b>
+							</p>
+							<p>
+								Отделение:
+								<b> {department}</b>
+							</p>
+						</div>
+					</>
+				}
 			>
 				<table className={styles.table}>
 					<thead className={'border-b-2 border-t-2'}>

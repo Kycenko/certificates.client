@@ -1,7 +1,7 @@
-import {format} from 'date-fns'
-import {FC} from 'react'
+import { format } from 'date-fns'
+import { FC } from 'react'
 
-import {IPhysicalEducationReport} from '@/modules/reports/types/reports.types.ts'
+import { IPhysicalEducationReport } from '@/modules/reports/types/reports.types.ts'
 import formatFullName from '@/shared/utils/formatFullName.ts'
 
 interface PhysicalEducationReportDataProps {
@@ -29,7 +29,6 @@ const PhysicalEducationReportData: FC<PhysicalEducationReportDataProps> = ({
 										<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
 										<td>{number}</td>
 										<td>{groupName}</td>
-										<td>{physicalEducation.name}</td>
 									</tr>
 								))
 						)

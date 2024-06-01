@@ -1,5 +1,4 @@
-import {IStudent} from "@/modules/students/types/student.types.ts";
-
+import { IStudent } from '@/modules/students/types/student.types.ts'
 
 const getFullName = (student: IStudent | undefined) => {
 	const { surname = '', name = '', secondName = '' } = student || {}

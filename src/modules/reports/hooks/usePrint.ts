@@ -1,5 +1,5 @@
-import {useEffect, useRef} from 'react'
-import {useReactToPrint} from 'react-to-print'
+import { useEffect, useRef } from 'react'
+import { useReactToPrint } from 'react-to-print'
 
 interface UsePrintOptions {
 	documentTitle?: string

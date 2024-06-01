@@ -1,13 +1,16 @@
-import {zodResolver} from '@hookform/resolvers/zod'
-import {FC, useEffect} from 'react'
-import {useForm} from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FC, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData'
 
 import styles from '@/app/styles/Tables.module.scss'
-import {IDepartment, TypeDepartmentForm} from '@/modules/departments/types/department.types.ts'
-import {departmentValidationSchema} from '@/shared/helpers/validation.schema.ts'
+import {
+	IDepartment,
+	TypeDepartmentForm
+} from '@/modules/departments/types/department.types.ts'
+import { departmentValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'

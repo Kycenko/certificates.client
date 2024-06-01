@@ -1,6 +1,6 @@
-import {IPhysicalEducation} from '../../physical-educations/types/physical-education.types.ts'
+import { IPhysicalEducation } from '../../physical-educations/types/physical-education.types.ts'
 
-import {IHealthGroup} from '@/modules/health-groups/types/health-group.types.ts'
+import { IHealthGroup } from '@/modules/health-groups/types/health-group.types.ts'
 
 export interface IMedicalCertificateHistory {
 	id: number

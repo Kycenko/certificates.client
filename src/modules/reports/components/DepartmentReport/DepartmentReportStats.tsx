@@ -1,6 +1,6 @@
-import {FC} from 'react'
+import { FC } from 'react'
 
-import {IDepartmentReport} from '../../types/reports.types'
+import { IDepartmentReport } from '../../types/reports.types'
 
 interface DepartmentReportStatsProps {
 	data: IDepartmentReport[] | undefined

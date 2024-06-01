@@ -1,14 +1,14 @@
-import {useSearchParams} from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
-import {useGetPhysicalEducationReport} from '../../api/reports.queries.ts'
+import { useGetPhysicalEducationReport } from '../../api/reports.queries.ts'
 
 import PhysicalEducationReportData from './PhysicalEducationReportData.tsx'
 import PhysicalEducationReportFilters from './PhysicalEducationReportFilters.tsx'
-import {PhysicalEducationReportHeads} from './physical-education-report-heads.ts'
+import { PhysicalEducationReportHeads } from './physical-education-report-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
-import {useGetGroups} from '@/modules/groups/api/group.queries.ts'
+import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import ReportBody from '@/modules/reports/components/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
@@ -35,7 +35,7 @@ const PhysicalEducationReport = () => {
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `health-report-${department}`
 	})
-	const departmentName = data?.map(({ name }) => <p>{name}</p>)
+
 	return (
 		<>
 			<div className='w-full'>
@@ -61,8 +61,20 @@ const PhysicalEducationReport = () => {
 
 			<ReportBody
 				printRef={printRef}
-				header='Листок здоровья отделения:'
-				title={departmentName}
+				header={
+					<>
+						<div className='flex flex-col text-center'>
+							<p>
+								Листок здоровья по группе по физкультуре:{' '}
+								<b>{physicalEducation}</b>
+							</p>
+							<p>
+								Отделение:
+								<b> {department}</b>
+							</p>
+						</div>
+					</>
+				}
 			>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>

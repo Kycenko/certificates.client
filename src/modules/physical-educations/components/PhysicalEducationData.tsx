@@ -1,16 +1,16 @@
-import {zodResolver} from '@hookform/resolvers/zod'
-import {FC, useEffect} from 'react'
-import {useForm} from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FC, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Cards.module.scss'
 import {
-    IPhysicalEducation,
-    TypePhysicalEducationForm
+	IPhysicalEducation,
+	TypePhysicalEducationForm
 } from '@/modules/physical-educations/types/physical-education.types.ts'
-import {physicalEducationValidationSchema} from '@/shared/helpers/validation.schema.ts'
+import { physicalEducationValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'

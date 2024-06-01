@@ -1,10 +1,10 @@
-import {Dispatch, FC, SetStateAction} from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 
 import Filter from '@/components/filters/Filter/Filter'
 import SortOrder from '@/components/filters/SortOrder/SortOrder'
 
-import {IHealthGroup} from '@/modules/health-groups/types/health-group.types'
-import {IPhysicalEducation} from '@/modules/physical-educations/types/physical-education.types'
+import { IHealthGroup } from '@/modules/health-groups/types/health-group.types'
+import { IPhysicalEducation } from '@/modules/physical-educations/types/physical-education.types'
 
 interface GroupFiltersProps {
 	healthGroups: IHealthGroup[] | undefined

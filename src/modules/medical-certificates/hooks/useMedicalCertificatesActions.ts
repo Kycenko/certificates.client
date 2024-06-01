@@ -1,12 +1,12 @@
-import {QueryObserverResult} from '@tanstack/react-query'
+import { QueryObserverResult } from '@tanstack/react-query'
 
 import {
-    useDeleteMedicalCertificate,
-    useUpdateMedicalCertificate
+	useDeleteMedicalCertificate,
+	useUpdateMedicalCertificate
 } from '@/modules/medical-certificates/api/medical-certificate.queries.ts'
 import {
-    IMedicalCertificate,
-    TypeMedicalCertificateForm
+	IMedicalCertificate,
+	TypeMedicalCertificateForm
 } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
 import useModal from '@/shared/hooks/useModal'
 

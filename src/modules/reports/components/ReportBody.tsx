@@ -1,8 +1,8 @@
-import {FC, ReactNode, RefObject} from 'react'
+import { FC, ReactNode, RefObject } from 'react'
 
 interface ReportBodyProps {
 	printRef: RefObject<HTMLDivElement>
-	header: string
+	header: any
 	title?: JSX.Element[] | undefined
 	children: ReactNode
 }

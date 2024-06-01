@@ -1,9 +1,9 @@
-import {format} from 'date-fns'
-import {FC} from 'react'
+import { format } from 'date-fns'
+import { FC } from 'react'
 
 import NoData from '@/components/NoData.tsx'
 
-import {IExpiredCertificatesReport} from '../../types/reports.types'
+import { IExpiredCertificatesReport } from '../../types/reports.types'
 
 import formatFullName from '@/shared/utils/formatFullName'
 

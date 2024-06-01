@@ -1,12 +1,13 @@
-import {format} from 'date-fns'
-import {FC} from 'react'
-import {useNavigate} from 'react-router-dom'
+import { format } from 'date-fns'
+import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/DetailsTables.module.scss'
-import {IGroup} from '@/modules/groups/types/group.types.ts'
-import {PAGES_URL} from '@/shared/constants/enums.ts'
+import { IGroup } from '@/modules/groups/types/group.types.ts'
+import { PAGES_URL } from '@/shared/constants/enums.ts'
+import daysUntilTheEnd from '@/shared/utils/daysUntilTheEnd'
 
 interface GroupDetailsDataProps {
 	data: IGroup | undefined
@@ -33,7 +34,9 @@ const GroupDetailsData: FC<GroupDetailsDataProps> = ({ data }) => {
 							{format(new Date(birthDate), 'dd.MM.yyyy')}
 						</td>
 						<td className={styles.cellPadding}>{data.name}</td>
-						<td>{medicalCertificates?.length}</td>
+						<td className={styles.cellPadding}>
+							{daysUntilTheEnd(medicalCertificates[0]?.finishDate)}
+						</td>
 					</tr>
 				)
 			)}

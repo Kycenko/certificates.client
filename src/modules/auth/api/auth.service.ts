@@ -1,7 +1,14 @@
-import {IAuthResponse, ILogin, IRegister} from '@/modules/auth/types/auth.types.ts'
+import {
+	IAuthResponse,
+	ILogin,
+	IRegister
+} from '@/modules/auth/types/auth.types.ts'
 import instance from '@/shared/api/api.instance.ts'
-import {SERVICE_URL} from '@/shared/constants/enums.ts'
-import {saveTokensToStorage, saveToStorage} from '@/shared/helpers/auth.helper.ts'
+import { SERVICE_URL } from '@/shared/constants/enums.ts'
+import {
+	saveToStorage,
+	saveTokensToStorage
+} from '@/shared/helpers/auth.helper.ts'
 
 export const AuthService = {
 	async login(data: ILogin) {

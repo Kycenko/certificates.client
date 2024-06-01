@@ -1,4 +1,4 @@
-import {ComponentType, PropsWithChildren} from 'react'
+import { ComponentType, PropsWithChildren } from 'react'
 
 import Layout from '@/components/Layout/Layout.tsx'
 

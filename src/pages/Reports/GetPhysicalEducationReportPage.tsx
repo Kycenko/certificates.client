@@ -1,4 +1,5 @@
 import WithPageLayout from '@/components/Layout/hoc/WithPageLayout'
+
 import PhysicalEducationReport from '@/modules/reports/components/PhysicalEducationReport/PhysicalEducationReport'
 
 const GetPhysicalEducationReportPage = () => {
