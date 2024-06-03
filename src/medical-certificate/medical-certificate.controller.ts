@@ -36,7 +36,9 @@ export class MedicalCertificateController {
 		@Query('sort') sortOrder: 'asc' | 'desc' = 'asc',
 		@Query('department') department?: string,
 		@Query('course') course?: number,
-		@Query('group') group?: string
+		@Query('group') group?: string,
+		@Query('startDate') startDate?: Date | string,
+		@Query('finishDate') finishDate?: Date | string
 	) {
 		return this.medicalCertificateService.getAll(
 			page,
@@ -44,7 +46,9 @@ export class MedicalCertificateController {
 			sortOrder,
 			department,
 			course,
-			group
+			group,
+			startDate,
+			finishDate
 		)
 	}
 

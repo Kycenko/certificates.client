@@ -23,7 +23,9 @@ export class MedicalCertificateService {
 		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: number,
-		group?: string
+		group?: string,
+		startDate?: Date | string,
+		finishDate?: Date | string
 	) {
 		const skipCount = (pageNum - 1) * pageSize
 
@@ -43,6 +45,48 @@ export class MedicalCertificateService {
 			}
 		})
 
+		let whereStudent = {
+			group: {
+				course: course
+					? {
+							number: +course,
+							department: {
+								name: department
+							}
+						}
+					: {
+							number: undefined,
+							department: {
+								name: department
+							}
+						},
+				name: group
+			}
+		}
+
+		let whereCertificates = {
+			student: {
+				group: {
+					course: course
+						? {
+								number: +course,
+								department: {
+									name: department
+								}
+							}
+						: {
+								number: undefined,
+								department: {
+									name: department
+								}
+							},
+					name: group
+				}
+			},
+			startDate: startDate ? { gte: new Date(startDate) } : undefined,
+			finishDate: finishDate ? { lte: new Date(finishDate) } : undefined
+		}
+
 		const studentsIds = await this.prisma.student
 			.findMany({
 				orderBy: { surname: sortOrder },
@@ -51,24 +95,7 @@ export class MedicalCertificateService {
 				select: {
 					id: true
 				},
-				where: {
-					group: {
-						course: course
-							? {
-									number: +course,
-									department: {
-										name: department
-									}
-								}
-							: {
-									number: undefined,
-									department: {
-										name: department
-									}
-								},
-						name: group
-					}
-				}
+				where: whereStudent
 			})
 			.then(students => students.map(student => student.id))
 
@@ -77,25 +104,8 @@ export class MedicalCertificateService {
 				orderBy: { startDate: 'desc' },
 
 				where: {
-					studentId: studentId,
-					student: {
-						group: {
-							course: course
-								? {
-										number: +course,
-										department: {
-											name: department
-										}
-									}
-								: {
-										number: undefined,
-										department: {
-											name: department
-										}
-									},
-							name: group
-						}
-					}
+					...whereCertificates,
+					studentId: +studentId
 				},
 				select: {
 					id: true,

@@ -14,14 +14,18 @@ export class ReportsController {
 		@Query('sort') sort: 'asc' | 'desc' = 'asc',
 		@Query('group') group?: string,
 		@Query('hg') hg?: string,
-		@Query('pe') pe?: string
+		@Query('pe') pe?: string,
+		@Query('startDate') startDate?: Date | string,
+		@Query('finishDate') finishDate?: Date | string
 	) {
 		return this.reportsService.getDepartmentReport(
 			departmentId,
 			sort,
 			group,
 			hg,
-			pe
+			pe,
+			startDate,
+			finishDate
 		)
 	}
 
@@ -32,9 +36,18 @@ export class ReportsController {
 		@Param('groupId') groupId: number,
 		@Query('sort') sort: 'asc' | 'desc' = 'asc',
 		@Query('hg') hg?: string,
-		@Query('pe') pe?: string
+		@Query('pe') pe?: string,
+		@Query('startDate') startDate?: Date | string,
+		@Query('finishDate') finishDate?: Date | string
 	) {
-		return this.reportsService.getGroupReport(groupId, sort, hg, pe)
+		return this.reportsService.getGroupReport(
+			groupId,
+			sort,
+			hg,
+			pe,
+			startDate,
+			finishDate
+		)
 	}
 
 	// отчёт по истекшим справкам

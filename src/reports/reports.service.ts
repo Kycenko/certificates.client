@@ -13,7 +13,9 @@ export class ReportsService {
 		sort: 'asc' | 'desc' = 'asc',
 		group?: string,
 		hg?: string | undefined,
-		pe?: string | undefined
+		pe?: string | undefined,
+		startDate?: Date | string,
+		finishDate?: Date | string
 	) {
 		const departmentReport = await this.prisma.department.findMany({
 			where: {
@@ -44,6 +46,12 @@ export class ReportsService {
 										secondName: true,
 										medicalCertificates: {
 											where: {
+												startDate: startDate
+													? { gte: new Date(startDate) }
+													: undefined,
+												finishDate: finishDate
+													? { lte: new Date(finishDate) }
+													: undefined,
 												healthGroup: {
 													name: hg || undefined
 												},
@@ -87,7 +95,9 @@ export class ReportsService {
 		groupId: number,
 		sort: 'asc' | 'desc' = 'asc',
 		hg?: string,
-		pe?: string
+		pe?: string,
+		startDate?: Date | string,
+		finishDate?: Date | string
 	) {
 		const groupReport = await this.prisma.group.findMany({
 			where: {
@@ -113,6 +123,10 @@ export class ReportsService {
 						secondName: true,
 						medicalCertificates: {
 							where: {
+								startDate: startDate ? { gte: new Date(startDate) } : undefined,
+								finishDate: finishDate
+									? { lte: new Date(finishDate) }
+									: undefined,
 								healthGroup: {
 									name: hg || undefined
 								},
