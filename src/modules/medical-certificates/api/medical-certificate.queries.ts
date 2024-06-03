@@ -32,12 +32,23 @@ export const useGetMedicalCertificates = (
 	sortOrder: 'asc' | 'desc' = 'asc',
 	department?: string,
 	course?: string,
-	group?: string
+	group?: string,
+	startDate?: Date | string,
+	finishDate?: Date | string
 ) => {
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [
 			QUERY_KEYS.MEDICAL_CERTIFICATES,
-			{ page, limit, sortOrder, department, course, group }
+			{
+				page,
+				limit,
+				sortOrder,
+				department,
+				course,
+				group,
+				startDate,
+				finishDate
+			}
 		],
 		queryFn: async () => {
 			const response: AxiosResponse<{
@@ -50,7 +61,9 @@ export const useGetMedicalCertificates = (
 				sortOrder,
 				department,
 				course,
-				group
+				group,
+				startDate,
+				finishDate
 			)
 			return response.data
 		}

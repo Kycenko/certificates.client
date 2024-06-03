@@ -15,17 +15,24 @@ export const useGetDepartmentReport = (
 	sort: 'asc' | 'desc' = 'asc',
 	groupId?: string | undefined,
 	hg?: string | undefined,
-	pe?: string | undefined
+	pe?: string | undefined,
+	startDate?: Date | string,
+	finishDate?: Date | string
 ) => {
 	const { data, isLoading } = useQuery<IDepartmentReport[]>({
-		queryKey: ['department-report', { departmentId, sort, groupId, hg, pe }],
+		queryKey: [
+			'department-report',
+			{ departmentId, sort, groupId, hg, pe, startDate, finishDate }
+		],
 		queryFn: async () => {
 			const response: AxiosResponse = await ReportsService.getDepartmentReport(
 				departmentId,
 				sort,
 				groupId,
 				hg,
-				pe
+				pe,
+				startDate,
+				finishDate
 			)
 			return response.data
 		}
@@ -37,16 +44,23 @@ export const useGetGroupReport = (
 	groupId: string | undefined,
 	sort: 'asc' | 'desc',
 	hg?: string,
-	pe?: string
+	pe?: string,
+	startDate?: Date | string,
+	finishDate?: Date | string
 ) => {
 	const { data, isLoading } = useQuery<IGroupReport[]>({
-		queryKey: ['group-report', { groupId, sort, hg, pe }],
+		queryKey: [
+			'group-report',
+			{ groupId, sort, hg, pe, startDate, finishDate }
+		],
 		queryFn: async () => {
 			const response: AxiosResponse = await ReportsService.getGroupReport(
 				groupId,
 				sort,
 				hg,
-				pe
+				pe,
+				startDate,
+				finishDate
 			)
 			return response.data
 		}

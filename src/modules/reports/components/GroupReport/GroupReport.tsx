@@ -24,14 +24,20 @@ const GroupReport = () => {
 		healthValue,
 		setHealthValue,
 		physicalValue,
-		setPhysicalValue
+		setPhysicalValue,
+		startDateValue,
+		setStartDateValue,
+		finishDateValue,
+		setFinishDateValue
 	} = useFilterStates()
 
 	const { data, isLoading } = useGetGroupReport(
 		id,
 		sortOrder,
 		healthValue,
-		physicalValue
+		physicalValue,
+		startDateValue,
+		finishDateValue
 	)
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
@@ -54,6 +60,10 @@ const GroupReport = () => {
 							setHealthValue={setHealthValue}
 							educationValue={physicalValue}
 							setEducationValue={setPhysicalValue}
+							startDate={startDateValue}
+							setStartDate={setStartDateValue}
+							finishDate={finishDateValue}
+							setFinishDate={setFinishDateValue}
 						/>
 					</div>
 					<button

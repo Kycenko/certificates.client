@@ -30,7 +30,11 @@ const MedicalCertificatesTable = () => {
 		groupValue,
 		setGroupValue,
 		sortOrder,
-		setSortOrder
+		setSortOrder,
+		startDateValue,
+		setStartDateValue,
+		finishDateValue,
+		setFinishDateValue
 	} = useFilterStates()
 
 	const { certificates, isLoading, refetch, totalPages, totalRecords } =
@@ -40,7 +44,9 @@ const MedicalCertificatesTable = () => {
 			sortOrder,
 			departmentValue,
 			courseValue,
-			groupValue
+			groupValue,
+			startDateValue,
+			finishDateValue
 		)
 
 	const { departments } = useGetDepartments()
@@ -64,9 +70,17 @@ const MedicalCertificatesTable = () => {
 		window.history.pushState(
 			null,
 			'',
-			`?page=${currentPage}&sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}`
+			`?page=${currentPage}&sort=${sortOrder}&department=${departmentValue}&course=${courseValue}&group=${groupValue}&start=${startDateValue}&finish=${finishDateValue}`
 		)
-	}, [sortOrder, departmentValue, courseValue, groupValue, currentPage])
+	}, [
+		sortOrder,
+		departmentValue,
+		courseValue,
+		groupValue,
+		currentPage,
+		startDateValue,
+		finishDateValue
+	])
 
 	return (
 		<div className={styles.container}>
@@ -83,6 +97,10 @@ const MedicalCertificatesTable = () => {
 						setCourseValue={setCourseValue}
 						groupValue={groupValue}
 						setGroupValue={setGroupValue}
+						startDate={startDateValue}
+						setStartDate={setStartDateValue}
+						finishDate={finishDateValue}
+						setFinishDate={setFinishDateValue}
 					/>
 				</div>
 			</div>

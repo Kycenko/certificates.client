@@ -13,10 +13,12 @@ export const ReportsService = {
 		sort: 'asc' | 'desc' = 'asc',
 		groupId?: string | undefined,
 		hg?: string | undefined,
-		pe?: string | undefined
+		pe?: string | undefined,
+		startDate?: Date | string,
+		finishDate?: Date | string
 	) {
 		return instance.get<IDepartmentReport[]>(
-			`${SERVICE_URL.REPORTS}/department-report/${departmentId}?sort=${sort}&group=${groupId}&hg=${hg}&pe=${pe}`
+			`${SERVICE_URL.REPORTS}/department-report/${departmentId}?sort=${sort}&group=${groupId}&hg=${hg}&pe=${pe}&startDate=${startDate}&finishDate=${finishDate}`
 		)
 	},
 
@@ -24,10 +26,12 @@ export const ReportsService = {
 		groupId: string | undefined,
 		sort: 'asc' | 'desc' = 'asc',
 		hg?: string,
-		pe?: string
+		pe?: string,
+		startDate?: Date | string,
+		finishDate?: Date | string
 	) {
 		return instance.get<IGroupReport[]>(
-			`${SERVICE_URL.REPORTS}/group-report/${groupId}?sort=${sort}&hg=${hg}&pe=${pe}`
+			`${SERVICE_URL.REPORTS}/group-report/${groupId}?sort=${sort}&hg=${hg}&pe=${pe}&startDate=${startDate}&finishDate=${finishDate}`
 		)
 	},
 

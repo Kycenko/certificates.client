@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import DetailsTableHeads from '@/components/tablesHeads/DetailsTableHeads.tsx'
 
@@ -11,6 +11,8 @@ import styles from '@/app/styles/DetailsTables.module.scss'
 import { useGetGroup } from '@/modules/groups/api/group.queries.ts'
 import { useCreateStudent } from '@/modules/students/api/student.queries.ts'
 import { TypeStudentForm } from '@/modules/students/types/student.types.ts'
+import { PAGES_URL } from '@/shared/constants/enums.ts'
+import { removeFromStorage } from '@/shared/helpers/auth.helper.ts'
 import { studentValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 import useModal from '@/shared/hooks/useModal.ts'
@@ -22,6 +24,7 @@ import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const GroupDetailsTable = () => {
+	const navigate = useNavigate()
 	const { id } = useParams()
 	const { user } = useAuth()
 	const { group, refetch, isLoading } = useGetGroup(id)
@@ -47,12 +50,25 @@ const GroupDetailsTable = () => {
 		reset()
 	}
 
+	const handleLogout = async () => {
+		removeFromStorage()
+		navigate(`${PAGES_URL.LOGIN}`, { replace: true })
+	}
+
 	if (isLoading) return <CustomLoader />
 
 	return (
 		<>
 			<Heading title={'Описание группы'}>
 				<span className={styles.title}>{group?.name}</span>
+				<div>
+					<button
+						className='btn'
+						onClick={handleLogout}
+					>
+						Выйти
+					</button>
+				</div>
 			</Heading>
 			{user?.isAdmin ? (
 				<CustomButton

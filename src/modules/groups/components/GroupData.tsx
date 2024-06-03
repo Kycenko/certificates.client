@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 
 import ActionButtons from '@/components/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
@@ -9,7 +8,6 @@ import NoData from '@/components/NoData.tsx'
 import styles from '@/app/styles/Tables.module.scss'
 import { ICourse } from '@/modules/courses/types/course.types'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-import CourseOptions from '@/shared/helpers/course.options'
 import { groupValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 import useModal from '@/shared/hooks/useModal.ts'
@@ -33,7 +31,6 @@ const GroupData: FC<GroupDataProps> = ({
 	onEdit,
 	onInfo
 }) => {
-	const navigate = useNavigate()
 	const { setDeleteId, deleteId, editId, setEditId } = useModal()
 
 	const { user } = useAuth()
@@ -143,16 +140,15 @@ const GroupData: FC<GroupDataProps> = ({
 							defaultValue={course.number}
 							{...register('courseId')}
 						>
-							{/* {filteredCourses?.map(filteredCourse => (
+							{/* <CourseOptions /> */}
+							{filteredCourses?.map(filteredCourse => (
 								<option
 									key={filteredCourse.id}
-									value={filteredCourse.number}
+									value={filteredCourse.id}
 								>
 									{filteredCourse.number}-й курс
 								</option>
-							
-							))} */}
-							<CourseOptions />
+							))}
 						</CustomSelect>
 					</CustomModalForm>
 					<CustomModalForm

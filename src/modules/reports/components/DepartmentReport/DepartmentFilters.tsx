@@ -22,6 +22,10 @@ interface DepartmentFiltersProps {
 	setHealthGroupValue: Dispatch<SetStateAction<string>>
 	educationValue: string
 	setEducationValue: Dispatch<SetStateAction<string>>
+	startDate: string
+	setStartDate: Dispatch<SetStateAction<string>>
+	finishDate: string
+	setFinishDate: Dispatch<SetStateAction<string>>
 }
 
 const DepartmentFilters: FC<DepartmentFiltersProps> = ({
@@ -35,7 +39,11 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 	healthGroupValue,
 	setHealthGroupValue,
 	educationValue,
-	setEducationValue
+	setEducationValue,
+	startDate,
+	setStartDate,
+	finishDate,
+	setFinishDate
 }) => {
 	return (
 		<>
@@ -106,6 +114,27 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 					</option>
 				))}
 			</Filter>
+			<label htmlFor=''>
+				{' '}
+				Дата начала
+				<input
+					className='input input-bordered w-full'
+					type='date'
+					id='startDate'
+					value={startDate}
+					onChange={e => setStartDate(e.target.value)}
+				/>
+			</label>
+			<label htmlFor=''>
+				Дата окончания
+				<input
+					className='input input-bordered w-full'
+					type='date'
+					id='finishDate'
+					value={finishDate}
+					onChange={e => setFinishDate(e.target.value)}
+				/>
+			</label>
 		</>
 	)
 }

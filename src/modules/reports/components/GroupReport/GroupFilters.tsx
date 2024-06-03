@@ -15,6 +15,10 @@ interface GroupFiltersProps {
 	setHealthValue: Dispatch<SetStateAction<string>>
 	educationValue: string
 	setEducationValue: Dispatch<SetStateAction<string>>
+	startDate: string
+	setStartDate: Dispatch<SetStateAction<string>>
+	finishDate: string
+	setFinishDate: Dispatch<SetStateAction<string>>
 }
 
 const GroupFilters: FC<GroupFiltersProps> = ({
@@ -25,7 +29,11 @@ const GroupFilters: FC<GroupFiltersProps> = ({
 	healthValue,
 	setHealthValue,
 	educationValue,
-	setEducationValue
+	setEducationValue,
+	startDate,
+	setStartDate,
+	finishDate,
+	setFinishDate
 }) => {
 	return (
 		<>
@@ -63,6 +71,27 @@ const GroupFilters: FC<GroupFiltersProps> = ({
 					</option>
 				))}
 			</Filter>
+			<label htmlFor=''>
+				{' '}
+				Дата начала
+				<input
+					className='input input-bordered w-full'
+					type='date'
+					id='startDate'
+					value={startDate}
+					onChange={e => setStartDate(e.target.value)}
+				/>
+			</label>
+			<label htmlFor=''>
+				Дата окончания
+				<input
+					className='input input-bordered w-full'
+					type='date'
+					id='finishDate'
+					value={finishDate}
+					onChange={e => setFinishDate(e.target.value)}
+				/>
+			</label>
 		</>
 	)
 }

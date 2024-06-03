@@ -79,29 +79,32 @@ const UserDetailsComponent = () => {
 							/>
 							<ErrorMessage error={errors.password} />
 						</div>
+						{user?.isAdmin === false ? (
+							<>
+								<CustomCheckBox
+									className='mt-7'
+									id={'isAdmin'}
+									label={'Администратор?'}
+									{...register('isAdmin')}
+								/>
 
-						<CustomCheckBox
-							className='mt-7'
-							id={'isAdmin'}
-							label={'Администратор?'}
-							{...register('isAdmin')}
-						/>
-
-						<CustomSelect
-							id={'groupId'}
-							label={'Группа'}
-							{...register('groupId')}
-						>
-							<option value={''}>Не выбрана</option>
-							{groups?.map(({ id, name }) => (
-								<option
-									key={id}
-									value={id}
+								<CustomSelect
+									id={'groupId'}
+									label={'Группа'}
+									{...register('groupId')}
 								>
-									{name}
-								</option>
-							))}
-						</CustomSelect>
+									<option value={''}>Не выбрана</option>
+									{groups?.map(({ id, name }) => (
+										<option
+											key={id}
+											value={id}
+										>
+											{name}
+										</option>
+									))}
+								</CustomSelect>
+							</>
+						) : null}
 					</div>
 					<div className={styles.submitBtn}>
 						<CustomButton

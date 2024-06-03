@@ -7,7 +7,9 @@ const useFilterStates = (
 	initialGroupValue = '',
 	initialHealthValue = '',
 	initialPhysicalValue = '',
-	initialIsExpelledValue = ''
+	initialIsExpelledValue = '',
+	initialStartDateValue = '',
+	initialFinishDateValue = ''
 ) => {
 	const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>(initialSortOrder)
 	const [courseValue, setCourseValue] = useState(initialCourseValue)
@@ -16,6 +18,8 @@ const useFilterStates = (
 	const [healthValue, setHealthValue] = useState(initialHealthValue)
 	const [physicalValue, setPhysicalValue] = useState(initialPhysicalValue)
 	const [isExpelledValue, setIsExpelledValue] = useState(initialIsExpelledValue)
+	const [startDateValue, setStartDateValue] = useState(initialStartDateValue)
+	const [finishDateValue, setFinishDateValue] = useState(initialFinishDateValue)
 
 	return {
 		sortOrder,
@@ -31,7 +35,11 @@ const useFilterStates = (
 		physicalValue,
 		setPhysicalValue,
 		isExpelledValue,
-		setIsExpelledValue
+		setIsExpelledValue,
+		startDateValue,
+		setStartDateValue,
+		finishDateValue,
+		setFinishDateValue
 	}
 }
 export default useFilterStates

@@ -18,13 +18,17 @@ export const MedicalCertificateService = {
 		sortOrder: 'asc' | 'desc' = 'asc',
 		department?: string,
 		course?: string,
-		group?: string
+		group?: string,
+		startDate?: Date | string,
+		finishDate?: Date | string
 	) {
 		const departmentParam = department ? `&department=${department}` : ''
 		const courseParam = course ? `&course=${course}` : ''
 		const groupParam = group ? `&group=${group}` : ''
+		const startDateParam = startDate ? `&startDate=${startDate}` : ''
+		const finishDateParam = finishDate ? `&finishDate=${finishDate}` : ''
 		return instance.get<IMedicalCertificate[]>(
-			`${SERVICE_URL.MEDICAL_CERTIFICATES}/?page=${page}&limit=${limit}&sort=${sortOrder}${departmentParam}${courseParam}${groupParam}`
+			`${SERVICE_URL.MEDICAL_CERTIFICATES}/?page=${page}&limit=${limit}&sort=${sortOrder}${departmentParam}${courseParam}${groupParam}&${startDateParam}${finishDateParam}`
 		)
 	},
 

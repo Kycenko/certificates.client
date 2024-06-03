@@ -33,7 +33,7 @@ const GroupDetailsData: FC<GroupDetailsDataProps> = ({ data }) => {
 						<td className={styles.cellPadding}>
 							{format(new Date(birthDate), 'dd.MM.yyyy')}
 						</td>
-						<td className={styles.cellPadding}>{data.name}</td>
+
 						<td className={styles.cellPadding}>
 							{daysUntilTheEnd(medicalCertificates[0]?.finishDate)}
 						</td>

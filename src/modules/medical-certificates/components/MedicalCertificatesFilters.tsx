@@ -18,6 +18,10 @@ interface MedicalCertificatesFiltersProps {
 	setCourseValue: Dispatch<SetStateAction<string>>
 	groupValue: string
 	setGroupValue: Dispatch<SetStateAction<string>>
+	startDate: string
+	setStartDate: Dispatch<SetStateAction<string>>
+	finishDate: string
+	setFinishDate: Dispatch<SetStateAction<string>>
 }
 
 const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
@@ -30,7 +34,11 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 	courseValue,
 	setCourseValue,
 	groupValue,
-	setGroupValue
+	setGroupValue,
+	startDate,
+	setStartDate,
+	finishDate,
+	setFinishDate
 }) => {
 	return (
 		<>
@@ -76,6 +84,27 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 					</option>
 				))}
 			</Filter>
+			<label htmlFor=''>
+				{' '}
+				Дата начала
+				<input
+					className='input input-bordered w-full'
+					type='date'
+					id='startDate'
+					value={startDate}
+					onChange={e => setStartDate(e.target.value)}
+				/>
+			</label>
+			<label htmlFor=''>
+				Дата окончания
+				<input
+					className='input input-bordered w-full'
+					type='date'
+					id='finishDate'
+					value={finishDate}
+					onChange={e => setFinishDate(e.target.value)}
+				/>
+			</label>
 		</>
 	)
 }

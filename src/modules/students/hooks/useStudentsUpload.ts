@@ -21,7 +21,6 @@ const useStudentsUpload = () => {
 					raw: false
 				})
 				setData(jsonData as IUploadStudent[])
-				console.log(jsonData)
 			}
 			reader.readAsBinaryString(selectedFile)
 		}
