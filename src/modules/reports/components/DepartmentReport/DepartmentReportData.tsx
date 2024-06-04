@@ -30,7 +30,11 @@ const DepartmentReportData: FC<DepartmentReportDataProps> = ({ data }) => {
 											index
 										) => (
 											<tr
-												className='border '
+												className={
+													getDaysUntilExpiry(finishDate, startDate) === 0
+														? 'border-2 border-red-500'
+														: 'border'
+												}
 												key={`${id}-${name}-${surname}-${index}`}
 											>
 												<td className='p-2'>

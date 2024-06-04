@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { FC, ReactNode, RefObject } from 'react'
 
 interface ReportBodyProps {
@@ -16,15 +17,19 @@ const ReportBody: FC<ReportBodyProps> = ({
 	return (
 		<div
 			ref={printRef}
-			className='overflow-x-auto'
+			className='overflow-x-auto text-center'
 		>
-			<div className='text-center'>
-				Частное учреждение образования "Колледж бизнеса и права"
+			<div>
+				<b>{format(new Date(), 'dd.MM.yyyy')}</b>
+			</div>
+			<div className='text-center flex flex-col'>
+				Частное учреждение образования <b>"Колледж бизнеса и права"</b>
 			</div>
 			<div className='justify-center flex flex-row py-4'>
 				{header}
-				<b className='ml-2 font-bold'>{title}</b>
+				<b className='ml-1 font-bold'>{title}</b>
 			</div>
+
 			<div className='overflow-y-visible'>{children}</div>
 		</div>
 	)

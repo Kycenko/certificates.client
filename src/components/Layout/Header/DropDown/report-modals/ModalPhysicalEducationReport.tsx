@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
+import { PAGES_URL } from '@/shared/constants/enums'
 import CourseOptions from '@/shared/helpers/course.options.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
@@ -27,10 +28,8 @@ const ModalPhysicalEducationReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 
 	const onSubmit = (data: FormState) => {
 		navigate(
-			`/reports/pe-check-list?department=${data.departmentId}&course=${data.courseId}&pe=${data.physicalEducationId}`
+			`${PAGES_URL.PE_REPORT}?department=${data.departmentId}&course=${data.courseId}&pe=${data.physicalEducationId}`
 		)
-
-		onClose()
 	}
 
 	return (

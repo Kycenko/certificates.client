@@ -140,6 +140,7 @@ const StudentData: FC<StudentDataProps> = ({
 							<CustomModalForm
 								onSubmit={handleSubmit(data => onSubmit(id, data))}
 								isOpen={editId === id}
+								disabled={Object.keys(errors).length > 0}
 								onClose={() => {
 									setEditId(null)
 									reset()
@@ -212,7 +213,10 @@ const StudentData: FC<StudentDataProps> = ({
 								onClose={() => setDeleteId(null)}
 								formTitle={'Удаление'}
 							>
-								{name}
+								<p>{surname}</p>
+								<p>{name}</p>
+								<p>{secondName}</p>
+								<p>{format(new Date(birthDate), 'dd.MM.yyyy')}</p>
 							</CustomModalForm>
 						</tr>
 					)

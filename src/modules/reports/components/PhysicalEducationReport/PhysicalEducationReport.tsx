@@ -65,8 +65,7 @@ const PhysicalEducationReport = () => {
 					<>
 						<div className='flex flex-col text-center'>
 							<p>
-								Листок здоровья по группе по физкультуре:{' '}
-								<b>{physicalEducation}</b>
+								Листок по группе по физкультуре: <b>{physicalEducation}</b>
 							</p>
 							<p>
 								Отделение:

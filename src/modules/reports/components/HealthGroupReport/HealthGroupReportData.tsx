@@ -28,7 +28,7 @@ const HealthGroupReportData: FC<HealthGroupReportDataProps> = ({ data }) => {
 									birthDate,
 									medicalCertificates
 								}) =>
-									medicalCertificates.map(({ healthGroup }) => (
+									medicalCertificates.map(() => (
 										<tr
 											className='border'
 											key={`${id}-${name}-${surname}`}
@@ -39,7 +39,6 @@ const HealthGroupReportData: FC<HealthGroupReportDataProps> = ({ data }) => {
 											<td>{format(new Date(birthDate), 'dd.MM.yyyy')}</td>
 											<td>{number}</td>
 											<td>{groupName}</td>
-											{/* <td>{healthGroup.name}</td> */}
 										</tr>
 									))
 							)

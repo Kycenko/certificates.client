@@ -41,8 +41,7 @@ const UserData: FC<UserDataProps> = ({ data, onEdit, onDelete }) => {
 							onClose={() => setDeleteId(null)}
 							formTitle={'Удаление'}
 						>
-							<p>{id}</p>
-							<p>{login}</p>
+							{login}
 						</CustomModalForm>
 					</div>
 				)

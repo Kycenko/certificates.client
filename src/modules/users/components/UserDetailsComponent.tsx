@@ -26,7 +26,7 @@ const UserDetailsComponent = () => {
 
 	useUserInitialData(id, reset)
 
-	const { mutateAsync, isPending } = useUpdateUser()
+	const { mutateAsync } = useUpdateUser()
 	const handleEdit: SubmitHandler<TypeUserForm> = async (
 		data: TypeUserForm
 	) => {
@@ -110,7 +110,7 @@ const UserDetailsComponent = () => {
 						<CustomButton
 							type={'submit'}
 							variant='create'
-							disabled={isPending}
+							disabled={Object.keys(errors).length > 0}
 						>
 							Сохранить
 						</CustomButton>

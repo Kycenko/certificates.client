@@ -61,14 +61,16 @@ const GroupDetailsTable = () => {
 		<>
 			<Heading title={'Описание группы'}>
 				<span className={styles.title}>{group?.name}</span>
-				<div>
-					<button
-						className='btn'
-						onClick={handleLogout}
-					>
-						Выйти
-					</button>
-				</div>
+				{user?.isAdmin === true ? null : (
+					<div>
+						<button
+							className='btn'
+							onClick={handleLogout}
+						>
+							Выйти
+						</button>
+					</div>
+				)}
 			</Heading>
 			{user?.isAdmin ? (
 				<CustomButton
@@ -91,6 +93,7 @@ const GroupDetailsTable = () => {
 				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}
+				disabled={Object.keys(errors).length > 0}
 				formTitle={'Добавление'}
 			>
 				<CustomInput

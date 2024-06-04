@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { PAGES_URL } from '@/shared/constants/enums'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 
 interface ModalProps {
@@ -15,8 +16,7 @@ const ModalExpiredCertificatesReport: FC<ModalProps> = ({
 	const navigate = useNavigate()
 
 	const onSubmit = () => {
-		navigate(`/reports/expired-certificates-report`)
-		onClose()
+		navigate(`${PAGES_URL.EXPIRED_REPORT}`)
 	}
 
 	return (

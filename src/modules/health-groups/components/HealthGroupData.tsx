@@ -79,6 +79,7 @@ const HealthGroupData: FC<HealthGroupProps> = ({ data, onDelete, onEdit }) => {
 						onSubmit={handleSubmit(data => onSubmit(id, data))}
 						buttonTitle={'Изменить'}
 						isOpen={editId === id}
+						disabled={Object.keys(errors).length > 0}
 						onClose={() => {
 							setEditId(null)
 							reset()

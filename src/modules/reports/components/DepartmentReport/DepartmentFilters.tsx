@@ -52,7 +52,6 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label=''
 				filterValue={groupValue}
 				setFilterValue={setGroupValue}
 			>
@@ -73,7 +72,6 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-				label=''
 				filterValue={healthGroupValue}
 				setFilterValue={setHealthGroupValue}
 			>
@@ -94,7 +92,6 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-				label=''
 				filterValue={educationValue}
 				setFilterValue={setEducationValue}
 			>
@@ -115,7 +112,6 @@ const DepartmentFilters: FC<DepartmentFiltersProps> = ({
 				))}
 			</Filter>
 			<label htmlFor=''>
-				{' '}
 				Дата начала
 				<input
 					className='input input-bordered w-full'

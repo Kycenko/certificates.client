@@ -5,6 +5,7 @@ import NoData from '@/components/NoData.tsx'
 
 import { IGroupReport } from '@/modules/reports/types/reports.types.ts'
 import formatFullName from '@/shared/utils/formatFullName.ts'
+import getDaysUntilExpiry from '@/shared/utils/getDaysUntilExpiry'
 
 interface GroupReportDataProps {
 	data: IGroupReport[] | undefined
@@ -21,7 +22,11 @@ const GroupReportData: FC<GroupReportDataProps> = ({ data }) => {
 						medicalCertificates.map(
 							({ startDate, finishDate, healthGroup, physicalEducation }) => (
 								<tr
-									className='border'
+									className={
+										getDaysUntilExpiry(finishDate, startDate)
+											? 'border'
+											: 'border-2 border-red-500'
+									}
 									key={id}
 								>
 									<td className='p-2'>

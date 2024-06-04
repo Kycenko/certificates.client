@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
+import { PAGES_URL } from '@/shared/constants/enums'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 
@@ -20,8 +21,7 @@ const ModalDepartmentReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 	const { departments } = useGetDepartments()
 	const { handleSubmit, register } = useForm<FormState>()
 	const onSubmit = (data: FormState) => {
-		navigate(`/reports/department-report/${data.departmentId}`)
-		onClose()
+		navigate(`${PAGES_URL.DEPARTMENT_REPORT}/${data.departmentId}`)
 	}
 	return (
 		<CustomModalForm

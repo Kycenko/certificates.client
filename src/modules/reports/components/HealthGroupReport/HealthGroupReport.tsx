@@ -76,7 +76,7 @@ const HealthGroupReport = () => {
 				}
 			>
 				<table className={styles.table}>
-					<thead className={'border-b-2 border-t-2'}>
+					<thead className={styles.tHeads}>
 						<TableHeads
 							className={styles.dHead}
 							data={HealthGroupReportHeads}

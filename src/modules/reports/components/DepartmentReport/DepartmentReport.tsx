@@ -50,7 +50,9 @@ const DepartmentReport = () => {
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `department-report-${id}`
 	})
-	const departmentName = data?.map(({ name }) => <p>{name}</p>)
+	const departmentName = data?.map(({ name }) => (
+		<p className='ml-1 font-bold'>{name}</p>
+	))
 
 	return (
 		<>
@@ -77,7 +79,7 @@ const DepartmentReport = () => {
 						/>
 					</div>
 					<button
-						className='btn btn-error text-white '
+						className='btn btn-error text-white'
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -86,13 +88,12 @@ const DepartmentReport = () => {
 				</div>
 			</div>
 
-			<DepartmentReportStats data={data} />
-
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по медицинским показателем обучающихся отделения:'
 				title={departmentName}
 			>
+				<DepartmentReportStats data={data} />
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>
 						<TableHeads

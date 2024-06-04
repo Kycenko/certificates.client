@@ -18,7 +18,7 @@ const PhysicalEducationReportData: FC<PhysicalEducationReportDataProps> = ({
 					groups.flatMap(({ students, name: groupName }) =>
 						students.flatMap(
 							({ name, surname, secondName, birthDate, medicalCertificates }) =>
-								medicalCertificates?.map(({ physicalEducation }) => (
+								medicalCertificates?.map(() => (
 									<tr
 										className='border'
 										key={`${id}-${name}-${surname}`}

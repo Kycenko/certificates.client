@@ -33,9 +33,6 @@ const LoginForm = () => {
 	const handleLogin = async (data: ILogin) => {
 		try {
 			await mutateAsync(data)
-
-			// if (user?.isAdmin) navigate(`${PAGES_URL.HOME}`, { replace: true })
-			// else navigate(`${PAGES_URL.GROUPS}/${user?.groupId}`, { replace: true })
 		} catch (error) {
 			setLoginError('Неверный логин или пароль')
 			reset()
@@ -85,6 +82,7 @@ const LoginForm = () => {
 					<div className={styles.btnContainer}>
 						<button
 							className={styles.loginBtn}
+							disabled={Object.keys(errors).length > 0}
 							type='submit'
 						>
 							Войти

@@ -31,7 +31,7 @@ const MedicalCertificateHistoryData: FC<MedicalCertificateHistoryDataProps> = ({
 							className={styles.contentCell}
 							key={id}
 						>
-							<td className={'text-center'}>
+							<td className={'text-center p-2'}>
 								{format(new Date(startDate), 'dd.MM.yyyy ')}
 							</td>
 							<td className={'text-center'}>

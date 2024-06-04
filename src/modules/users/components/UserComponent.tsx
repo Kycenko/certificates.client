@@ -66,6 +66,7 @@ const UserComponent = () => {
 				buttonTitle='Добавить'
 				formTitle='Добавление'
 				isOpen={isOpen}
+				disabled={Object.keys(errors).length > 0}
 				onClose={closeModal}
 				onSubmit={handleSubmit(handleRegister)}
 			>

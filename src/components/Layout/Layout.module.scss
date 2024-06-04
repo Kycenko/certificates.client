@@ -1,6 +1,6 @@
 .sideBar {
 	@apply flex min-h-screen;
-	padding-left: 270px;
+	padding-left: 250px;
 
 	@media (max-width: 768px) {
 		@apply flex-col;

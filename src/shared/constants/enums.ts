@@ -14,7 +14,12 @@ export const enum PAGES_URL {
 	STUDENTS = '/students',
 	STUDENT_HISTORY = '/student-history',
 	MEDICAL_CERTIFICATES = '/medical-certificates',
-	MEDICAL_CERTIFICATE_HISTORY = '/medical-certificate-history'
+	MEDICAL_CERTIFICATE_HISTORY = '/medical-certificate-history',
+	DEPARTMENT_REPORT = '/reports/department-report',
+	EXPIRED_REPORT = '/reports/expired-certificates-report',
+	GROUP_REPORT = '/reports/group-report',
+	HG_REPORT = '/reports/hg-check-list',
+	PE_REPORT = '/reports/pe-check-list'
 }
 
 export const enum SERVICE_URL {

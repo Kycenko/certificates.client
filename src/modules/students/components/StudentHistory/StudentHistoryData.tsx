@@ -21,7 +21,7 @@ const StudentHistoryData: FC<StudentHistoryDataProps> = ({ data }) => {
 						className={styles.contentCell}
 						key={id}
 					>
-						<td className={'text-center'}>{group?.name}</td>
+						<td className={'text-center p-2'}>{group?.name}</td>
 						<td className={'text-center'}>
 							{format(new Date(createdAt), 'dd.MM.yyyy HH:mm:ss')}
 						</td>

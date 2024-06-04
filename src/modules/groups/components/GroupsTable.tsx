@@ -5,6 +5,8 @@ import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 
 import useGroupActions from '../hooks/useGroupsActions.ts'
 
+import GroupsFilters from './GroupsFilters.tsx'
+import { GroupHeads } from './group-heads.ts'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetCourses } from '@/modules/courses/api/course.queries.ts'
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
@@ -15,8 +17,6 @@ import { PAGES_URL } from '@/shared/constants/enums.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import useSortAndFilterData from '@/shared/hooks/useSortAndFilterData.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-import GroupsFilters from './GroupsFilters.tsx'
-import { GroupHeads } from './group-heads.ts'
 
 const GroupsTable = () => {
 	const navigate = useNavigate()
@@ -37,7 +37,6 @@ const GroupsTable = () => {
 		departmentValue,
 		courseValue
 	)
-
 
 	const { handleDelete, handleEdit } = useGroupActions(refetch)
 

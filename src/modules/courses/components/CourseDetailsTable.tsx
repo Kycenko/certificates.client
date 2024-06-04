@@ -75,6 +75,7 @@ const CourseDetailsTable = () => {
 				onSubmit={handleSubmit(handleCreate)}
 				buttonTitle={'Добавить'}
 				isOpen={isOpen}
+				disabled={Object.keys(errors).length > 0}
 				onClose={closeModal}
 				formTitle={'Добавление'}
 			>

@@ -30,13 +30,18 @@ const GroupReportStats: FC<GroupReportStatsProps> = ({ data }) => {
 	)
 
 	return (
-		<div className='flex flex-col items-start'>
-			<div className='ml-5'>
-				<p>Всего выбрано обучающихся: {totalStudents}</p>
-				<p>Обучающиеся с действительной справкой: {isValid}</p>
-				<p>Обучающиеся с недействительной справкой: {isNotValid}</p>
+		<div className='flex flex-col items-center'>
+			<div className='mb-2'>
+				<p>
+					Всего выбрано обучающихся: <b>{totalStudents}</b>
+				</p>
+				<p>
+					Обучающиеся с действительной справкой: <b>{isValid}</b>
+				</p>
+				<p>
+					Обучающиеся с недействительной справкой: <b>{isNotValid}</b>
+				</p>
 			</div>
-			<hr className='my-3 h-[1.5px] bg-gray-400 bg-opacity-20 w-full' />
 		</div>
 	)
 }

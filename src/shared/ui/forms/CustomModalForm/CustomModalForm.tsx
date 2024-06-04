@@ -9,6 +9,7 @@ interface CustomModalFormProps {
 	isOpen: boolean
 	formTitle: string
 	buttonTitle: string
+	disabled?: boolean
 	children?: ReactNode
 	onClose: () => void
 }
@@ -27,6 +28,7 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = ({
 	isOpen,
 	formTitle,
 	buttonTitle,
+	disabled,
 	onClose,
 	onSubmit,
 	children
@@ -42,6 +44,7 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = ({
 		onSubmit(data)
 		onClose()
 	}
+
 	return (
 		isOpen && (
 			<div className={isOpen ? styles.modalOpen : styles.modalClose}>
@@ -70,7 +73,8 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = ({
 											Закрыть
 										</button>
 										<button
-											className='btn btn-success text-white font-bold uppercase px-6 py-3 rounded'
+											disabled={disabled}
+											className={styles.submitBtn}
 											type='submit'
 											onClick={submitBtn}
 										>

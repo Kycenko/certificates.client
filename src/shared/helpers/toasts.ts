@@ -1,20 +1,16 @@
 import toast from 'react-hot-toast'
 
 export const createToast = () => {
-	toast.success('Операция создания прошла успешно')
+	toast.success('Добавление прошло успешно')
 }
 
 export const editToast = () => {
-	toast.success('Операция изменения прошла успешно')
+	toast.success('Изменение прошло успешно')
 }
 
 export const deleteToast = () => {
-	toast.success('Операция удаления прошла успешно')
+	toast.success('Удаление прошло успешно')
 }
 export const authToast = () => {
 	toast.success('Авторизация прошла успешно')
-}
-
-export const reportToast = () => {
-	toast.success('Отчёт сформирован успешно')
 }

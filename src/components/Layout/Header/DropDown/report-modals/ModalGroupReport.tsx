@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
+import { PAGES_URL } from '@/shared/constants/enums'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
 
@@ -21,8 +22,7 @@ const ModalGroupReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 	const { handleSubmit, register } = useForm<FormState>()
 
 	const onSubmit = (data: FormState) => {
-		navigate(`/reports/group-report/${data.groupId}`)
-		onClose()
+		navigate(`${PAGES_URL.GROUP_REPORT}/${data.groupId}`)
 	}
 	return (
 		<CustomModalForm

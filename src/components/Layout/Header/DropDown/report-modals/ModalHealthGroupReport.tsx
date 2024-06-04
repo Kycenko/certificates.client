@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
+import { PAGES_URL } from '@/shared/constants/enums'
 import CourseOptions from '@/shared/helpers/course.options.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomSelect from '@/shared/ui/selects/CustomSelect.tsx'
@@ -30,9 +31,8 @@ const ModalHealthGroupReport: FC<ModalHealthGroupReportProps> = ({
 
 	const onSubmit = (data: FormState) => {
 		navigate(
-			`/reports/hg-check-list?department=${data.departmentId}&course=${data.courseId}&hg=${data.healthGroupId}`
+			`${PAGES_URL.HG_REPORT}?department=${data.departmentId}&course=${data.courseId}&hg=${data.healthGroupId}`
 		)
-		onClose()
 	}
 	return (
 		<CustomModalForm

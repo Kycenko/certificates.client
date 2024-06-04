@@ -77,9 +77,6 @@ const Header = () => {
 			/>
 		</div>
 	) : null
-	// <div className={styles.userContainer}>
-	// 	<span>{user?.login}</span>
-	// </div>
 }
 
 export default Header

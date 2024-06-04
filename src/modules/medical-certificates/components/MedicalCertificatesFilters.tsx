@@ -85,7 +85,6 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 				))}
 			</Filter>
 			<label htmlFor=''>
-				{' '}
 				Дата начала
 				<input
 					className='input input-bordered w-full'

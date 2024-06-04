@@ -44,7 +44,7 @@ const GroupReport = () => {
 	const { printRef, handlePrint } = usePrint({
 		documentTitle: `group-report-${id}`
 	})
-	const groupName = data?.map(({ name }) => <p>{name}</p>)
+	const groupName = data?.map(({ name }) => <p className='font-bold'>{name}</p>)
 
 	return (
 		<>
@@ -76,15 +76,14 @@ const GroupReport = () => {
 				</div>
 			</div>
 
-			<GroupReportStats data={data} />
-
 			<ReportBody
 				printRef={printRef}
 				header='Отчет по медицинским показателем обучающихся группы:'
 				title={groupName}
 			>
+				<GroupReportStats data={data} />
 				<table className={styles.table}>
-					<thead className={'border-b-2 border-t-2'}>
+					<thead className={styles.tHeads}>
 						<TableHeads
 							className={styles.dHead}
 							data={GroupReportHeads}

@@ -84,6 +84,7 @@ const DepartmentData: FC<DepartmentDataProps> = ({
 						<CustomModalForm
 							onSubmit={handleSubmit(data => onSubmit(id, data))}
 							isOpen={editId === id}
+							disabled={Object.keys(errors).length > 0}
 							onClose={() => {
 								setEditId(null)
 								reset()

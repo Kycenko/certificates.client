@@ -111,6 +111,7 @@ const DepartmentsTable = () => {
 			<CustomModalForm
 				onSubmit={handleSubmit(handleCreate)}
 				buttonTitle={'Добавить'}
+				disabled={Object.keys(errors).length > 0}
 				isOpen={isOpen}
 				onClose={closeModal}
 				formTitle={'Добавление'}

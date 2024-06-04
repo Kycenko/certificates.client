@@ -122,6 +122,7 @@ const GroupData: FC<GroupDataProps> = ({
 							onSubmit(id, newData)
 						})}
 						isOpen={editId === id}
+						disabled={Object.keys(errors).length > 0}
 						onClose={() => setEditId(null)}
 						formTitle='Изменение'
 						buttonTitle='Изменить'
