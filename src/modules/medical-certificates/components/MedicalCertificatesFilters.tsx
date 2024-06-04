@@ -47,7 +47,7 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label=''
+
 				filterValue={departmentValue}
 				setFilterValue={setDepartmentValue}
 			>
@@ -62,7 +62,7 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-				label=''
+
 				filterValue={courseValue}
 				setFilterValue={setCourseValue}
 			>
@@ -70,7 +70,7 @@ const MedicalCertificatesFilters: FC<MedicalCertificatesFiltersProps> = ({
 				<CourseOptions />
 			</Filter>
 			<Filter
-				label=''
+
 				filterValue={groupValue}
 				setFilterValue={setGroupValue}
 			>

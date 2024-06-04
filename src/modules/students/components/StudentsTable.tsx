@@ -125,9 +125,8 @@ const StudentsTable = () => {
 						currentPage={currentPage}
 						onChangePage={onChangePage}
 						totalPages={totalPages}
-					>
-						Всего обучающихся: {totalRecords}
-					</Pagination>
+						totalElements={totalRecords}
+					/>
 				</div>
 			</div>
 		</>

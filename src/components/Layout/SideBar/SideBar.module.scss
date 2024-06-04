@@ -1,6 +1,6 @@
 .main {
 	@apply flex flex-col justify-between h-screen w-full fixed z-50 top-0 left-0;
-	max-width: 250px;
+	max-width: 260px;
 	@apply rounded-lg border-r p-4 shadow-xl;
 
 	@media (max-width: 768px) {

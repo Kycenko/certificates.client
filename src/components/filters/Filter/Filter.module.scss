@@ -1,11 +1,14 @@
 .container {
 	@apply flex items-center space-x-2;
 }
-
-.label {
-	@apply text-gray-700;
+.labelContainer {
+	@apply form-control w-full max-w-xs;
 }
 
-.select {
-	@apply rounded border border-gray-300 px-2 py-1 focus:border-primary  focus:outline-none;
+.lab {
+	@apply label;
+}
+
+.sel {
+	@apply select select-bordered;
 }

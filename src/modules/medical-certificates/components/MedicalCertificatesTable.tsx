@@ -129,9 +129,8 @@ const MedicalCertificatesTable = () => {
 					currentPage={currentPage}
 					onChangePage={onChangePage}
 					totalPages={totalPages}
-				>
-					Всего медицинских справок: {totalRecords}
-				</Pagination>
+					totalElements={totalRecords}
+				/>
 			</div>
 		</div>
 	)

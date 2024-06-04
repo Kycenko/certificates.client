@@ -1,0 +1,22 @@
+.container {
+	@apply w-full;
+}
+
+.main {
+	@apply flex justify-between items-end p-5;
+}
+
+.header {
+	@apply flex items-end gap-3;
+}
+
+.printBtn {
+	@apply btn btn-error text-white;
+}
+
+.title {
+	@apply ml-1 font-bold;
+}
+.tBody {
+	@apply text-center;
+}

@@ -1,11 +1,12 @@
 .container {
-	@apply mb-4 rounded-md bg-white p-4 shadow-md;
+  @apply w-full;
+}
+
+.header{
+
+  @apply flex justify-between p-4;
 }
 
 .title {
-	@apply mb-2 text-xl font-bold;
-}
-
-.buttons {
-	@apply flex gap-2;
+  @apply text-xl md:text-2xl font-bold text-gray-800;
 }

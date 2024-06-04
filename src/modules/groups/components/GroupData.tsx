@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import ActionButtons from '@/components/ActionButtons.tsx'
+import ActionButtons from '@/components/ActionButtons/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
 import styles from '@/app/styles/Tables.module.scss'
@@ -141,7 +141,6 @@ const GroupData: FC<GroupDataProps> = ({
 							defaultValue={course.number}
 							{...register('courseId')}
 						>
-							{/* <CourseOptions /> */}
 							{filteredCourses?.map(filteredCourse => (
 								<option
 									key={filteredCourse.id}

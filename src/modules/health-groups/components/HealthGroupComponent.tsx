@@ -14,7 +14,7 @@ import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-
+import styles from '@/app/styles/Cards.module.scss'
 const HealthGroupComponent = () => {
 	const { healthGroups, refetch, isLoading } = useGetHealthGroups()
 	const { closeModal, isOpen, openModal } = useModal()
@@ -39,9 +39,9 @@ const HealthGroupComponent = () => {
 	)
 
 	return (
-		<div className='w-full'>
-			<div className='flex justify-between p-4'>
-				<h1 className='text-xl md:text-2xl font-bold text-gray-800'>
+		<div className={styles.container}>
+			<div className={styles.header}>
+				<h1 className={styles.title}>
 					Список групп здоровья
 				</h1>
 				<CustomButton

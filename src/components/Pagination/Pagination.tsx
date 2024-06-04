@@ -7,6 +7,7 @@ interface PaginationProps {
 	currentPage: number
 	onChangePage: (page: number) => void
 	totalPages: number
+	totalElements?: number
 	children?: ReactNode
 }
 
@@ -14,10 +15,10 @@ const Pagination: FC<PaginationProps> = ({
 	currentPage,
 	onChangePage,
 	totalPages,
-	children
+	totalElements
 }) => {
 	return (
-		<div className='flex p-2 justify-between items-center'>
+		<div className={styles.container}>
 			<ReactPaginate
 				className={styles.root}
 				breakLabel='...'
@@ -29,9 +30,9 @@ const Pagination: FC<PaginationProps> = ({
 				pageCount={totalPages}
 				forcePage={Math.min(Math.max(currentPage - 1, 0), totalPages - 1)}
 				renderOnZeroPageCount={null}
-				disabledClassName='btn-disabled'
+				disabledClassName={styles.disabledBtn}
 			/>
-			<span className='ml-2'>{children}</span>
+			<span className='ml-2'>Всего записей: {totalElements}</span>
 		</div>
 	)
 }

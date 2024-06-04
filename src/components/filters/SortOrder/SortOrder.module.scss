@@ -2,10 +2,10 @@
 	@apply flex items-end space-x-2;
 }
 
-.label {
-	@apply text-gray-700;
+.lab {
+	@apply form-control w-full max-w-xs;
 }
 
-.select {
-	@apply rounded border border-gray-300 px-2 py-1 focus:border-primary  focus:outline-none;
+.sel {
+	@apply select select-bordered;
 }

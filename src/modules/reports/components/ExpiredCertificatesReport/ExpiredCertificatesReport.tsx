@@ -1,3 +1,5 @@
+import { format } from 'date-fns'
+
 import TableHeads from '@/components/tablesHeads/TableHeads'
 
 import { useGetExpiredCertificatesReport } from '../../api/reports.queries.ts'
@@ -6,10 +8,11 @@ import usePrint from '../../hooks/usePrint'
 import ExpiredCertificatesData from './ExpiredCertificatesData'
 import ExpiredCertificatesFilters from './ExpiredCertificatesFilters'
 import { ExpiredCertificatesHeads } from './expired-certificates-heads'
+import reportStyles from '@/app/styles/Reports.module.scss'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetDepartments } from '@/modules/departments/api/department.queries.ts'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
-import ReportBody from '@/modules/reports/components/ReportBody.tsx'
+import ReportBody from '@/modules/reports/components/ReportBody/ReportBody.tsx'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader'
 
@@ -26,7 +29,7 @@ const ExpiredCertificatesReport = () => {
 	} = useFilterStates()
 
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: ``
+		documentTitle: `expired-certificates-${format(new Date(), 'dd.MM.yyyy')}`
 	})
 
 	const { data, isLoading } = useGetExpiredCertificatesReport(
@@ -40,9 +43,9 @@ const ExpiredCertificatesReport = () => {
 
 	return (
 		<>
-			<div className='w-full'>
-				<div className='flex justify-between items-end p-5'>
-					<div className='flex items-end gap-3'>
+			<div className={reportStyles.container}>
+				<div className={reportStyles.main}>
+					<div className={reportStyles.header}>
 						<ExpiredCertificatesFilters
 							departments={departments}
 							groups={groups}
@@ -57,7 +60,7 @@ const ExpiredCertificatesReport = () => {
 						/>
 					</div>
 					<button
-						className='btn btn-error text-white'
+						className={reportStyles.printBtn}
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -76,7 +79,7 @@ const ExpiredCertificatesReport = () => {
 							data={ExpiredCertificatesHeads}
 						/>
 					</thead>
-					<tbody className='text-center'>
+					<tbody className={reportStyles.tBody}>
 						{isLoading ? (
 							<CustomLoader />
 						) : (

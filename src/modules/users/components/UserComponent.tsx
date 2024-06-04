@@ -13,7 +13,9 @@ import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.t
 import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-
+import {zodResolver} from "@hookform/resolvers/zod";
+import { userValidationSchema} from "@/shared/helpers/validation.schema.ts";
+import styles from '@/app/styles/Cards.module.scss'
 const UserComponent = () => {
 	const navigate = useNavigate()
 	const { closeModal, isOpen, openModal } = useModal()
@@ -22,7 +24,7 @@ const UserComponent = () => {
 		formState: { errors },
 		handleSubmit,
 		reset
-	} = useForm<IRegister>({ mode: 'onChange' })
+	} = useForm<IRegister>({ mode: 'onChange', resolver: zodResolver(userValidationSchema) })
 	const { users, refetch, isLoading } = useGetUsers()
 
 	const registerQuery = useRegister()
@@ -45,9 +47,9 @@ const UserComponent = () => {
 	if (isLoading) return <CustomLoader />
 
 	return (
-		<div className='w-full'>
-			<div className='flex justify-between p-4'>
-				<h1 className='text-xl md:text-2xl font-bold text-gray-800'>
+		<div className={styles.container}>
+			<div className={styles.header}>
+				<h1 className={styles.title}>
 					Список пользователей
 				</h1>
 				<CustomButton
@@ -74,11 +76,7 @@ const UserComponent = () => {
 					id={'login'}
 					label={'Логин'}
 					placeholder={'Введите логин'}
-					{...register('login', {
-						required: 'Обязательное поле',
-						minLength: { value: 5, message: 'Минимум 5 символов' },
-						maxLength: { value: 30, message: 'Максимум 30 символов' }
-					})}
+					{...register('login')}
 				/>
 				<ErrorMessage error={errors.login} />
 
@@ -86,15 +84,10 @@ const UserComponent = () => {
 					id={'password'}
 					label={'Пароль'}
 					placeholder={'Введите пароль'}
-					{...register('password', {
-						required: 'Обязательное поле',
-						minLength: { value: 6, message: 'Минимум 6 символов' },
-						maxLength: { value: 40, message: 'Максимум 40 символов' }
-					})}
+					{...register('password')}
 				/>
 				<ErrorMessage error={errors.password} />
 				<CustomCheckBox
-					className='mt-2'
 					id={'isAdmin'}
 					label={'Администратор?'}
 					{...register('isAdmin')}

@@ -1,4 +1,15 @@
-import { CircleUserRound, LogOut } from 'lucide-react'
+import { UserGroupIcon, UsersIcon } from '@heroicons/react/24/outline'
+import {
+	CalendarHeart,
+	CircleUserRound,
+	ClipboardEdit,
+	HeartPulse,
+	LayoutPanelLeft,
+	LogOut,
+	StretchHorizontal,
+	UserCog,
+	Zap
+} from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import styles from './SideBar.module.scss'
@@ -21,96 +32,100 @@ const Sidebar = () => {
 					to={`${PAGES_URL.HOME}`}
 					className={styles.link}
 				>
-					{/* <LayoutGrid
+					<LayoutPanelLeft
 						size={15}
 						className={styles.padding}
-					/> */}
+					/>
 					Главная
 				</Link>
+				<hr />
 
-				<Link
-					to={`${PAGES_URL.USERS}`}
-					className={styles.link}
-				>
-					{/* <UserCog
-						size={15}
-						className={styles.padding}
-					/> */}
-					Пользователи
-				</Link>
 				<Link
 					to={`${PAGES_URL.PHYSICAL_EDUCATIONS}`}
 					className={styles.link}
 				>
-					{/* <Zap
+					<Zap
 						size={15}
 						className={styles.padding}
-					/> */}
+					/>
 					Группы по физкультуре
 				</Link>
 				<Link
 					to={`${PAGES_URL.HEALTHS_GROUPS}`}
 					className={styles.link}
 				>
-					{/* <HeartPulse
+					<HeartPulse
 						size={15}
 						className={styles.padding}
-					/> */}
+					/>
 					Группы здоровья
 				</Link>
-
+				<hr />
 				<Link
 					to={`${PAGES_URL.DEPARTMENTS}`}
 					className={styles.link}
 				>
-					{/* <Component
+					<ClipboardEdit
 						size={15}
 						className={styles.padding}
-					/> */}
+					/>
 					Отделения
 				</Link>
 				<Link
 					to={`${PAGES_URL.COURSES}`}
 					className={styles.link}
 				>
-					{/* <Component
+					<StretchHorizontal
 						size={15}
 						className={styles.padding}
-					/> */}
+					/>
 					Курсы
 				</Link>
 				<Link
 					to={`${PAGES_URL.GROUPS}`}
 					className={styles.link}
 				>
-					{/* <Component
+					<UsersIcon
+						width={15}
+						height={15}
 						className={styles.padding}
-						size={15}
-					/> */}
+					/>
 					Группы
 				</Link>
 				<Link
 					to={`${PAGES_URL.STUDENTS}`}
 					className={styles.link}
 				>
-					{/* <Users
-						size={15}
+					<UserGroupIcon
 						className={styles.padding}
-					/> */}
+						width={15}
+						height={15}
+					/>
 					Обучающиеся
 				</Link>
 				<Link
 					to={`${PAGES_URL.MEDICAL_CERTIFICATES}`}
 					className={styles.link}
 				>
-					{/* <ClipboardPlus
+					<CalendarHeart
 						size={15}
 						className={styles.padding}
-					/> */}
+					/>
 					Медицинские справки
 				</Link>
 			</div>
 			<div>
+				<Link
+					to={`${PAGES_URL.USERS}`}
+					className={styles.link}
+				>
+					<UserCog
+						size={15}
+						className={styles.padding}
+					/>
+					Пользователи
+				</Link>
+
 				<Link
 					to={`${PAGES_URL.USERS}/${user?.id}`}
 					className={styles.link}

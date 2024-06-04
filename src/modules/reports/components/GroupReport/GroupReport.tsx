@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
@@ -5,12 +6,13 @@ import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 import GroupFilters from './GroupFilters.tsx'
 import GroupReportData from './GroupReportData.tsx'
 import GroupReportStats from './GroupReportStats.tsx'
+import reportStyles from '@/app/styles/Reports.module.scss'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
 import { useGetGroupReport } from '@/modules/reports/api/reports.queries.ts'
 import { GroupReportHeads } from '@/modules/reports/components/GroupReport/group-report-heads.ts'
-import ReportBody from '@/modules/reports/components/ReportBody.tsx'
+import ReportBody from '@/modules/reports/components/ReportBody/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
@@ -42,15 +44,17 @@ const GroupReport = () => {
 	const { healthGroups } = useGetHealthGroups()
 	const { physicalEducations } = useGetPhysicalEducations()
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: `group-report-${id}`
+		documentTitle: `group-report-${format(new Date(), 'dd.MM.yyyy')}`
 	})
-	const groupName = data?.map(({ name }) => <p className='font-bold'>{name}</p>)
+	const groupName = data?.map(({ name }) => (
+		<p className={reportStyles.title}>{name}</p>
+	))
 
 	return (
 		<>
-			<div className='w-full'>
-				<div className='flex justify-between items-end p-5'>
-					<div className='flex items-end gap-3'>
+			<div className={reportStyles.container}>
+				<div className={reportStyles.main}>
+					<div className={reportStyles.header}>
 						<GroupFilters
 							healthGroups={healthGroups}
 							physicalEducations={physicalEducations}
@@ -67,7 +71,7 @@ const GroupReport = () => {
 						/>
 					</div>
 					<button
-						className='btn btn-error text-white'
+						className={reportStyles.printBtn}
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -89,7 +93,7 @@ const GroupReport = () => {
 							data={GroupReportHeads}
 						/>
 					</thead>
-					<tbody className='text-center'>
+					<tbody className={reportStyles.tBody}>
 						{isLoading ? <CustomLoader /> : <GroupReportData data={data} />}
 					</tbody>
 				</table>

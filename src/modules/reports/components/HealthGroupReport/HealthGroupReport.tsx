@@ -1,4 +1,5 @@
-import { useParams, useSearchParams } from 'react-router-dom'
+import { format } from 'date-fns'
+import { useSearchParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads'
 
@@ -8,14 +9,14 @@ import usePrint from '../../hooks/usePrint'
 import HealthGroupReportData from './HealthGroupReportData'
 import HealthGroupReportFilters from './HealthGroupReportFilters'
 import { HealthGroupReportHeads } from './health-group-report-heads'
+import reportStyles from '@/app/styles/Reports.module.scss'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
-import ReportBody from '@/modules/reports/components/ReportBody.tsx'
+import ReportBody from '@/modules/reports/components/ReportBody/ReportBody.tsx'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
 
 const HealthGroupReport = () => {
-	const { id } = useParams()
 	const [search] = useSearchParams()
 	const department = search.get('department')
 	const course = search.get('course')
@@ -34,14 +35,14 @@ const HealthGroupReport = () => {
 	)
 
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: `group-report-${id}`
+		documentTitle: `group-report-${format(new Date(), 'dd.MM.yyyy')}`
 	})
 
 	return (
 		<>
-			<div className='w-full'>
-				<div className='flex justify-between items-end p-5'>
-					<div className='flex items-end gap-3'>
+			<div className={reportStyles.container}>
+				<div className={reportStyles.main}>
+					<div className={reportStyles.header}>
 						<HealthGroupReportFilters
 							groups={groups}
 							sortOrder={sortOrder}
@@ -51,7 +52,7 @@ const HealthGroupReport = () => {
 						/>
 					</div>
 					<button
-						className='btn btn-error text-white'
+						className={reportStyles.printBtn}
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -82,7 +83,7 @@ const HealthGroupReport = () => {
 							data={HealthGroupReportHeads}
 						/>
 					</thead>
-					<tbody className='text-center'>
+					<tbody className={reportStyles.tBody}>
 						{isLoading ? (
 							<CustomLoader />
 						) : (

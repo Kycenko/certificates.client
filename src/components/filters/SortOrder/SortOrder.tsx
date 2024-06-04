@@ -14,9 +14,9 @@ const SortOrder: FC<SortOrderProps> = ({ sortOrder, setSortOrder }) => {
 
 	return (
 		<div className={styles.container}>
-			<label className='form-control w-full max-w-xs'>
+			<label className={styles.lab}>
 				<select
-					className='select select-bordered'
+					className={styles.sel}
 					value={sortOrder}
 					onChange={handleSortChange}
 				>

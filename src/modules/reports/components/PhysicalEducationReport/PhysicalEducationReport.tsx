@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { useSearchParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
@@ -7,9 +8,10 @@ import { useGetPhysicalEducationReport } from '../../api/reports.queries.ts'
 import PhysicalEducationReportData from './PhysicalEducationReportData.tsx'
 import PhysicalEducationReportFilters from './PhysicalEducationReportFilters.tsx'
 import { PhysicalEducationReportHeads } from './physical-education-report-heads.ts'
+import reportStyles from '@/app/styles/Reports.module.scss'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
-import ReportBody from '@/modules/reports/components/ReportBody.tsx'
+import ReportBody from '@/modules/reports/components/ReportBody/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
@@ -33,14 +35,14 @@ const PhysicalEducationReport = () => {
 
 	const { groups } = useGetGroups()
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: `health-report-${department}`
+		documentTitle: `health-report-${format(new Date(), 'dd.MM.yyyy')}`
 	})
 
 	return (
 		<>
-			<div className='w-full'>
-				<div className='flex justify-between items-end p-5'>
-					<div className='flex items-end gap-3'>
+			<div className={reportStyles.container}>
+				<div className={reportStyles.main}>
+					<div className={reportStyles.header}>
 						<PhysicalEducationReportFilters
 							groups={groups}
 							sortOrder={sortOrder}
@@ -50,7 +52,7 @@ const PhysicalEducationReport = () => {
 						/>
 					</div>
 					<button
-						className='btn btn-error text-white'
+						className={styles.printBtn}
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -82,7 +84,7 @@ const PhysicalEducationReport = () => {
 							data={PhysicalEducationReportHeads}
 						/>
 					</thead>
-					<tbody className='text-center'>
+					<tbody className={reportStyles.tBody}>
 						{isLoading ? (
 							<CustomLoader />
 						) : (

@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
 
 import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
@@ -5,13 +6,14 @@ import TableHeads from '@/components/tablesHeads/TableHeads.tsx'
 import DepartmentFilters from './DepartmentFilters.tsx'
 import DepartmentReportData from './DepartmentReportData.tsx'
 import DepartmentReportStats from './DepartmentReportStats.tsx'
+import reportStyles from '@/app/styles/Reports.module.scss'
 import styles from '@/app/styles/Tables.module.scss'
 import { useGetGroups } from '@/modules/groups/api/group.queries.ts'
 import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
 import { useGetDepartmentReport } from '@/modules/reports/api/reports.queries.ts'
 import { DepartmentReportHeads } from '@/modules/reports/components/DepartmentReport/department-report-heads.ts'
-import ReportBody from '@/modules/reports/components/ReportBody.tsx'
+import ReportBody from '@/modules/reports/components/ReportBody/ReportBody.tsx'
 import usePrint from '@/modules/reports/hooks/usePrint.ts'
 import useFilterStates from '@/shared/hooks/useFilterStates.ts'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
@@ -48,17 +50,17 @@ const DepartmentReport = () => {
 	const { groups } = useGetGroups()
 
 	const { printRef, handlePrint } = usePrint({
-		documentTitle: `department-report-${id}`
+		documentTitle: `department-report-${id}-${format(new Date(), 'dd.MM.yyyy')}`
 	})
 	const departmentName = data?.map(({ name }) => (
-		<p className='ml-1 font-bold'>{name}</p>
+		<p className={reportStyles.title}>{name}</p>
 	))
 
 	return (
 		<>
-			<div className='w-full'>
-				<div className='flex justify-between items-end p-5'>
-					<div className='flex items-end gap-3'>
+			<div className={reportStyles.container}>
+				<div className={reportStyles.main}>
+					<div className={reportStyles.header}>
 						<DepartmentFilters
 							data={data}
 							healthGroups={healthGroups}
@@ -79,7 +81,7 @@ const DepartmentReport = () => {
 						/>
 					</div>
 					<button
-						className='btn btn-error text-white'
+						className={reportStyles.printBtn}
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -101,7 +103,7 @@ const DepartmentReport = () => {
 							data={DepartmentReportHeads}
 						/>
 					</thead>
-					<tbody className='text-center'>
+					<tbody className={reportStyles.tBody}>
 						{isLoading ? (
 							<CustomLoader />
 						) : (

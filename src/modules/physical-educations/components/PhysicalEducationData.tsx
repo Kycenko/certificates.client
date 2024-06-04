@@ -2,10 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { FC, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import ActionButtons from '@/components/ActionButtons.tsx'
+import ActionButtons from '@/components/ActionButtons/ActionButtons.tsx'
 import NoData from '@/components/NoData.tsx'
 
-import styles from '@/app/styles/Cards.module.scss'
+import styles from '@/app/styles/CardsData.module.scss'
 import {
 	IPhysicalEducation,
 	TypePhysicalEducationForm

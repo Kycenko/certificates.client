@@ -21,12 +21,12 @@ const Filter: FC<FilterProps> = ({
 
 	return (
 		<div className={styles.container}>
-			<label className='form-control w-full max-w-xs'>
-				<div className='label'>
-					<span className=''>{label}</span>
+			<label className={styles.labelContainer}>
+				<div className={styles.lab}>
+					<span>{label}</span>
 				</div>
 				<select
-					className='select select-bordered '
+					className={styles.sel}
 					value={filterValue}
 					onChange={handleFilterChange}
 				>

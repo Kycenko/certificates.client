@@ -17,11 +17,11 @@ const Dropdown: FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<div
 			ref={dropdownRef}
-			className='dropdown'
+			className={styles.drop}
 		>
 			<button
 				type='button'
-				className='btn m-1 bg-base-200'
+				className={styles.button}
 				onClick={toggleDropdown}
 			>
 				<span>Отчеты</span>
@@ -33,7 +33,7 @@ const Dropdown: FC<PropsWithChildren> = ({ children }) => {
 					<ul
 						tabIndex={0}
 						onClick={closeDropdown}
-						className='dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-80'
+						className={styles.list}
 					>
 						{children}
 					</ul>

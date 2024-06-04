@@ -1,4 +1,3 @@
-export { CourseService } from './api/course.service'
 export {
 	useCreateCourse,
 	useDeleteCourse,
@@ -6,6 +5,7 @@ export {
 	useGetCourses,
 	useUpdateCourse
 } from './api/course.queries'
+export { CourseService } from './api/course.service'
 
 export type { ICourse, TypeCourseForm } from './types/course.types'
 

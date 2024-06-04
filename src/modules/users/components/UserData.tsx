@@ -1,8 +1,8 @@
 import { FC } from 'react'
 
-import ActionButtons from '@/components/ActionButtons.tsx'
+import ActionButtons from '@/components/ActionButtons/ActionButtons.tsx'
 
-import styles from '@/app/styles/Cards.module.scss'
+import styles from '@/app/styles/CardsData.module.scss'
 import { IUser } from '@/modules/users/types/user.types.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 import useModal from '@/shared/hooks/useModal.ts'

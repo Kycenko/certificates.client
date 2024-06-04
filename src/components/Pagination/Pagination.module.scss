@@ -48,3 +48,11 @@
 		pointer-events: none;
 	}
 }
+
+.container {
+	@apply flex p-2 justify-between items-center;
+}
+
+.disabledBtn {
+	@apply btn-disabled;
+}

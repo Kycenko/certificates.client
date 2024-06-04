@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
+import { PAGES_URL } from '@/shared/constants/enums'
+
 const NotFoundPage = () => {
 	const navigate = useNavigate()
 	return (
@@ -11,7 +13,7 @@ const NotFoundPage = () => {
 				</p>
 				<button
 					className='px-6 py-3 text-sm font-semibold text-white bg-primary rounded hover:bg-secondary'
-					onClick={() => navigate('/', { replace: true })}
+					onClick={() => navigate(PAGES_URL.HOME, { replace: true })}
 				>
 					На главную
 				</button>

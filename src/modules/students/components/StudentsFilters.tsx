@@ -53,7 +53,6 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-				label=''
 				filterValue={departmentValue}
 				setFilterValue={setDepartmentValue}
 			>
@@ -69,7 +68,6 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-				label=''
 				filterValue={courseValue}
 				setFilterValue={setCourseValue}
 			>
@@ -78,7 +76,6 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 				<CourseOptions />
 			</Filter>
 			<Filter
-				label=''
 				filterValue={groupValue}
 				setFilterValue={setGroupValue}
 			>
@@ -94,7 +91,6 @@ const StudentsFilters: FC<StudentsFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-				label=''
 				filterValue={isExpelledValue}
 				setFilterValue={setIsExpelledValue}
 			>
