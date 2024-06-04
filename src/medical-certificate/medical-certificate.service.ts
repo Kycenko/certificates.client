@@ -35,7 +35,7 @@ export class MedicalCertificateService {
 					group: {
 						name: group || undefined,
 						course: {
-							number: course || undefined,
+							number: +course || undefined,
 							department: {
 								name: department || undefined
 							}

@@ -122,6 +122,9 @@ export class ReportsService {
 						name: true,
 						secondName: true,
 						medicalCertificates: {
+							orderBy: {
+								startDate: 'desc'
+							},
 							where: {
 								startDate: startDate ? { gte: new Date(startDate) } : undefined,
 								finishDate: finishDate
@@ -168,6 +171,7 @@ export class ReportsService {
 			orderBy: {
 				surname: sort
 			},
+
 			where: {
 				group: {
 					name: group,
@@ -191,6 +195,11 @@ export class ReportsService {
 						finishDate: {
 							lt: new Date()
 						}
+					},
+					none: {
+						finishDate: {
+							gt: new Date()
+						}
 					}
 				}
 			},
@@ -213,6 +222,17 @@ export class ReportsService {
 							}
 						}
 					}
+				},
+				medicalCertificates: {
+					where: {
+						finishDate: {
+							lt: new Date()
+						}
+					},
+					orderBy: {
+						startDate: 'desc'
+					},
+					take: 1
 				}
 			}
 		})
