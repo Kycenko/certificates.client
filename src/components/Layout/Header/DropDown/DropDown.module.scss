@@ -7,7 +7,7 @@
 }
 
 .open {
-	@apply origin-top-right absolute left-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black  ring-opacity-5;
+	@apply origin-top-right absolute z-50 left-0 mt-2 w-72 rounded-md shadow-lg bg-white ring-1 ring-black  ring-opacity-5;
 }
 
 .list {

@@ -32,6 +32,7 @@ const PhysicalEducationReport = () => {
 		sortOrder,
 		groupValue
 	)
+	console.log(data)
 
 	const { groups } = useGetGroups()
 	const { printRef, handlePrint } = usePrint({
@@ -52,7 +53,7 @@ const PhysicalEducationReport = () => {
 						/>
 					</div>
 					<button
-						className={styles.printBtn}
+						className={reportStyles.printBtn}
 						type='submit'
 						onClick={handlePrint}
 					>
@@ -77,13 +78,6 @@ const PhysicalEducationReport = () => {
 					</>
 				}
 			>
-				<div className='flex flex-col items-center'>
-					<div className='mb-2'>
-						<p>
-							Всего выбрано обучающихся: <b>{data?.length || 0}</b>
-						</p>
-					</div>
-				</div>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>
 						<TableHeads
