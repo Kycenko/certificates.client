@@ -1,11 +1,14 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import styles from '@/app/styles/Cards.module.scss'
 import { useRegister } from '@/modules/auth/api/auth.queries.ts'
 import { IRegister } from '@/modules/auth/types/auth.types.ts'
 import { useDeleteUser, useGetUsers } from '@/modules/users/api/user.queries.ts'
 import UserData from '@/modules/users/components/UserData.tsx'
 import { PAGES_URL } from '@/shared/constants/enums.ts'
+import { userValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useModal from '@/shared/hooks/useModal.ts'
 import CustomButton from '@/shared/ui/buttons/CustomButton.tsx'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
@@ -13,9 +16,7 @@ import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.t
 import CustomCheckBox from '@/shared/ui/inputs/CustomCheckBox/CustomCheckBox.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-import {zodResolver} from "@hookform/resolvers/zod";
-import { userValidationSchema} from "@/shared/helpers/validation.schema.ts";
-import styles from '@/app/styles/Cards.module.scss'
+
 const UserComponent = () => {
 	const navigate = useNavigate()
 	const { closeModal, isOpen, openModal } = useModal()
@@ -24,7 +25,10 @@ const UserComponent = () => {
 		formState: { errors },
 		handleSubmit,
 		reset
-	} = useForm<IRegister>({ mode: 'onChange', resolver: zodResolver(userValidationSchema) })
+	} = useForm<IRegister>({
+		mode: 'onChange',
+		resolver: zodResolver(userValidationSchema)
+	})
 	const { users, refetch, isLoading } = useGetUsers()
 
 	const registerQuery = useRegister()
@@ -49,9 +53,7 @@ const UserComponent = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<h1 className={styles.title}>
-					Список пользователей
-				</h1>
+				<h1 className={styles.title}>Список пользователей</h1>
 				<CustomButton
 					variant='create'
 					onClick={openModal}

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './LoginForm.module.scss'
 import { useLogin } from '@/modules/auth/api/auth.queries.ts'
 import { ILogin } from '@/modules/auth/types/auth.types.ts'
-import { PAGES_URL } from '@/shared/constants/enums.ts'
+import { PAGES_URL } from '@/shared/constants/enums'
 import { loginValidationSchema } from '@/shared/helpers/validation.schema.ts'
 import useAuth from '@/shared/hooks/useAuth.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
@@ -40,12 +40,15 @@ const LoginForm = () => {
 	}
 
 	useEffect(() => {
-		if (user?.isAdmin) {
-			navigate(`${PAGES_URL.HOME}`, { replace: true })
-		} else if (user?.groupId) {
-			navigate(`${PAGES_URL.GROUPS}/${user.groupId}`, { replace: true })
+		if (user) {
+			navigate(
+				user.isAdmin
+					? `${PAGES_URL.HOME}`
+					: `${PAGES_URL.GROUPS}/${user.groupId}`,
+				{ replace: true }
+			)
 		}
-	}, [user])
+	}, [user, navigate])
 
 	return (
 		<div className={styles.container}>

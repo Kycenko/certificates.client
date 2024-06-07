@@ -51,20 +51,17 @@ export const useGetMedicalCertificates = (
 			}
 		],
 		queryFn: async () => {
-			const response: AxiosResponse<{
-				data: IMedicalCertificate[]
-				totalPages: number
-				totalRecords: number
-			}> = await MedicalCertificateService.getAll(
-				page,
-				limit,
-				sortOrder,
-				department,
-				course,
-				group,
-				startDate,
-				finishDate
-			)
+			const response: AxiosResponse<any> =
+				await MedicalCertificateService.getAll(
+					page,
+					limit,
+					sortOrder,
+					department,
+					course,
+					group,
+					startDate,
+					finishDate
+				)
 			return response.data
 		}
 	})

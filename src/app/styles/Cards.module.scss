@@ -1,12 +1,11 @@
 .container {
-  @apply w-full;
+	@apply w-full;
 }
 
-.header{
-
-  @apply flex justify-between p-4;
+.header {
+	@apply flex justify-between p-4;
 }
 
 .title {
-  @apply text-xl md:text-2xl font-bold text-gray-800;
+	@apply text-xl md:text-2xl font-bold text-gray-800;
 }

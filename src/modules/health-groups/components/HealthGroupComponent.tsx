@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import useHealthGroupActions from '../hooks/useHealthGroupActions'
 
+import styles from '@/app/styles/Cards.module.scss'
 import { useGetHealthGroups } from '@/modules/health-groups/api/health-group.query.ts'
 import HealthGroupData from '@/modules/health-groups/components/HealthGroupData.tsx'
 import { TypeHealthGroupForm } from '@/modules/health-groups/types/health-group.types.ts'
@@ -14,7 +15,7 @@ import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-import styles from '@/app/styles/Cards.module.scss'
+
 const HealthGroupComponent = () => {
 	const { healthGroups, refetch, isLoading } = useGetHealthGroups()
 	const { closeModal, isOpen, openModal } = useModal()
@@ -41,9 +42,7 @@ const HealthGroupComponent = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
-				<h1 className={styles.title}>
-					Список групп здоровья
-				</h1>
+				<h1 className={styles.title}>Список групп здоровья</h1>
 				<CustomButton
 					variant='create'
 					onClick={openModal}

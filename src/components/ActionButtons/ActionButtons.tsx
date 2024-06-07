@@ -21,35 +21,55 @@ const ActionButtons: FC<ActionButtonsProps> = ({
 	return (
 		<>
 			{!onHistory ? null : (
+				<div
+					className='tooltip '
+					data-tip='История изменений'
+				>
+					<button
+						className={styles.iconBtn}
+						onClick={() => onHistory(actionId)}
+					>
+						<History />
+					</button>
+				</div>
+			)}
+			<div
+				className='tooltip '
+				data-tip='Изменить'
+			>
 				<button
 					className={styles.iconBtn}
-					onClick={() => onHistory(actionId)}
+					onClick={() => onEdit(actionId)}
 				>
-					<History />
+					<PencilLine />
 				</button>
-			)}
-
-			<button
-				className={styles.iconBtn}
-				onClick={() => onEdit(actionId)}
-			>
-				<PencilLine />
-			</button>
+			</div>
 
 			{!onInfo ? null : (
+				<div
+					className='tooltip '
+					data-tip='Подробнее'
+				>
+					<button
+						className={styles.iconBtn}
+						onClick={() => onInfo(actionId)}
+					>
+						<Eye />
+					</button>
+				</div>
+			)}
+			<div
+				className='tooltip '
+				data-tip='Удалить'
+			>
+				{' '}
 				<button
 					className={styles.iconBtn}
-					onClick={() => onInfo(actionId)}
+					onClick={() => onDelete(actionId)}
 				>
-					<Eye />
+					<Trash2 />
 				</button>
-			)}
-			<button
-				className={styles.iconBtn}
-				onClick={() => onDelete(actionId)}
-			>
-				<Trash2 />
-			</button>
+			</div>
 		</>
 	)
 }

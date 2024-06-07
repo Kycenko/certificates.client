@@ -72,6 +72,13 @@ const ExpiredCertificatesReport = () => {
 				printRef={printRef}
 				header='Отчет по истёкшим медицинским справкам'
 			>
+				<div className='flex flex-col items-center'>
+					<div className='mb-2'>
+						<p>
+							Всего выбрано обучающихся: <b>{data?.length || 0}</b>
+						</p>
+					</div>
+				</div>
 				<table className={styles.table}>
 					<thead className={styles.tHeads}>
 						<TableHeads

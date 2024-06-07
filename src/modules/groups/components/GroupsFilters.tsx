@@ -42,7 +42,6 @@ const GroupsFilters: FC<GroupsFiltersProps> = ({
 				setSortOrder={setSortOrder}
 			/>
 			<Filter
-
 				filterValue={departmentValue}
 				setFilterValue={setDepartmentValue}
 			>
@@ -57,7 +56,6 @@ const GroupsFilters: FC<GroupsFiltersProps> = ({
 				))}
 			</Filter>
 			<Filter
-
 				filterValue={courseValue}
 				setFilterValue={setCourseValue}
 			>

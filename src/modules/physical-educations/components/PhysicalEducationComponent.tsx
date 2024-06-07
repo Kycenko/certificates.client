@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import usePhysicalEducationActions from '../hooks/usePhysicalEducationActions'
 
+import styles from '@/app/styles/Cards.module.scss'
 import { useGetPhysicalEducations } from '@/modules/physical-educations/api/physical-education.queries.ts'
 import PhysicalEducationData from '@/modules/physical-educations/components/PhysicalEducationData.tsx'
 import { TypePhysicalEducationForm } from '@/modules/physical-educations/types/physical-education.types.ts'
@@ -14,7 +15,7 @@ import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomModalForm from '@/shared/ui/forms/CustomModalForm/CustomModalForm.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 import CustomLoader from '@/shared/ui/loader/CustomLoader.tsx'
-import styles from '@/app/styles/Cards.module.scss'
+
 const PhysicalEducationComponent = () => {
 	const { physicalEducations, refetch, isLoading } = useGetPhysicalEducations()
 
@@ -42,9 +43,7 @@ const PhysicalEducationComponent = () => {
 		<>
 			<div className={styles.container}>
 				<div className={styles.header}>
-					<h1 className={styles.title}>
-						Список групп по физкультуре
-					</h1>
+					<h1 className={styles.title}>Список групп по физкультуре</h1>
 					<CustomButton
 						variant='create'
 						onClick={openModal}

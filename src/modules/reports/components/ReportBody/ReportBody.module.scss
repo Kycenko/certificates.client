@@ -1,12 +1,15 @@
 .container {
 	@apply overflow-x-auto text-center;
 }
+
 .heading {
 	@apply text-center flex flex-col;
 }
+
 .header {
 	@apply justify-center flex flex-row py-4;
 }
+
 .title {
 	@apply ml-1 font-bold;
 }

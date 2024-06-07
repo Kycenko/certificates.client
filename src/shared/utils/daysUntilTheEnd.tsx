@@ -5,6 +5,7 @@ const daysUntilTheEnd = (date: Date) => {
 	const finishDate = new Date(date)
 	const diffDays = getDaysUntilExpiry(finishDate, currentDate)
 
+	if (!date) return <div className='badge bg-gray-300'>Отсутствует</div>
 	return (
 		<>
 			{currentDate.toDateString() === finishDate.toDateString() ? (
