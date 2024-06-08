@@ -6,18 +6,18 @@ import {
 	IStudent,
 	TypeStudentForm
 } from '@/modules/students/types/student.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 
 export const useUploadStudents = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({
+		mutationKey: ['upload students'],
 		mutationFn: async (data: TypeStudentForm[]) => {
 			const response = await StudentService.upload(data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
+			queryClient.invalidateQueries({ queryKey: ['students'] })
 			createToast()
 		}
 	})
@@ -27,12 +27,13 @@ export const useUploadStudents = () => {
 export const useCreateStudent = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({
+		mutationKey: ['create student'],
 		mutationFn: async (data: TypeStudentForm) => {
 			const response = await StudentService.create(data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
+			queryClient.invalidateQueries({ queryKey: ['students'] })
 			createToast()
 		}
 	})
@@ -49,7 +50,7 @@ export const useGetStudents = (
 ) => {
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [
-			QUERY_KEYS.STUDENTS,
+			'students',
 			{ page, limit, department, course, group, isExpelled }
 		],
 		queryFn: async () => {
@@ -88,7 +89,7 @@ export const useGetStudent = (id: string | undefined) => {
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.STUDENTS, id],
+		queryKey: ['student', id],
 		queryFn: async () => {
 			const response: AxiosResponse<IStudent> = await StudentService.getById(id)
 			return response.data
@@ -104,12 +105,13 @@ export const useUpdateStudent = () => {
 		Error,
 		{ id: number | string; data: TypeStudentForm }
 	>({
+		mutationKey: ['update student'],
 		mutationFn: async ({ id, data }) => {
 			const response = await StudentService.update(id, data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
+			queryClient.invalidateQueries({ queryKey: ['students'] })
 			editToast()
 		}
 	})
@@ -119,11 +121,12 @@ export const useUpdateStudent = () => {
 export const useDeleteStudent = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: remove, isPending } = useMutation({
+		mutationKey: ['delete student'],
 		mutationFn: async (id: number | string) => {
 			await StudentService.delete(id)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.STUDENTS] })
+			queryClient.invalidateQueries({ queryKey: ['students'] })
 			deleteToast()
 		}
 	})

@@ -6,20 +6,19 @@ import {
 	IMedicalCertificateHistory,
 	TypeMedicalCertificateHistoryForm
 } from '@/modules/medical-certificates/types/medical-certificate-history.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
-import { deleteToast } from '@/shared/helpers/toasts.ts'
 
 export const useCreateMedicalCertificateHistory = () => {
 	const queryClient = new QueryClient()
 
 	const { mutateAsync: create } = useMutation({
+		mutationKey: ['create certificate-history'],
 		mutationFn: async (data: TypeMedicalCertificateHistoryForm) => {
 			const response = await MedicalCertificateHistoryService.create(data)
 			return response.data
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATE_HISTORY]
+				queryKey: ['certificates-histories']
 			})
 		}
 	})
@@ -34,7 +33,7 @@ export const useGetMedicalCertificateHistories = (
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATE_HISTORY, medicalCertificatesId],
+		queryKey: ['certificates-histories', medicalCertificatesId],
 		queryFn: async () => {
 			const response: AxiosResponse<IMedicalCertificateHistory[]> =
 				await MedicalCertificateHistoryService.getAll(medicalCertificatesId)
@@ -42,20 +41,4 @@ export const useGetMedicalCertificateHistories = (
 		}
 	})
 	return { certificates, isLoading, refetch }
-}
-
-export const useDeleteMedicalCertificateHistory = () => {
-	const queryClient = new QueryClient()
-	const { mutateAsync: remove, isPending } = useMutation({
-		mutationFn: async (id: number | string) => {
-			await MedicalCertificateHistoryService.delete(id)
-		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATE_HISTORY]
-			})
-			deleteToast()
-		}
-	})
-	return { remove, isPending }
 }

@@ -47,16 +47,3 @@ export const enum TOKENS {
 export const enum LOCAL_STORAGE_KEY {
 	USER = 'user'
 }
-
-export const enum QUERY_KEYS {
-	COURSES = 'courses',
-	DEPARTMENTS = 'departments',
-	GROUPS = 'groups',
-	HEALTH_GROUPS = 'health-groups',
-	MEDICAL_CERTIFICATES = 'medical-certificates',
-	MEDICAL_CERTIFICATE_HISTORY = 'medical-certificate-history',
-	PHYSICAL_EDUCATIONS = 'physical-educations',
-	STUDENTS = 'students',
-	STUDENT_HISTORY = 'student-history',
-	USERS = 'users'
-}

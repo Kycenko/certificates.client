@@ -6,7 +6,6 @@ import {
 	IHealthGroup,
 	TypeHealthGroupForm
 } from '@/modules/health-groups/types/health-group.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 
 export function useCreateHealthGroup() {
@@ -16,7 +15,7 @@ export function useCreateHealthGroup() {
 		mutationFn: (data: TypeHealthGroupForm) => HealthGroupService.create(data),
 		onSuccess() {
 			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.HEALTH_GROUPS]
+				queryKey: ['health-groups']
 			})
 			createToast()
 		}
@@ -32,7 +31,7 @@ export const useGetHealthGroups = () => {
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.HEALTH_GROUPS],
+		queryKey: ['health-groups'],
 		queryFn: async () => {
 			const response: AxiosResponse<IHealthGroup[]> =
 				await HealthGroupService.getAll()
@@ -48,7 +47,7 @@ export const useGetHealthGroup = (id: string | number) => {
 		isSuccess,
 		isLoading
 	} = useQuery({
-		queryKey: [QUERY_KEYS.HEALTH_GROUPS, id],
+		queryKey: ['health-group', id],
 		queryFn: async () => {
 			const response: AxiosResponse<IHealthGroup> =
 				await HealthGroupService.getById(id)
@@ -65,12 +64,13 @@ export const useUpdateHealthGroup = () => {
 		Error,
 		{ id: string | number; data: TypeHealthGroupForm }
 	>({
+		mutationKey: ['update health-group'],
 		mutationFn: async ({ id, data }) => {
 			const response = await HealthGroupService.update(id, data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.HEALTH_GROUPS] })
+			queryClient.invalidateQueries({ queryKey: ['health-groups'] })
 			editToast()
 		}
 	})
@@ -80,11 +80,12 @@ export const useUpdateHealthGroup = () => {
 export const useDeleteHealthGroup = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: remove } = useMutation({
+		mutationKey: ['delete health-group'],
 		mutationFn: async (id: string | number) => {
 			await HealthGroupService.delete(id)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.HEALTH_GROUPS] })
+			queryClient.invalidateQueries({ queryKey: ['health-groups'] })
 			deleteToast()
 		}
 	})

@@ -3,18 +3,18 @@ import { AxiosResponse } from 'axios'
 
 import { GroupService } from '@/modules/groups/api/group.service.ts'
 import { IGroup, TypeGroupForm } from '@/modules/groups/types/group.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 
 export const useCreateGroup = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({
+		mutationKey: ['create group'],
 		mutationFn: async (data: TypeGroupForm) => {
 			const response = await GroupService.create(data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GROUPS] })
+			queryClient.invalidateQueries({ queryKey: ['groups'] })
 			createToast()
 		}
 	})
@@ -31,7 +31,7 @@ export const useGetGroups = (
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.GROUPS, { sortOrder, department, course }],
+		queryKey: ['groups', { sortOrder, department, course }],
 		queryFn: async () => {
 			const response: AxiosResponse<IGroup[]> = await GroupService.getAll(
 				sortOrder,
@@ -50,7 +50,7 @@ export const useGetGroup = (id: string | undefined) => {
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.GROUPS, id],
+		queryKey: ['group', id],
 		queryFn: async () => {
 			const response: AxiosResponse<IGroup> = await GroupService.getById(id)
 			return response.data
@@ -66,12 +66,13 @@ export const useUpdateGroup = () => {
 		Error,
 		{ id: number | string; data: TypeGroupForm }
 	>({
+		mutationKey: ['update group'],
 		mutationFn: async ({ id, data }) => {
 			const response = await GroupService.update(id, data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GROUPS] })
+			queryClient.invalidateQueries({ queryKey: ['groups'] })
 			editToast()
 		}
 	})
@@ -81,11 +82,12 @@ export const useUpdateGroup = () => {
 export const useDeleteGroup = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: remove, isPending } = useMutation({
+		mutationKey: ['delete group'],
 		mutationFn: async (id: number | string) => {
 			await GroupService.delete(id)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.GROUPS] })
+			queryClient.invalidateQueries({ queryKey: ['groups'] })
 			deleteToast()
 		}
 	})

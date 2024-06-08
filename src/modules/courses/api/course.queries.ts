@@ -6,18 +6,18 @@ import {
 	ICourse,
 	TypeCourseForm
 } from '@/modules/courses/types/course.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 
 export const useCreateCourse = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({
+		mutationKey: ['create course'],
 		mutationFn: async (data: TypeCourseForm) => {
 			const response = await CourseService.create(data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COURSES] })
+			queryClient.invalidateQueries({ queryKey: ['courses'] })
 			createToast()
 		}
 	})
@@ -33,7 +33,7 @@ export const useGetCourses = (
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.COURSES, { departmentName, sortOrder }],
+		queryKey: ['courses', { departmentName, sortOrder }],
 		queryFn: async () => {
 			const response: AxiosResponse<ICourse[]> = await CourseService.getAll(
 				departmentName,
@@ -51,7 +51,7 @@ export const useGetCourse = (id: string | undefined) => {
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.COURSES, id],
+		queryKey: ['course', id],
 		queryFn: async () => {
 			const response: AxiosResponse<ICourse> = await CourseService.getById(id)
 			return response.data
@@ -67,12 +67,13 @@ export const useUpdateCourse = () => {
 		Error,
 		{ id: number | string; data: TypeCourseForm }
 	>({
+		mutationKey: ['update course'],
 		mutationFn: async ({ id, data }) => {
 			const response = await CourseService.update(id, data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COURSES] })
+			queryClient.invalidateQueries({ queryKey: ['courses'] })
 			editToast()
 		}
 	})
@@ -82,11 +83,12 @@ export const useUpdateCourse = () => {
 export const useDeleteCourse = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: remove, isPending } = useMutation({
+		mutationKey: ['delete course'],
 		mutationFn: async (id: number | string) => {
 			await CourseService.delete(id)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.COURSES] })
+			queryClient.invalidateQueries({ queryKey: ['courses'] })
 			deleteToast()
 		}
 	})

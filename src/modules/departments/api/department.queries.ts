@@ -6,18 +6,18 @@ import {
 	IDepartment,
 	TypeDepartmentForm
 } from '@/modules/departments/types/department.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 
 export const useCreateDepartment = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({
+		mutationKey: ['create department'],
 		mutationFn: async (data: TypeDepartmentForm) => {
 			const response = await DepartmentService.create(data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DEPARTMENTS] })
+			queryClient.invalidateQueries({ queryKey: ['departments'] })
 			createToast()
 		}
 	})
@@ -33,7 +33,7 @@ export const useGetDepartments = (
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.DEPARTMENTS, { departmentName, sortOrder }],
+		queryKey: ['departments', { departmentName, sortOrder }],
 		queryFn: async () => {
 			const response: AxiosResponse<IDepartment[]> =
 				await DepartmentService.getAll(departmentName, sortOrder)
@@ -49,7 +49,7 @@ export const useGetDepartment = (id: string | undefined) => {
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.DEPARTMENTS, id],
+		queryKey: ['department', id],
 		queryFn: async () => {
 			const response: AxiosResponse<IDepartment> =
 				await DepartmentService.getById(id)
@@ -66,12 +66,13 @@ export const useUpdateDepartment = () => {
 		Error,
 		{ id: number | string; data: TypeDepartmentForm }
 	>({
+		mutationKey: ['update department'],
 		mutationFn: async ({ id, data }) => {
 			const response = await DepartmentService.update(id, data)
 			return response.data
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DEPARTMENTS] })
+			queryClient.invalidateQueries({ queryKey: ['departments'] })
 			editToast()
 		}
 	})
@@ -81,11 +82,12 @@ export const useUpdateDepartment = () => {
 export const useDeleteDepartment = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: remove } = useMutation({
+		mutationKey: ['delete department'],
 		mutationFn: async (id: string | number) => {
 			await DepartmentService.delete(id)
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DEPARTMENTS] })
+			queryClient.invalidateQueries({ queryKey: ['departments'] })
 			deleteToast()
 		}
 	})

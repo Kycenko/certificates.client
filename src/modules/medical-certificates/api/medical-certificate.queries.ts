@@ -6,19 +6,19 @@ import {
 	IMedicalCertificate,
 	TypeMedicalCertificateForm
 } from '@/modules/medical-certificates/types/medical-certificate.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 import { createToast, deleteToast, editToast } from '@/shared/helpers/toasts.ts'
 
 export const useCreateMedicalCertificate = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: create, isPending } = useMutation({
+		mutationKey: ['create certificate'],
 		mutationFn: async (data: TypeMedicalCertificateForm) => {
 			const response = await MedicalCertificateService.create(data)
 			return response.data
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES]
+				queryKey: ['certificates']
 			})
 			createToast()
 		}
@@ -38,7 +38,7 @@ export const useGetMedicalCertificates = (
 ) => {
 	const { data, isLoading, refetch } = useQuery({
 		queryKey: [
-			QUERY_KEYS.MEDICAL_CERTIFICATES,
+			'certificates',
 			{
 				page,
 				limit,
@@ -84,7 +84,7 @@ export const useGetMedicalCertificate = (id: string | undefined) => {
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES, id],
+		queryKey: ['certificate', id],
 		queryFn: async () => {
 			const response: AxiosResponse<IMedicalCertificate> =
 				await MedicalCertificateService.getById(id)
@@ -101,13 +101,14 @@ export const useUpdateMedicalCertificate = () => {
 		Error,
 		{ id: number | string; data: TypeMedicalCertificateForm }
 	>({
+		mutationKey: ['update certificate'],
 		mutationFn: async ({ id, data }) => {
 			const response = await MedicalCertificateService.update(id, data)
 			return response.data
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES]
+				queryKey: ['certificates']
 			})
 			editToast()
 		}
@@ -118,12 +119,13 @@ export const useUpdateMedicalCertificate = () => {
 export const useDeleteMedicalCertificate = () => {
 	const queryClient = new QueryClient()
 	const { mutateAsync: remove, isPending } = useMutation({
+		mutationKey: ['delete certificate'],
 		mutationFn: async (id: number | string) => {
 			await MedicalCertificateService.delete(id)
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.MEDICAL_CERTIFICATES]
+				queryKey: ['certificates']
 			})
 			deleteToast()
 		}

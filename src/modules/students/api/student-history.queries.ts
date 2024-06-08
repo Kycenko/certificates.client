@@ -2,19 +2,19 @@ import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 
 import { StudentHistoryService } from '@/modules/students/api/student-history.service.ts'
 import { TypeStudentHistoryForm } from '@/modules/students/types/student-history.types.ts'
-import { QUERY_KEYS } from '@/shared/constants/enums.ts'
 
 export const useCreateStudentHistory = () => {
 	const queryClient = new QueryClient()
 
 	const { mutateAsync: create } = useMutation({
+		mutationKey: ['create student-history'],
 		mutationFn: async (data: TypeStudentHistoryForm) => {
 			const response = await StudentHistoryService.create(data)
 			return response.data
 		},
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: [QUERY_KEYS.STUDENT_HISTORY]
+				queryKey: ['student-histories']
 			})
 		}
 	})
@@ -27,7 +27,7 @@ export const useGetStudentHistories = (studentId: string | undefined) => {
 		isLoading,
 		refetch
 	} = useQuery({
-		queryKey: [QUERY_KEYS.STUDENT_HISTORY, studentId],
+		queryKey: ['student-histories', studentId],
 		queryFn: async () => {
 			const response = await StudentHistoryService.getAll(studentId)
 			return response.data
