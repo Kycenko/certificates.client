@@ -8,10 +8,5 @@ RUN npm install
 
 COPY . .
 
-RUN npx prisma generate --schema=/app/prisma/schema.prisma
-
-RUN npm run build
-
-CMD ["npm", "run", "start:prod"]
-
+CMD source init.sh
 
