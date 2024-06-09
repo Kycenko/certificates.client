@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+    ports:
+      - 7777:7777
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - '${DB_PORT}:5432'
