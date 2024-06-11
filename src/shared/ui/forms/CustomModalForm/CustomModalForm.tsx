@@ -42,7 +42,6 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = ({
 
 	const submitBtn = async (data: any) => {
 		onSubmit(data)
-		onClose()
 	}
 
 	return (

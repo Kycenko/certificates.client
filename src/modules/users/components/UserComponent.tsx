@@ -35,8 +35,9 @@ const UserComponent = () => {
 	const deleteQuery = useDeleteUser()
 
 	const handleRegister = async (data: IRegister) => {
-		await registerQuery.mutateAsync({ ...data })
+		await registerQuery.mutateAsync({ ...data, isAdmin: Boolean(data.isAdmin) })
 		await refetch()
+		closeModal()
 		reset()
 	}
 

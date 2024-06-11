@@ -64,7 +64,7 @@ const GroupDetailsTable = () => {
 				{user?.isAdmin === true ? null : (
 					<div>
 						<button
-							className='btn'
+							className='btn hover:bg-primary hover:text-white'
 							onClick={handleLogout}
 						>
 							Выйти

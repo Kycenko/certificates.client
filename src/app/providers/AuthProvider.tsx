@@ -52,8 +52,8 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 			setAccessToken(accessToken)
 		}
 
-		if (user?.isAdmin === false && user?.groupId)
-			navigate(`${PAGES_URL.GROUPS}/${user?.groupId}`, { replace: true })
+		// if (user?.isAdmin === false && user?.groupId)
+		// 	navigate(`${PAGES_URL.GROUPS}/${user?.groupId}`, { replace: true })
 
 		initializeAuth()
 	}, [navigate])
