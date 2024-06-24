@@ -56,10 +56,11 @@ const StudentDetailsTable = () => {
 			physicalEducationId: Number(data.physicalEducationId),
 			studentId: student?.id
 		}
-		await create(newDate)
-		closeModal()
-		await refetch()
-		reset()
+		await create(newDate).then(() => {
+			closeModal()
+			refetch()
+			reset()
+		})
 	}
 	return (
 		<>

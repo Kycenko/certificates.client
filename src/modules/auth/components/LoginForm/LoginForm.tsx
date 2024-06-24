@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Eye, EyeOff } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
@@ -32,23 +32,19 @@ const LoginForm = () => {
 
 	const handleLogin = async (data: ILogin) => {
 		try {
-			await mutateAsync(data)
+			const result = await mutateAsync(data)
+			if (result.data.user.isAdmin) {
+				navigate(`${PAGES_URL.HOME}`, { replace: true })
+			} else {
+				navigate(`${PAGES_URL.GROUPS}/${result.data.user.groupId}`, {
+					replace: true
+				})
+			}
 		} catch (error) {
 			setLoginError('Неверный логин или пароль')
 			reset()
 		}
 	}
-
-	useEffect(() => {
-		if (user) {
-			navigate(
-				user.isAdmin
-					? `${PAGES_URL.HOME}`
-					: `${PAGES_URL.GROUPS}/${user.groupId}`,
-				{ replace: true }
-			)
-		}
-	}, [user, navigate])
 
 	return (
 		<div className={styles.container}>

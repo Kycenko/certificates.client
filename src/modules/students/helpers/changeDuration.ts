@@ -27,6 +27,13 @@ export const changeDuration = ({
 		proposedEndDate = new Date(data.finishDate)
 	}
 
+	if (
+		new Date(proposedEndDate).getTime() <= new Date(data.startDate).getTime()
+	) {
+		alert('Дата окончания не может быть раньше даты начала.')
+		return { error: 'Invalid end date' }
+	}
+
 	let lastCertificateEndDate
 	if (student?.medicalCertificates?.length) {
 		lastCertificateEndDate = new Date(
@@ -35,15 +42,20 @@ export const changeDuration = ({
 			].finishDate
 		)
 	}
-
-	if (lastCertificateEndDate && data.startDate <= lastCertificateEndDate) {
+	if (
+		lastCertificateEndDate &&
+		new Date(data.startDate).getTime() <= lastCertificateEndDate.getTime()
+	) {
 		alert(
 			'Дата начала новой справки должна быть позже даты окончания предыдущей справки.'
 		)
 		return { error: 'Invalid start date' }
 	}
 
-	if (lastCertificateEndDate && proposedEndDate <= lastCertificateEndDate) {
+	if (
+		lastCertificateEndDate &&
+		new Date(proposedEndDate).getTime() <= lastCertificateEndDate.getTime()
+	) {
 		alert(
 			'Дата окончания новой справки должна быть позже даты окончания предыдущей справки.'
 		)

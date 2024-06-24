@@ -109,7 +109,10 @@ const DepartmentsTable = () => {
 				</div>
 			</div>
 			<CustomModalForm
-				onSubmit={handleSubmit(handleCreate)}
+				onSubmit={() => {
+					handleSubmit(handleCreate)()
+					closeModal()
+				}}
 				buttonTitle={'Добавить'}
 				disabled={Object.keys(errors).length > 0}
 				isOpen={isOpen}

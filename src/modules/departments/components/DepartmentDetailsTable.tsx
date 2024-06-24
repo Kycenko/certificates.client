@@ -29,6 +29,7 @@ const DepartmentDetailsTable = () => {
 	const handleCreate: SubmitHandler<TypeCourseForm> = async data => {
 		const newData = {
 			...data,
+
 			departmentId: department?.id,
 			number: Number(data.number)
 		}
@@ -59,7 +60,10 @@ const DepartmentDetailsTable = () => {
 				</tbody>
 			</table>
 			<CustomModalForm
-				onSubmit={handleSubmit(handleCreate)}
+				onSubmit={() => {
+					handleSubmit(handleCreate)()
+					closeModal()
+				}}
 				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}

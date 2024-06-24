@@ -18,10 +18,10 @@ const useDepartmentActions = (
 	const { create } = useCreateDepartment()
 	const { update } = useUpdateDepartment()
 	const { remove } = useDeleteDepartment()
-
 	const handleCreate: SubmitHandler<TypeDepartmentForm> = async data => {
 		await create(data)
 		await refetch()
+
 		reset()
 	}
 
