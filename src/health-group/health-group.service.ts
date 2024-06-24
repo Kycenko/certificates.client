@@ -5,8 +5,7 @@ import { HealthGroupDto } from './dto/health-group.dto'
 
 @Injectable()
 export class HealthGroupService {
-	constructor(private prisma: PrismaService) {
-	}
+	constructor(private prisma: PrismaService) {}
 
 	async create(dto: HealthGroupDto) {
 		return this.prisma.healthGroup.create({

@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common'
 import { PrismaService } from '@config/prisma.service'
+import { Module } from '@nestjs/common'
 import { ReportsController } from './reports.controller'
 import { ReportsService } from './reports.service'
 
@@ -7,5 +7,4 @@ import { ReportsService } from './reports.service'
 	controllers: [ReportsController],
 	providers: [ReportsService, PrismaService]
 })
-export class ReportsModule {
-}
+export class ReportsModule {}
