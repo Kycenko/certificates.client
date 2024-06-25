@@ -29,14 +29,19 @@ const DepartmentDetailsTable = () => {
 	const handleCreate: SubmitHandler<TypeCourseForm> = async data => {
 		const newData = {
 			...data,
-
 			departmentId: department?.id,
 			number: Number(data.number)
 		}
-		await create(newData)
-		closeModal()
-		await refetch()
-		reset()
+		try {
+			await create(newData)
+			closeModal()
+			await refetch()
+			reset()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Номер курса должен быть уникальным')
+			}
+		}
 	}
 	if (isLoading) return <CustomLoader />
 
@@ -60,10 +65,7 @@ const DepartmentDetailsTable = () => {
 				</tbody>
 			</table>
 			<CustomModalForm
-				onSubmit={() => {
-					handleSubmit(handleCreate)()
-					closeModal()
-				}}
+				onSubmit={handleSubmit(handleCreate)}
 				buttonTitle={'Добавить'}
 				isOpen={isOpen}
 				onClose={closeModal}

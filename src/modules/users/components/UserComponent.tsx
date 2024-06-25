@@ -35,10 +35,19 @@ const UserComponent = () => {
 	const deleteQuery = useDeleteUser()
 
 	const handleRegister = async (data: IRegister) => {
-		await registerQuery.mutateAsync({ ...data, isAdmin: Boolean(data.isAdmin) })
-		await refetch()
-		closeModal()
-		reset()
+		try {
+			await registerQuery.mutateAsync({
+				...data,
+				isAdmin: Boolean(data.isAdmin)
+			})
+			await refetch()
+			closeModal()
+			reset()
+		} catch (error) {
+			if (error?.response.status === 400) {
+				alert('Пользователь с таким логином уже существует')
+			}
+		}
 	}
 
 	const handleDelete = async (id: string | number) => {

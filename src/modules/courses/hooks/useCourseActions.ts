@@ -16,15 +16,21 @@ const useCourseActions = (
 	const { remove } = useDeleteCourse()
 
 	const handleEdit = async (id: number | string, data: TypeCourseForm) => {
-		await update({
-			id,
-			data: {
-				...data,
-				number: +data.number
-			}
-		})
+		try {
+			await update({
+				id,
+				data: {
+					...data,
+					number: +data.number
+				}
+			})
 
-		await refetch()
+			await refetch()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Номер курса должен быть уникальным')
+			}
+		}
 	}
 
 	const handleDelete = async (id: number | string) => {

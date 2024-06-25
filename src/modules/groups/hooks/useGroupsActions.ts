@@ -16,9 +16,15 @@ const useGroupActions = (
 	const { remove } = useDeleteGroup()
 
 	const handleEdit = async (id: number | string, data: TypeGroupForm) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
+		try {
+			await update({ id, data })
+			closeModal()
+			await refetch()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Название группы должно быть уникальным')
+			}
+		}
 	}
 
 	const handleDelete = async (id: number | string) => {

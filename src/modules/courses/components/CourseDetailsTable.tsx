@@ -43,10 +43,16 @@ const CourseDetailsTable = () => {
 
 	const handleCreate: SubmitHandler<TypeGroupForm> = async data => {
 		const newData = { ...data, courseId: course?.id }
-		await create(newData)
-		closeModal()
-		await refetch()
-		reset()
+		try {
+			await create(newData)
+			closeModal()
+			await refetch()
+			reset()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Название группы должно быть уникальным')
+			}
+		}
 	}
 
 	if (isLoading) return <CustomLoader />

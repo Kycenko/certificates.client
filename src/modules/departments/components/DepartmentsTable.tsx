@@ -61,7 +61,8 @@ const DepartmentsTable = () => {
 
 	const { handleCreate, handleEdit, handleDelete } = useDepartmentActions(
 		refetch,
-		reset
+		reset,
+		closeModal
 	)
 
 	const handleInfo = (id: number | string) => {
@@ -109,10 +110,7 @@ const DepartmentsTable = () => {
 				</div>
 			</div>
 			<CustomModalForm
-				onSubmit={() => {
-					handleSubmit(handleCreate)()
-					closeModal()
-				}}
+				onSubmit={handleSubmit(handleCreate)}
 				buttonTitle={'Добавить'}
 				disabled={Object.keys(errors).length > 0}
 				isOpen={isOpen}

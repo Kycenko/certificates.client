@@ -13,21 +13,34 @@ import {
 
 const useDepartmentActions = (
 	refetch: () => Promise<QueryObserverResult<IDepartment[], Error>>,
-	reset: UseFormReset<TypeDepartmentForm>
+	reset: UseFormReset<TypeDepartmentForm>,
+	onClose: () => void
 ) => {
 	const { create } = useCreateDepartment()
 	const { update } = useUpdateDepartment()
 	const { remove } = useDeleteDepartment()
 	const handleCreate: SubmitHandler<TypeDepartmentForm> = async data => {
-		await create(data)
-		await refetch()
-
-		reset()
+		try {
+			await create(data)
+			await refetch()
+			reset()
+			onClose()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Название отделения должно быть уникальным')
+			}
+		}
 	}
 
 	const handleEdit = async (id: number | string, data: TypeDepartmentForm) => {
-		await update({ id, data })
-		await refetch()
+		try {
+			await update({ id, data })
+			await refetch()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Название отделения должно быть уникальным')
+			}
+		}
 	}
 
 	const handleDelete = async (id: number | string) => {

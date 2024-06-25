@@ -30,16 +30,22 @@ const UserDetailsComponent = () => {
 	const handleEdit: SubmitHandler<TypeUserForm> = async (
 		data: TypeUserForm
 	) => {
-		const { password, groupId, ...rest } = data
-		await mutateAsync({
-			id: id,
-			data: {
-				...rest,
-				password: password || undefined,
-				groupId: Number(groupId) || null
+		try {
+			const { password, groupId, ...rest } = data
+			await mutateAsync({
+				id: id,
+				data: {
+					...rest,
+					password: password || undefined,
+					groupId: Number(groupId) || null
+				}
+			})
+			await refetch()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Пользователь с таким логином уже существует')
 			}
-		})
-		await refetch()
+		}
 	}
 
 	return (
