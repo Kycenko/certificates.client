@@ -22,6 +22,7 @@ const ModalDepartmentReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 	const { handleSubmit, register } = useForm<FormState>()
 	const onSubmit = (data: FormState) => {
 		navigate(`${PAGES_URL.DEPARTMENT_REPORT}/${data.departmentId}`)
+		onClose()
 	}
 	return (
 		<CustomModalForm

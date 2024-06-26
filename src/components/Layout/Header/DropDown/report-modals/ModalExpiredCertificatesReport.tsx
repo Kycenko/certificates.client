@@ -17,6 +17,7 @@ const ModalExpiredCertificatesReport: FC<ModalProps> = ({
 
 	const onSubmit = () => {
 		navigate(`${PAGES_URL.EXPIRED_REPORT}`)
+		onClose()
 	}
 
 	return (

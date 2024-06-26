@@ -30,6 +30,7 @@ const ModalPhysicalEducationReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 		navigate(
 			`${PAGES_URL.PE_REPORT}?department=${data.departmentId}&course=${data.courseId}&pe=${data.physicalEducationId}`
 		)
+		onClose()
 	}
 
 	return (

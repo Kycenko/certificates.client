@@ -1,7 +1,4 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
-import { Link } from 'react-router-dom'
-
-import { PAGES_URL } from '@/shared/constants/enums'
 
 interface Props {
 	children?: ReactNode
@@ -31,11 +28,13 @@ class ErrorBoundary extends Component<Props, State> {
 					<h1 className='text-3xl font-semibold mb-4'>
 						Упс! Что-то пошло не так.
 					</h1>
-					<Link to={PAGES_URL.HOME}>
-						<button className='px-6 py-3 text-sm font-semibold text-white bg-primary rounded hover:bg-secondary'>
-							На главную
-						</button>
-					</Link>
+
+					<button
+						onClick={() => window.location.reload()}
+						className='px-6 py-3 text-sm font-semibold text-white bg-primary rounded hover:bg-secondary'
+					>
+						На главную
+					</button>
 				</div>
 			)
 		}

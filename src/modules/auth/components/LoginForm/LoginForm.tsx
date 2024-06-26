@@ -9,7 +9,6 @@ import { useLogin } from '@/modules/auth/api/auth.queries.ts'
 import { ILogin } from '@/modules/auth/types/auth.types.ts'
 import { PAGES_URL } from '@/shared/constants/enums'
 import { loginValidationSchema } from '@/shared/helpers/validation.schema.ts'
-import useAuth from '@/shared/hooks/useAuth.ts'
 import ErrorMessage from '@/shared/ui/fields/ErrorMessage.tsx'
 import CustomInput from '@/shared/ui/inputs/CustomInput/CustomInput.tsx'
 
@@ -24,7 +23,6 @@ const LoginForm = () => {
 		resolver: zodResolver(loginValidationSchema)
 	})
 
-	const { user } = useAuth()
 	const navigate = useNavigate()
 	const { mutateAsync } = useLogin()
 	const [loginError, setLoginError] = useState<string | null>(null)

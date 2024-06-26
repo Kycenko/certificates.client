@@ -33,6 +33,7 @@ const ModalHealthGroupReport: FC<ModalHealthGroupReportProps> = ({
 		navigate(
 			`${PAGES_URL.HG_REPORT}?department=${data.departmentId}&course=${data.courseId}&hg=${data.healthGroupId}`
 		)
+		onClose()
 	}
 	return (
 		<CustomModalForm

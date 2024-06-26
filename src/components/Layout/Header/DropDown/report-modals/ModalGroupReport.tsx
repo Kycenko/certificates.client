@@ -23,6 +23,7 @@ const ModalGroupReport: FC<ModalProps> = ({ isOpen, onClose }) => {
 
 	const onSubmit = (data: FormState) => {
 		navigate(`${PAGES_URL.GROUP_REPORT}/${data.groupId}`)
+		onClose()
 	}
 	return (
 		<CustomModalForm
