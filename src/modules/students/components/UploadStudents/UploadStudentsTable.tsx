@@ -25,7 +25,7 @@ const UploadStudentsTable = () => {
 
 	return (
 		<>
-			<Heading title='Импорт данных' />
+			<Heading title='Импорт данных обучающихся' />
 			<div className='flex flex-col'>
 				<div className='flex justify-center mb-4'>
 					<input

@@ -31,9 +31,15 @@ const usePhysicalEducationActions = (
 		id: number | string,
 		data: TypePhysicalEducationForm
 	) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
+		try {
+			await update({ id, data })
+			closeModal()
+			await refetch()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Название группы по физкультуре должно быть уникальным.')
+			}
+		}
 	}
 
 	const handleDelete = async (id: number | string) => {

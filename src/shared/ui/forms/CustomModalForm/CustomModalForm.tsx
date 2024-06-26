@@ -1,5 +1,5 @@
 import { X } from 'lucide-react'
-import { FC, ReactNode, useRef } from 'react'
+import { FC, ReactNode, useEffect, useRef } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import styles from './CustomModalForm.module.scss'
@@ -44,6 +44,16 @@ const CustomModalForm: FC<CreateModalProps | DeleteConfirmModalProps> = ({
 		onSubmit(data)
 		// onClose()
 	}
+	const handleKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'Escape') onClose()
+	}
+	useEffect(() => {
+		window.addEventListener('keydown', handleKeyDown)
+
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown)
+		}
+	}, [handleKeyDown])
 
 	return (
 		isOpen && (

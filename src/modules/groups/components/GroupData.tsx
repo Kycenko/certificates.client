@@ -67,9 +67,30 @@ const GroupData: FC<GroupDataProps> = ({
 		course => course.departmentId === selectedDepartmentId
 	)
 
+	// const handleEdit = (id: number | string) => {
+	// 	setEditId(id)
+	// 	reset()
+	// }
 	const handleEdit = (id: number | string) => {
-		setEditId(id)
-		reset()
+		const group = data?.find(group => group.id === id)
+		if (group) {
+			setSelectedDepartmentId(prevState => {
+				if (prevState !== group.course.departmentId) {
+					return group.course.departmentId
+				}
+				return prevState
+			})
+			setEditId(prevId => {
+				if (prevId !== id) {
+					reset({
+						name: group.name,
+						courseId: group.course.id
+					})
+					return id
+				}
+				return prevId
+			})
+		}
 	}
 	const handleDelete = (id: number | string) => {
 		onDelete(id)

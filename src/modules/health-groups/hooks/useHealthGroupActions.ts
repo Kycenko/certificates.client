@@ -27,9 +27,15 @@ const useHealthGroupActions = (
 	}
 
 	const handleEdit = async (id: string | number, data: TypeHealthGroupForm) => {
-		await update({ id, data })
-		closeModal()
-		await refetch()
+		try {
+			await update({ id, data })
+			closeModal()
+			await refetch()
+		} catch (error) {
+			if (error?.response.status === 500) {
+				alert('Название группы здоровья должно быть уникальным.')
+			}
+		}
 	}
 
 	const handleDelete = async (id: string | number) => {
